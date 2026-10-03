@@ -440,6 +440,14 @@
         document.getElementById('theme-toggle').textContent = '☀️';
     }
 
+    const seenQuestionText = new Set();
+    questions = questions.filter((question) => {
+        const normalizedQuestion = question.q.trim().toLowerCase();
+        if (seenQuestionText.has(normalizedQuestion)) return false;
+        seenQuestionText.add(normalizedQuestion);
+        return true;
+    });
+
     questions.sort(() => Math.random() - 0.5);
     let currentQuestionIndex = 0; let score = 0; let answered = false;
 
