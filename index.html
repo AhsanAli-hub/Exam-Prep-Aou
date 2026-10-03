@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Study Hub</title>
+    <style>
+        :root {
+            --purple: #8b5cf6;
+            --purple-hover: #7c3aed;
+            --bg-color: #f3f4f6;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .header-container {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .header-container h1 {
+            font-size: 2.5rem;
+            color: var(--purple);
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .header-container p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        /* The Subject Cards */
+        .card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            text-decoration: none;
+            color: var(--text-main);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--purple);
+            box-shadow: 0 10px 15px -3px rgba(139, 92, 246, 0.2);
+        }
+
+        .card h2 {
+            color: var(--purple);
+            font-size: 1.8rem;
+            margin: 0 0 10px 0;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-container">
+        <h1>🎓 Final Mids Prep</h1>
+        <p>Master your exams with these comprehensive quizzes</p>
+    </div>
+    <div class="grid-container">
+        
+        <!-- GT103 Card -->
+        <a href="gt103.html" class="card">
+            <div class="card-icon">🤖</div>
+            <h2>GT103</h2>
+            <p>Artificial Intelligence Mids Quiz</p>
+        </a>
+
+        <!-- TU170 Card -->
+        <a href="tu170.html" class="card">
+            <div class="card-icon">💻</div>
+            <h2>TU170</h2>
+            <p>Computing Essentials Quiz</p>
+        </a>
+
+        <!-- EL112 Card -->
+        <a href="el112.html" class="card">
+            <div class="card-icon">📖</div>
+            <h2>EL112</h2>
+            <p>English Language Quiz</p>
+        </a>
+
+    </div>
+
+</body>
+</html>
