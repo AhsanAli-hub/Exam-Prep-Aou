@@ -3,303 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TU170 Quiz</title>
+    <title>TU170 Mids Quiz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --purple-border: #8b5cf6;
+            --purple: #8b5cf6;
             --purple-hover: #7c3aed;
-            --bg-color: #f3f4f6;
-            --card-bg: #ffffff;
+            --purple-light: #f5f3ff;
             --success: #10b981;
             --error: #ef4444;
-            --text-main: #1f2937;
+            --bg: #f9fafb;
+            --card-bg: #ffffff;
+            --text-main: #111827;
             --text-muted: #6b7280;
+            --border: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
         }
-
-        body { 
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; 
-            background-color: var(--bg-color);
-            color: var(--text-main); 
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            min-height: 100vh;
-            box-sizing: border-box;
+        [data-theme="dark"] {
+            --bg: #0f172a; --card-bg: #1e293b; --text-main: #f1f5f9;
+            --text-muted: #94a3b8; --border: #334155; --purple-light: #312e81;
         }
+        * { box-sizing: border-box; transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; }
+        body { font-family: 'Inter', 'Segoe UI', system-ui, sans-serif; background-color: var(--bg); color: var(--text-main); margin: 0; padding: 20px; display: flex; justify-content: center; min-height: 100vh; }
+        
+        .app-container { width: 100%; max-width: 800px; display: flex; flex-direction: column; gap: 20px; }
+        
+        .main-header { background: var(--card-bg); padding: 18px 30px; border-radius: 16px; box-shadow: var(--shadow-sm); text-align: center; position: relative; border: 1px solid var(--border); }
+        .main-header h1 { margin: 0; color: var(--purple); font-size: 1.6rem; font-weight: 800; letter-spacing: -0.5px; }
+        .theme-toggle { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background: var(--purple-light); border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; }
+        .theme-toggle:hover { transform: translateY(-50%) scale(1.1); }
 
-        .app-container {
-            width: 100%;
-            max-width: 1100px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
+        .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; gap: 15px; }
+        .progress-text { font-size: 0.85rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        .live-score { font-size: 0.95rem; font-weight: 800; color: var(--purple); background: var(--purple-light); padding: 6px 14px; border-radius: 20px; white-space: nowrap; }
 
-        .main-header {
-            background: white;
-            padding: 20px 30px;
-            border-radius: 16px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            text-align: center;
-        }
+        .progress-bar-container { width: 100%; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; margin-bottom: 30px; }
+        .progress-bar { height: 100%; background: linear-gradient(90deg, var(--purple), #a78bfa); width: 0%; transition: width 0.4s ease; border-radius: 4px; }
 
-        .main-header h1 {
-            margin: 0;
-            color: var(--purple-border);
-            font-size: 2rem;
-            font-weight: 800;
-            letter-spacing: 1px;
-        }
+        .quiz-main { background: var(--card-bg); padding: 40px; border-radius: 20px; box-shadow: var(--shadow-md); min-height: 500px; display: flex; flex-direction: column; border: 1px solid var(--border); }
 
-        .quiz-layout {
-            display: flex;
-            gap: 20px;
-            align-items: flex-start;
-        }
+        .question { font-size: 1.35rem; font-weight: 700; margin-bottom: 30px; line-height: 1.5; color: var(--text-main); }
+        .options { display: flex; flex-direction: column; gap: 12px; }
+        .option-btn { padding: 18px 22px; border: 2px solid var(--border); border-radius: 14px; background: var(--card-bg); cursor: pointer; text-align: left; font-size: 1.05rem; font-weight: 500; color: var(--text-main); font-family: inherit; transition: all 0.2s ease; display: flex; align-items: center; min-height: 55px; }
+        .option-btn:hover:not(:disabled) { border-color: var(--purple); background: var(--purple-light); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .option-btn.correct { background: #ecfdf5; color: #065f46; border-color: var(--success); animation: pulse 0.4s ease; }
+        .option-btn.wrong { background: #fef2f2; color: #991b1b; border-color: var(--error); }
+        [data-theme="dark"] .option-btn.correct { background: #064e3b; color: #6ee7b7; }
+        [data-theme="dark"] .option-btn.wrong { background: #7f1d1d; color: #fca5a5; }
+        .option-btn:disabled { cursor: not-allowed; opacity: 0.9; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
 
-        .quiz-main {
-            flex: 1;
-            background: white;
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
-            min-height: 500px;
-            display: flex;
-            flex-direction: column;
-        }
+        .feedback-container { margin-top: 25px; min-height: 60px; }
+        .feedback-status { font-weight: 700; font-size: 1.1rem; margin-bottom: 8px; }
+        .explanation { font-size: 0.95rem; color: var(--text-muted); font-weight: 500; font-style: italic; padding: 14px 18px; background: var(--purple-light); border-left: 4px solid var(--purple); border-radius: 8px; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
 
-        .progress-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            border-bottom: 2px solid #f3f4f6;
-            padding-bottom: 15px;
-        }
+        .next-btn { margin-top: 20px; padding: 16px; background: var(--purple); color: white; border: none; border-radius: 14px; cursor: pointer; font-size: 1.05rem; font-weight: 700; transition: all 0.2s; display: none; width: 100%; font-family: inherit; letter-spacing: 0.3px; }
+        .next-btn:hover { background: var(--purple-hover); transform: translateY(-2px); box-shadow: var(--shadow-lg); }
 
-        .progress-text { font-size: 0.95rem; color: var(--text-muted); font-weight: 600; }
+        .score-screen { text-align: center; display: none; width: 100%; background: var(--card-bg); padding: 50px; border-radius: 20px; box-shadow: var(--shadow-lg); border: 1px solid var(--border); }
+        .score-screen h2 { font-size: 2.2rem; color: var(--purple); margin-bottom: 20px; }
+        .score-circle { width: 160px; height: 160px; border-radius: 50%; background: var(--purple-light); display: flex; justify-content: center; align-items: center; margin: 0 auto 20px; font-size: 2.5rem; font-weight: 800; color: var(--purple); border: 8px solid var(--purple); }
+        .score-message { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 30px; }
+        .restart-btn { padding: 16px 32px; background: var(--purple); color: white; border: none; border-radius: 14px; cursor: pointer; font-size: 1rem; font-weight: 700; transition: all 0.2s; font-family: inherit; }
+        .restart-btn:hover { background: var(--purple-hover); transform: translateY(-2px); box-shadow: var(--shadow-lg); }
 
-        .question { 
-            font-size: 1.3rem; 
-            font-weight: 700; 
-            margin-bottom: 30px; 
-            line-height: 1.5;
-            color: #111827;
-        }
-
-        .options { 
-            display: flex; 
-            flex-direction: column; 
-            gap: 15px; 
-            flex-grow: 1;
-        }
-
-        .option-btn { 
-            padding: 18px 20px; 
-            border: 2px solid var(--purple-border); 
-            border-radius: 12px; 
-            background: white; 
-            cursor: pointer; 
-            text-align: left; 
-            font-size: 1.05rem; 
-            font-weight: 500;
-            color: var(--text-main);
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-        }
-
-        .option-btn:hover:not(:disabled) { 
-            background: #f5f3ff;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px -1px rgba(139, 92, 246, 0.2);
-        }
-
-        .option-btn.correct { 
-            background: #ecfdf5; 
-            color: #065f46; 
-            border-color: var(--success); 
-        }
-
-        .option-btn.wrong { 
-            background: #fef2f2; 
-            color: #991b1b; 
-            border-color: var(--error); 
-        }
-
-        .option-btn:disabled { 
-            cursor: not-allowed; 
-            opacity: 0.9; 
-        }
-
-        .feedback-container {
-            margin-top: 25px;
-            min-height: 60px;
-        }
-
-        .feedback-status { 
-            font-weight: 700; 
-            font-size: 1.1rem;
-        }
-
-        .explanation {
-            font-size: 0.95rem;
-            color: #4b5563;
-            font-weight: 500;
-            font-style: italic;
-            margin-top: 8px;
-            display: block;
-            background: #f9fafb;
-            padding: 10px 15px;
-            border-left: 4px solid var(--purple-border);
-            border-radius: 4px;
-        }
-
-        .next-btn { 
-            margin-top: 20px; 
-            padding: 16px; 
-            background: var(--purple-border); 
-            color: white; 
-            border: none; 
-            border-radius: 12px; 
-            cursor: pointer; 
-            font-size: 1.1rem; 
-            font-weight: 700;
-            transition: background 0.2s;
-            display: none;
-            width: 100%;
-        }
-
-        .next-btn:hover { background: var(--purple-hover); }
-
-        .quiz-sidebar {
-            width: 280px;
-            background: white;
-            padding: 25px;
-            border-radius: 16px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .quiz-sidebar h3 {
-            margin: 0 0 10px 0;
-            font-size: 1.2rem;
-            color: var(--text-main);
-            text-align: center;
-            border-bottom: 2px solid #f3f4f6;
-            padding-bottom: 10px;
-        }
-
-        .stat-box {
-            background: #f9fafb;
-            padding: 15px;
-            border-radius: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 1px solid #e5e7eb;
-        }
-
-        .stat-label { font-size: 0.9rem; color: var(--text-muted); font-weight: 600; }
-        .stat-value { font-size: 1.3rem; font-weight: 800; color: var(--purple-border); }
-
-        .score-screen { 
-            text-align: center; 
-            display: none; 
-            width: 100%;
-            background: white;
-            padding: 50px;
-            border-radius: 16px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
-        }
-
-        .score-screen h2 { font-size: 2.5rem; color: var(--purple-border); margin-bottom: 10px; }
-
-        .score-circle {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: #f5f3ff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0 auto 20px;
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: var(--purple-border);
-            border: 8px solid var(--purple-border);
-        }
-
-        .score-message { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 30px; }
-
-        .restart-btn {
-            padding: 16px 32px; 
-            background: var(--purple-border); 
-            color: white; 
-            border: none; 
-            border-radius: 12px; 
-            cursor: pointer; 
-            font-size: 1.1rem; 
-            font-weight: 600;
-            transition: background 0.2s;
-        }
-        .restart-btn:hover { background: var(--purple-hover); }
-
-        @media (max-width: 850px) {
-            .quiz-layout { flex-direction: column; }
-            .quiz-sidebar { width: 100%; flex-direction: row; flex-wrap: wrap; }
-            .quiz-sidebar h3 { width: 100%; }
-            .stat-box { flex: 1; min-width: 120px; }
-        }
-
-        @media (max-width: 600px) {
-            .quiz-main { padding: 20px; }
-            .main-header h1 { font-size: 1.5rem; }
-            .question { font-size: 1.1rem; }
+        @media (max-width: 600px) { 
+            body { padding: 15px; }
+            .quiz-main { padding: 25px; } 
+            .main-header h1 { font-size: 1.2rem; } 
+            .question { font-size: 1.1rem; } 
+            .theme-toggle { width: 34px; height: 34px; font-size: 0.9rem; right: 12px; }
+            .option-btn { padding: 15px; font-size: 1rem; }
+            .live-score { font-size: 0.85rem; padding: 5px 10px; }
         }
     </style>
 </head>
 <body>
-
 <div class="app-container" id="app-container">
     <header class="main-header">
-        <h1>TU170 Quiz</h1>
+        <h1>TU170 Mids Quiz</h1>
+        <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()">🌙</button>
     </header>
 
-    <div class="quiz-layout" id="quiz-layout">
-        <main class="quiz-main">
-            <div class="progress-container">
-                <div class="progress-text" id="progress-text">Question 1</div>
-            </div>
-            <div class="question" id="question">Loading question...</div>
-            <div class="options" id="options"></div>
-            
-            <div class="feedback-container" id="feedback-container">
-                <div class="feedback-status" id="feedback-status"></div>
-                <div class="explanation" id="explanation" style="display: none;"></div>
-            </div>
-            
-            <button class="next-btn" id="next-btn">Next Question ➔</button>
-        </main>
+    <div class="quiz-main" id="quiz-main">
+        <div class="top-bar">
+            <div class="progress-text" id="progress-text">Question 1</div>
+            <div class="live-score" id="live-score">⭐ Score: 0</div>
+        </div>
+        <div class="progress-bar-container"><div class="progress-bar" id="progress-bar"></div></div>
 
-        <aside class="quiz-sidebar">
-            <h3>Live Tracker</h3>
-            <div class="stat-box">
-                <span class="stat-label">Answers Said</span>
-                <span class="stat-value" id="said-count">0</span>
-            </div>
-            <div class="stat-box">
-                <span class="stat-label">Answers Left</span>
-                <span class="stat-value" id="left-count">0</span>
-            </div>
-            <div class="stat-box">
-                <span class="stat-label">Current Score</span>
-                <span class="stat-value" id="sidebar-score">0</span>
-            </div>
-        </aside>
+        <div class="question" id="question">Loading question...</div>
+        <div class="options" id="options"></div>
+
+        <div class="feedback-container">
+            <div class="feedback-status" id="feedback-status"></div>
+            <div class="explanation" id="explanation" style="display: none;"></div>
+        </div>
+
+        <button class="next-btn" id="next-btn">Next Question ➔</button>
     </div>
 
     <div class="score-screen" id="score-screen">
@@ -312,10 +118,10 @@
 
 <script>
     // ==========================================
-    // PASTE YOUR TU170 QUESTIONS HERE
+    // PASTE YOUR EXISTING TU170 QUESTIONS HERE
     // ==========================================
     let questions = [
-        { q: "Why is it important to understand how hackers and viruses work?", options: ["To create more advanced computer viruses", "To protect your computer from potential cyber threats", "To improve the speed of your internet connection", "To develop gaming applications"], answer: 1, explanation: "Understanding how hackers and viruses operate is essential to protect your computer from potential cyber threats." },
+     { q: "Why is it important to understand how hackers and viruses work?", options: ["To create more advanced computer viruses", "To protect your computer from potential cyber threats", "To improve the speed of your internet connection", "To develop gaming applications"], answer: 1, explanation: "Understanding how hackers and viruses operate is essential to protect your computer from potential cyber threats." },
         { q: "What is one effective way to protect your online privacy?", options: ["Sharing personal information on social media", "Using weak passwords for easy access", "Adjusting privacy settings and using strong passwords", "Clicking on pop-up ads to check security threats"], answer: 2, explanation: "Adjusting privacy settings and using strong passwords are effective ways to protect your online privacy." },
         { q: "What does being computer literate help you understand about cybersecurity risks?", options: ["That cyber threats are only a problem for large corporations", "That privacy and security risks exist for all internet users", "That identity theft only happens when using online banking", "That using the same password for all accounts is the safest practice"], answer: 1, explanation: "Being computer literate helps you understand that privacy and security risks exist for all internet users." },
         { q: "Why is it important to use the web wisely?", options: ["To find reliable and accurate information effectively", "To rely on the first search result without verification", "To share personal details on random websites", "To use outdated sources for research"], answer: 0, explanation: "Using the web wisely involves efficiently locating reliable and accurate information online." },
@@ -618,31 +424,44 @@
         { q: "When shopping online, it is better to avoid non-well-known sites.", options: ["TRUE", "FALSE"], answer: 0, explanation: "It is safer to avoid non-well-known sites when shopping online to protect your information." }
     ];
 
-    questions.sort(() => Math.random() - 0.5);
+    function toggleTheme() {
+        const html = document.documentElement;
+        const btn = document.getElementById('theme-toggle');
+        if (html.getAttribute('data-theme') === 'dark') {
+            html.setAttribute('data-theme', 'light');
+            btn.textContent = '🌙';
+            localStorage.setItem('theme', 'light');
+        } else {
+            html.setAttribute('data-theme', 'dark');
+            btn.textContent = '☀️';
+            localStorage.setItem('theme', 'dark');
+        }
+    }
+    if (localStorage.getItem('theme') === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.getElementById('theme-toggle').textContent = '☀️';
+    }
 
-    let currentQuestionIndex = 0;
-    let score = 0;
-    let answered = false;
+    questions.sort(() => Math.random() - 0.5);
+    let currentQuestionIndex = 0; let score = 0; let answered = false;
 
     const questionEl = document.getElementById('question');
     const optionsEl = document.getElementById('options');
     const nextBtn = document.getElementById('next-btn');
     const progressText = document.getElementById('progress-text');
+    const liveScoreEl = document.getElementById('live-score');
     const feedbackStatus = document.getElementById('feedback-status');
     const explanationEl = document.getElementById('explanation');
-    const quizLayout = document.getElementById('quiz-layout');
+    const quizMain = document.getElementById('quiz-main');
     const scoreScreen = document.getElementById('score-screen');
     const scoreCircle = document.getElementById('score-circle');
     const scoreMessage = document.getElementById('score-message');
-    
-    const saidCountEl = document.getElementById('said-count');
-    const leftCountEl = document.getElementById('left-count');
-    const sidebarScoreEl = document.getElementById('sidebar-score');
+    const progressBarEl = document.getElementById('progress-bar');
 
-    function updateSidebar() {
-        saidCountEl.textContent = currentQuestionIndex;
-        leftCountEl.textContent = questions.length - currentQuestionIndex;
-        sidebarScoreEl.textContent = score;
+    function updateTopBar() {
+        liveScoreEl.textContent = `⭐ Score: ${score}`;
+        const progressPercent = (currentQuestionIndex / questions.length) * 100;
+        progressBarEl.style.width = progressPercent + '%';
     }
 
     function loadQuestion() {
@@ -652,11 +471,10 @@
         explanationEl.textContent = '';
         nextBtn.style.display = 'none';
         optionsEl.innerHTML = '';
-        
+
         const currentQuestion = questions[currentQuestionIndex];
-        
         progressText.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
-        updateSidebar();
+        updateTopBar();
 
         questionEl.textContent = currentQuestion.q;
 
@@ -678,11 +496,8 @@
         
         buttons.forEach((button, index) => {
             button.disabled = true;
-            if (index === currentQuestion.answer) {
-                button.classList.add('correct');
-            } else if (index === selectedIndex) {
-                button.classList.add('wrong');
-            }
+            if (index === currentQuestion.answer) button.classList.add('correct');
+            else if (index === selectedIndex) button.classList.add('wrong');
         });
 
         if (selectedIndex === currentQuestion.answer) {
@@ -698,37 +513,31 @@
             explanationEl.textContent = `💡 Explanation: ${currentQuestion.explanation}`;
             explanationEl.style.display = 'block';
         } else {
-            explanationEl.textContent = `💡 Explanation: No explanation provided for this question.`;
+            explanationEl.textContent = `💡 Explanation: No explanation provided.`;
             explanationEl.style.display = 'block';
         }
 
-        updateSidebar();
+        updateTopBar();
         nextBtn.style.display = 'block';
     }
 
     nextBtn.onclick = () => {
         currentQuestionIndex++;
-        if (currentQuestionIndex < questions.length) {
-            loadQuestion();
-        } else {
-            showScore();
-        }
+        if (currentQuestionIndex < questions.length) loadQuestion();
+        else showScore();
     };
 
     function showScore() {
-        quizLayout.style.display = 'none';
+        quizMain.style.display = 'none';
         scoreScreen.style.display = 'block';
-        
         const percentage = Math.round((score / questions.length) * 100);
         scoreCircle.textContent = `${percentage}%`;
         scoreMessage.textContent = `You scored ${score} out of ${questions.length}`;
-
         let msg = "";
         if (percentage >= 90) msg = "Outstanding! You are ready for the exam! 🏆";
         else if (percentage >= 70) msg = "Great job! Just a little more review needed. 👍";
         else if (percentage >= 50) msg = "Good effort, but keep studying! 📚";
         else msg = "Don't worry, review the lectures and try again! 💪";
-        
         scoreMessage.textContent += ` - ${msg}`;
     }
 
