@@ -54,6 +54,20 @@
         .progress-bar { height: 100%; background: linear-gradient(90deg, var(--purple), #a78bfa); width: 0%; transition: width 0.4s ease; }
         .question { font-size: 1.35rem; font-weight: 700; margin-bottom: 30px; line-height: 1.5; }
         .options { display: flex; flex-direction: column; gap: 12px; }
+        .show-answer-btn {
+            margin-top: 14px;
+            padding: 12px;
+            background: transparent;
+            color: var(--purple);
+            border: 2px dashed var(--purple);
+            border-radius: 14px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 700;
+            font-family: inherit;
+            width: 100%;
+        }
+        .show-answer-btn:hover:not(:disabled) { background: var(--purple-light); }
         .option-btn { padding: 18px 22px; border: 2px solid var(--border); border-radius: 14px; background: var(--card-bg); cursor: pointer; text-align: left; font-size: 1.05rem; font-weight: 500; color: var(--text-main); font-family: inherit; transition: all 0.2s; min-height: 55px; }
         .option-btn:hover:not(:disabled) { border-color: var(--purple); background: var(--purple-light); transform: translateY(-2px); }
         .option-btn.correct { background: #ecfdf5; color: #065f46; border-color: var(--success); }
@@ -93,7 +107,7 @@
         <div class="top-bar"><div class="progress-text" id="progress-text">Question 1</div><div class="live-score" id="live-score">⭐ Score: 0</div></div>
         <div class="progress-bar-container"><div class="progress-bar" id="progress-bar"></div></div>
         <div class="question" id="question">Loading question...</div>
-        <div class="options" id="options"></div>
+        <button class="show-answer-btn" id="show-answer-btn">💡 Show Answer</button>  
         <div class="feedback-container"><div class="feedback-status" id="feedback-status"></div><div class="explanation" id="explanation" style="display: none;"></div></div>
         <button class="next-btn" id="next-btn">Next Question ➔</button>
         <button class="back-btn" onclick="goBackToMenu()">← Back to Chapters</button>
@@ -118,6 +132,7 @@
 
     /* ---------------- DOM ---------------- */
     const questionEl     = document.getElementById('question');
+    const showAnswerBtn = document.getElementById('show-answer-btn');
     const optionsEl      = document.getElementById('options');
     const nextBtn        = document.getElementById('next-btn');
     const progressText   = document.getElementById('progress-text');
@@ -300,6 +315,9 @@
         explanationEl.style.display = 'none';
         explanationEl.textContent = '';
         nextBtn.style.display = 'none';
+        showAnswerBtn.style.display = 'block';
+        showAnswerBtn.disabled = false;
+        showAnswerBtn.onclick = revealAnswer;
         optionsEl.innerHTML = '';
 
         const q = activeQuestions[currentQuestionIndex];
@@ -318,6 +336,7 @@
 
     function selectOption(selectedIndex) {
         if (answered) return;
+        showAnswerBtn.style.display = 'none';
         answered = true;
 
         const q = activeQuestions[currentQuestionIndex];
@@ -343,7 +362,29 @@
         updateTopBar();
         nextBtn.style.display = 'block';
     }
+        function revealAnswer() {
+        if (answered) return;
+        answered = true;
 
+        const q = activeQuestions[currentQuestionIndex];
+        const buttons = document.querySelectorAll('.option-btn');
+
+        // Lock all options and highlight the correct one
+        buttons.forEach((btn, index) => {
+            btn.disabled = true;
+            if (index === q.answer) btn.classList.add('correct');
+        });
+
+        // Show the feedback without awarding a point
+        feedbackStatus.textContent = `💡 The correct answer is: ${q.options[q.answer]}`;
+        feedbackStatus.style.color = "var(--purple)";
+        explanationEl.textContent = `💡 Explanation: ${q.explanation || 'No explanation provided.'}`;
+        explanationEl.style.display = 'block';
+
+        showAnswerBtn.style.display = 'none';
+        nextBtn.style.display = 'block';
+        updateTopBar();
+    }
     nextBtn.onclick = () => {
         currentQuestionIndex++;
         if (currentQuestionIndex < activeQuestions.length) loadQuestion();
