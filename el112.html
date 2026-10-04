@@ -15,12 +15,31 @@
         .app-container { width: 100%; max-width: 800px; display: flex; flex-direction: column; gap: 20px; }
         .main-header { background: var(--card-bg); padding: 18px 30px; border-radius: 16px; box-shadow: var(--shadow-sm); text-align: center; position: relative; border: 1px solid var(--border); }
         .main-header h1 { margin: 0; color: var(--purple); font-size: 1.6rem; font-weight: 800; }
-        .theme-toggle { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background: var(--purple-light); border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; font-size: 1.1rem; }
-        .chapter-menu { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; grid-auto-rows: 1fr; }
-        .menu-btn { background: var(--card-bg); border: 2px solid var(--border); border-radius: 16px; padding: 25px 20px; cursor: pointer; text-align: center; transition: all 0.2s; box-shadow: var(--shadow-sm); font-family: inherit; color: var(--text-main); }
-        .menu-btn:hover { border-color: var(--purple); transform: translateY(-4px); box-shadow: var(--shadow-md); background: var(--purple-light); }
-        .menu-btn h2 { margin: 0 0 8px 0; color: var(--purple); font-size: 1.25rem; font-weight: 800; }
-        .menu-btn p { margin: 0; color: var(--text-muted); font-size: 0.9rem; font-weight: 600; }
+        .theme-toggle { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background: var(--purple-light); border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; }
+
+        /* ---------- SETUP / CHAPTER SELECTION SCREEN ---------- */
+        .setup-screen { width: 100%; }
+        .setup-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 30px; box-shadow: var(--shadow-md); }
+        .setup-card h2 { margin: 0 0 6px 0; color: var(--purple); font-size: 1.5rem; font-weight: 800; }
+        .setup-subtitle { margin: 0 0 20px 0; color: var(--text-muted); font-size: 0.95rem; font-weight: 500; }
+        .setup-controls { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; }
+        .chip-btn { padding: 9px 16px; border-radius: 20px; border: 2px solid var(--purple); background: transparent; color: var(--purple); font-weight: 700; font-size: 0.85rem; cursor: pointer; font-family: inherit; }
+        .chip-btn:hover { background: var(--purple-light); }
+        .chapter-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+        .chapter-item { display: flex; align-items: center; gap: 12px; padding: 16px 18px; border: 2px solid var(--border); border-radius: 14px; cursor: pointer; background: var(--card-bg); user-select: none; }
+        .chapter-item:hover { border-color: var(--purple); transform: translateY(-2px); }
+        .chapter-item.selected { border-color: var(--purple); background: var(--purple-light); }
+        .chapter-checkbox { width: 20px; height: 20px; accent-color: var(--purple); cursor: pointer; flex-shrink: 0; }
+        .chapter-info { display: flex; flex-direction: column; }
+        .chapter-name { font-weight: 700; font-size: 0.98rem; }
+        .chapter-count { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; }
+        .setup-footer { display: flex; justify-content: space-between; align-items: center; gap: 15px; margin-top: 24px; flex-wrap: wrap; }
+        .selected-count { font-size: 0.9rem; font-weight: 700; color: var(--text-muted); }
+        .start-btn { padding: 15px 32px; background: var(--purple); color: #fff; border: none; border-radius: 14px; font-size: 1rem; font-weight: 700; cursor: pointer; font-family: inherit; }
+        .start-btn:hover:not(:disabled) { background: var(--purple-hover); }
+        .start-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+        /* ---------- QUIZ ---------- */
         .quiz-main { background: var(--card-bg); padding: 40px; border-radius: 20px; box-shadow: var(--shadow-md); min-height: 500px; display: none; flex-direction: column; border: 1px solid var(--border); }
         .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; gap: 15px; }
         .progress-text { font-size: 0.85rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; }
@@ -41,13 +60,17 @@
         .next-btn { margin-top: 20px; padding: 16px; background: var(--purple); color: white; border: none; border-radius: 14px; cursor: pointer; font-size: 1.05rem; font-weight: 700; display: none; width: 100%; font-family: inherit; }
         .next-btn:hover { background: var(--purple-hover); }
         .back-btn { margin-top: 10px; padding: 14px; background: transparent; color: var(--purple); border: 2px solid var(--purple); border-radius: 14px; cursor: pointer; font-size: 0.95rem; font-weight: 700; width: 100%; font-family: inherit; }
+
+        /* ---------- SCORE SCREEN ---------- */
         .score-screen { text-align: center; display: none; width: 100%; background: var(--card-bg); padding: 50px; border-radius: 20px; box-shadow: var(--shadow-lg); border: 1px solid var(--border); }
         .score-screen h2 { font-size: 2.2rem; color: var(--purple); margin-bottom: 20px; }
         .score-circle { width: 160px; height: 160px; border-radius: 50%; background: var(--purple-light); display: flex; justify-content: center; align-items: center; margin: 0 auto 20px; font-size: 2.5rem; font-weight: 800; color: var(--purple); border: 8px solid var(--purple); }
         .score-message { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 30px; }
         .restart-btn { padding: 16px 32px; background: var(--purple); color: white; border: none; border-radius: 14px; cursor: pointer; font-size: 1rem; font-weight: 700; font-family: inherit; }
+        .restart-btn:hover { background: var(--purple-hover); }
+
         .loading { text-align: center; padding: 40px; color: var(--text-muted); font-weight: 600; }
-        @media (max-width: 600px) { body { padding: 15px; } .quiz-main { padding: 25px; } .main-header h1 { font-size: 1.2rem; } .question { font-size: 1.1rem; } .option-btn { padding: 15px; } }
+        @media (max-width: 600px) { body { padding: 15px; } .quiz-main { padding: 25px; } .main-header h1 { font-size: 1.2rem; } .question { font-size: 1.1rem; } .option-btn { padding: 15px; } .setup-card { padding: 22px; } .setup-footer { flex-direction: column; align-items: stretch; } .start-btn { width: 100%; } }
     </style>
 </head>
 <body>
@@ -56,7 +79,10 @@
         <h1>EL112 Mids Quiz</h1>
         <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()">🌙</button>
     </header>
-    <div id="chapter-menu" class="chapter-menu"><div class="loading">Loading chapters...</div></div>
+
+    <!-- SETUP / CHAPTER SELECTION SCREEN -->
+    <div id="setup-screen" class="setup-screen"><div class="loading">Loading chapters...</div></div>
+
     <div class="quiz-main" id="quiz-main">
         <div class="top-bar"><div class="progress-text" id="progress-text">Question 1</div><div class="live-score" id="live-score">⭐ Score: 0</div></div>
         <div class="progress-bar-container"><div class="progress-bar" id="progress-bar"></div></div>
@@ -66,6 +92,7 @@
         <button class="next-btn" id="next-btn">Next Question ➔</button>
         <button class="back-btn" onclick="goBackToMenu()">← Back to Chapters</button>
     </div>
+
     <div class="score-screen" id="score-screen">
         <h2>Quiz Completed!</h2>
         <div class="score-circle" id="score-circle">0%</div>
@@ -73,84 +100,266 @@
         <button class="restart-btn" onclick="goBackToMenu()">Back to Chapters 🔄</button>
     </div>
 </div>
+
 <script>
-    let allQuestions = []; let activeQuestions = []; let currentQuestionIndex = 0; let score = 0; let answered = false;
-    const questionEl = document.getElementById('question'); const optionsEl = document.getElementById('options');
-    const nextBtn = document.getElementById('next-btn'); const progressText = document.getElementById('progress-text');
-    const liveScoreEl = document.getElementById('live-score'); const feedbackStatus = document.getElementById('feedback-status');
-    const explanationEl = document.getElementById('explanation'); const chapterMenu = document.getElementById('chapter-menu');
-    const quizMain = document.getElementById('quiz-main'); const scoreScreen = document.getElementById('score-screen');
-    const scoreCircle = document.getElementById('score-circle'); const scoreMessage = document.getElementById('score-message');
-    const progressBarEl = document.getElementById('progress-bar');
+    /* ---------------- STATE ---------------- */
+    let allQuestions = [];       // every question from the JSON
+    let activeQuestions = [];    // only the questions the student selected
+    let setupChapters = [];      // [{ name: 'Chapter 1', count: 12 }, ...]
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let answered = false;
 
-    function toggleTheme() { const html = document.documentElement; const btn = document.getElementById('theme-toggle'); if (html.getAttribute('data-theme') === 'dark') { html.setAttribute('data-theme', 'light'); btn.textContent = '🌙'; localStorage.setItem('theme', 'light'); } else { html.setAttribute('data-theme', 'dark'); btn.textContent = '☀️'; localStorage.setItem('theme', 'dark'); } }
-    if (localStorage.getItem('theme') === 'dark') { document.documentElement.setAttribute('data-theme', 'dark'); document.getElementById('theme-toggle').textContent = '☀️'; }
+    /* ---------------- DOM ---------------- */
+    const questionEl     = document.getElementById('question');
+    const optionsEl      = document.getElementById('options');
+    const nextBtn        = document.getElementById('next-btn');
+    const progressText   = document.getElementById('progress-text');
+    const liveScoreEl    = document.getElementById('live-score');
+    const feedbackStatus = document.getElementById('feedback-status');
+    const explanationEl  = document.getElementById('explanation');
+    const setupScreen    = document.getElementById('setup-screen');
+    const quizMain       = document.getElementById('quiz-main');
+    const scoreScreen    = document.getElementById('score-screen');
+    const scoreCircle    = document.getElementById('score-circle');
+    const scoreMessage   = document.getElementById('score-message');
+    const progressBarEl  = document.getElementById('progress-bar');
 
+    /* ---------------- THEME ---------------- */
+    function toggleTheme() {
+        const html = document.documentElement;
+        const btn = document.getElementById('theme-toggle');
+        if (html.getAttribute('data-theme') === 'dark') {
+            html.setAttribute('data-theme', 'light'); btn.textContent = '🌙'; localStorage.setItem('theme', 'light');
+        } else {
+            html.setAttribute('data-theme', 'dark'); btn.textContent = '☀️'; localStorage.setItem('theme', 'dark');
+        }
+    }
+    if (localStorage.getItem('theme') === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.getElementById('theme-toggle').textContent = '☀️';
+    }
+
+    /* ---------------- HELPERS ---------------- */
+    function escapeHtml(str) {
+        return String(str).replace(/[&<>"']/g, c => (
+            { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
+        ));
+    }
+
+    // Fisher–Yates shuffle (unbiased)
+    function shuffle(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
+    /* ---------------- DATA LOADING ---------------- */
     async function loadData() {
         try {
+            // NOTE: lowercase .json — GitHub Pages is case-sensitive!
             const response = await fetch('./data/el112.json');
             if (!response.ok) throw new Error('Failed to load JSON');
             allQuestions = await response.json();
+
+            // Remove duplicate questions (same question text)
             const seen = new Set();
-            allQuestions = allQuestions.filter(q => { const key = q.q.trim().toLowerCase(); if (seen.has(key)) return false; seen.add(key); return true; });
-            buildChapterMenu();
+            allQuestions = allQuestions.filter(q => {
+                const key = (q.q || '').trim().toLowerCase();
+                if (seen.has(key)) return false;
+                seen.add(key);
+                return true;
+            });
+
+            buildSetupScreen();
         } catch (error) {
-            chapterMenu.innerHTML = '<div class="loading" style="color: #ef4444;">⚠️ Error loading questions. Make sure data/el112.json contains valid quiz data.</div>';
+            setupScreen.innerHTML = '<div class="loading" style="color:#ef4444;">⚠️ Error loading questions. Make sure data/el112.json exists.</div>';
         }
     }
 
-    function buildChapterMenu() {
-        // Robust sorting for "Chapter 1", "Chapter 2", "Chapter 12" etc.
-        const chapters = [...new Set(allQuestions.map(q => q.chapter))].sort((a, b) => 
-            a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' })
-        );
-        
-        chapterMenu.innerHTML = '';
-        chapterMenu.innerHTML += `<button class="menu-btn" onclick="startQuiz('all')"><h2>📚 All Chapters</h2><p>${allQuestions.length} Questions</p></button>`;
-        
-        chapters.forEach(ch => { 
-            const count = allQuestions.filter(q => q.chapter === ch).length; 
-            // THE FIX IS HERE: Wrapping ${ch} in single quotes so it's treated as a string
-            chapterMenu.innerHTML += `<button class="menu-btn" onclick="startQuiz('${ch}')"><h2>${ch}</h2><p>${count} Questions</p></button>`; 
-        });
+    /* ---------------- SETUP SCREEN ---------------- */
+    function buildSetupScreen() {
+        const chapterNames = [...new Set(allQuestions.map(q => q.chapter))]
+            .sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }));
+
+        setupChapters = chapterNames.map(name => ({
+            name,
+            count: allQuestions.filter(q => q.chapter === name).length
+        }));
+
+        const itemsHTML = setupChapters.map((ch, i) => `
+            <label class="chapter-item selected">
+                <input type="checkbox" class="chapter-checkbox" data-index="${i}" checked>
+                <span class="chapter-info">
+                    <span class="chapter-name">${escapeHtml(ch.name)}</span>
+                    <span class="chapter-count">${ch.count} question${ch.count === 1 ? '' : 's'}</span>
+                </span>
+            </label>`).join('');
+
+        setupScreen.innerHTML = `
+            <div class="setup-card">
+                <h2>Choose Your Chapters</h2>
+                <p class="setup-subtitle">Tick the chapters you want to practise, then press Start.</p>
+                <div class="setup-controls">
+                    <button type="button" class="chip-btn" id="select-all-btn">✓ Select All</button>
+                    <button type="button" class="chip-btn" id="clear-all-btn">✕ Clear All</button>
+                </div>
+                <div class="chapter-list">${itemsHTML}</div>
+                <div class="setup-footer">
+                    <div class="selected-count" id="selected-count"></div>
+                    <button type="button" class="start-btn" id="start-btn">Start Quiz ➔</button>
+                </div>
+            </div>`;
+
+        updateSelectedCount();
     }
 
-    function startQuiz(chapter) {
-        if (chapter === 'all') { activeQuestions = [...allQuestions]; } else { activeQuestions = allQuestions.filter(q => q.chapter === chapter); }
-        activeQuestions.sort(() => Math.random() - 0.5);
-        currentQuestionIndex = 0; score = 0;
-        chapterMenu.style.display = 'none'; scoreScreen.style.display = 'none'; quizMain.style.display = 'flex';
+    // Event delegation: one listener handles all dynamically created checkboxes/buttons
+    setupScreen.addEventListener('change', (e) => {
+        if (!e.target.classList.contains('chapter-checkbox')) return;
+        e.target.closest('.chapter-item').classList.toggle('selected', e.target.checked);
+        updateSelectedCount();
+    });
+
+    setupScreen.addEventListener('click', (e) => {
+        const btn = e.target.closest('button');
+        if (!btn) return;
+        if (btn.id === 'select-all-btn') setAllChecked(true);
+        else if (btn.id === 'clear-all-btn') setAllChecked(false);
+        else if (btn.id === 'start-btn') startQuiz();
+    });
+
+    function setAllChecked(state) {
+        setupScreen.querySelectorAll('.chapter-checkbox').forEach(cb => {
+            cb.checked = state;
+            cb.closest('.chapter-item').classList.toggle('selected', state);
+        });
+        updateSelectedCount();
+    }
+
+    function updateSelectedCount() {
+        const checked = [...setupScreen.querySelectorAll('.chapter-checkbox:checked')];
+        const totalQuestions = checked.reduce(
+            (sum, cb) => sum + setupChapters[Number(cb.dataset.index)].count, 0
+        );
+
+        const countEl = document.getElementById('selected-count');
+        const startBtn = document.getElementById('start-btn');
+        if (!countEl || !startBtn) return;
+
+        if (checked.length === 0) {
+            countEl.textContent = 'Select at least one chapter';
+        } else {
+            countEl.textContent =
+                `${checked.length} chapter${checked.length === 1 ? '' : 's'} · ${totalQuestions} question${totalQuestions === 1 ? '' : 's'}`;
+        }
+        startBtn.disabled = checked.length === 0;
+    }
+
+    /* ---------------- QUIZ FLOW ---------------- */
+    function startQuiz() {
+        const checked = [...setupScreen.querySelectorAll('.chapter-checkbox:checked')];
+        if (checked.length === 0) return;
+
+        const chosen = new Set(checked.map(cb => setupChapters[Number(cb.dataset.index)].name));
+
+        // filter() returns a NEW array, so the master list is never modified
+        activeQuestions = shuffle(allQuestions.filter(q => chosen.has(q.chapter)));
+
+        currentQuestionIndex = 0;
+        score = 0;
+
+        setupScreen.style.display = 'none';
+        scoreScreen.style.display = 'none';
+        quizMain.style.display = 'flex';
+
         loadQuestion();
     }
 
-    function goBackToMenu() { quizMain.style.display = 'none'; scoreScreen.style.display = 'none'; chapterMenu.style.display = 'grid'; }
-    function updateTopBar() { liveScoreEl.textContent = `⭐ Score: ${score}`; const percent = (currentQuestionIndex / activeQuestions.length) * 100; progressBarEl.style.width = percent + '%'; }
-    
+    function goBackToMenu() {
+        quizMain.style.display = 'none';
+        scoreScreen.style.display = 'none';
+        setupScreen.style.display = 'block';
+    }
+
+    function updateTopBar() {
+        liveScoreEl.textContent = `⭐ Score: ${score}`;
+        const percent = (currentQuestionIndex / activeQuestions.length) * 100;
+        progressBarEl.style.width = percent + '%';
+    }
+
     function loadQuestion() {
-        answered = false; feedbackStatus.textContent = ''; explanationEl.style.display = 'none'; explanationEl.textContent = ''; nextBtn.style.display = 'none'; optionsEl.innerHTML = '';
+        answered = false;
+        feedbackStatus.textContent = '';
+        explanationEl.style.display = 'none';
+        explanationEl.textContent = '';
+        nextBtn.style.display = 'none';
+        optionsEl.innerHTML = '';
+
         const q = activeQuestions[currentQuestionIndex];
         progressText.textContent = `Question ${currentQuestionIndex + 1} of ${activeQuestions.length}`;
-        updateTopBar(); questionEl.textContent = q.q;
-        q.options.forEach((option, index) => { const btn = document.createElement('button'); btn.classList.add('option-btn'); btn.textContent = option; btn.onclick = () => selectOption(index); optionsEl.appendChild(btn); });
+        updateTopBar();
+        questionEl.textContent = q.q;
+
+        q.options.forEach((option, index) => {
+            const btn = document.createElement('button');
+            btn.classList.add('option-btn');
+            btn.textContent = option;
+            btn.onclick = () => selectOption(index);
+            optionsEl.appendChild(btn);
+        });
     }
 
     function selectOption(selectedIndex) {
-        if (answered) return; answered = true;
-        const q = activeQuestions[currentQuestionIndex]; const buttons = document.querySelectorAll('.option-btn');
-        buttons.forEach((btn, index) => { btn.disabled = true; if (index === q.answer) btn.classList.add('correct'); else if (index === selectedIndex) btn.classList.add('wrong'); });
-        if (selectedIndex === q.answer) { score++; feedbackStatus.textContent = "✅ Correct!"; feedbackStatus.style.color = "var(--success)"; } else { feedbackStatus.textContent = `❌ Incorrect. The correct answer is: ${q.options[q.answer]}`; feedbackStatus.style.color = "var(--error)"; }
-        explanationEl.textContent = `💡 Explanation: ${q.explanation || 'No explanation provided.'}`; explanationEl.style.display = 'block';
-        updateTopBar(); nextBtn.style.display = 'block';
+        if (answered) return;
+        answered = true;
+
+        const q = activeQuestions[currentQuestionIndex];
+        const buttons = document.querySelectorAll('.option-btn');
+
+        buttons.forEach((btn, index) => {
+            btn.disabled = true;
+            if (index === q.answer) btn.classList.add('correct');
+            else if (index === selectedIndex) btn.classList.add('wrong');
+        });
+
+        if (selectedIndex === q.answer) {
+            score++;
+            feedbackStatus.textContent = "✅ Correct!";
+            feedbackStatus.style.color = "var(--success)";
+        } else {
+            feedbackStatus.textContent = `❌ Incorrect. The correct answer is: ${q.options[q.answer]}`;
+            feedbackStatus.style.color = "var(--error)";
+        }
+
+        explanationEl.textContent = `💡 Explanation: ${q.explanation || 'No explanation provided.'}`;
+        explanationEl.style.display = 'block';
+        updateTopBar();
+        nextBtn.style.display = 'block';
     }
 
-    nextBtn.onclick = () => { currentQuestionIndex++; if (currentQuestionIndex < activeQuestions.length) loadQuestion(); else showScore(); };
-    
+    nextBtn.onclick = () => {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < activeQuestions.length) loadQuestion();
+        else showScore();
+    };
+
     function showScore() {
-        quizMain.style.display = 'none'; scoreScreen.style.display = 'block';
-        const percent = Math.round((score / activeQuestions.length) * 100); scoreCircle.textContent = `${percent}%`;
-        scoreMessage.textContent = `You scored ${score} out of ${activeQuestions.length}`;
-        let msg = ""; if (percent >= 90) msg = "Outstanding! 🏆"; else if (percent >= 70) msg = "Great job! 👍"; else if (percent >= 50) msg = "Keep studying! 📚"; else msg = "Review and try again! 💪";
-        scoreMessage.textContent += ` - ${msg}`;
+        quizMain.style.display = 'none';
+        scoreScreen.style.display = 'block';
+
+        const percent = Math.round((score / activeQuestions.length) * 100);
+        scoreCircle.textContent = `${percent}%`;
+
+        let msg = "";
+        if (percent >= 90) msg = "Outstanding! 🏆";
+        else if (percent >= 70) msg = "Great job! 👍";
+        else if (percent >= 50) msg = "Keep studying! 📚";
+        else msg = "Review and try again! 💪";
+
+        scoreMessage.textContent = `You scored ${score} out of ${activeQuestions.length} - ${msg}`;
     }
 
     loadData();
