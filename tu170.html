@@ -88,14 +88,14 @@
 
     async function loadData() {
         try {
-            const response = await fetch('./data/tu170.JSON');
-            if (!response.ok) throw new Error('Failed to load JSON');
+            const response = await fetch('./data/tu170.json');
+            if (!response.ok) throw new Error('Failed to load json');
             allQuestions = await response.json();
             const seen = new Set();
             allQuestions = allQuestions.filter(q => { const key = q.q.trim().toLowerCase(); if (seen.has(key)) return false; seen.add(key); return true; });
             buildChapterMenu();
         } catch (error) {
-            chapterMenu.innerHTML = '<div class="loading" style="color: #ef4444;">⚠️ Error loading questions. Make sure data/tu170.JSON exists.</div>';
+            chapterMenu.innerHTML = '<div class="loading" style="color: #ef4444;">⚠️ Error loading questions. Make sure data/tu170.json exists.</div>';
         }
     }
 
