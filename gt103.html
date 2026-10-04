@@ -5,18 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GT103 Quiz</title>
     <script>
-        <script>
-    (function() {
-        try {
-            var saved = localStorage.getItem('theme');
-            if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                document.documentElement.setAttribute('data-theme', 'dark');
-            }
-        } catch (e) {
-            // If localStorage is disabled, just fall back to light mode
-        }
-    })();
-</script>
+        (function() {
+            try {
+                var saved = localStorage.getItem('theme');
+                if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                }
+            } catch (e) {}
+        })();
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -91,30 +87,45 @@
         .next-btn:hover { background: var(--purple-hover); }
         .back-btn { margin-top: 10px; padding: 14px; background: transparent; color: var(--purple); border: 2px solid var(--purple); border-radius: 14px; cursor: pointer; font-size: 0.95rem; font-weight: 700; width: 100%; font-family: inherit; }
 
-        .score-screen { text-align: center; display: none; width: 100%; background: var(--card-bg); padding: 40px; border-radius: 20px; box-shadow: var(--shadow-lg); border: 1px solid var(--border); }
-        .score-screen h2 { font-size: 2.2rem; color: var(--purple); margin: 0 0 20px 0; }
-        .score-circle { width: 160px; height: 160px; border-radius: 50%; background: var(--purple-light); display: flex; justify-content: center; align-items: center; margin: 0 auto 20px; font-size: 2.5rem; font-weight: 800; color: var(--purple); border: 8px solid var(--purple); }
-        .score-message { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 10px; }
-        .score-time { font-size: 0.95rem; color: var(--text-muted); font-weight: 600; margin-bottom: 24px; }
-        .score-actions { display: flex; flex-direction: column; gap: 12px; align-items: center; margin-bottom: 24px; }
-        .retry-wrong-btn { padding: 14px 28px; background: var(--error); color: #fff; border: none; border-radius: 14px; cursor: pointer; font-size: 1rem; font-weight: 700; font-family: inherit; }
-        .retry-wrong-btn:hover { opacity: 0.9; }
-        .restart-btn { padding: 14px 28px; background: var(--purple); color: white; border: none; border-radius: 14px; cursor: pointer; font-size: 1rem; font-weight: 700; font-family: inherit; }
-        .restart-btn:hover { background: var(--purple-hover); }
+        /* ---------- SCORE SCREEN ---------- */
+        .score-screen { display: none; width: 100%; background: var(--card-bg); padding: 48px 40px; border-radius: 20px; box-shadow: var(--shadow-lg); border: 1px solid var(--border); }
+        .score-header { text-align: center; font-size: 0.75rem; color: var(--text-muted); font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 24px; }
+        .score-percent { text-align: center; font-size: 4.5rem; font-weight: 800; color: var(--text-main); line-height: 1; font-variant-numeric: tabular-nums; margin-bottom: 6px; }
+        .score-caption { text-align: center; font-size: 0.95rem; color: var(--text-muted); font-weight: 500; margin-bottom: 36px; }
 
-        .review-section { text-align: left; margin-top: 30px; border-top: 1px solid var(--border); padding-top: 24px; }
-        .review-section summary { cursor: pointer; font-weight: 800; color: var(--purple); font-size: 1.1rem; padding: 12px; border-radius: 12px; list-style: none; display: flex; align-items: center; gap: 8px; }
-        .review-section summary:hover { background: var(--purple-light); }
+        .score-stats { display: flex; justify-content: center; gap: 1px; background: var(--border); border-radius: 14px; overflow: hidden; margin: 0 auto 36px; max-width: 480px; }
+        .score-stat { flex: 1; background: var(--card-bg); padding: 20px 10px; text-align: center; }
+        .score-stat-value { font-size: 1.6rem; font-weight: 800; line-height: 1; margin-bottom: 6px; font-variant-numeric: tabular-nums; }
+        .score-stat-value.good { color: var(--success); }
+        .score-stat-value.bad { color: var(--error); }
+        .score-stat-value.neutral { color: var(--text-main); }
+        .score-stat-label { font-size: 0.68rem; color: var(--text-muted); font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; }
+
+        .score-actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 36px; }
+        .btn-primary, .btn-outline {
+            padding: 14px 26px; border-radius: 12px; font-size: 0.92rem; font-weight: 700;
+            font-family: inherit; cursor: pointer; transition: all 0.2s; min-width: 160px;
+        }
+        .btn-primary { background: var(--purple); color: #fff; border: none; }
+        .btn-primary:hover { background: var(--purple-hover); }
+        .btn-outline { background: transparent; color: var(--text-main); border: 1.5px solid var(--border); }
+        .btn-outline:hover { border-color: var(--purple); color: var(--purple); }
+
+        .review-section { text-align: left; border-top: 1px solid var(--border); padding-top: 20px; }
+        .review-section summary { cursor: pointer; font-weight: 700; color: var(--text-main); font-size: 0.92rem; padding: 10px 0; list-style: none; display: flex; align-items: center; justify-content: space-between; }
         .review-section summary::-webkit-details-marker { display: none; }
-        .review-item { padding: 16px 18px; margin-top: 12px; border: 2px solid var(--border); border-radius: 14px; background: var(--card-bg); }
-        .review-q { font-weight: 700; margin-bottom: 10px; line-height: 1.4; }
-        .review-line { font-size: 0.9rem; margin: 4px 0; font-weight: 600; }
+        .review-section summary::after { content: "▸"; font-size: 1rem; color: var(--text-muted); transition: transform 0.2s; }
+        .review-section[open] summary::after { transform: rotate(90deg); }
+        .review-section summary:hover { color: var(--purple); }
+        .review-item { padding: 14px 0; margin-top: 8px; border-top: 1px solid var(--border); }
+        .review-q { font-weight: 600; font-size: 0.95rem; margin-bottom: 10px; line-height: 1.5; }
+        .review-line { font-size: 0.85rem; margin: 4px 0; font-weight: 500; }
         .review-line.user { color: var(--error); }
         .review-line.correct { color: var(--success); }
-        .review-expl { font-size: 0.85rem; color: var(--text-muted); font-style: italic; margin-top: 10px; padding: 10px 12px; background: var(--purple-light); border-radius: 8px; }
+        .review-expl { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; margin-top: 8px; line-height: 1.5; padding-left: 12px; border-left: 2px solid var(--border); }
 
         .loading { text-align: center; padding: 40px; color: var(--text-muted); font-weight: 600; }
-        @media (max-width: 600px) { body { padding: 15px; } .quiz-main { padding: 25px; } .score-screen { padding: 25px; } .main-header h1 { font-size: 1.2rem; } .question { font-size: 1.1rem; } .option-btn { padding: 15px; } .setup-card { padding: 22px; } .setup-footer { flex-direction: column; align-items: stretch; } .start-btn { width: 100%; } .top-bar { flex-direction: column; align-items: stretch; } .top-left { justify-content: center; } }
+        @media (max-width: 600px) { body { padding: 15px; } .quiz-main { padding: 25px; } .score-screen { padding: 30px 22px; } .score-percent { font-size: 3.4rem; } .main-header h1 { font-size: 1.2rem; } .question { font-size: 1.1rem; } .option-btn { padding: 15px; } .setup-card { padding: 22px; } .setup-footer { flex-direction: column; align-items: stretch; } .start-btn { width: 100%; } .top-bar { flex-direction: column; align-items: stretch; } .top-left { justify-content: center; } .btn-primary, .btn-outline { flex: 1; min-width: 0; } }
     </style>
 </head>
 <body>
@@ -144,16 +155,32 @@
     </div>
 
     <div class="score-screen" id="score-screen">
-        <h2>Quiz Completed!</h2>
-        <div class="score-circle" id="score-circle">0%</div>
-        <div class="score-message" id="score-message">You scored 0 out of 0</div>
-        <div class="score-time" id="score-time">⏱ Time: 00:00</div>
-        <div class="score-actions" id="score-actions">
-            <button class="retry-wrong-btn" id="retry-wrong-btn" style="display: none;">🔁 Retry Wrong Answers</button>
-            <button class="restart-btn" onclick="goBackToMenu()">Back to Chapters 🔄</button>
+        <div class="score-header">Quiz Complete</div>
+        <div class="score-percent" id="score-percent">0%</div>
+        <div class="score-caption" id="score-caption"></div>
+
+        <div class="score-stats">
+            <div class="score-stat">
+                <div class="score-stat-value good" id="stat-correct">0</div>
+                <div class="score-stat-label">Correct</div>
+            </div>
+            <div class="score-stat">
+                <div class="score-stat-value bad" id="stat-wrong">0</div>
+                <div class="score-stat-label">Incorrect</div>
+            </div>
+            <div class="score-stat">
+                <div class="score-stat-value neutral" id="stat-time">00:00</div>
+                <div class="score-stat-label">Time</div>
+            </div>
         </div>
+
+        <div class="score-actions">
+            <button class="btn-primary" id="retry-wrong-btn" style="display: none;">Practice mistakes</button>
+            <button class="btn-outline" onclick="goBackToMenu()">New quiz</button>
+        </div>
+
         <details class="review-section" id="review-section" style="display: none;">
-            <summary>📝 Review Incorrect Answers (<span id="review-count">0</span>)</summary>
+            <summary><span>Review incorrect answers (<span id="review-count">0</span>)</span></summary>
             <div id="review-list"></div>
         </details>
     </div>
@@ -161,10 +188,10 @@
 
 <script>
     /* ====================== SUBJECT CONFIG ====================== */
-    // ⚠️ CHANGE THESE 3 LINES for each subject file:
+    // ⚠️ CHANGE THESE 2 LINES for each subject file:
     const SUBJECT = {
-        key: 'gt103',                          // 'tu170' | 'gt103' | 'el112'
-        dataFile: './data/gt103.json'          // path to your JSON
+        key: 'gt103',
+        dataFile: './data/gt103.json'
     };
 
     /* ====================== STATE ====================== */
@@ -175,7 +202,7 @@
     let score = 0;
     let answered = false;
     let showAnswerEnabled = false;
-    let wrongAnswers = [];       // [{ q, userAnswer, correctAnswer }]
+    let wrongAnswers = [];
     let timerInterval = null;
     let elapsedSeconds = 0;
     let quizStartTime = 0;
@@ -193,10 +220,12 @@
     const setupScreen    = document.getElementById('setup-screen');
     const quizMain       = document.getElementById('quiz-main');
     const scoreScreen    = document.getElementById('score-screen');
-    const scoreCircle    = document.getElementById('score-circle');
-    const scoreMessage   = document.getElementById('score-message');
-    const scoreTimeEl    = document.getElementById('score-time');
     const progressBarEl  = document.getElementById('progress-bar');
+    const scorePercentEl = document.getElementById('score-percent');
+    const scoreCaptionEl = document.getElementById('score-caption');
+    const statCorrectEl  = document.getElementById('stat-correct');
+    const statWrongEl    = document.getElementById('stat-wrong');
+    const statTimeEl     = document.getElementById('stat-time');
     const retryWrongBtn  = document.getElementById('retry-wrong-btn');
     const reviewSection  = document.getElementById('review-section');
     const reviewList     = document.getElementById('review-list');
@@ -207,9 +236,11 @@
         const html = document.documentElement;
         const btn = document.getElementById('theme-toggle');
         if (html.getAttribute('data-theme') === 'dark') {
-            html.setAttribute('data-theme', 'light'); btn.textContent = '🌙'; localStorage.setItem('theme', 'light');
+            html.setAttribute('data-theme', 'light'); btn.textContent = '🌙';
+            try { localStorage.setItem('theme', 'light'); } catch (e) {}
         } else {
-            html.setAttribute('data-theme', 'dark'); btn.textContent = '☀️'; localStorage.setItem('theme', 'dark');
+            html.setAttribute('data-theme', 'dark'); btn.textContent = '☀️';
+            try { localStorage.setItem('theme', 'dark'); } catch (e) {}
         }
     }
     if (document.documentElement.getAttribute('data-theme') === 'dark') {
@@ -237,7 +268,7 @@
         return `${m}:${s}`;
     }
 
-    /* ====================== localStorage HIGH SCORES ====================== */
+    /* ====================== HIGH SCORES ====================== */
     function loadHighScores() {
         try { return JSON.parse(localStorage.getItem(SUBJECT.key + '-highscores') || '{}'); }
         catch (e) { return {}; }
@@ -411,7 +442,7 @@
         quizMain.style.display = 'none';
         scoreScreen.style.display = 'none';
         setupScreen.style.display = 'block';
-        buildSetupScreen(); // refresh to show updated high scores
+        buildSetupScreen();
     }
 
     function updateTopBar() {
@@ -434,7 +465,7 @@
 
         const q = activeQuestions[currentQuestionIndex];
 
-        // 🔀 Shuffle options and remember the new correct index
+        // Shuffle options and remember the new correct index
         const pairs = q.options.map((text, i) => ({ text, isCorrect: i === q.answer }));
         shuffle(pairs);
         q._shuffledOptions = pairs.map(p => p.text);
@@ -526,10 +557,8 @@
 
     /* ====================== KEYBOARD SHORTCUTS ====================== */
     document.addEventListener('keydown', (e) => {
-        // Only act during active quiz
         if (quizMain.style.display === 'none') return;
 
-        // Number keys 1-4 to pick an option
         if (!answered && ['1', '2', '3', '4'].includes(e.key)) {
             const idx = Number(e.key) - 1;
             const buttons = document.querySelectorAll('.option-btn');
@@ -539,7 +568,6 @@
             return;
         }
 
-        // Enter or Space to go to next question (only if answered)
         if (answered && (e.key === 'Enter' || e.key === ' ')) {
             e.preventDefault();
             nextBtn.click();
@@ -553,23 +581,25 @@
         scoreScreen.style.display = 'block';
 
         const total = activeQuestions.length;
-        const percent = Math.round((score / total) * 100);
-        scoreCircle.textContent = `${percent}%`;
+        const correct = score;
+        const wrong = total - correct;
+        const percent = Math.round((correct / total) * 100);
 
-        let msg = "";
-        if (percent >= 90) msg = "Outstanding! 🏆";
-        else if (percent >= 70) msg = "Great job! 👍";
-        else if (percent >= 50) msg = "Keep studying! 📚";
-        else msg = "Review and try again! 💪";
+        scorePercentEl.textContent = `${percent}%`;
+        statCorrectEl.textContent = correct;
+        statWrongEl.textContent = wrong;
+        statTimeEl.textContent = formatTime(elapsedSeconds);
 
-        scoreMessage.textContent = `You scored ${score} out of ${total} - ${msg}`;
-        scoreTimeEl.textContent = `⏱ Time: ${formatTime(elapsedSeconds)}`;
+        let caption = "";
+        if (percent >= 90) caption = "Excellent result";
+        else if (percent >= 70) caption = "Solid work";
+        else if (percent >= 50) caption = "Room to improve";
+        else caption = "Needs more practice";
+        scoreCaptionEl.textContent = caption;
 
-        // Save high scores per chapter (only for the chapters used)
         const usedChapters = [...new Set(activeQuestions.map(q => q.chapter))];
         usedChapters.forEach(ch => saveHighScore(ch, percent));
 
-        // Retry wrong answers button
         if (wrongAnswers.length > 0) {
             retryWrongBtn.style.display = 'inline-block';
             retryWrongBtn.onclick = retryWrongAnswers;
@@ -577,16 +607,16 @@
             retryWrongBtn.style.display = 'none';
         }
 
-        // Review section
         if (wrongAnswers.length > 0) {
             reviewSection.style.display = 'block';
+            reviewSection.open = false;
             reviewCount.textContent = wrongAnswers.length;
             reviewList.innerHTML = wrongAnswers.map(w => `
                 <div class="review-item">
                     <div class="review-q">${escapeHtml(w.q)}</div>
-                    <div class="review-line user">❌ Your answer: ${escapeHtml(w.userAnswer)}</div>
-                    <div class="review-line correct">✅ Correct: ${escapeHtml(w.correctAnswer)}</div>
-                    <div class="review-expl">💡 ${escapeHtml(w.explanation || 'No explanation provided.')}</div>
+                    <div class="review-line user">Your answer: ${escapeHtml(w.userAnswer)}</div>
+                    <div class="review-line correct">Correct answer: ${escapeHtml(w.correctAnswer)}</div>
+                    <div class="review-expl">${escapeHtml(w.explanation || 'No explanation provided.')}</div>
                 </div>
             `).join('');
         } else {
@@ -595,7 +625,6 @@
     }
 
     function retryWrongAnswers() {
-        // Rebuild activeQuestions from the wrong ones (using original question objects)
         const wrongTextSet = new Set(wrongAnswers.map(w => w.q));
         activeQuestions = shuffle(allQuestions.filter(q => wrongTextSet.has(q.q)));
 
