@@ -1510,5 +1510,635 @@
     "options": ["Until he is comfortable he knows the information and feels confident.", "Until night before exam.", "Until he have a good estimation, makes a reasonable guess.", "Until he feels flexible, positive, and grateful."],
     "answer": 0,
     "explanation": "He should review and rehearse until he is comfortable he knows the information and feels confident."
+  },
+    {
+    "chapter": "Mock Mids",
+    "q": "According to the course, what is the recommended strategy for answering questions in an exam?",
+    "options": ["Answer randomly to save time", "Skip all questions and come back later", "Start with the hardest questions first", "Answer the easy questions first"],
+    "answer": 3,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Business-to-consumer (B2C) transactions take place between businesses and consumers.",
+    "options": ["False", "True"],
+    "answer": 1,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "In Computer Literacy, not understanding how to diagnose and fix certain problems can save your time and money.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Which of the following is a type of hard disks?",
+    "options": ["external hard disks", "universal hard disk", "multi hard disk", "global hard disk"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "In the R.E.D. Model, what does 'D' stand for?",
+    "options": ["Draw Conclusions", "Draw facts", "Deliver assumptions", "Determine facts"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Which of the following is the main circuit board of a computer?",
+    "options": ["input board", "output board", "motherboard", "desktop board"],
+    "answer": 2,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Critical thinking means making decisions based on assumptions.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "In the URL 'https://www.arabou.edu', which part represents the domain name?",
+    "options": ["edu", "https://www.arabou.edu", "www.arabou.edu", "arabou"],
+    "answer": 2,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Which of the following is an example of a tablet computer?",
+    "options": ["Samsung smartphone", "Apple iPad", "HP gaming laptop", "Dell desktop PC"],
+    "answer": 1,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Dropbox is an example of:",
+    "options": ["File storage service", "Web browser", "Email address", "Searching engine"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "One petabyte (PB) = 1024 TB.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "What is a recommended action for effective emergency studying?",
+    "options": ["Study everything", "Ignore important materials", "Panic", "Relax and anticipate questions"],
+    "answer": 3,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Which storage device has NO spinning parts?",
+    "options": ["DVDs", "CDs", "Solid-state storage devices", "Hard disks"],
+    "answer": 2,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Chromebook laptops have the following feature(s):",
+    "options": ["All answers are correct", "Focus on offering a very thin, lightweight computing solution", "They use the Google Chrome OS", "They can be converted into a tablet-like device"],
+    "answer": 2,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "In binary language every letter on the keyboard is represented by one bit.",
+    "options": ["False", "True"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Which sensor in a phone detects when it's near your ear and turns off the screen during a call?",
+    "options": ["Pedometer sensor", "Proximity sensor", "Fingerprint sensor", "Magnetometer sensor"],
+    "answer": 1,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "The formal written standards designed to apply to everyone, is known as:",
+    "options": ["Laws", "Technology", "Ethics", "Property"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "When evaluating a website's content, whether the information is factually reported or if the author has a bias is considered part of which element?",
+    "options": ["currency", "authority", "objectivity", "accuracy"],
+    "answer": 2,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Which application of artificial intelligence helps in the design of prosthetic devices?",
+    "options": ["Facial recognition", "Law violation detection", "Machine learning", "3D printing"],
+    "answer": 3,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Type of computers that is often used in businesses that manage large amounts of data, such as insurance companies.",
+    "options": ["Embedded Computers", "Supercomputer", "Both mainframes and supercomputers", "Mainframes"],
+    "answer": 3,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "is the set of instructions that tell the computer how to do its work.",
+    "options": ["Manual", "Hardware", "Memory", "Software"],
+    "answer": 3,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Considering Bloom's Taxonomy, when you are able to make practical application of the information, this is related to the 'Evaluating' level of learning.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "The spider program is part of a search engine that",
+    "options": ["Pulls out relevant information according to your search", "Organizes the data into a large database", "Searches the indexed data", "Constantly collects data on the web"],
+    "answer": 3,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "One of the following printers combines the functions of a printer, scanner, and copier:",
+    "options": ["3D printer", "All-in-one printer", "Large format printer", "All answers are correct"],
+    "answer": 1,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "If a solution of a problem doesn't work as expected, you should analyze what went wrong and try again.",
+    "options": ["False", "True"],
+    "answer": 1,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "What is the main idea of the text 'Adapting Old Skills to New Situations'?",
+    "options": ["Changing and modifying skills to fit new circumstances", "Using old skills without change", "Removing oneself from difficult situations", "Quitting when faced with challenges"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "How do embedded computers typically operate?",
+    "options": ["They need a keyboard and mouse to work", "They should be always connected to the Internet", "They require continuous user input", "They function independently with their own programming"],
+    "answer": 3,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "When the computer is turned off, RAM loses all of its contents.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "The input function in the computer handles data entry.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "What is recommended to do if you feel inadequate before a test?",
+    "options": ["Blame others for your anxiety", "Visit a therapist", "Encourage yourself like you would encourage a friend", "Ignore your feelings"],
+    "answer": 2,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Which computer-literacy skill helps a user obtain dependable information from the Internet?",
+    "options": ["Using the web wisely", "Replacing the operating system", "Increasing processor speed", "Installing a larger monitor"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Artificial intelligence focuses on creating computer systems that can perform tasks associated with human intelligence.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Which of the following best describes plagiarism?",
+    "options": ["Copying text or ideas without acknowledging the source", "Using a search engine to locate information", "Saving a document in a folder", "Reviewing a classmate's work with permission"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Raw, unprocessed facts are called:",
+    "options": ["Data", "Information", "Software", "Output"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Eight bits make one byte.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Which of the following is an example of application software?",
+    "options": ["A word processor", "An operating system", "A motherboard", "A CPU"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Which laptop type is designed as a full-featured, very thin, lightweight computing solution?",
+    "options": ["Ultrabook", "Mainframe", "Desktop computer", "Embedded computer"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "An all-in-one computer requires a separate tower to house its processor and memory.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Which type of computer is designed to perform complex calculations extremely rapidly, such as those used in weather forecasting?",
+    "options": ["Supercomputer", "Tablet", "Mainframe", "Smartphone"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "An embedded computer is best described as:",
+    "options": ["A specially designed computer chip that resides in another device", "A desktop computer used by one person", "A large computer that supports many simultaneous users", "A portable computer with a multi-touch screen"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Which input device captures sound waves and transfers them into digital format on a computer?",
+    "options": ["Microphone", "Projector", "Printer", "Speaker"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "A soft copy is a copy that can be physically touched.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Which two printer categories are most common in homes and offices?",
+    "options": ["Inkjet and laser", "3D and large-format", "Thermal and dot-matrix", "Scanner and copier"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Which type of memory stores permanent instructions needed to start a computer?",
+    "options": ["ROM", "RAM", "Cloud storage", "Cache folder"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "CPU processor speed alone determines the overall performance of the CPU.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "In a client/server network, what does a client do?",
+    "options": ["Asks for data", "Stores every website permanently", "Creates an IP address for each user", "Controls all Internet servers"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "The Internet began in 1969 with a U.S. national computer network called:",
+    "options": ["ARPANET", "World Wide Web", "Google", "Ethernet"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "The World Wide Web is a subset of the Internet.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Which practice is recommended when sending a professional email?",
+    "options": ["Use a meaningful subject line", "Use abbreviations such as u and LOL", "Add everyone you know as a recipient", "Avoid proofreading to save time"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Which e-commerce model describes transactions in which one business sells goods or services to another business?",
+    "options": ["B2B", "B2C", "C2C", "P2P"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "In the R.E.D. Model, which step requires separating facts from fiction and questioning what you assume to be true?",
+    "options": ["Recognize Assumptions", "Stop and Think", "Draw Conclusions", "Plan of Action"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Confirmation bias means preferring information that confirms what we already believe.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Which group contains only higher-order thinking skills in Bloom's Taxonomy as presented in the course?",
+    "options": ["Applying, Analyzing, Evaluating, Creating", "Remembering, Understanding, Applying, Analyzing", "Remembering and Understanding only", "Understanding, Remembering, Evaluating, Creating"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "During the brainstorming stage of problem solving, the main goal is to:",
+    "options": ["Generate as many possible ideas as possible without evaluating them", "Choose the first idea immediately", "Reject unusual ideas before listing them", "Implement a solution before considering alternatives"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Problem solving differs from critical thinking in that problem solving should lead to a proposed solution.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "According to the course, what can help reduce test anxiety caused by lack of preparation?",
+    "options": ["Start studying early and make the exam a priority", "Wait until the final hour to begin", "Avoid reviewing the material", "Focus only on possible failure"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Which sequence is recommended for improving memory during test preparation?",
+    "options": ["Notice the material, store the material, reclaim the material", "Read the material, ignore it, replace it", "Memorize the material, skip review, forget details", "Collect the material, print the material, delete the material"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Effective test preparation involves organizing and prioritizing your efforts long before the actual exam.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Why should students watch for trigger words while taking a test?",
+    "options": ["Missing an important keyword can cause an otherwise avoidable error", "Trigger words always reveal the correct answer", "Trigger words replace the need to read instructions", "They indicate which questions should be skipped"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Which action is recommended during a post-exam review?",
+    "options": ["Identify your strengths and weaknesses", "Discard the material immediately", "Avoid looking at mistakes", "Set no goals for future exams"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Which computer-literacy ability helps a user deal with spam, adware, spyware, viruses, worms, and Trojan horses?",
+    "options": ["Avoiding online annoyances", "Increasing screen resolution", "Creating presentation slides", "Installing a printer"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Ethics provide a general set of unwritten guidelines for people to follow.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Which set lists protections associated with intellectual property?",
+    "options": ["Copyright laws, patents, and trademarks", "Passwords, firewalls, and browsers", "RAM, ROM, and CPU", "Blogs, email, and social networks"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Which is an example of artificial intelligence used in transportation?",
+    "options": ["Autopilots on commercial airplanes", "Word processing software", "Inkjet printing", "File compression"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Computers process data using numbers represented in binary language.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "What is the main purpose of a folder in a computer file system?",
+    "options": ["To store related files", "To process binary instructions", "To display graphics", "To control the CPU"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Which software controls how a computer functions and allows hardware devices and applications to work together?",
+    "options": ["Operating system", "Presentation file", "Web page", "Flash drive"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Smartphones require their own operating system software and application software.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Which laptop variation can convert into a tablet-like device?",
+    "options": ["2-in-1 PC", "Ultrabook", "Chromebook", "Mainframe"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "A monitor or keyboard that connects to a desktop computer is an example of a:",
+    "options": ["Peripheral device", "Server farm", "Search engine", "Binary digit"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Which device looks like a pen and can be used to tap commands or draw on a screen?",
+    "options": ["Stylus", "Touch pad", "Scanner", "Microphone"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "A webcam is commonly used to capture and transmit live video for videoconferencing applications.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Which sensor records the number of steps taken while a person carries a smartphone or tablet?",
+    "options": ["Pedometer", "Magnetometer", "Proximity sensor", "Fingerprint sensor"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Which of the following is a hard copy?",
+    "options": ["A printed page", "A picture displayed on a monitor", "A file stored in cloud storage", "An email message on a phone"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "ROM is volatile memory, so its data is erased when power is turned off.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Processor speeds measured in gigahertz (GHz) represent approximately:",
+    "options": ["Billions of operations per second", "Thousands of bytes per second", "Hundreds of web pages per minute", "Millions of files per folder"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "How is an external hard disk typically connected to a desktop system unit?",
+    "options": ["Through a USB port", "Through the CPU socket", "Through the monitor screen", "Through the power button"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "What is a key benefit of cloud storage described in the course?",
+    "options": ["Files can be accessed from Internet-connected devices", "Files can be used only on the device where they were created", "It removes the need for any Internet connection", "It stores data only in RAM"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Email is asynchronous, so the sender and receiver do not have to be online at the same time.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Which mobile messaging service is used to send images or videos?",
+    "options": ["MMS", "SMS", "ROM", "URL"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "What is the primary purpose of a web browser?",
+    "options": ["To locate, view, and navigate web resources", "To permanently store every website on the Internet", "To replace the computer operating system", "To manufacture IP addresses"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "In 'https://', the letter 's' indicates that the website connection is secure.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Which search-engine component organizes collected web data into a large database?",
+    "options": ["Indexer", "Spider", "Browser", "Server"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "When evaluating a website, which criterion asks whether the information is up to date?",
+    "options": ["Currency", "Authority", "Accuracy", "Objectivity"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Critical thinking is described as a logical, rational, and systematic thought process.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Which R.E.D. Model step emphasizes remaining objective and unemotional while assessing information?",
+    "options": ["Evaluate Information", "Recognize Assumptions", "Stop and Think", "Plan of Action"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "In the problem-solving process, what should you do during the 'Choosing' step?",
+    "options": ["Select the best choice, plan how to carry it out, and evaluate the choice", "Generate ideas without evaluating them", "Put the plan into action immediately without choosing", "Ignore assumptions and avoid comparing alternatives"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Creative thinking can help a person become aware of more possible solutions to a problem.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Which action is recommended when preparing for the test before arriving at the testing room?",
+    "options": ["Gather your materials", "Avoid setting an alarm", "Arrive late to reduce waiting time", "Ignore the test format"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
+  },
+  {
+    "chapter": "Mock Mids",
+    "q": "Which action is listed as a violation of academic integrity during an exam?",
+    "options": ["Accessing a cell phone or other digital aid", "Reviewing the entire exam before starting", "Reading all instructions carefully", "Sitting away from distractions"],
+    "answer": 0,
+    "explanation": "Based on Mock Midterm Exam."
   }
 ]
