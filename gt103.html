@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GT103 Quiz</title>
-        <script>
-        // Check for saved theme immediately before the page renders
-        if (localStorage.getItem('theme') === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'dark');
-        }
+    <script>
+        (function() {
+            var saved = localStorage.getItem('theme');
+            if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +25,6 @@
         .main-header h1 { margin: 0; color: var(--purple); font-size: 1.6rem; font-weight: 800; }
         .theme-toggle { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background: var(--purple-light); border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; }
 
-        /* ---------- SETUP / CHAPTER SELECTION SCREEN ---------- */
         .setup-screen { width: 100%; }
         .setup-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 30px; box-shadow: var(--shadow-md); }
         .setup-card h2 { margin: 0 0 6px 0; color: var(--purple); font-size: 1.5rem; font-weight: 800; }
@@ -36,39 +37,42 @@
         .chapter-item:hover { border-color: var(--purple); transform: translateY(-2px); }
         .chapter-item.selected { border-color: var(--purple); background: var(--purple-light); }
         .chapter-checkbox { width: 20px; height: 20px; accent-color: var(--purple); cursor: pointer; flex-shrink: 0; }
-        .chapter-info { display: flex; flex-direction: column; }
+        .chapter-info { display: flex; flex-direction: column; gap: 2px; }
         .chapter-name { font-weight: 700; font-size: 0.98rem; }
         .chapter-count { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; }
+        .chapter-best { font-size: 0.78rem; color: var(--success); font-weight: 700; }
+
+        .toggle-row { display: flex; align-items: center; justify-content: space-between; gap: 15px; padding: 16px 18px; margin-top: 18px; border: 2px solid var(--border); border-radius: 14px; background: var(--card-bg); }
+        .toggle-label { display: flex; flex-direction: column; gap: 2px; }
+        .toggle-label strong { font-size: 0.95rem; }
+        .toggle-label span { font-size: 0.8rem; color: var(--text-muted); font-weight: 500; }
+        .switch { position: relative; width: 48px; height: 28px; flex-shrink: 0; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .switch .slider { position: absolute; inset: 0; background: var(--border); border-radius: 28px; cursor: pointer; transition: 0.3s; }
+        .switch .slider::before { content: ""; position: absolute; height: 22px; width: 22px; left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: 0.3s; }
+        .switch input:checked + .slider { background: var(--purple); }
+        .switch input:checked + .slider::before { transform: translateX(20px); }
+
         .setup-footer { display: flex; justify-content: space-between; align-items: center; gap: 15px; margin-top: 24px; flex-wrap: wrap; }
         .selected-count { font-size: 0.9rem; font-weight: 700; color: var(--text-muted); }
         .start-btn { padding: 15px 32px; background: var(--purple); color: #fff; border: none; border-radius: 14px; font-size: 1rem; font-weight: 700; cursor: pointer; font-family: inherit; }
         .start-btn:hover:not(:disabled) { background: var(--purple-hover); }
         .start-btn:disabled { opacity: 0.45; cursor: not-allowed; }
 
-        /* ---------- QUIZ ---------- */
         .quiz-main { background: var(--card-bg); padding: 40px; border-radius: 20px; box-shadow: var(--shadow-md); min-height: 500px; display: none; flex-direction: column; border: 1px solid var(--border); }
-        .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; gap: 15px; }
+        .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; gap: 15px; flex-wrap: wrap; }
+        .top-left { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
         .progress-text { font-size: 0.85rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; }
         .live-score { font-size: 0.95rem; font-weight: 800; color: var(--purple); background: var(--purple-light); padding: 6px 14px; border-radius: 20px; }
+        .live-timer { font-size: 0.95rem; font-weight: 800; color: var(--text-muted); background: var(--border); padding: 6px 14px; border-radius: 20px; font-variant-numeric: tabular-nums; }
         .progress-bar-container { width: 100%; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; margin-bottom: 30px; }
         .progress-bar { height: 100%; background: linear-gradient(90deg, var(--purple), #a78bfa); width: 0%; transition: width 0.4s ease; }
         .question { font-size: 1.35rem; font-weight: 700; margin-bottom: 30px; line-height: 1.5; }
         .options { display: flex; flex-direction: column; gap: 12px; }
-        .show-answer-btn {
-            margin-top: 14px;
-            padding: 12px;
-            background: transparent;
-            color: var(--purple);
-            border: 2px dashed var(--purple);
-            border-radius: 14px;
-            cursor: pointer;
-            font-size: 0.95rem;
-            font-weight: 700;
-            font-family: inherit;
-            width: 100%;
-        }
+        .show-answer-btn { margin-top: 14px; padding: 12px; background: transparent; color: var(--purple); border: 2px dashed var(--purple); border-radius: 14px; cursor: pointer; font-size: 0.95rem; font-weight: 700; font-family: inherit; width: 100%; }
         .show-answer-btn:hover:not(:disabled) { background: var(--purple-light); }
-        .option-btn { padding: 18px 22px; border: 2px solid var(--border); border-radius: 14px; background: var(--card-bg); cursor: pointer; text-align: left; font-size: 1.05rem; font-weight: 500; color: var(--text-main); font-family: inherit; transition: all 0.2s; min-height: 55px; }
+        .option-btn { padding: 18px 22px; border: 2px solid var(--border); border-radius: 14px; background: var(--card-bg); cursor: pointer; text-align: left; font-size: 1.05rem; font-weight: 500; color: var(--text-main); font-family: inherit; transition: all 0.2s; min-height: 55px; display: flex; align-items: center; gap: 12px; }
+        .option-btn .key-hint { font-size: 0.75rem; font-weight: 800; color: var(--text-muted); background: var(--border); border-radius: 6px; padding: 3px 8px; flex-shrink: 0; }
         .option-btn:hover:not(:disabled) { border-color: var(--purple); background: var(--purple-light); transform: translateY(-2px); }
         .option-btn.correct { background: #ecfdf5; color: #065f46; border-color: var(--success); }
         .option-btn.wrong { background: #fef2f2; color: #991b1b; border-color: var(--error); }
@@ -81,16 +85,30 @@
         .next-btn:hover { background: var(--purple-hover); }
         .back-btn { margin-top: 10px; padding: 14px; background: transparent; color: var(--purple); border: 2px solid var(--purple); border-radius: 14px; cursor: pointer; font-size: 0.95rem; font-weight: 700; width: 100%; font-family: inherit; }
 
-        /* ---------- SCORE SCREEN ---------- */
-        .score-screen { text-align: center; display: none; width: 100%; background: var(--card-bg); padding: 50px; border-radius: 20px; box-shadow: var(--shadow-lg); border: 1px solid var(--border); }
-        .score-screen h2 { font-size: 2.2rem; color: var(--purple); margin-bottom: 20px; }
+        .score-screen { text-align: center; display: none; width: 100%; background: var(--card-bg); padding: 40px; border-radius: 20px; box-shadow: var(--shadow-lg); border: 1px solid var(--border); }
+        .score-screen h2 { font-size: 2.2rem; color: var(--purple); margin: 0 0 20px 0; }
         .score-circle { width: 160px; height: 160px; border-radius: 50%; background: var(--purple-light); display: flex; justify-content: center; align-items: center; margin: 0 auto 20px; font-size: 2.5rem; font-weight: 800; color: var(--purple); border: 8px solid var(--purple); }
-        .score-message { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 30px; }
-        .restart-btn { padding: 16px 32px; background: var(--purple); color: white; border: none; border-radius: 14px; cursor: pointer; font-size: 1rem; font-weight: 700; font-family: inherit; }
+        .score-message { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 10px; }
+        .score-time { font-size: 0.95rem; color: var(--text-muted); font-weight: 600; margin-bottom: 24px; }
+        .score-actions { display: flex; flex-direction: column; gap: 12px; align-items: center; margin-bottom: 24px; }
+        .retry-wrong-btn { padding: 14px 28px; background: var(--error); color: #fff; border: none; border-radius: 14px; cursor: pointer; font-size: 1rem; font-weight: 700; font-family: inherit; }
+        .retry-wrong-btn:hover { opacity: 0.9; }
+        .restart-btn { padding: 14px 28px; background: var(--purple); color: white; border: none; border-radius: 14px; cursor: pointer; font-size: 1rem; font-weight: 700; font-family: inherit; }
         .restart-btn:hover { background: var(--purple-hover); }
 
+        .review-section { text-align: left; margin-top: 30px; border-top: 1px solid var(--border); padding-top: 24px; }
+        .review-section summary { cursor: pointer; font-weight: 800; color: var(--purple); font-size: 1.1rem; padding: 12px; border-radius: 12px; list-style: none; display: flex; align-items: center; gap: 8px; }
+        .review-section summary:hover { background: var(--purple-light); }
+        .review-section summary::-webkit-details-marker { display: none; }
+        .review-item { padding: 16px 18px; margin-top: 12px; border: 2px solid var(--border); border-radius: 14px; background: var(--card-bg); }
+        .review-q { font-weight: 700; margin-bottom: 10px; line-height: 1.4; }
+        .review-line { font-size: 0.9rem; margin: 4px 0; font-weight: 600; }
+        .review-line.user { color: var(--error); }
+        .review-line.correct { color: var(--success); }
+        .review-expl { font-size: 0.85rem; color: var(--text-muted); font-style: italic; margin-top: 10px; padding: 10px 12px; background: var(--purple-light); border-radius: 8px; }
+
         .loading { text-align: center; padding: 40px; color: var(--text-muted); font-weight: 600; }
-        @media (max-width: 600px) { body { padding: 15px; } .quiz-main { padding: 25px; } .main-header h1 { font-size: 1.2rem; } .question { font-size: 1.1rem; } .option-btn { padding: 15px; } .setup-card { padding: 22px; } .setup-footer { flex-direction: column; align-items: stretch; } .start-btn { width: 100%; } }
+        @media (max-width: 600px) { body { padding: 15px; } .quiz-main { padding: 25px; } .score-screen { padding: 25px; } .main-header h1 { font-size: 1.2rem; } .question { font-size: 1.1rem; } .option-btn { padding: 15px; } .setup-card { padding: 22px; } .setup-footer { flex-direction: column; align-items: stretch; } .start-btn { width: 100%; } .top-bar { flex-direction: column; align-items: stretch; } .top-left { justify-content: center; } }
     </style>
 </head>
 <body>
@@ -100,11 +118,16 @@
         <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()">🌙</button>
     </header>
 
-    <!-- SETUP / CHAPTER SELECTION SCREEN -->
     <div id="setup-screen" class="setup-screen"><div class="loading">Loading chapters...</div></div>
 
     <div class="quiz-main" id="quiz-main">
-        <div class="top-bar"><div class="progress-text" id="progress-text">Question 1</div><div class="live-score" id="live-score">⭐ Score: 0</div></div>
+        <div class="top-bar">
+            <div class="top-left">
+                <div class="progress-text" id="progress-text">Question 1</div>
+                <div class="live-timer" id="live-timer">⏱ 00:00</div>
+            </div>
+            <div class="live-score" id="live-score">⭐ Score: 0</div>
+        </div>
         <div class="progress-bar-container"><div class="progress-bar" id="progress-bar"></div></div>
         <div class="question" id="question">Loading question...</div>
         <div class="options" id="options"></div>
@@ -118,26 +141,47 @@
         <h2>Quiz Completed!</h2>
         <div class="score-circle" id="score-circle">0%</div>
         <div class="score-message" id="score-message">You scored 0 out of 0</div>
-        <button class="restart-btn" onclick="goBackToMenu()">Back to Chapters 🔄</button>
+        <div class="score-time" id="score-time">⏱ Time: 00:00</div>
+        <div class="score-actions" id="score-actions">
+            <button class="retry-wrong-btn" id="retry-wrong-btn" style="display: none;">🔁 Retry Wrong Answers</button>
+            <button class="restart-btn" onclick="goBackToMenu()">Back to Chapters 🔄</button>
+        </div>
+        <details class="review-section" id="review-section" style="display: none;">
+            <summary>📝 Review Incorrect Answers (<span id="review-count">0</span>)</summary>
+            <div id="review-list"></div>
+        </details>
     </div>
 </div>
 
 <script>
-    /* ---------------- STATE ---------------- */
-    let allQuestions = [];       // every question from the JSON
-    let activeQuestions = [];    // only the questions the student selected
-    let setupChapters = [];      // [{ name: 'Chapter 1', count: 12 }, ...]
+    /* ====================== SUBJECT CONFIG ====================== */
+    // ⚠️ CHANGE THESE 3 LINES for each subject file:
+    const SUBJECT = {
+        key: 'gt103',                          // 'tu170' | 'gt103' | 'el112'
+        dataFile: './data/gt103.json'          // path to your JSON
+    };
+
+    /* ====================== STATE ====================== */
+    let allQuestions = [];
+    let activeQuestions = [];
+    let setupChapters = [];
     let currentQuestionIndex = 0;
     let score = 0;
     let answered = false;
+    let showAnswerEnabled = false;
+    let wrongAnswers = [];       // [{ q, userAnswer, correctAnswer }]
+    let timerInterval = null;
+    let elapsedSeconds = 0;
+    let quizStartTime = 0;
 
-    /* ---------------- DOM ---------------- */
+    /* ====================== DOM ====================== */
     const questionEl     = document.getElementById('question');
     const showAnswerBtn  = document.getElementById('show-answer-btn');
     const optionsEl      = document.getElementById('options');
     const nextBtn        = document.getElementById('next-btn');
     const progressText   = document.getElementById('progress-text');
     const liveScoreEl    = document.getElementById('live-score');
+    const liveTimerEl    = document.getElementById('live-timer');
     const feedbackStatus = document.getElementById('feedback-status');
     const explanationEl  = document.getElementById('explanation');
     const setupScreen    = document.getElementById('setup-screen');
@@ -145,9 +189,14 @@
     const scoreScreen    = document.getElementById('score-screen');
     const scoreCircle    = document.getElementById('score-circle');
     const scoreMessage   = document.getElementById('score-message');
+    const scoreTimeEl    = document.getElementById('score-time');
     const progressBarEl  = document.getElementById('progress-bar');
+    const retryWrongBtn  = document.getElementById('retry-wrong-btn');
+    const reviewSection  = document.getElementById('review-section');
+    const reviewList     = document.getElementById('review-list');
+    const reviewCount    = document.getElementById('review-count');
 
-    /* ---------------- THEME ---------------- */
+    /* ====================== THEME ====================== */
     function toggleTheme() {
         const html = document.documentElement;
         const btn = document.getElementById('theme-toggle');
@@ -157,19 +206,17 @@
             html.setAttribute('data-theme', 'dark'); btn.textContent = '☀️'; localStorage.setItem('theme', 'dark');
         }
     }
-    // Update the button icon based on the saved theme
-    if (localStorage.getItem('theme') === 'dark') {
+    if (document.documentElement.getAttribute('data-theme') === 'dark') {
         document.getElementById('theme-toggle').textContent = '☀️';
     }
 
-    /* ---------------- HELPERS ---------------- */
+    /* ====================== HELPERS ====================== */
     function escapeHtml(str) {
         return String(str).replace(/[&<>"']/g, c => (
             { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
         ));
     }
 
-    // Fisher–Yates shuffle (unbiased)
     function shuffle(arr) {
         for (let i = arr.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -178,15 +225,48 @@
         return arr;
     }
 
-    /* ---------------- DATA LOADING ---------------- */
+    function formatTime(sec) {
+        const m = String(Math.floor(sec / 60)).padStart(2, '0');
+        const s = String(sec % 60).padStart(2, '0');
+        return `${m}:${s}`;
+    }
+
+    /* ====================== localStorage HIGH SCORES ====================== */
+    function loadHighScores() {
+        try { return JSON.parse(localStorage.getItem(SUBJECT.key + '-highscores') || '{}'); }
+        catch (e) { return {}; }
+    }
+    function saveHighScore(chapter, percent) {
+        const scores = loadHighScores();
+        if (scores[chapter] === undefined || percent > scores[chapter]) {
+            scores[chapter] = percent;
+            try { localStorage.setItem(SUBJECT.key + '-highscores', JSON.stringify(scores)); } catch (e) {}
+        }
+    }
+
+    /* ====================== TIMER ====================== */
+    function startTimer() {
+        elapsedSeconds = 0;
+        quizStartTime = Date.now();
+        liveTimerEl.textContent = '⏱ 00:00';
+        clearInterval(timerInterval);
+        timerInterval = setInterval(() => {
+            elapsedSeconds = Math.floor((Date.now() - quizStartTime) / 1000);
+            liveTimerEl.textContent = '⏱ ' + formatTime(elapsedSeconds);
+        }, 1000);
+    }
+    function stopTimer() {
+        clearInterval(timerInterval);
+        timerInterval = null;
+    }
+
+    /* ====================== DATA LOADING ====================== */
     async function loadData() {
         try {
-            // NOTE: lowercase .json — GitHub Pages is case-sensitive!
-            const response = await fetch('./data/gt103.json');
+            const response = await fetch(SUBJECT.dataFile);
             if (!response.ok) throw new Error('Failed to load JSON');
             allQuestions = await response.json();
 
-            // Remove duplicate questions (same question text)
             const seen = new Set();
             allQuestions = allQuestions.filter(q => {
                 const key = (q.q || '').trim().toLowerCase();
@@ -197,11 +277,11 @@
 
             buildSetupScreen();
         } catch (error) {
-            setupScreen.innerHTML = '<div class="loading" style="color:#ef4444;">⚠️ Error loading questions. Make sure data/gt103.json exists.</div>';
+            setupScreen.innerHTML = '<div class="loading" style="color:#ef4444;">⚠️ Error loading questions. Make sure ' + SUBJECT.dataFile + ' exists.</div>';
         }
     }
 
-    /* ---------------- SETUP SCREEN ---------------- */
+    /* ====================== SETUP SCREEN ====================== */
     function buildSetupScreen() {
         const chapterNames = [...new Set(allQuestions.map(q => q.chapter))]
             .sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }));
@@ -211,14 +291,21 @@
             count: allQuestions.filter(q => q.chapter === name).length
         }));
 
-        const itemsHTML = setupChapters.map((ch, i) => `
+        const highScores = loadHighScores();
+
+        const itemsHTML = setupChapters.map((ch, i) => {
+            const best = highScores[ch.name];
+            const bestHTML = best !== undefined ? `<span class="chapter-best">⭐ Best: ${best}%</span>` : '';
+            return `
             <label class="chapter-item selected">
                 <input type="checkbox" class="chapter-checkbox" data-index="${i}" checked>
                 <span class="chapter-info">
                     <span class="chapter-name">${escapeHtml(ch.name)}</span>
                     <span class="chapter-count">${ch.count} question${ch.count === 1 ? '' : 's'}</span>
+                    ${bestHTML}
                 </span>
-            </label>`).join('');
+            </label>`;
+        }).join('');
 
         setupScreen.innerHTML = `
             <div class="setup-card">
@@ -229,6 +316,18 @@
                     <button type="button" class="chip-btn" id="clear-all-btn">✕ Clear All</button>
                 </div>
                 <div class="chapter-list">${itemsHTML}</div>
+
+                <div class="toggle-row">
+                    <div class="toggle-label">
+                        <strong>💡 Show Answer button</strong>
+                        <span>Adds a hint button under each question (no point awarded).</span>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="answer-toggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
                 <div class="setup-footer">
                     <div class="selected-count" id="selected-count"></div>
                     <button type="button" class="start-btn" id="start-btn">Start Quiz ➔</button>
@@ -238,7 +337,6 @@
         updateSelectedCount();
     }
 
-    // Event delegation: one listener handles all dynamically created checkboxes/buttons
     setupScreen.addEventListener('change', (e) => {
         if (!e.target.classList.contains('chapter-checkbox')) return;
         e.target.closest('.chapter-item').classList.toggle('selected', e.target.checked);
@@ -280,30 +378,34 @@
         startBtn.disabled = checked.length === 0;
     }
 
-    /* ---------------- QUIZ FLOW ---------------- */
+    /* ====================== QUIZ FLOW ====================== */
     function startQuiz() {
         const checked = [...setupScreen.querySelectorAll('.chapter-checkbox:checked')];
         if (checked.length === 0) return;
 
         const chosen = new Set(checked.map(cb => setupChapters[Number(cb.dataset.index)].name));
-
-        // filter() returns a NEW array, so the master list is never modified
         activeQuestions = shuffle(allQuestions.filter(q => chosen.has(q.chapter)));
+
+        showAnswerEnabled = document.getElementById('answer-toggle').checked;
 
         currentQuestionIndex = 0;
         score = 0;
+        wrongAnswers = [];
 
         setupScreen.style.display = 'none';
         scoreScreen.style.display = 'none';
         quizMain.style.display = 'flex';
 
+        startTimer();
         loadQuestion();
     }
 
     function goBackToMenu() {
+        stopTimer();
         quizMain.style.display = 'none';
         scoreScreen.style.display = 'none';
         setupScreen.style.display = 'block';
+        buildSetupScreen(); // refresh to show updated high scores
     }
 
     function updateTopBar() {
@@ -318,20 +420,34 @@
         explanationEl.style.display = 'none';
         explanationEl.textContent = '';
         nextBtn.style.display = 'none';
-        showAnswerBtn.style.display = 'block';
-        showAnswerBtn.disabled = false;
-        showAnswerBtn.onclick = revealAnswer;
         optionsEl.innerHTML = '';
 
+        showAnswerBtn.style.display = showAnswerEnabled ? 'block' : 'none';
+        showAnswerBtn.disabled = false;
+        showAnswerBtn.onclick = revealAnswer;
+
         const q = activeQuestions[currentQuestionIndex];
-        progressText.textContent = `Question ${currentQuestionIndex + 1} of ${activeQuestions.length}`;
+
+        // 🔀 Shuffle options and remember the new correct index
+        const pairs = q.options.map((text, i) => ({ text, isCorrect: i === q.answer }));
+        shuffle(pairs);
+        q._shuffledOptions = pairs.map(p => p.text);
+        q._shuffledAnswer = pairs.findIndex(p => p.isCorrect);
+
+        progressText.textContent = `Q${currentQuestionIndex + 1} / ${activeQuestions.length}`;
         updateTopBar();
         questionEl.textContent = q.q;
 
-        q.options.forEach((option, index) => {
+        q._shuffledOptions.forEach((option, index) => {
             const btn = document.createElement('button');
             btn.classList.add('option-btn');
-            btn.textContent = option;
+            const keyHint = document.createElement('span');
+            keyHint.classList.add('key-hint');
+            keyHint.textContent = index + 1;
+            const textSpan = document.createElement('span');
+            textSpan.textContent = option;
+            btn.appendChild(keyHint);
+            btn.appendChild(textSpan);
             btn.onclick = () => selectOption(index);
             optionsEl.appendChild(btn);
         });
@@ -344,20 +460,27 @@
 
         const q = activeQuestions[currentQuestionIndex];
         const buttons = document.querySelectorAll('.option-btn');
+        const correctIdx = q._shuffledAnswer;
 
         buttons.forEach((btn, index) => {
             btn.disabled = true;
-            if (index === q.answer) btn.classList.add('correct');
+            if (index === correctIdx) btn.classList.add('correct');
             else if (index === selectedIndex) btn.classList.add('wrong');
         });
 
-        if (selectedIndex === q.answer) {
+        if (selectedIndex === correctIdx) {
             score++;
             feedbackStatus.textContent = "✅ Correct!";
             feedbackStatus.style.color = "var(--success)";
         } else {
-            feedbackStatus.textContent = `❌ Incorrect. The correct answer is: ${q.options[q.answer]}`;
+            feedbackStatus.textContent = `❌ Incorrect. The correct answer is: ${q._shuffledOptions[correctIdx]}`;
             feedbackStatus.style.color = "var(--error)";
+            wrongAnswers.push({
+                q: q.q,
+                userAnswer: q._shuffledOptions[selectedIndex],
+                correctAnswer: q._shuffledOptions[correctIdx],
+                explanation: q.explanation
+            });
         }
 
         explanationEl.textContent = `💡 Explanation: ${q.explanation || 'No explanation provided.'}`;
@@ -372,15 +495,14 @@
 
         const q = activeQuestions[currentQuestionIndex];
         const buttons = document.querySelectorAll('.option-btn');
+        const correctIdx = q._shuffledAnswer;
 
-        // Lock all options and highlight the correct one
         buttons.forEach((btn, index) => {
             btn.disabled = true;
-            if (index === q.answer) btn.classList.add('correct');
+            if (index === correctIdx) btn.classList.add('correct');
         });
 
-        // Show the feedback without awarding a point
-        feedbackStatus.textContent = `💡 The correct answer is: ${q.options[q.answer]}`;
+        feedbackStatus.textContent = `💡 The correct answer is: ${q._shuffledOptions[correctIdx]}`;
         feedbackStatus.style.color = "var(--purple)";
         explanationEl.textContent = `💡 Explanation: ${q.explanation || 'No explanation provided.'}`;
         explanationEl.style.display = 'block';
@@ -396,11 +518,36 @@
         else showScore();
     };
 
+    /* ====================== KEYBOARD SHORTCUTS ====================== */
+    document.addEventListener('keydown', (e) => {
+        // Only act during active quiz
+        if (quizMain.style.display === 'none') return;
+
+        // Number keys 1-4 to pick an option
+        if (!answered && ['1', '2', '3', '4'].includes(e.key)) {
+            const idx = Number(e.key) - 1;
+            const buttons = document.querySelectorAll('.option-btn');
+            if (idx < buttons.length && !buttons[idx].disabled) {
+                buttons[idx].click();
+            }
+            return;
+        }
+
+        // Enter or Space to go to next question (only if answered)
+        if (answered && (e.key === 'Enter' || e.key === ' ')) {
+            e.preventDefault();
+            nextBtn.click();
+        }
+    });
+
+    /* ====================== SCORE SCREEN ====================== */
     function showScore() {
+        stopTimer();
         quizMain.style.display = 'none';
         scoreScreen.style.display = 'block';
 
-        const percent = Math.round((score / activeQuestions.length) * 100);
+        const total = activeQuestions.length;
+        const percent = Math.round((score / total) * 100);
         scoreCircle.textContent = `${percent}%`;
 
         let msg = "";
@@ -409,9 +556,55 @@
         else if (percent >= 50) msg = "Keep studying! 📚";
         else msg = "Review and try again! 💪";
 
-        scoreMessage.textContent = `You scored ${score} out of ${activeQuestions.length} - ${msg}`;
+        scoreMessage.textContent = `You scored ${score} out of ${total} - ${msg}`;
+        scoreTimeEl.textContent = `⏱ Time: ${formatTime(elapsedSeconds)}`;
+
+        // Save high scores per chapter (only for the chapters used)
+        const usedChapters = [...new Set(activeQuestions.map(q => q.chapter))];
+        usedChapters.forEach(ch => saveHighScore(ch, percent));
+
+        // Retry wrong answers button
+        if (wrongAnswers.length > 0) {
+            retryWrongBtn.style.display = 'inline-block';
+            retryWrongBtn.onclick = retryWrongAnswers;
+        } else {
+            retryWrongBtn.style.display = 'none';
+        }
+
+        // Review section
+        if (wrongAnswers.length > 0) {
+            reviewSection.style.display = 'block';
+            reviewCount.textContent = wrongAnswers.length;
+            reviewList.innerHTML = wrongAnswers.map(w => `
+                <div class="review-item">
+                    <div class="review-q">${escapeHtml(w.q)}</div>
+                    <div class="review-line user">❌ Your answer: ${escapeHtml(w.userAnswer)}</div>
+                    <div class="review-line correct">✅ Correct: ${escapeHtml(w.correctAnswer)}</div>
+                    <div class="review-expl">💡 ${escapeHtml(w.explanation || 'No explanation provided.')}</div>
+                </div>
+            `).join('');
+        } else {
+            reviewSection.style.display = 'none';
+        }
     }
 
+    function retryWrongAnswers() {
+        // Rebuild activeQuestions from the wrong ones (using original question objects)
+        const wrongTextSet = new Set(wrongAnswers.map(w => w.q));
+        activeQuestions = shuffle(allQuestions.filter(q => wrongTextSet.has(q.q)));
+
+        wrongAnswers = [];
+        currentQuestionIndex = 0;
+        score = 0;
+
+        scoreScreen.style.display = 'none';
+        quizMain.style.display = 'flex';
+
+        startTimer();
+        loadQuestion();
+    }
+
+    /* ====================== INIT ====================== */
     loadData();
 </script>
 </body>
