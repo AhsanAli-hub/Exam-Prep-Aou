@@ -8,187 +8,36 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --purple: #8b5cf6;
-            --purple-hover: #7c3aed;
-            --bg: #f9fafb;
-            --card-bg: #ffffff;
-            --text-main: #111827;
-            --text-muted: #6b7280;
-            --border: #e5e7eb;
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-        }
-
-        [data-theme="dark"] {
-            --bg: #0f172a;
-            --card-bg: #1e293b;
-            --text-main: #f1f5f9;
-            --text-muted: #94a3b8;
-            --border: #334155;
-        }
-
-        * {
-            box-sizing: border-box;
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-        }
-
-        body {
-            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background-color: var(--bg);
-            color: var(--text-main);
-            margin: 0;
-            padding: 40px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            box-sizing: border-box;
-        }
-
-        .header-container {
-            text-align: center;
-            margin-bottom: 50px;
-            position: relative;
-            width: 100%;
-            max-width: 1000px;
-        }
-
-        .header-container h1 {
-            font-size: 2.5rem;
-            color: var(--purple);
-            margin-bottom: 10px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-        }
-
-        .header-container p {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin: 0;
-        }
-
-        .theme-toggle {
-            position: absolute;
-            right: 0;
-            top: 0;
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 50%;
-            width: 44px;
-            height: 44px;
-            cursor: pointer;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: var(--shadow-md);
-        }
-
-        .theme-toggle:hover {
-            transform: scale(1.1);
-        }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            width: 100%;
-            max-width: 1000px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            padding: 40px 30px;
-            border-radius: 20px;
-            box-shadow: var(--shadow-md);
-            text-decoration: none;
-            color: var(--text-main);
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            border-color: var(--purple);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .card h2 {
-            color: var(--purple);
-            font-size: 1.8rem;
-            margin: 0 0 10px 0;
-            font-weight: 800;
-        }
-
-        .card p {
-            color: var(--text-muted);
-            font-size: 1rem;
-            margin: 0;
-        }
-
-        .card-icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
-        }
-
-        @media (max-width: 600px) {
-            .header-container h1 { font-size: 1.8rem; }
-            .theme-toggle { width: 38px; height: 38px; font-size: 1rem; }
-        }
+        :root { --purple: #8b5cf6; --bg: #f9fafb; --card-bg: #ffffff; --text-main: #111827; --text-muted: #6b7280; --border: #e5e7eb; --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1); --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1); }
+        [data-theme="dark"] { --bg: #0f172a; --card-bg: #1e293b; --text-main: #f1f5f9; --text-muted: #94a3b8; --border: #334155; }
+        * { box-sizing: border-box; transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; }
+        body { font-family: 'Inter', system-ui, sans-serif; background-color: var(--bg); color: var(--text-main); margin: 0; padding: 40px 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; box-sizing: border-box; }
+        .header-container { text-align: center; margin-bottom: 50px; position: relative; width: 100%; max-width: 1000px; }
+        .header-container h1 { font-size: 2.5rem; color: var(--purple); margin-bottom: 10px; font-weight: 800; }
+        .header-container p { font-size: 1.1rem; color: var(--text-muted); margin: 0; }
+        .theme-toggle { position: absolute; right: 0; top: 0; background: var(--card-bg); border: 1px solid var(--border); border-radius: 50%; width: 44px; height: 44px; cursor: pointer; font-size: 1.2rem; box-shadow: var(--shadow-md); }
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; width: 100%; max-width: 1000px; }
+        .card { background: var(--card-bg); padding: 40px 30px; border-radius: 20px; box-shadow: var(--shadow-md); text-decoration: none; color: var(--text-main); border: 2px solid transparent; transition: all 0.3s ease; display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .card:hover { transform: translateY(-8px); border-color: var(--purple); box-shadow: var(--shadow-lg); }
+        .card h2 { color: var(--purple); font-size: 1.8rem; margin: 0 0 10px 0; font-weight: 800; }
+        .card p { color: var(--text-muted); font-size: 1rem; margin: 0; }
+        .card-icon { font-size: 3rem; margin-bottom: 15px; }
     </style>
 </head>
 <body>
-
     <div class="header-container">
         <h1>🎓 Final Mids Prep</h1>
         <p>Master your exams with these comprehensive quizzes</p>
         <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()">🌙</button>
     </div>
     <div class="grid-container">
-        
-        <a href="gt103.html" class="card">
-            <div class="card-icon">🤖</div>
-            <h2>GT103</h2>
-            <p>Artificial Intelligence Mids Quiz</p>
-        </a>
-
-        <a href="tu170.html" class="card">
-            <div class="card-icon">💻</div>
-            <h2>TU170</h2>
-            <p>Computing Essentials Quiz</p>
-        </a>
-
-        <a href="el112.html" class="card">
-            <div class="card-icon">📖</div>
-            <h2>EL112</h2>
-            <p>English Language Quiz</p>
-        </a>
-
+        <a href="gt103.html" class="card"><div class="card-icon">🤖</div><h2>GT103</h2><p>Artificial Intelligence Mids Quiz</p></a>
+        <a href="tu170.html" class="card"><div class="card-icon">💻</div><h2>TU170</h2><p>Computing Essentials Quiz</p></a>
+        <a href="el112.html" class="card"><div class="card-icon">📖</div><h2>EL112</h2><p>English Language Quiz</p></a>
     </div>
-
     <script>
-        function toggleTheme() {
-            const html = document.documentElement;
-            const btn = document.getElementById('theme-toggle');
-            if (html.getAttribute('data-theme') === 'dark') {
-                html.setAttribute('data-theme', 'light');
-                btn.textContent = '🌙';
-                localStorage.setItem('theme', 'light');
-            } else {
-                html.setAttribute('data-theme', 'dark');
-                btn.textContent = '☀️';
-                localStorage.setItem('theme', 'dark');
-            }
-        }
-        if (localStorage.getItem('theme') === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            document.getElementById('theme-toggle').textContent = '☀️';
-        }
+        function toggleTheme() { const html = document.documentElement; const btn = document.getElementById('theme-toggle'); if (html.getAttribute('data-theme') === 'dark') { html.setAttribute('data-theme', 'light'); btn.textContent = '🌙'; localStorage.setItem('theme', 'light'); } else { html.setAttribute('data-theme', 'dark'); btn.textContent = '☀️'; localStorage.setItem('theme', 'dark'); } }
+        if (localStorage.getItem('theme') === 'dark') { document.documentElement.setAttribute('data-theme', 'dark'); document.getElementById('theme-toggle').textContent = '☀️'; }
     </script>
 </body>
 </html>

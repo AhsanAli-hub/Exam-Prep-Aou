@@ -8,540 +8,152 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --purple: #8b5cf6;
-            --purple-hover: #7c3aed;
-            --purple-light: #f5f3ff;
-            --success: #10b981;
-            --error: #ef4444;
-            --bg: #f9fafb;
-            --card-bg: #ffffff;
-            --text-main: #111827;
-            --text-muted: #6b7280;
-            --border: #e5e7eb;
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-        }
-        [data-theme="dark"] {
-            --bg: #0f172a; --card-bg: #1e293b; --text-main: #f1f5f9;
-            --text-muted: #94a3b8; --border: #334155; --purple-light: #312e81;
-        }
+        :root { --purple: #8b5cf6; --purple-hover: #7c3aed; --purple-light: #f5f3ff; --success: #10b981; --error: #ef4444; --bg: #f9fafb; --card-bg: #ffffff; --text-main: #111827; --text-muted: #6b7280; --border: #e5e7eb; --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05); --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1); --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1); }
+        [data-theme="dark"] { --bg: #0f172a; --card-bg: #1e293b; --text-main: #f1f5f9; --text-muted: #94a3b8; --border: #334155; --purple-light: #312e81; }
         * { box-sizing: border-box; transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; }
-        body { font-family: 'Inter', 'Segoe UI', system-ui, sans-serif; background-color: var(--bg); color: var(--text-main); margin: 0; padding: 20px; display: flex; justify-content: center; min-height: 100vh; }
-        
+        body { font-family: 'Inter', system-ui, sans-serif; background-color: var(--bg); color: var(--text-main); margin: 0; padding: 20px; display: flex; justify-content: center; min-height: 100vh; }
         .app-container { width: 100%; max-width: 800px; display: flex; flex-direction: column; gap: 20px; }
-        
         .main-header { background: var(--card-bg); padding: 18px 30px; border-radius: 16px; box-shadow: var(--shadow-sm); text-align: center; position: relative; border: 1px solid var(--border); }
-        .main-header h1 { margin: 0; color: var(--purple); font-size: 1.6rem; font-weight: 800; letter-spacing: -0.5px; }
+        .main-header h1 { margin: 0; color: var(--purple); font-size: 1.6rem; font-weight: 800; }
         .theme-toggle { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background: var(--purple-light); border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; }
-        .theme-toggle:hover { transform: translateY(-50%) scale(1.1); }
-
+        .chapter-menu { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; grid-auto-rows: 1fr; }
+        .menu-btn { background: var(--card-bg); border: 2px solid var(--border); border-radius: 16px; padding: 25px 20px; cursor: pointer; text-align: center; transition: all 0.2s; box-shadow: var(--shadow-sm); font-family: inherit; color: var(--text-main); }
+        .menu-btn:hover { border-color: var(--purple); transform: translateY(-4px); box-shadow: var(--shadow-md); background: var(--purple-light); }
+        .menu-btn h2 { margin: 0 0 8px 0; color: var(--purple); font-size: 1.25rem; font-weight: 800; }
+        .menu-btn p { margin: 0; color: var(--text-muted); font-size: 0.9rem; font-weight: 600; }
+        .quiz-main { background: var(--card-bg); padding: 40px; border-radius: 20px; box-shadow: var(--shadow-md); min-height: 500px; display: none; flex-direction: column; border: 1px solid var(--border); }
         .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; gap: 15px; }
-        .progress-text { font-size: 0.85rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
-        .live-score { font-size: 0.95rem; font-weight: 800; color: var(--purple); background: var(--purple-light); padding: 6px 14px; border-radius: 20px; white-space: nowrap; }
-
+        .progress-text { font-size: 0.85rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; }
+        .live-score { font-size: 0.95rem; font-weight: 800; color: var(--purple); background: var(--purple-light); padding: 6px 14px; border-radius: 20px; }
         .progress-bar-container { width: 100%; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; margin-bottom: 30px; }
-        .progress-bar { height: 100%; background: linear-gradient(90deg, var(--purple), #a78bfa); width: 0%; transition: width 0.4s ease; border-radius: 4px; }
-
-        .quiz-main { background: var(--card-bg); padding: 40px; border-radius: 20px; box-shadow: var(--shadow-md); min-height: 500px; display: flex; flex-direction: column; border: 1px solid var(--border); }
-
-        .question { font-size: 1.35rem; font-weight: 700; margin-bottom: 30px; line-height: 1.5; color: var(--text-main); }
+        .progress-bar { height: 100%; background: linear-gradient(90deg, var(--purple), #a78bfa); width: 0%; transition: width 0.4s ease; }
+        .question { font-size: 1.35rem; font-weight: 700; margin-bottom: 30px; line-height: 1.5; }
         .options { display: flex; flex-direction: column; gap: 12px; }
-        .option-btn { padding: 18px 22px; border: 2px solid var(--border); border-radius: 14px; background: var(--card-bg); cursor: pointer; text-align: left; font-size: 1.05rem; font-weight: 500; color: var(--text-main); font-family: inherit; transition: all 0.2s ease; display: flex; align-items: center; min-height: 55px; }
-        .option-btn:hover:not(:disabled) { border-color: var(--purple); background: var(--purple-light); transform: translateY(-2px); box-shadow: var(--shadow-md); }
-        .option-btn.correct { background: #ecfdf5; color: #065f46; border-color: var(--success); animation: pulse 0.4s ease; }
+        .option-btn { padding: 18px 22px; border: 2px solid var(--border); border-radius: 14px; background: var(--card-bg); cursor: pointer; text-align: left; font-size: 1.05rem; font-weight: 500; color: var(--text-main); font-family: inherit; transition: all 0.2s; min-height: 55px; }
+        .option-btn:hover:not(:disabled) { border-color: var(--purple); background: var(--purple-light); transform: translateY(-2px); }
+        .option-btn.correct { background: #ecfdf5; color: #065f46; border-color: var(--success); }
         .option-btn.wrong { background: #fef2f2; color: #991b1b; border-color: var(--error); }
         [data-theme="dark"] .option-btn.correct { background: #064e3b; color: #6ee7b7; }
         [data-theme="dark"] .option-btn.wrong { background: #7f1d1d; color: #fca5a5; }
-        .option-btn:disabled { cursor: not-allowed; opacity: 0.9; }
-        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
-
         .feedback-container { margin-top: 25px; min-height: 60px; }
         .feedback-status { font-weight: 700; font-size: 1.1rem; margin-bottom: 8px; }
-        .explanation { font-size: 0.95rem; color: var(--text-muted); font-weight: 500; font-style: italic; padding: 14px 18px; background: var(--purple-light); border-left: 4px solid var(--purple); border-radius: 8px; animation: fadeIn 0.3s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
-
-        .next-btn { margin-top: 20px; padding: 16px; background: var(--purple); color: white; border: none; border-radius: 14px; cursor: pointer; font-size: 1.05rem; font-weight: 700; transition: all 0.2s; display: none; width: 100%; font-family: inherit; letter-spacing: 0.3px; }
-        .next-btn:hover { background: var(--purple-hover); transform: translateY(-2px); box-shadow: var(--shadow-lg); }
-
+        .explanation { font-size: 0.95rem; color: var(--text-muted); font-weight: 500; font-style: italic; padding: 14px 18px; background: var(--purple-light); border-left: 4px solid var(--purple); border-radius: 8px; }
+        .next-btn { margin-top: 20px; padding: 16px; background: var(--purple); color: white; border: none; border-radius: 14px; cursor: pointer; font-size: 1.05rem; font-weight: 700; display: none; width: 100%; font-family: inherit; }
+        .next-btn:hover { background: var(--purple-hover); }
+        .back-btn { margin-top: 10px; padding: 14px; background: transparent; color: var(--purple); border: 2px solid var(--purple); border-radius: 14px; cursor: pointer; font-size: 0.95rem; font-weight: 700; width: 100%; font-family: inherit; }
         .score-screen { text-align: center; display: none; width: 100%; background: var(--card-bg); padding: 50px; border-radius: 20px; box-shadow: var(--shadow-lg); border: 1px solid var(--border); }
         .score-screen h2 { font-size: 2.2rem; color: var(--purple); margin-bottom: 20px; }
         .score-circle { width: 160px; height: 160px; border-radius: 50%; background: var(--purple-light); display: flex; justify-content: center; align-items: center; margin: 0 auto 20px; font-size: 2.5rem; font-weight: 800; color: var(--purple); border: 8px solid var(--purple); }
         .score-message { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 30px; }
-        .restart-btn { padding: 16px 32px; background: var(--purple); color: white; border: none; border-radius: 14px; cursor: pointer; font-size: 1rem; font-weight: 700; transition: all 0.2s; font-family: inherit; }
-        .restart-btn:hover { background: var(--purple-hover); transform: translateY(-2px); box-shadow: var(--shadow-lg); }
-
-        @media (max-width: 600px) { 
-            body { padding: 15px; }
-            .quiz-main { padding: 25px; } 
-            .main-header h1 { font-size: 1.2rem; } 
-            .question { font-size: 1.1rem; } 
-            .theme-toggle { width: 34px; height: 34px; font-size: 0.9rem; right: 12px; }
-            .option-btn { padding: 15px; font-size: 1rem; }
-            .live-score { font-size: 0.85rem; padding: 5px 10px; }
-        }
+        .restart-btn { padding: 16px 32px; background: var(--purple); color: white; border: none; border-radius: 14px; cursor: pointer; font-size: 1rem; font-weight: 700; font-family: inherit; }
+        .loading { text-align: center; padding: 40px; color: var(--text-muted); font-weight: 600; }
+        @media (max-width: 600px) { body { padding: 15px; } .quiz-main { padding: 25px; } .main-header h1 { font-size: 1.2rem; } .question { font-size: 1.1rem; } .option-btn { padding: 15px; } }
     </style>
 </head>
 <body>
-<div class="app-container" id="app-container">
+<div class="app-container">
     <header class="main-header">
         <h1>TU170 Mids Quiz</h1>
         <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()">🌙</button>
     </header>
-
+    <div id="chapter-menu" class="chapter-menu"><div class="loading">Loading chapters...</div></div>
     <div class="quiz-main" id="quiz-main">
-        <div class="top-bar">
-            <div class="progress-text" id="progress-text">Question 1</div>
-            <div class="live-score" id="live-score">⭐ Score: 0</div>
-        </div>
+        <div class="top-bar"><div class="progress-text" id="progress-text">Question 1</div><div class="live-score" id="live-score">⭐ Score: 0</div></div>
         <div class="progress-bar-container"><div class="progress-bar" id="progress-bar"></div></div>
-
         <div class="question" id="question">Loading question...</div>
         <div class="options" id="options"></div>
-
-        <div class="feedback-container">
-            <div class="feedback-status" id="feedback-status"></div>
-            <div class="explanation" id="explanation" style="display: none;"></div>
-        </div>
-
+        <div class="feedback-container"><div class="feedback-status" id="feedback-status"></div><div class="explanation" id="explanation" style="display: none;"></div></div>
         <button class="next-btn" id="next-btn">Next Question ➔</button>
+        <button class="back-btn" onclick="goBackToMenu()">← Back to Chapters</button>
     </div>
-
     <div class="score-screen" id="score-screen">
         <h2>Quiz Completed!</h2>
         <div class="score-circle" id="score-circle">0%</div>
         <div class="score-message" id="score-message">You scored 0 out of 0</div>
-        <button class="restart-btn" onclick="location.reload()">Retake Quiz 🔄</button>
+        <button class="restart-btn" onclick="goBackToMenu()">Back to Chapters 🔄</button>
     </div>
 </div>
-
 <script>
-    // ==========================================
-    // PASTE YOUR EXISTING TU170 QUESTIONS HERE
-    // ==========================================
-    let questions = [
-     { q: "Why is it important to understand how hackers and viruses work?", options: ["To create more advanced computer viruses", "To protect your computer from potential cyber threats", "To improve the speed of your internet connection", "To develop gaming applications"], answer: 1, explanation: "Understanding how hackers and viruses operate is essential to protect your computer from potential cyber threats." },
-        { q: "What is one effective way to protect your online privacy?", options: ["Sharing personal information on social media", "Using weak passwords for easy access", "Adjusting privacy settings and using strong passwords", "Clicking on pop-up ads to check security threats"], answer: 2, explanation: "Adjusting privacy settings and using strong passwords are effective ways to protect your online privacy." },
-        { q: "What does being computer literate help you understand about cybersecurity risks?", options: ["That cyber threats are only a problem for large corporations", "That privacy and security risks exist for all internet users", "That identity theft only happens when using online banking", "That using the same password for all accounts is the safest practice"], answer: 1, explanation: "Being computer literate helps you understand that privacy and security risks exist for all internet users." },
-        { q: "Why is it important to use the web wisely?", options: ["To find reliable and accurate information effectively", "To rely on the first search result without verification", "To share personal details on random websites", "To use outdated sources for research"], answer: 0, explanation: "Using the web wisely involves efficiently locating reliable and accurate information online." },
-        { q: "What is an example of a good online security practice?", options: ["Clicking on email links from unknown sources", "Using different passwords for each account", "Downloading software from unverified websites", "Ignoring software update notifications"], answer: 1, explanation: "Using different passwords for each account is a good online security practice." },
-        { q: "What should you do to avoid hackers and viruses?", options: ["Open email attachments from unknown senders", "Install and regularly update antivirus software", "Disable all security settings on your computer", "Visit unsecured websites without checking for HTTPS"], answer: 1, explanation: "Installing and regularly updating antivirus software helps avoid hackers and viruses." },
-        { q: "What is one major risk of not being computer literate?", options: ["Increased vulnerability to cyber threats", "Faster browsing experience", "Better access to secure websites", "Improved computer performance"], answer: 0, explanation: "A major risk of not being computer literate is increased vulnerability to cyber threats." },
-        { q: "How does protecting your privacy online help you?", options: ["It ensures that your personal and financial data is safe", "It allows companies to track and collect your data freely", "It encourages you to share more personal information online", "It makes your accounts easier to hack"], answer: 0, explanation: "Protecting your privacy online ensures that your personal and financial data is safe." },
-        { q: "What should you check when visiting a website to ensure its credibility?", options: ["The number of advertisements on the page", "The presence of 'https://' in the URL and a security certificate", "The website's ability to load quickly", "Whether the website asks for unnecessary personal details"], answer: 1, explanation: "Checking for 'https://' in the URL and a security certificate helps ensure a website's credibility." },
-        { q: "What is an example of an unreliable online source?", options: ["A research paper published by a reputable university", "A verified government website", "A personal blog with unverified information", "A medical journal from an official health organization"], answer: 2, explanation: "A personal blog with unverified information is an example of an unreliable online source." },
-        { q: "Which of the following is an example of online annoyance?", options: ["Reading an online news article", "Receiving spam emails and pop-up ads", "Watching a tutorial on cybersecurity", "Installing a legitimate software update"], answer: 1, explanation: "Receiving spam emails and pop-up ads is a common example of online annoyance." },
-        { q: "How can you protect your computer from spyware and adware?", options: ["Clicking on pop-up ads to check their content", "Installing reliable antivirus and anti-malware software", "Downloading software from unknown websites", "Ignoring security updates"], answer: 1, explanation: "Installing reliable antivirus and anti-malware software protects your computer from spyware and adware." },
-        { q: "What is the primary difference between a virus, a worm, and a Trojan horse?", options: ["A virus spreads by attaching itself to files, a worm spreads independently, and a Trojan horse disguises itself as legitimate software", "A worm only affects mobile devices, while a virus and a Trojan horse affect computers", "A virus is harmless, a worm speeds up your computer, and a Trojan horse improves security", "A Trojan horse is a type of antivirus software, while a virus and worm are security tools"], answer: 0, explanation: "A virus attaches to files, a worm spreads independently, and a Trojan horse disguises itself as legitimate software." },
-        { q: "What is the best way to avoid downloading a Trojan horse?", options: ["Downloading software only from trusted sources", "Opening email attachments from unknown senders", "Clicking on suspicious links offering free software", "Ignoring security warnings from your operating system"], answer: 0, explanation: "Downloading software only from trusted sources is the best way to avoid downloading a Trojan horse." },
-        { q: "How can maintaining and upgrading your computer save time and money?", options: ["By preventing hardware failures and improving performance", "By forcing you to buy new devices frequently", "By making the computer run slower", "By ensuring viruses stay on your system"], answer: 0, explanation: "Maintaining and upgrading your computer prevents hardware failures and improves performance, saving time and money." },
-        { q: "Which of the following is an essential part of troubleshooting a computer issue?", options: ["Restarting the computer to see if the problem persists", "Ignoring error messages and continuing work", "Uninstalling all software randomly to fix the issue", "Downloading unknown programs to fix errors"], answer: 0, explanation: "Restarting the computer to see if the problem persists is an essential first step in troubleshooting." },
-        { q: "How does staying up to date with technology benefit users?", options: ["It helps in integrating new tools into daily life efficiently", "It forces people to spend unnecessary money on new gadgets", "It makes using older technologies impossible", "It prevents people from learning new skills"], answer: 0, explanation: "Staying up to date with technology helps in integrating new tools into daily life efficiently." },
-        { q: "Which of the following is NOT a reason to stay updated with technology?", options: ["Learning new skills to remain competitive in the job market", "Enhancing security by using the latest software updates", "Gaining knowledge about improved digital tools", "Ignoring new developments because old technology is always better"], answer: 3, explanation: "Ignoring new developments because old technology is always better is not a reason to stay updated." },
-        { q: "What is a key benefit of knowing how to troubleshoot your computer?", options: ["Reduces dependency on professional technical support for minor issues", "Ensures that the computer will never have problems again", "Allows the computer to operate without updates", "Prevents the need for any antivirus protection"], answer: 0, explanation: "Knowing how to troubleshoot reduces dependency on professional technical support for minor issues." },
-        { q: "What is an example of a safe practice to avoid online annoyances?", options: ["Clicking on pop-ups that claim your computer is infected", "Using ad-blockers and adjusting browser security settings", "Downloading 'free' software from unknown sources", "Responding to spam emails to stop receiving them"], answer: 1, explanation: "Using ad-blockers and adjusting browser security settings is a safe practice to avoid online annoyances." },
-        { q: "What is intelligence?", options: ["The ability to memorize everything", "The ability to acquire and apply knowledge and skills", "The ability to repeat tasks without understanding", "The ability to function without learning"], answer: 1, explanation: "Intelligence is the ability to acquire and apply knowledge and skills." },
-        { q: "One of these sentences is considered to be the main goal of artificial intelligence?", options: ["To replace all human workers", "To create computer systems that perform tasks associated with human intelligence", "To reduce the need for information technology", "To develop new physical machines only"], answer: 1, explanation: "The main goal of AI is to create computer systems that perform tasks associated with human intelligence." },
-        { q: "Which of the following is an application of AI in transportation?", options: ["Manual driving of all cars", "Autopilots on commercial airplanes and autonomous vehicles", "Traffic lights controlled by human operators", "Hand signals for communication"], answer: 1, explanation: "Autopilots on commercial airplanes and autonomous vehicles are applications of AI in transportation." },
-        { q: "How is AI used in education?", options: ["Teaching without interaction with students", "Virtual language instructors correcting grammar and suggesting new words", "Completely replacing teachers in all schools", "Teaching students only mathematics"], answer: 1, explanation: "AI is used in education through virtual language instructors that correct grammar and suggest new words." },
-        { q: "What is the purpose of plagiarism checkers?", options: ["To generate new content", "To help educators detect plagiarized work", "To delete all student assignments", "To teach history"], answer: 1, explanation: "The purpose of plagiarism checkers is to help educators detect plagiarized work." },
-        { q: "How are robots used in industrial settings?", options: ["For entertainment purposes only", "To replace all human workers immediately", "To perform hazardous or repetitive tasks", "To increase physical exercise for employees"], answer: 2, explanation: "Robots are used in industrial settings to perform hazardous or repetitive tasks." },
-        { q: "What is one way AI is used in law enforcement?", options: ["Facial reconstruction and computer forensics", "Printing legal documents", "Creating laws and policies", "Solving cases without human involvement"], answer: 0, explanation: "AI is used in law enforcement for facial reconstruction and computer forensics." },
-        { q: "How is AI used in medicine?", options: ["To replace all doctors permanently", "To help diagnose unfamiliar conditions and design prosthetic devices", "To reduce the number of patients seeking healthcare", "To prevent all medical errors"], answer: 1, explanation: "AI is used in medicine to help diagnose unfamiliar conditions and design prosthetic devices." },
-        { q: "How is AI integrated into patient information systems?", options: ["By keeping all records on paper", "By analyzing medical data to provide better patient care", "By limiting doctors' access to patient history", "By preventing the use of digital health records"], answer: 1, explanation: "AI is integrated into patient information systems by analyzing medical data to provide better patient care." },
-        { q: "Which of the following statements is true about AI?", options: ["AI can only be used in one specific field", "AI has applications in various fields, including transportation, education, law enforcement, and medicine", "AI is only useful for entertainment purposes", "AI does not help in problem-solving"], answer: 1, explanation: "AI has applications in various fields, including transportation, education, law enforcement, and medicine." },
-        { q: "How is AI enhancing public transportation systems?", options: ["By increasing manual ticket inspections", "By implementing AI-based parking enforcement to keep bus lanes clear", "By reducing the number of buses on the road", "By eliminating the need for public transportation"], answer: 1, explanation: "AI enhances public transportation by implementing AI-based parking enforcement to keep bus lanes clear." },
-        { q: "In what way is AI contributing to public safety through video analysis?", options: ["By replacing all human surveillance personnel", "By analyzing video footage to identify potential threats and criminal activities", "By recording videos without any analysis", "By reducing the number of security cameras in public areas"], answer: 1, explanation: "AI contributes to public safety by analyzing video footage to identify potential threats and criminal activities." },
-        { q: "How are AI chatbots transforming Emergency Medical Services (EMS)?", options: ["By replacing paramedics in the field", "By assisting with data entry, documentation, and real-time decision support", "By delaying emergency response times", "By reducing the need for medical equipment"], answer: 1, explanation: "AI chatbots transform EMS by assisting with data entry, documentation, and real-time decision support." },
-        { q: "What role does AI play in predictive policing?", options: ["It eliminates the need for police officers", "It uses data analysis to forecast potential criminal activities and allocate resources effectively", "It increases random patrols without data support", "It reduces the use of technology in law enforcement"], answer: 1, explanation: "AI in predictive policing uses data analysis to forecast potential criminal activities and allocate resources effectively." },
-        { q: "How is AI utilized in the field of medicine for diagnostics?", options: ["By replacing doctors in diagnosing all conditions", "By assisting in diagnosing unfamiliar conditions and analyzing medical data", "By discouraging the use of medical imaging", "By reducing the accuracy of medical diagnoses"], answer: 1, explanation: "AI is utilized in medicine for diagnostics by assisting in diagnosing unfamiliar conditions and analyzing medical data." },
-        { q: "Why does technology create ethical challenges?", options: ["Because technology is always used ethically", "Because laws are created before technology advances", "Because technology often moves faster than rules can be formulated to govern it", "Because technology does not impact ethical decisions"], answer: 2, explanation: "Technology creates ethical challenges because it often moves faster than rules can be formulated to govern it." },
-        { q: "What is the definition of ethics?", options: ["A formal set of laws enforced by governments", "A general set of unwritten guidelines for people to follow", "The process of developing new technology", "A method of improving computing efficiency"], answer: 1, explanation: "Ethics is a general set of unwritten guidelines for people to follow." },
-        { q: "What is an example of unethical behavior?", options: ["Following copyright laws", "Cheating on an exam", "Developing new software", "Using open-source programs legally"], answer: 1, explanation: "Cheating on an exam is an example of unethical behavior." },
-        { q: "Which of the following influences a person's ethical beliefs?", options: ["Family values", "Religious affiliation", "Personal experiences", "All of the above"], answer: 3, explanation: "Family values, religious affiliation, and personal experiences all influence a person's ethical beliefs." },
-        { q: "What is intellectual property?", options: ["Any physical object created in a factory", "Work that is the result of someone's creativity and knowledge", "A type of artificial intelligence", "A method of computer programming"], answer: 1, explanation: "Intellectual property is work that is the result of someone's creativity and knowledge." },
-        { q: "Why has the enforcement of copyright laws become more difficult?", options: ["Because fewer people create original content", "Because electronic media has made content easier to share and distribute", "Because copyright laws no longer exist", "Because software piracy has been eliminated"], answer: 1, explanation: "Enforcement of copyright laws is more difficult because electronic media has made content easier to share and distribute." },
-        { q: "How do companies like Microsoft combat software piracy?", options: ["By encouraging illegal software use", "By offering free copies of their software", "By implementing measures to fight piracy", "By avoiding copyright enforcement"], answer: 2, explanation: "Companies like Microsoft combat software piracy by implementing measures to fight piracy." },
-        { q: "How do intelligent personal agents like Alexa raise privacy concerns?", options: ["By constantly listening and analyzing user data", "By improving security for all users", "By limiting access to online information", "By preventing identity theft"], answer: 0, explanation: "Intelligent personal agents raise privacy concerns by constantly listening and analyzing user data." },
-        { q: "How do social media platforms track user behavior?", options: ["By randomly guessing user preferences", "By using algorithms to predict personal attributes based on user activity", "By asking users to submit daily reports", "By disabling user accounts"], answer: 1, explanation: "Social media platforms track user behavior by using algorithms to predict personal attributes based on user activity." },
-        { q: "What is plagiarism?", options: ["Using someone else's work without proper acknowledgment", "Creating original work", "Citing all sources properly in a research paper", "Avoiding the use of external sources"], answer: 0, explanation: "Plagiarism is using someone else's work without proper acknowledgment." },
-        { q: "What is an example of plagiarism?", options: ["Writing an original essay", "Copying content from a website without citation", "Citing all sources correctly in a bibliography", "Using quotation marks and proper references"], answer: 1, explanation: "Copying content from a website without citation is an example of plagiarism." },
-        { q: "How do educational institutions detect plagiarism?", options: ["By manually checking each student's work", "By using plagiarism detection tools like Turnitin", "By assuming all students submit original work", "By ignoring potential plagiarism cases"], answer: 1, explanation: "Educational institutions detect plagiarism by using plagiarism detection tools like Turnitin." },
-        { q: "Why is illegal software use unethical?", options: ["Because it gives businesses and individuals an unfair advantage in global markets", "Because it helps companies save money legally", "Because it increases the quality of the software", "Because it prevents software updates"], answer: 0, explanation: "Illegal software use is unethical because it gives businesses and individuals an unfair advantage in global markets." },
-        { q: "What is the main challenge in maintaining privacy online?", options: ["Keeping up with changing security settings and privacy laws", "Avoiding social media entirely", "Blocking all online communication", "Using only public Wi-Fi networks"], answer: 0, explanation: "The main challenge in maintaining privacy online is keeping up with changing security settings and privacy laws." },
-        { q: "What is an ethical way to use information found online?", options: ["Copying and pasting without citing the source", "Paraphrasing and giving credit to the original author", "Sharing copyrighted material without permission", "Claiming someone else's work as your own"], answer: 1, explanation: "An ethical way to use information found online is paraphrasing and giving credit to the original author." },
-                { q: "What are the four main functions of a computer?", options: ["Typing, Printing, Editing, Saving", "Input, Processing, Output, Storage", "Scanning, Downloading, Sharing, Deleting", "Uploading, Compressing, Encrypting, Formatting"], answer: 1, explanation: "The four main functions of a computer are Input, Processing, Output, and Storage." },
-        { q: "What is the main function of the 'processing' stage in computing?", options: ["To store data permanently", "To convert raw data into meaningful information", "To display results on a screen", "To delete unwanted files"], answer: 1, explanation: "Processing converts raw data into meaningful information." },
-        { q: "What is the primary function of 'Input' in a computer system?", options: ["To display data on the screen", "To gather and enter data into the computer", "To store data for future use", "To process information"], answer: 1, explanation: "Input gathers and enters data into the computer." },
-        { q: "Which device is an example of an 'output' function in a computer system?", options: ["Mouse", "Scanner", "Printer", "Keyboard"], answer: 2, explanation: "A printer is an output device that produces a hard copy of processed data." },
-        { q: "Which of the following is an example of an input device?", options: ["Printer", "Keyboard", "Monitor", "Speaker"], answer: 1, explanation: "A keyboard is an input device used to enter data and commands." },
-        { q: "What is the main purpose of computer storage?", options: ["To keep data temporarily only", "To store data for future use", "To process numbers faster", "To connect multiple computers"], answer: 1, explanation: "The main purpose of computer storage is to store data for future use." },
-        { q: "Which of the following best describes the 'Output' function of a computer?", options: ["It gathers data from the user", "It saves data in a storage device", "It manipulates data to produce results", "It displays processed data and information"], answer: 3, explanation: "Output displays processed data and information." },
-        { q: "Which of the following is an example of a storage device?", options: ["Monitor", "Hard Disk Drive (HDD)", "Mouse", "Webcam"], answer: 1, explanation: "A Hard Disk Drive (HDD) is a storage device." },
-        { q: "What is the correct order of operations in a computer system?", options: ["Storage, Processing, Input, Output", "Input, Processing, Output, Storage", "Output, Storage, Input, Processing", "Processing, Storage, Input, Output"], answer: 1, explanation: "The correct order is Input, Processing, Output, Storage." },
-        { q: "What type of memory is typically used for short-term processing?", options: ["Hard drive", "SSD", "RAM", "USB flash drive"], answer: 2, explanation: "RAM is typically used for short-term processing." },
-        { q: "Which of the following devices is used for long-term storage?", options: ["CPU", "RAM", "Hard Drive", "Printer"], answer: 2, explanation: "A Hard Drive is used for long-term storage." },
-        { q: "What is an example of raw data?", options: ["A completed report", "An unordered list of numbers", "A summary of statistics", "A pie chart"], answer: 1, explanation: "An unordered list of numbers is raw data because it has not been processed." },
-        { q: "What is binary language?", options: ["A programming language used in coding", "A method for organizing documents", "A system of numbers consisting of only 0s and 1s", "A form of spoken communication"], answer: 2, explanation: "Binary language is a system of numbers consisting of only 0s and 1s." },
-        { q: "What is a 'bit' in computing?", options: ["A group of numbers", "The smallest unit of data in a computer", "A type of file format", "A software program"], answer: 1, explanation: "A bit is the smallest unit of data in a computer." },
-        { q: "How many bits make up one byte?", options: ["2", "4", "8", "16"], answer: 2, explanation: "8 bits make up one byte." },
-        { q: "What is the binary representation of the letter 'K'?", options: ["10011001", "01001011", "11100011", "00011100"], answer: 1, explanation: "The letter 'K' is represented as 01001011 in binary." },
-        { q: "What does '1 kilobyte (KB)' equal in bytes?", options: ["512 bytes", "1000 bytes", "1024 bytes", "2048 bytes"], answer: 2, explanation: "1 kilobyte (KB) equals 1024 bytes." },
-        { q: "How many megabytes (MB) are in 1 gigabyte (GB)?", options: ["1000 MB", "1024 MB", "512 MB", "2048 MB"], answer: 1, explanation: "1 gigabyte (GB) equals 1024 megabytes (MB)." },
-        { q: "The role of the CPU in a computer system is ...?", options: ["Processing data into useful information", "Storing data permanently", "Displaying graphics", "Controlling screen brightness"], answer: 0, explanation: "The CPU processes data into useful information." },
-        { q: "What is an example of computer processing?", options: ["A user clicks a button with a mouse", "The CPU performs calculations on entered numbers", "The monitor displays a video", "The speaker plays music"], answer: 1, explanation: "The CPU performing calculations on entered numbers is an example of processing." },
-        { q: "What is the difference between data and information?", options: ["Data is meaningful, while information is random", "Data is processed, while information is raw", "Data is raw, while information is organized and meaningful", "Data and information are the same"], answer: 2, explanation: "Data is raw, while information is organized and meaningful." },
-        { q: "What type of computer is the most powerful?", options: ["Smartphone", "Tablet", "Supercomputer", "Laptop"], answer: 2, explanation: "Supercomputers are the most powerful type of computer." },
-        { q: "What is an example of how a computer processes data into information?", options: ["Sorting an unordered list of numbers into a structured table", "Deleting all user files", "Turning off automatically", "Making the screen brighter"], answer: 0, explanation: "Sorting an unordered list of numbers into a structured table is an example of processing data into information." },
-        { q: "How does a computer process bits and bytes?", options: ["By storing all files in external devices", "By using hardware and software to process data into information", "By converting files into music", "By using only software without hardware"], answer: 1, explanation: "A computer processes bits and bytes by using hardware and software to process data into information." },
-        { q: "What is hardware in a computer?", options: ["The set of instructions that control the computer", "The physical components of a computer", "A type of cloud storage", "A software program"], answer: 1, explanation: "Hardware refers to the physical components of a computer." },
-        { q: "What is software in a computer?", options: ["The operating system only", "The physical parts of the computer", "The set of programs that enable the hardware to function", "The memory unit of the computer"], answer: 2, explanation: "Software is the set of programs that enable the hardware to function." },
-        { q: "What is the primary function of software?", options: ["To store files permanently", "To convert data into meaningful information", "To connect hardware components", "To run the internet"], answer: 1, explanation: "The primary function of software is to convert data into meaningful information." },
-        { q: "What are the two major types of software?", options: ["Input software and Output software", "Application software and System software", "Personal software and Business software", "Online software and Offline software"], answer: 1, explanation: "The two major types of software are Application software and System software." },
-        { q: "What is an example of application software?", options: ["Windows 10", "Microsoft Excel", "macOS", "Linux"], answer: 1, explanation: "Microsoft Excel is an example of application software." },
-        { q: "What does system software do?", options: ["Controls how the hardware and software work together", "Runs web-based applications", "Stores data permanently", "Loads only when a document is opened"], answer: 0, explanation: "System software controls how the hardware and software work together." },
-        { q: "What is the most common type of system software?", options: ["Word processor", "Database software", "Operating system", "Video player"], answer: 2, explanation: "The operating system is the most common type of system software." },
-        { q: "What is an example of an operating system?", options: ["Microsoft Word", "Apple macOS", "Adobe Photoshop", "Google Drive"], answer: 1, explanation: "Apple macOS is an example of an operating system." },
-        { q: "What are the two basic designs of computers?", options: ["Stationary and Portable", "Work and Home Computers", "Internal and External Computers", "Internet and Offline Computers"], answer: 0, explanation: "The two basic designs of computers are Stationary and Portable." },
-        { q: "Which of the following is a portable computer?", options: ["Desktop", "Workstation", "Laptop", "Server"], answer: 2, explanation: "A laptop is a portable computer." },
-        { q: "What components do smartphones share with computers?", options: ["Processor, memory, input and output devices", "Only a touchscreen", "A built-in gaming processor", "A physical keyboard"], answer: 0, explanation: "Smartphones share processor, memory, input and output devices with computers." },
-        { q: "What is digital convergence?", options: ["A single device performing multiple functions", "The use of multiple devices for different tasks", "Storing all files in a single device", "Using a computer for cloud storage only"], answer: 0, explanation: "Digital convergence refers to a single device performing multiple functions." },
-        { q: "What is a key feature of a tablet?", options: ["It has a touchscreen interface", "It is heavier than a desktop computer", "It requires a wired mouse", "It cannot run any applications"], answer: 0, explanation: "A key feature of a tablet is its touchscreen interface." },
-        { q: "What is a laptop?", options: ["A portable computer with an integrated screen and keyboard", "A stationary computer", "A type of gaming console", "A storage device"], answer: 0, explanation: "A laptop is a portable computer with an integrated screen and keyboard." },
-        { q: "What is a 2-in-1 PC?", options: ["A laptop that can function as a tablet", "A desktop that includes two monitors", "A tablet with a built-in keyboard", "A gaming device"], answer: 0, explanation: "A 2-in-1 PC is a laptop that can function as a tablet." },
-        { q: "What is the defining feature of Ultrabooks?", options: ["They are lightweight and have long battery life", "They have built-in CD/DVD drives", "They are larger than desktops", "They do not support Wi-Fi"], answer: 0, explanation: "Ultrabooks are defined by being lightweight and having long battery life." },
-        { q: "What is unique about Chromebooks?", options: ["They use Chrome OS and rely on cloud storage", "They run Windows applications", "They are used for high-end gaming", "They have an internal optical drive"], answer: 0, explanation: "Chromebooks are unique because they use Chrome OS and rely on cloud storage." },
-        { q: "Why are Chromebooks designed for constant internet connectivity?", options: ["They do not have internal storage", "They store files primarily in the cloud", "They do not require software updates", "They function as standalone devices"], answer: 1, explanation: "Chromebooks are designed for constant internet connectivity because they store files primarily in the cloud." },
-        { q: "What is one major disadvantage of Chromebooks?", options: ["They cannot connect to the internet", "They rely on cloud-based applications", "They do not have any display screens", "They are larger than desktop computers"], answer: 1, explanation: "A major disadvantage of Chromebooks is that they rely on cloud-based applications." },
-        { q: "Stationary computers are defined as:", options: ["A computer that can be carried around", "A computer intended for use in a single location", "A mobile phone", "A tablet"], answer: 1, explanation: "Stationary computers are intended for use in a single location." },
-        { q: "What is a desktop computer?", options: ["A computer that is small and portable", "A computer with a built-in monitor and keyboard", "A computer with a separate system unit that houses the main components", "A tablet with a detachable keyboard"], answer: 2, explanation: "A desktop computer has a separate system unit that houses the main components." },
-        { q: "What is a system unit in a desktop computer?", options: ["A software program", "A separate case that holds the main components of the computer", "A gaming console", "A network server"], answer: 1, explanation: "A system unit is a separate case that holds the main components of the computer." },
-        { q: "What is a peripheral device?", options: ["A built-in component of the system unit", "A device that connects to a computer, such as a monitor or keyboard", "A part of the motherboard", "A type of storage device"], answer: 1, explanation: "A peripheral device is a device that connects to a computer, such as a monitor or keyboard." },
-        { q: "What is an all-in-one computer?", options: ["A computer with a separate monitor and system unit", "A desktop computer with all components housed in the monitor", "A tablet with a detachable keyboard", "A gaming console"], answer: 1, explanation: "An all-in-one computer is a desktop computer with all components housed in the monitor." },
-        { q: "Which of the following is an example of an all-in-one computer?", options: ["Apple iMac", "Lenovo ThinkPad", "Dell Gaming PC", "Microsoft Surface Pro"], answer: 0, explanation: "Apple iMac is an example of an all-in-one computer." },
-        { q: "What is an advantage of all-in-one computers?", options: ["They are more powerful than desktop computers", "They take up less space and have fewer cables", "They allow for easier upgrading than desktops", "They do not require an operating system"], answer: 1, explanation: "An advantage of all-in-one computers is that they take up less space and have fewer cables." },
-                { q: "What is a Personal Computer (PC)?", options: ["A computer designed for individual use", "A computer used by multiple users simultaneously", "A high-speed mainframe computer", "A computer used for industrial operations"], answer: 0, explanation: "A Personal Computer (PC) is designed for individual use." },
-        { q: "Which of the following is NOT a type of personal computer?", options: ["Desktop", "Laptop", "Mainframe", "Tablet"], answer: 2, explanation: "A mainframe is not a personal computer; it is a large system used by organizations." },
-        { q: "What is a mainframe computer?", options: ["A small, portable computer", "A large, expensive computer that supports many users simultaneously", "A personal gaming computer", "A tablet used for office work"], answer: 1, explanation: "A mainframe computer is a large, expensive computer that supports many users simultaneously." },
-        { q: "Where are mainframe computers commonly used?", options: ["Personal homes", "Small businesses", "Large organizations like banks and insurance companies", "Portable gaming devices"], answer: 2, explanation: "Mainframe computers are commonly used in large organizations like banks and insurance companies." },
-        { q: "What is an advantage of a mainframe computer?", options: ["It is cheap and lightweight", "It allows multiple users to work on similar tasks at the same time", "It can replace all other computer systems", "It is only used for video editing"], answer: 1, explanation: "An advantage of a mainframe is that it allows multiple users to work on similar tasks at the same time." },
-        { q: "What is a supercomputer?", options: ["A computer used for simple data entry", "A computer designed for extremely complex calculations", "A type of personal computer", "A smartphone with advanced AI"], answer: 1, explanation: "A supercomputer is designed for extremely complex calculations." },
-        { q: "Where are supercomputers used?", options: ["Web browsing", "Weather forecasting and scientific research", "Playing video games", "Word processing"], answer: 1, explanation: "Supercomputers are used for weather forecasting and scientific research." },
-        { q: "What is the main difference between a mainframe and a supercomputer?", options: ["Supercomputers handle multiple tasks at the same time", "Mainframes process complex calculations faster", "Supercomputers execute a few programs at high speed, while mainframes handle many programs at once", "Mainframes do not require programming"], answer: 2, explanation: "Supercomputers execute a few programs at high speed, while mainframes handle many programs at once." },
-        { q: "What is currently the world's fastest supercomputer?", options: ["IBM Watson", "Google DeepMind", "IBM Summit", "Apple M1 Max"], answer: 2, explanation: "IBM Summit is recognized as one of the world's fastest supercomputers." },
-        { q: "What is an embedded computer?", options: ["A small, self-contained computer built into another device", "A standalone desktop system", "A cloud-based storage unit", "A large computing server"], answer: 0, explanation: "An embedded computer is a small, self-contained computer built into another device." },
-        { q: "Which of the following is an example of an embedded computer?", options: ["A laptop", "A washing machine's control system", "A gaming desktop", "A smartphone"], answer: 1, explanation: "A washing machine's control system is an example of an embedded computer." },
-        { q: "Do embedded computers require user input?", options: ["Yes, they function like desktops", "No, they are pre-programmed to operate automatically", "Only when connected to the internet", "Only when they are used for gaming"], answer: 1, explanation: "Embedded computers do not require user input because they are pre-programmed to operate automatically." },
-        { q: "What is the function of an input device?", options: ["To process and organize data", "To enter data and commands into a computer", "To display processed data", "To store files permanently"], answer: 1, explanation: "The function of an input device is to enter data and commands into a computer." },
-        { q: "What is a touch screen?", options: ["A type of display that does not accept input", "A display that responds to touch commands", "A type of keyboard", "A microphone-based device"], answer: 1, explanation: "A touch screen is a display that responds to touch commands." },
-        { q: "What is a stylus?", options: ["A type of computer mouse", "A device that looks like a pen and is used for touch screens", "A type of game controller", "A microphone"], answer: 1, explanation: "A stylus is a device that looks like a pen and is used for touch screens." },
-        { q: "What is a pointing device?", options: ["A device used to input images", "A device that helps users interact with a computer's GUI", "A device that processes calculations", "A device used to play audio"], answer: 1, explanation: "A pointing device helps users interact with a computer's GUI." },
-        { q: "What is an example of a pointing device?", options: ["Keyboard", "Mouse", "Monitor", "Speaker"], answer: 1, explanation: "A mouse is an example of a pointing device." },
-        { q: "What is a touch pad?", options: ["A small, touch-sensitive area on laptops used instead of a mouse", "A type of monitor", "A device used to record audio", "A printing device"], answer: 0, explanation: "A touch pad is a small, touch-sensitive area on laptops used instead of a mouse." },
-        { q: "What are game controllers classified as?", options: ["Input devices", "Output devices", "Storage devices", "Processing units"], answer: 0, explanation: "Game controllers are classified as input devices." },
-        { q: "What is an image input device?", options: ["A keyboard", "A digital camera or scanner", "A monitor", "A speaker"], answer: 1, explanation: "A digital camera or scanner is an image input device." },
-        { q: "What is a webcam used for?", options: ["Capturing and transmitting live video", "Displaying output", "Processing documents", "Storing files"], answer: 0, explanation: "A webcam is used for capturing and transmitting live video." },
-        { q: "Microphone is used for?", options: ["Recording and inputting sound", "Playing back sound", "Displaying video", "Printing documents"], answer: 0, explanation: "A microphone is used for recording and inputting sound." },
-        { q: "What is a fingerprint sensor used for?", options: ["Detecting and scanning fingerprints for security", "Measuring heart rate", "Detecting temperature", "Counting steps"], answer: 0, explanation: "A fingerprint sensor is used for detecting and scanning fingerprints for security." },
-        { q: "What is a heart rate monitor used for?", options: ["Detecting blood flow to measure pulse rate", "Counting steps", "Measuring temperature", "Detecting light levels"], answer: 0, explanation: "A heart rate monitor detects blood flow to measure pulse rate." },
-        { q: "What is the most common type of monitor used in modern computers?", options: ["CRT", "Liquid Crystal Display (LCD)", "Plasma screen", "Inkjet screen"], answer: 1, explanation: "Liquid Crystal Display (LCD) is the most common type of monitor used in modern computers." },
-        { q: "A projector is used for...", options: ["Displaying output to a large group of people", "Inputting commands into a computer", "Recording images", "Playing sound"], answer: 0, explanation: "A projector is used for displaying output to a large group of people." },
-        { q: "What is the difference between soft copy and hard copy output?", options: ["Soft copies are displayed on a screen, while hard copies are printed", "Soft copies are printed documents", "Hard copies are stored in memory", "Hard copies cannot be seen"], answer: 0, explanation: "Soft copies are displayed on a screen, while hard copies are printed." },
-        { q: "There are two main types of printers?", options: ["Inkjet and laser", "LCD and CRT", "Analog and digital", "Wireless and wired"], answer: 0, explanation: "The two main types of printers are inkjet and laser." },
-        { q: "What is the motherboard?", options: ["The power source of a computer", "The main circuit board that contains essential components", "A storage device used in laptops", "A type of RAM"], answer: 1, explanation: "The motherboard is the main circuit board that contains essential components." },
-        { q: "Where is the motherboard located in a desktop computer?", options: ["Inside the keyboard", "Inside the system unit", "In the display screen", "In the external hard drive"], answer: 1, explanation: "The motherboard is located inside the system unit." },
-        { q: "Which are the components located on the motherboard?", options: ["CPU and memory", "Printer and monitor", "Power supply and speakers", "Keyboard and mouse"], answer: 0, explanation: "CPU and memory are components located on the motherboard." },
-        { q: "What is the system unit?", options: ["A storage device", "A metal or plastic case that houses the motherboard and other components", "A type of display screen", "A peripheral device"], answer: 1, explanation: "The system unit is a metal or plastic case that houses the motherboard and other components." },
-        { q: "A computer memory is defined as?", options: ["The place where the computer keeps data it will need", "A type of input device", "A monitor used to display information", "The main processing unit of the computer"], answer: 0, explanation: "Computer memory is the place where the computer keeps data it will need." },
-        { q: "What does RAM stand for?", options: ["Read-Only Memory", "Random Access Memory", "Rapid Application Module", "Remote Access Mode"], answer: 1, explanation: "RAM stands for Random Access Memory." },
-        { q: "What is the main function of RAM?", options: ["To permanently store data", "To temporarily hold programs and data the CPU is currently processing", "To provide internet access", "To display graphics"], answer: 1, explanation: "The main function of RAM is to temporarily hold programs and data the CPU is currently processing." },
-        { q: "Why is RAM called volatile memory?", options: ["Because it stores data permanently", "Because it retains data even after power is turned off", "Because it loses its contents when power is turned off", "Because it is only used in mobile devices"], answer: 2, explanation: "RAM is called volatile memory because it loses its contents when power is turned off." },
-        { q: "What is ROM?", options: ["Random Online Memory", "Read-Only Memory", "Read-On-Demand Memory", "Remote Operating Mode"], answer: 1, explanation: "ROM stands for Read-Only Memory." },
-        { q: "How is ROM different from RAM?", options: ["ROM is volatile, while RAM is non-volatile", "ROM holds permanent instructions, while RAM stores temporary data", "RAM is used only for gaming, while ROM is for general computing", "ROM is faster than RAM"], answer: 1, explanation: "ROM holds permanent instructions, while RAM stores temporary data." },
-        { q: "What does CPU stand for?", options: ["Central Processing Unit", "Computer Peripheral Unit", "Central Power Unit", "Computer Processing Utility"], answer: 0, explanation: "CPU stands for Central Processing Unit." },
-        { q: "The function of the CPU is?", options: ["To store files permanently", "To control all the functions performed by a computer", "To display images on the screen", "To input commands"], answer: 1, explanation: "The function of the CPU is to control all the functions performed by a computer." },
-        { q: "A unit which is used to measure processor speed is called?", options: ["Bytes per second", "Gigabytes (GB)", "Hertz (Hz)", "Volts (V)"], answer: 2, explanation: "Hertz (Hz) is the unit used to measure processor speed." },
-        { q: "What does a 3.8 GHz processor mean?", options: ["It can process 3.8 billion operations per second", "It has 3.8 cores", "It has 3.8 GB of memory", "It can store 3.8 TB of data"], answer: 0, explanation: "A 3.8 GHz processor can process 3.8 billion operations per second." },
-        { q: "What is a multi-core processor?", options: ["A processor that has multiple storage devices", "A processor that has more than one processing path", "A processor with additional RAM", "A processor used only for gaming"], answer: 1, explanation: "A multi-core processor has more than one processing path." },
-        { q: "Why is RAM not used for permanent storage?", options: ["Because it is too slow", "Because it is volatile and loses data when power is turned off", "Because it does not support applications", "Because it cannot connect to the motherboard"], answer: 1, explanation: "RAM is not used for permanent storage because it is volatile and loses data when power is turned off." },
-        { q: "What is an example of a non-volatile storage device?", options: ["RAM", "Hard drive", "CPU", "Cache memory"], answer: 1, explanation: "A hard drive is an example of a non-volatile storage device." },
-        { q: "What is the advantage of solid-state storage (SSD) over a hard disk drive (HDD)?", options: ["SSDs are faster and more durable", "HDDs store more data than SSDs", "SSDs require frequent defragmentation", "HDDs last longer than SSDs"], answer: 0, explanation: "SSDs are faster and more durable than HDDs." },
-        { q: "What is cloud storage?", options: ["Storage located on an external drive", "A type of storage located on remote servers accessible via the internet", "A special type of SSD", "A built-in backup system in ROM"], answer: 1, explanation: "Cloud storage is a type of storage located on remote servers accessible via the internet." },
-        { q: "What is the primary function of a hard disk?", options: ["To process data", "To store and retrieve large quantities of information", "To display information on the screen", "To transfer data between devices"], answer: 1, explanation: "The primary function of a hard disk is to store and retrieve large quantities of information." },
-        { q: "Where is an internal hard disk located?", options: ["Inside the system unit", "Outside the computer", "Inside a USB drive", "In the cloud"], answer: 0, explanation: "An internal hard disk is located inside the system unit." },
-        { q: "What is an external hard disk?", options: ["A hard disk inside the system unit", "A USB storage device", "A removable hard disk connected via USB", "A type of SSD"], answer: 2, explanation: "An external hard disk is a removable hard disk connected via USB." },
-                { q: "What is the Internet?", options: ["A single website", "A network of networks connecting billions of computers", "A social media platform", "A private network used by companies"], answer: 1, explanation: "The Internet is a global network of networks connecting billions of computers." },
-        { q: "When was the Internet launched?", options: ["1950", "1969", "1985", "1991"], answer: 1, explanation: "The Internet was launched in 1969 with the creation of ARPANET." },
-        { q: "ARPANET is considered to be...?", options: ["A social media platform", "The first national computer network in the US", "A modern web browser", "A cloud storage service"], answer: 1, explanation: "ARPANET is considered the first national computer network in the US." },
-        { q: "What is the World Wide Web (WWW)?", options: ["A network hardware component", "A subset of the Internet that hosts web pages", "A replacement for the Internet", "A social networking platform"], answer: 1, explanation: "The World Wide Web is a subset of the Internet that hosts web pages." },
-        { q: "When was the World Wide Web introduced?", options: ["1969", "1989", "1991", "2000"], answer: 2, explanation: "The World Wide Web was introduced in 1991." },
-        { q: "What is a client in a client/server network?", options: ["A device that requests data", "A device that provides data", "A storage device", "A web browser"], answer: 0, explanation: "In a client/server network, a client is a device that requests data." },
-        { q: "What is a server in a client/server network?", options: ["A device that processes web searches", "A device that requests data", "A device that provides data to clients", "A type of Internet connection"], answer: 2, explanation: "A server is a device that provides data to clients." },
-        { q: "What is an IP address?", options: ["A unique number assigned to devices on the Internet", "A web page title", "A search engine ranking", "A type of Internet browser"], answer: 0, explanation: "An IP address is a unique number assigned to devices on the Internet." },
-        { q: "Why are domain names (e.g., www.google.com) used instead of IP addresses?", options: ["Because they are more secure", "Because they are easier to remember", "Because they store more data", "Because they change daily"], answer: 1, explanation: "Domain names are used because they are easier to remember than IP addresses." },
-        { q: "What are examples of Internet communication tools?", options: ["Web browsers and email", "Email, social media, and instant messaging", "CPUs and storage devices", "Cloud storage and firewalls"], answer: 1, explanation: "Email, social media, and instant messaging are examples of Internet communication tools." },
-        { q: "What is an example of an e-learning tool?", options: ["Online courses on platforms like Coursera", "Printed textbooks", "CDs and DVDs", "Physical classrooms only"], answer: 0, explanation: "Online courses on platforms like Coursera are examples of e-learning tools." },
-        { q: "What is cloud storage?", options: ["A local hard drive", "A USB drive", "A service that stores files on the Internet", "A type of RAM"], answer: 2, explanation: "Cloud storage is a service that stores files on the Internet." },
-        { q: "What is an example of a cloud storage service?", options: ["Microsoft Word", "Google Drive", "Wi-Fi router", "USB flash drive"], answer: 1, explanation: "Google Drive is an example of a cloud storage service." },
-        { q: "What is e-commerce?", options: ["Buying and selling goods or services over the Internet", "A type of email service", "A method of encrypting websites", "A system for browsing the web"], answer: 0, explanation: "E-commerce is the buying and selling of goods or services over the Internet." },
-        { q: "What is an example of an e-commerce website?", options: ["YouTube", "Amazon", "Wikipedia", "Facebook"], answer: 1, explanation: "Amazon is an example of an e-commerce website." },
-        { q: "What is a web browser?", options: ["A device that connects to the Internet", "A software program that allows users to access websites", "A storage device", "A social media platform"], answer: 1, explanation: "A web browser is a software program that allows users to access websites." },
-        { q: "What is a URL?", options: ["A unique address for a web page", "A type of email", "A search engine", "A computer virus"], answer: 0, explanation: "A URL (Uniform Resource Locator) is a unique address for a web page." },
-        { q: "What are the main parts of a URL?", options: ["Protocol, domain name, and path", "IP address, RAM, and CPU", "Web browser, firewall, and cache", "Username, password, and email"], answer: 0, explanation: "The main parts of a URL are the protocol, domain name, and path." },
-        { q: "What is a search engine?", options: ["A tool that helps users find information on the web", "A physical component inside a computer", "A security software program", "A type of cloud storage"], answer: 0, explanation: "A search engine is a tool that helps users find information on the web." },
-        { q: "What should you consider when evaluating a website?", options: ["Credibility, accuracy, and domain name", "The number of advertisements", "The website's background color", "The number of search results"], answer: 0, explanation: "When evaluating a website, you should consider its credibility, accuracy, and domain name." },
-        { q: "What is the primary purpose of social networking sites?", options: ["To store files in the cloud", "To connect people and organizations with common interests", "To run complex calculations", "To host large-scale e-commerce transactions"], answer: 1, explanation: "The primary purpose of social networking sites is to connect people and organizations with common interests." },
-        { q: "Which of the following is best known for business networking and collaboration?", options: ["Snapchat", "LinkedIn", "TikTok", "Instagram"], answer: 1, explanation: "LinkedIn is best known for business networking and collaboration." },
-        { q: "Which group of sites is primarily used for media sharing?", options: ["Facebook, WhatsApp, and Snapchat", "Instagram, TikTok, SoundCloud, and YouTube", "LinkedIn and Twitter", "Gmail and Outlook"], answer: 1, explanation: "Instagram, TikTok, SoundCloud, and YouTube are primarily used for media sharing." },
-        { q: "What is a key privacy recommendation when using social networking sites?", options: ["Post all personal details to increase transparency", "Keep your personal information private and review privacy settings periodically", "Share every image and video publicly", "Accept friend requests from anyone"], answer: 1, explanation: "A key privacy recommendation is to keep your personal information private and review privacy settings periodically." },
-        { q: "Why is it important to verify the accuracy of posts before sharing them on social media?", options: ["To increase your follower count", "To prevent the spread of misinformation", "To promote advertising revenue", "To improve website loading times"], answer: 1, explanation: "It is important to verify accuracy to prevent the spread of misinformation." },
-        { q: "Which of the following should you avoid when posting on social networks?", options: ["Sharing non-sensitive updates", "Posting images without permission", "Using privacy settings", "Networking with colleagues"], answer: 1, explanation: "You should avoid posting images without permission." },
-        { q: "What is a blog?", options: ["A social media platform exclusively for sharing photos", "A personal website where articles and posts are regularly updated", "A type of online storage service", "A search engine for academic research"], answer: 1, explanation: "A blog is a personal website where articles and posts are regularly updated." },
-        { q: "Which of the following features is common to blogs?", options: ["Posts are randomly arranged with no time-stamp", "They display articles with the newest posts first and allow reader comments", "They are limited to video content only", "They do not allow any reader interaction"], answer: 1, explanation: "Blogs display articles with the newest posts first and allow reader comments." },
-        { q: "What is a vlog?", options: ["A blog that uses video as its primary content", "A microblog that allows only 140 characters per post", "An email service", "A type of cloud storage"], answer: 0, explanation: "A vlog is a blog that uses video as its primary content." },
-        { q: "Which platform is an example of a microblog?", options: ["WordPress", "Blogger", "Twitter (now known as X)", "LinkedIn"], answer: 2, explanation: "Twitter (now known as X) is an example of a microblog." },
-        { q: "Which tool is commonly used to create a blog?", options: ["Microsoft Excel", "Blogger or WordPress", "Adobe Photoshop", "Google Drive"], answer: 1, explanation: "Blogger or WordPress are commonly used to create a blog." },
-        { q: "What is email?", options: ["A real-time chat service", "A method of sending written messages over the Internet", "A type of social media platform", "A file-sharing tool"], answer: 1, explanation: "Email is a method of sending written messages over the Internet." },
-        { q: "Why is email considered asynchronous communication?", options: ["Because messages are delivered immediately and require instant responses", "Because messages can be sent and read at different times", "Because it requires a live video connection", "Because it works only on mobile devices"], answer: 1, explanation: "Email is asynchronous because messages can be sent and read at different times." },
-        { q: "What is a key element of professional email etiquette?", options: ["Including many emojis to express tone", "Being concise, proofread, and including a meaningful subject line", "Using casual abbreviations like 'u' and 'r'", "Sending emails to as many people as possible"], answer: 1, explanation: "A key element of professional email etiquette is being concise, proofread, and including a meaningful subject line." },
-        { q: "Which of the following is a web-based email service?", options: ["Microsoft Outlook (desktop client)", "Yahoo! Mail", "Apple Pages", "Adobe Acrobat"], answer: 1, explanation: "Yahoo! Mail is a web-based email service." },
-        { q: "What distinguishes a desktop client email system from a web-based email system?", options: ["Desktop email requires an internet connection to function", "Desktop email programs download messages to your computer", "Desktop email is accessible only on mobile devices", "There is no difference"], answer: 1, explanation: "Desktop email programs download messages to your computer, unlike web-based email." },
-        { q: "Which of the following should be included in a professional email signature?", options: ["A humorous quote", "Your full contact information", "Only your first name", "No signature at all"], answer: 1, explanation: "A professional email signature should include your full contact information." },
-        { q: "Which of the following is NOT a best practice in email communication?", options: ["Using a clear and informative subject line", "Keeping personal information confidential", "Using abbreviations like 'LOL' in professional emails", "Including only necessary recipients"], answer: 2, explanation: "Using abbreviations like 'LOL' in professional emails is NOT a best practice." },
-        { q: "What is the most popular form of mobile communication using cellular networks?", options: ["Email", "Instant messaging (IM)", "Text messaging (SMS)", "Video calls"], answer: 2, explanation: "Text messaging (SMS) is the most popular form of mobile communication using cellular networks." },
-        { q: "What does SMS stand for?", options: ["Social Messaging System", "Short Message Service", "Secure Messaging System", "Standard Media Service"], answer: 1, explanation: "SMS stands for Short Message Service." },
-        { q: "What is the difference between SMS and MMS?", options: ["SMS supports text only, while MMS supports multimedia messages", "SMS is faster than MMS", "MMS can be sent without an Internet connection", "SMS requires a higher bandwidth than MMS"], answer: 0, explanation: "SMS supports text only, while MMS supports multimedia messages." },
-        { q: "What is instant messaging (IM)?", options: ["A messaging service that uses email", "A real-time communication service over the Internet", "A program for offline chatting", "A type of cloud storage"], answer: 1, explanation: "Instant messaging (IM) is a real-time communication service over the Internet." },
-        { q: "Which of the following is an example of an instant messaging app?", options: ["Google Drive", "WhatsApp", "Adobe Photoshop", "Dropbox"], answer: 1, explanation: "WhatsApp is an example of an instant messaging app." },
-        { q: "What is cloud computing?", options: ["A way to store and access data on the Internet", "A type of operating system", "A hardware device", "A messaging service"], answer: 0, explanation: "Cloud computing is a way to store and access data on the Internet." },
-        { q: "Which of the following is NOT an example of cloud storage?", options: ["Google Drive", "Microsoft OneDrive", "Dropbox", "USB flash drive"], answer: 3, explanation: "A USB flash drive is a physical device, not an example of cloud storage." },
-        { q: "What is the front end of cloud computing?", options: ["The part of the system users interact with", "The data center where files are stored", "A physical server in a company's office", "A type of cloud-based gaming"], answer: 0, explanation: "The front end of cloud computing is the part of the system users interact with." },
-        { q: "What is the back end of cloud computing?", options: ["The user interface", "The storage and management system behind the cloud", "A type of web browser", "A social media network"], answer: 1, explanation: "The back end of cloud computing is the storage and management system behind the cloud." },
-        { q: "What does e-commerce stand for?", options: ["Electronic messaging", "Electronic commerce", "Encrypted communication", "Email communication"], answer: 1, explanation: "E-commerce stands for electronic commerce." },
-        { q: "Which of the following is an example of Business-to-Consumer (B2C) e-commerce?", options: ["A business selling products to customers online", "One business selling services to another business", "A person selling an item to another person on eBay", "A customer using a mobile wallet"], answer: 0, explanation: "A business selling products to customers online is an example of B2C e-commerce." },
-        { q: "What is the most secure way to make online purchases?", options: ["Using a debit card", "Using a credit card or third-party payer like PayPal", "Sending cash by mail", "Using public Wi-Fi for transactions"], answer: 1, explanation: "Using a credit card or third-party payer like PayPal is the most secure way to make online purchases." },
-        { q: "What does HTTPS indicate in a URL?", options: ["The website is hosted on a personal server", "The website is secure and uses encryption", "The website cannot be accessed on mobile devices", "The website is only for downloading files"], answer: 1, explanation: "HTTPS indicates that the website is secure and uses encryption." },
-                { q: "How does starting to study early impact test anxiety?", options: ["It lowers anxiety and builds confidence", "It has no effect", "It increases anxiety and builds confidence", "It decreases performance"], answer: 0, explanation: "Starting to study early lowers anxiety and builds confidence." },
-        { q: "Feeling stress or fear before or during a test is called:", options: ["Performance Anxiety", "Test Anxiety", "General Anxiety", "Exam Depression"], answer: 1, explanation: "Feeling stress or fear before or during a test is called Test Anxiety." },
-        { q: "If you don't prepare yourself for the exam this will lead to:", options: ["Feeling test anxiety", "Feeling relaxed", "Feeling confident", "Feeling happy"], answer: 0, explanation: "Lack of preparation for an exam leads to feeling test anxiety." },
-        { q: "Which of the following contribute to test anxiety?", options: ["Fear of the consequences of performance of the test", "All answers are correct", "Believe in the inability to perform well on a test", "Lack of preparation for a test"], answer: 1, explanation: "Fear of consequences, belief in inability, and lack of preparation all contribute to test anxiety." },
-        { q: "The feeling of unease or fear about an event is called:", options: ["Excitement", "Joy", "Depression", "Anxiety"], answer: 3, explanation: "Anxiety is the feeling of unease or fear about an event." },
-        { q: "Why might it be beneficial to arrive early for a test?", options: ["Gives you time to play games", "Let you study at the last minute", "Avoid feeling rushed and stressed", "It doesn't matter"], answer: 2, explanation: "Arriving early helps avoid feeling rushed and stressed." },
-        { q: "Which of the following is NOT an effective study skill for test preparation?", options: ["Create a study environment that works for you", "Review your notes regularly", "Study only the night before the exam", "Keeping positive attitudes"], answer: 2, explanation: "Studying only the night before the exam is not an effective study skill." },
-        { q: "What should you do after completing a test to improve performance?", options: ["Forget about it", "Talk to classmates", "Immediately prepares for the next test", "Conduct a post exam review"], answer: 3, explanation: "Conducting a post exam review helps you understand mistakes and improve." },
-        { q: "Why is it important to perform a Post Exam Review?", options: ["To understand mistakes", "To impress classmates", "To feel the pressure", "To have something to talk about"], answer: 0, explanation: "A post exam review is important to understand your mistakes." },
-        { q: "Which of the following should you pay close attention to in test questions to avoid mistakes?", options: ["long questions", "Historical references", "Trigger words", "Images"], answer: 2, explanation: "Paying close attention to trigger words helps avoid mistakes in test questions." },
-        { q: "Why is it important to review the entire exam before starting?", options: ["To memorize all questions", "To see how difficult the exam is and give up", "To waste time before answering questions", "To understand the structure and set a pace"], answer: 3, explanation: "Reviewing the entire exam first helps you understand the structure and set a pace." },
-        { q: "How can you improve your memory according to the text?", options: ["Notice, store and reclaim material", "Rely on your intuition", "Skip reviewing", "Study only during exams"], answer: 0, explanation: "Improving memory involves noticing, storing, and reclaiming material." },
-        { q: "What is confirmation bias?", options: ["The process of forgetting new information quickly", "The ability to analyze all perspectives without bias", "The habit to seek out and favor information that supports our beliefs", "The habit of questioning all information equally"], answer: 2, explanation: "Confirmation bias is the habit to seek out and favor information that supports our beliefs." },
-        { q: "By analyzing information rationally, critical thinking helps in making well-informed and objective decisions.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Critical thinking helps make well-informed and objective decisions through rational analysis." },
-        { q: "By thinking critically, we can solve problems logically and efficiently.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Critical thinking enables logical and efficient problem-solving." },
-        { q: "Critical thinking means making decisions based on assumptions.", options: ["TRUE", "FALSE"], answer: 1, explanation: "Critical thinking means making decisions based on facts, evidence, and logical reasoning, not assumptions." },
-        { q: "Critical thinkers go beyond memorizing and repeating information. They analyse and apply knowledge in different situations.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Critical thinkers analyze and apply knowledge rather than just memorizing." },
-        { q: "Critical thinking means making decisions based on facts, evidence, and logical reasoning rather than assumptions.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Critical thinking relies on facts, evidence, and logical reasoning." },
-        { q: "Problem solving is a structured process that involves critical thinking to analyze, evaluate, and find effective solution.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Problem solving is a structured process using critical thinking to find effective solutions." },
-        { q: "As you work toward solving problems, evaluation should be done continuously to ensure progress is moving in the right direction.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Continuous evaluation ensures problem-solving stays on the right track." },
-        { q: "If a solution of a problem doesn't work as expected, you should analyze what went wrong and try again.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Analyzing what went wrong and trying again is the correct approach when a solution fails." },
-        { q: "In the R.E.D. Model, what does 'R' stand for?", options: ["Recognize Assumptions", "Respond to facts", "Recognize Recommendations", "Recognize Results"], answer: 0, explanation: "In the R.E.D. Model, 'R' stands for Recognize Assumptions." },
-        { q: "In the R.E.D. Model, what does 'E' stand for?", options: ["Examine Ideas", "Evaluate Emotions", "Evaluate Information", "Evaluate Evidence"], answer: 3, explanation: "In the R.E.D. Model, 'E' stands for Evaluate Evidence." },
-        { q: "In the R.E.D. Model, what does 'D' stand for?", options: ["Deliver assumptions", "Determine facts", "Draw facts", "Draw Conclusions"], answer: 3, explanation: "In the R.E.D. Model, 'D' stands for Draw Conclusions." },
-        { q: "Considering Bloom's Taxonomy, when you are able to make practical application of the information, this is related to the 'Applying' level of learning.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Making practical application of information relates to the 'Applying' level in Bloom's Taxonomy." },
-        { q: "Considering Bloom's Taxonomy, when you recall the key points of a topic, this is related to 'Evaluating' level of learning.", options: ["TRUE", "FALSE"], answer: 1, explanation: "Recalling key points relates to the 'Remembering' level, not 'Evaluating'." },
-        { q: "Considering Bloom's Taxonomy, when you are able to make practical application of the information, this is related to the 'Creating' level of learning.", options: ["TRUE", "FALSE"], answer: 1, explanation: "Making practical application relates to 'Applying', not 'Creating'." },
-        { q: "Considering Bloom's Taxonomy, when you are able to explain the information using your own words, this is related to the 'Understanding' level of learning.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Explaining information in your own words relates to the 'Understanding' level." },
-        { q: "Considering Bloom's Taxonomy, when you recall the key points of a topic, this is related to the 'Remembering' level of learning.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Recalling key points relates to the 'Remembering' level in Bloom's Taxonomy." },
-        { q: "Dropping a coding class because it's too difficult instead of trying to improve. This is an example of:", options: ["Quitting from the situation", "Staying in a new situation without adjusting skills", "Changing and adapting your old skills to better fit the new demands", "Modify your skills to get by in the new situation"], answer: 0, explanation: "Dropping a class because it's difficult is an example of quitting from the situation." },
-        { q: "A worker struggles with new software at their job but refuses to learn it, leading to frustration and poor performance. This is an example of:", options: ["Changing and adapting your old skills to better fit the new demands", "Quitting from the situation", "Modify your skills to get by in the new situation", "Staying in a new situation without adjusting skills"], answer: 3, explanation: "Refusing to learn new software while staying in the job is staying in a new situation without adjusting skills." },
-        { q: "A student finds writing essays challenging but learns basic techniques and uses online tools to improve just enough to pass the class. This is an example of:", options: ["Quitting from the new situation", "Modify your skills to get by in the new situation", "Staying in a new situation without adjusting skills", "Refusing the new situation"], answer: 1, explanation: "Learning basic techniques just enough to pass is modifying your skills to get by." },
-        { q: "Leaving a job because it introduces new technology or responsibilities that you're unfamiliar with. This is an example of:", options: ["Staying in a new situation without adjusting skills", "Changing and adapting your old skills to better fit the new demands", "Quitting from the situation", "Modify your skills to get by in the new situation"], answer: 2, explanation: "Leaving a job due to unfamiliar technology is an example of quitting from the situation." },
-        { q: "What is the main idea of the text 'Adapting Old Skills to New Situations'?", options: ["Using old skills without change", "Removing oneself from difficult situations", "Changing and modifying skills to fit new circumstances", "Quitting when faced with challenges"], answer: 2, explanation: "The main idea is changing and modifying skills to fit new circumstances." },
-        { q: "Which of the following is the default web browser in Windows?", options: ["Microsoft Edge", "Safari", "Firefox", "Google Chrome"], answer: 0, explanation: "Microsoft Edge is the default web browser in Windows." },
-        { q: "The 's' in 'https://' indicates that the website is secure.", options: ["TRUE", "FALSE"], answer: 0, explanation: "The 's' in 'https://' indicates the website is secure and uses encryption." },
-        { q: "What is the main function of the motherboard in a computer?", options: ["To connect and hold the main electronic components of the computer", "To store files and documents", "To provide internet access", "To control external devices like printers"], answer: 0, explanation: "The main function of the motherboard is to connect and hold the main electronic components." },
-        { q: "The Back End side of cloud computing:", options: ["is the user-facing side", "All answers are correct", "is accessed through web browsers", "Contains data centers and server farms globally"], answer: 3, explanation: "The back end of cloud computing contains data centers and server farms globally." },
-        { q: "The device that looks like a pen and is used to draw on the iPad screen is:", options: ["Stylus", "Virtual Keyboard", "Keyboard", "Microphone"], answer: 0, explanation: "A stylus looks like a pen and is used to draw on touch screens." },
-        { q: "The two digits that are used in binary language are 0 and 1.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Binary language uses only two digits: 0 and 1." },
-        { q: "The following laptop computer can be converted into a tablet-like device:", options: ["Ultrabook", "Laptop", "2-in-1 PC", "Desktop"], answer: 2, explanation: "A 2-in-1 PC can be converted into a tablet-like device." },
-        { q: "Manipulating data describes a computer's ability to process data.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Manipulating data is part of a computer's processing ability." },
-        { q: "Creating computer systems that can perform tasks associated with human intelligence is known as:", options: ["Logic intelligence", "social intelligence", "Music intelligence", "Artificial intelligence"], answer: 3, explanation: "Artificial intelligence is the creation of systems that perform tasks associated with human intelligence." },
-        { q: "What do smartphones require to function properly?", options: ["Windows operating system", "Touchscreen display", "Mobile operating system", "Internet connection"], answer: 2, explanation: "Smartphones require a mobile operating system to function properly." },
-        { q: "Which storage device has NO spinning parts?", options: ["CDs", "DVDs", "Hard disks", "USB drives"], answer: 3, explanation: "USB drives (solid-state storage) have no spinning parts, unlike hard disks." },
-        { q: "How does AI contribute to medicine?", options: ["It replaces doctors", "It helps diagnose unfamiliar conditions", "It makes doctors more popular", "It increases hospital costs"], answer: 1, explanation: "AI contributes to medicine by helping diagnose unfamiliar conditions." },
-        { q: "The language of the computer is binary language.", options: ["TRUE", "FALSE"], answer: 0, explanation: "The language of the computer is binary language (0s and 1s)." },
-        { q: "A microphone is an example of:", options: ["Image capturing device", "Scanning device", "Pointing device", "Audio-input device"], answer: 3, explanation: "A microphone is an example of an audio-input device." },
-        { q: "RAM stores permanent instructions required for the computer to start up when powered on.", options: ["TRUE", "FALSE"], answer: 1, explanation: "ROM (not RAM) stores permanent instructions required for startup." },
-        { q: "Computers are excellent at processing information into data.", options: ["TRUE", "FALSE"], answer: 1, explanation: "Computers process data into information, not the other way around." },
-                { q: "What does URL stand for?", options: ["Universal Resource Link", "Uniform Resource Locator", "Unique Reference Label", "Unified Reading List"], answer: 1, explanation: "URL stands for Uniform Resource Locator, which is the address of a web page." },
-        { q: "What are the three main components of a search engine?", options: ["Spider, indexer, search engine software", "Browser, social media, messaging apps", "URL, domain, web server", "Website, email, blog"], answer: 0, explanation: "The three main components of a search engine are the spider, indexer, and search engine software." },
-        { q: "What should you consider when evaluating a website's reliability?", options: ["Its background color", "Authority, accuracy, objectivity, and currency", "The number of ads on the site", "The popularity of the site"], answer: 1, explanation: "When evaluating a website's reliability, consider authority, accuracy, objectivity, and currency." },
-        { q: "The spider program is part of a search engine that:", options: ["Searches the indexed data", "Constantly collects data on the web", "Pulls out relevant information according to your search", "Organizes the data into a large database"], answer: 1, explanation: "The spider program constantly collects data on the web to be indexed." },
-        { q: "A type of computer which is self-contained computer devices that have their own programming.", options: ["Embedded Computer", "Tablets", "Supercomputer", "Mainframe Computer"], answer: 0, explanation: "Embedded computers are self-contained devices with their own programming, built into other devices." },
-        { q: "A type of computer which is specially designed computer chip that resides in another device.", options: ["Supercomputer", "Mainframes", "Embedded Computer", "Tablets"], answer: 2, explanation: "An embedded computer is a specially designed chip that resides inside another device." },
-        { q: "A type of computer that can be found in many devices, such as cars, drones, and Washing machines.", options: ["Mainframes", "Tablets", "Supercomputer", "Embedded Computer"], answer: 3, explanation: "Embedded computers are found in many everyday devices like cars, drones, and washing machines." },
-        { q: "A type of computer that typically does not receive input from you or interact with other systems.", options: ["Mainframes", "Embedded Computer", "Tablets", "Supercomputer"], answer: 1, explanation: "Embedded computers typically do not receive direct user input or interact with other systems." },
-        { q: "RAM and ROM are two examples of temporary memories.", options: ["TRUE", "FALSE"], answer: 1, explanation: "ROM is non-volatile (permanent) memory, while RAM is temporary." },
-        { q: "One of the following printers generates three dimensional objects:", options: ["3D printer", "large format printer", "All-in-one printer", "All answers are correct"], answer: 0, explanation: "A 3D printer generates three-dimensional objects." },
-        { q: "One of the following printers generates oversize images such as posters:", options: ["large format printer", "All-in-one printer", "All answers are correct", "3D printer"], answer: 0, explanation: "A large format printer generates oversize images such as posters." },
-        { q: "Cloud computing refers to:", options: ["Storing data, files, and applications on the local drives", "All answers are correct", "Storing data, files, and applications on the network", "Storing data, files, and applications on the Internet"], answer: 3, explanation: "Cloud computing refers to storing data, files, and applications on the Internet." },
-        { q: "Which type of tasks can robots perform in industrial?", options: ["Customer service", "Repetitive tasks", "Creative tasks", "Cooking"], answer: 1, explanation: "Industrial robots are commonly used for repetitive tasks." },
-        { q: "Chromebook is a type of laptops that:", options: ["Designed to be always connected to the Internet", "Focuses on offering a very thin, lightweight computing solution", "Can be converted into a tablet-like device", "All answers are correct"], answer: 0, explanation: "Chromebooks are designed to be always connected to the Internet." },
-        { q: "Which of the following is NOT a feature of Chromebook laptop?", options: ["Stores documents and apps in the cloud", "Can convert into a tablet-like device", "Uses the Google Chrome OS", "Designed to be always connected to the Internet"], answer: 1, explanation: "Converting into a tablet-like device is a feature of 2-in-1 PCs, not Chromebooks." },
-        { q: "The two digits that are used in binary language are 0 and 8.", options: ["TRUE", "FALSE"], answer: 1, explanation: "Binary language uses only the digits 0 and 1." },
-        { q: "Why are smartphones considered computers?", options: ["Because they have a screen and a battery", "Because they can be connected to the internet", "Because they are used for making phone calls", "Because they have processing power, memory, input and output."], answer: 3, explanation: "Smartphones are considered computers because they have processing power, memory, and input/output capabilities." },
-        { q: "By thinking critically, we can solve problems logically and efficiently.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Critical thinking allows us to solve problems logically and efficiently." },
-        { q: "What is the main idea of the text 'Adapting Old Skills to New Situations'?", options: ["Using old skills without change", "Removing oneself from difficult situations", "Changing and modifying skills to fit new circumstances", "Quitting when faced with challenges"], answer: 2, explanation: "The main idea is changing and modifying skills to fit new circumstances." },
-        { q: "Text, images and videos inside a computer are represented in binary.", options: ["TRUE", "FALSE"], answer: 0, explanation: "All data, including text, images, and videos, are represented in binary inside a computer." },
-        { q: "Which of the following is the default web browser in Windows?", options: ["Microsoft Edge", "Safari", "Firefox", "Google Chrome"], answer: 0, explanation: "Microsoft Edge is the default web browser in Windows." },
-        { q: "The 's' in 'https://' indicates that the website is secure.", options: ["TRUE", "FALSE"], answer: 0, explanation: "The 's' in 'https://' indicates that the website uses encryption and is secure." },
-        { q: "The following portable computer is a fully featured computer that focuses on offering a very thin, lightweight computing solution:", options: ["Laptop", "Ultrabook", "2-in-1 PC", "Chromebooks"], answer: 1, explanation: "An Ultrabook is a thin, lightweight, fully featured portable computer." },
-        { q: "What is the main function of the motherboard in a computer?", options: ["To connect and hold the main electronic components of the computer", "To store files and documents", "To provide internet access", "To control external devices like printers"], answer: 0, explanation: "The motherboard connects and holds the main electronic components of the computer." },
-        { q: "The Back End side of cloud computing:", options: ["is the user-facing side", "All answers are correct", "is accessed through web browsers", "Contains data centers and server farms globally"], answer: 3, explanation: "The back end of cloud computing contains data centers and server farms globally." },
-        { q: "As you work toward solving problems, evaluation should be done continuously to ensure progress is moving in the right direction.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Continuous evaluation ensures that problem-solving stays on track." },
-        { q: "The device that looks like a pen and is used to draw on the iPad screen is:", options: ["Stylus", "Virtual Keyboard", "Keyboard", "Microphone"], answer: 0, explanation: "A stylus is a pen-like device used to draw on touch screens like the iPad." },
-        { q: "The two digits that are used in binary language are 0 and 1.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Binary language uses only two digits: 0 and 1." },
-        { q: "The following laptop computer can be converted into a tablet-like device:", options: ["Ultrabook", "Laptop", "2-in-1 PC", "Desktop"], answer: 2, explanation: "A 2-in-1 PC can be converted into a tablet-like device." },
-        { q: "Critical thinking means making decisions based on assumptions.", options: ["TRUE", "FALSE"], answer: 1, explanation: "Critical thinking means making decisions based on facts, evidence, and logical reasoning rather than assumptions." },
-        { q: "Manipulating data describes a computer's ability to process data.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Manipulating data is part of a computer's processing ability." },
-        { q: "Creating computer systems that can perform tasks associated with human intelligence is known as:", options: ["Logic intelligence", "Social intelligence", "Music intelligence", "Artificial intelligence"], answer: 3, explanation: "Artificial intelligence is the creation of systems that perform tasks associated with human intelligence." },
-        { q: "Why is it important to perform a Post Exam Review?", options: ["To understand mistakes", "To impress classmates", "To feel the pressure", "To have something to talk about"], answer: 0, explanation: "A post exam review is important to understand your mistakes and improve." },
-        { q: "What do smartphones require to function properly?", options: ["Windows operating system", "Touchscreen display", "Mobile operating system", "Internet connection"], answer: 2, explanation: "Smartphones require a mobile operating system to function properly." },
-        { q: "A worker struggles with new software at their job but refuses to learn it, leading to frustration and poor performance. This is an example of:", options: ["Changing and adapting your old skills to better fit the new demands", "Quitting from the situation", "Modify your skills to get by in the new situation", "Staying in a new situation without adjusting skills"], answer: 3, explanation: "Refusing to learn new software while staying in the job is staying in a new situation without adjusting skills." },
-        { q: "When the computer is turned off, ROM loses all of its contents.", options: ["TRUE", "FALSE"], answer: 1, explanation: "ROM is non-volatile memory and retains its contents even when the computer is turned off." },
-        { q: "Which storage device has NO spinning parts?", options: ["CDs", "DVDs", "Hard disks", "USB drives"], answer: 3, explanation: "USB drives (solid-state storage) have no spinning parts, unlike hard disks." },
-        { q: "How does AI contribute to medicine?", options: ["It replaces doctors", "It helps diagnose unfamiliar conditions", "It makes doctors more popular", "It increases hospital costs"], answer: 1, explanation: "AI contributes to medicine by helping diagnose unfamiliar conditions." },
-        { q: "How can you improve your memory according to the text?", options: ["Notice, store and reclaim material", "Rely on your intuition", "Skip reviewing", "Study only during exams"], answer: 0, explanation: "Improving memory involves noticing, storing, and reclaiming material." },
-        { q: "What should you do after completing a test to improve performance?", options: ["Forget about it", "Talk to classmates", "Immediately prepares for the next test", "Conduct a post exam review"], answer: 3, explanation: "Conducting a post exam review helps you understand mistakes and improve." },
-        { q: "The language of the computer is binary language.", options: ["TRUE", "FALSE"], answer: 0, explanation: "The language of the computer is binary language (0s and 1s)." },
-        { q: "A microphone is an example of:", options: ["Image capturing device", "Scanning device", "Pointing device", "Audio-input device"], answer: 3, explanation: "A microphone is an example of an audio-input device." },
-        { q: "Which of the following is NOT an effective study skill for test preparation?", options: ["Create a study environment that works for you", "Review your notes regularly", "Study only the night before the exam", "Keeping positive attitudes"], answer: 2, explanation: "Studying only the night before the exam is not an effective study skill." },
-        { q: "Problem solving is a structured process that involves critical thinking to analyze, evaluate, and find effective solution.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Problem solving is a structured process using critical thinking to find effective solutions." },
-        { q: "RAM stores permanent instructions required for the computer to start up when powered on.", options: ["TRUE", "FALSE"], answer: 1, explanation: "ROM (not RAM) stores permanent instructions required for startup." },
-        { q: "The is one of the factors that can determine the performance of the CPU.", options: ["number of processing paths", "number of input devices", "number of output devices", "number of functions"], answer: 0, explanation: "The number of processing paths (cores) is a factor that determines CPU performance." },
-        { q: "Computers are excellent at processing information into data.", options: ["TRUE", "FALSE"], answer: 1, explanation: "Computers process data into information, not the other way around." },
-        { q: "Critical thinkers go beyond memorizing and repeating information. They analyse and apply knowledge in different situations.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Critical thinkers analyze and apply knowledge rather than just memorizing." },
-        { q: "Unethical behavior is described as:", options: ["Sharing resources freely", "Following approved standards", "Not adhering to approved standards", "Acting based on personal belief"], answer: 2, explanation: "Unethical behavior is described as not adhering to approved standards." },
-        { q: "When shopping online, it is better to avoid non-well-known sites.", options: ["TRUE", "FALSE"], answer: 0, explanation: "It is safer to avoid non-well-known sites when shopping online to protect your information." }
-    ];
-
-    function toggleTheme() {
-        const html = document.documentElement;
-        const btn = document.getElementById('theme-toggle');
-        if (html.getAttribute('data-theme') === 'dark') {
-            html.setAttribute('data-theme', 'light');
-            btn.textContent = '🌙';
-            localStorage.setItem('theme', 'light');
-        } else {
-            html.setAttribute('data-theme', 'dark');
-            btn.textContent = '☀️';
-            localStorage.setItem('theme', 'dark');
-        }
-    }
-    if (localStorage.getItem('theme') === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        document.getElementById('theme-toggle').textContent = '☀️';
-    }
-
-    questions.sort(() => Math.random() - 0.5);
-    let currentQuestionIndex = 0; let score = 0; let answered = false;
-
-    const questionEl = document.getElementById('question');
-    const optionsEl = document.getElementById('options');
-    const nextBtn = document.getElementById('next-btn');
-    const progressText = document.getElementById('progress-text');
-    const liveScoreEl = document.getElementById('live-score');
-    const feedbackStatus = document.getElementById('feedback-status');
-    const explanationEl = document.getElementById('explanation');
-    const quizMain = document.getElementById('quiz-main');
-    const scoreScreen = document.getElementById('score-screen');
-    const scoreCircle = document.getElementById('score-circle');
-    const scoreMessage = document.getElementById('score-message');
+    let allQuestions = []; let activeQuestions = []; let currentQuestionIndex = 0; let score = 0; let answered = false;
+    const questionEl = document.getElementById('question'); const optionsEl = document.getElementById('options');
+    const nextBtn = document.getElementById('next-btn'); const progressText = document.getElementById('progress-text');
+    const liveScoreEl = document.getElementById('live-score'); const feedbackStatus = document.getElementById('feedback-status');
+    const explanationEl = document.getElementById('explanation'); const chapterMenu = document.getElementById('chapter-menu');
+    const quizMain = document.getElementById('quiz-main'); const scoreScreen = document.getElementById('score-screen');
+    const scoreCircle = document.getElementById('score-circle'); const scoreMessage = document.getElementById('score-message');
     const progressBarEl = document.getElementById('progress-bar');
 
-    function updateTopBar() {
-        liveScoreEl.textContent = `⭐ Score: ${score}`;
-        const progressPercent = (currentQuestionIndex / questions.length) * 100;
-        progressBarEl.style.width = progressPercent + '%';
+    function toggleTheme() { const html = document.documentElement; const btn = document.getElementById('theme-toggle'); if (html.getAttribute('data-theme') === 'dark') { html.setAttribute('data-theme', 'light'); btn.textContent = '🌙'; localStorage.setItem('theme', 'light'); } else { html.setAttribute('data-theme', 'dark'); btn.textContent = '☀️'; localStorage.setItem('theme', 'dark'); } }
+    if (localStorage.getItem('theme') === 'dark') { document.documentElement.setAttribute('data-theme', 'dark'); document.getElementById('theme-toggle').textContent = '☀️'; }
+
+    async function loadData() {
+        try {
+            const response = await fetch('./data/tu170.JSON');
+            if (!response.ok) throw new Error('Failed to load JSON');
+            allQuestions = await response.json();
+            const seen = new Set();
+            allQuestions = allQuestions.filter(q => { const key = q.q.trim().toLowerCase(); if (seen.has(key)) return false; seen.add(key); return true; });
+            buildChapterMenu();
+        } catch (error) {
+            chapterMenu.innerHTML = '<div class="loading" style="color: #ef4444;">⚠️ Error loading questions. Make sure data/tu170.JSON exists.</div>';
+        }
     }
 
-    function loadQuestion() {
-        answered = false;
-        feedbackStatus.textContent = '';
-        explanationEl.style.display = 'none';
-        explanationEl.textContent = '';
-        nextBtn.style.display = 'none';
-        optionsEl.innerHTML = '';
-
-        const currentQuestion = questions[currentQuestionIndex];
-        progressText.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
-        updateTopBar();
-
-        questionEl.textContent = currentQuestion.q;
-
-        currentQuestion.options.forEach((option, index) => {
-            const button = document.createElement('button');
-            button.classList.add('option-btn');
-            button.textContent = option;
-            button.onclick = () => selectOption(index);
-            optionsEl.appendChild(button);
+    function buildChapterMenu() {
+        // Robust sorting for "Chapter 1", "Chapter 2", "Chapter 12" etc.
+        const chapters = [...new Set(allQuestions.map(q => q.chapter))].sort((a, b) => 
+            a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' })
+        );
+        
+        chapterMenu.innerHTML = '';
+        chapterMenu.innerHTML += `<button class="menu-btn" onclick="startQuiz('all')"><h2>📚 All Chapters</h2><p>${allQuestions.length} Questions</p></button>`;
+        
+        chapters.forEach(ch => { 
+            const count = allQuestions.filter(q => q.chapter === ch).length; 
+            // THE FIX IS HERE: Wrapping ${ch} in single quotes so it's treated as a string
+            chapterMenu.innerHTML += `<button class="menu-btn" onclick="startQuiz('${ch}')"><h2>${ch}</h2><p>${count} Questions</p></button>`; 
         });
+    }
+
+    function startQuiz(chapter) {
+        if (chapter === 'all') { activeQuestions = [...allQuestions]; } else { activeQuestions = allQuestions.filter(q => q.chapter === chapter); }
+        activeQuestions.sort(() => Math.random() - 0.5);
+        currentQuestionIndex = 0; score = 0;
+        chapterMenu.style.display = 'none'; scoreScreen.style.display = 'none'; quizMain.style.display = 'flex';
+        loadQuestion();
+    }
+
+    function goBackToMenu() { quizMain.style.display = 'none'; scoreScreen.style.display = 'none'; chapterMenu.style.display = 'grid'; }
+    function updateTopBar() { liveScoreEl.textContent = `⭐ Score: ${score}`; const percent = (currentQuestionIndex / activeQuestions.length) * 100; progressBarEl.style.width = percent + '%'; }
+    
+    function loadQuestion() {
+        answered = false; feedbackStatus.textContent = ''; explanationEl.style.display = 'none'; explanationEl.textContent = ''; nextBtn.style.display = 'none'; optionsEl.innerHTML = '';
+        const q = activeQuestions[currentQuestionIndex];
+        progressText.textContent = `Question ${currentQuestionIndex + 1} of ${activeQuestions.length}`;
+        updateTopBar(); questionEl.textContent = q.q;
+        q.options.forEach((option, index) => { const btn = document.createElement('button'); btn.classList.add('option-btn'); btn.textContent = option; btn.onclick = () => selectOption(index); optionsEl.appendChild(btn); });
     }
 
     function selectOption(selectedIndex) {
-        if (answered) return;
-        answered = true;
-
-        const currentQuestion = questions[currentQuestionIndex];
-        const buttons = document.querySelectorAll('.option-btn');
-        
-        buttons.forEach((button, index) => {
-            button.disabled = true;
-            if (index === currentQuestion.answer) button.classList.add('correct');
-            else if (index === selectedIndex) button.classList.add('wrong');
-        });
-
-        if (selectedIndex === currentQuestion.answer) {
-            score++;
-            feedbackStatus.textContent = "✅ Correct!";
-            feedbackStatus.style.color = "var(--success)";
-        } else {
-            feedbackStatus.textContent = `❌ Incorrect. The correct answer is: ${currentQuestion.options[currentQuestion.answer]}`;
-            feedbackStatus.style.color = "var(--error)";
-        }
-
-        if (currentQuestion.explanation) {
-            explanationEl.textContent = `💡 Explanation: ${currentQuestion.explanation}`;
-            explanationEl.style.display = 'block';
-        } else {
-            explanationEl.textContent = `💡 Explanation: No explanation provided.`;
-            explanationEl.style.display = 'block';
-        }
-
-        updateTopBar();
-        nextBtn.style.display = 'block';
+        if (answered) return; answered = true;
+        const q = activeQuestions[currentQuestionIndex]; const buttons = document.querySelectorAll('.option-btn');
+        buttons.forEach((btn, index) => { btn.disabled = true; if (index === q.answer) btn.classList.add('correct'); else if (index === selectedIndex) btn.classList.add('wrong'); });
+        if (selectedIndex === q.answer) { score++; feedbackStatus.textContent = "✅ Correct!"; feedbackStatus.style.color = "var(--success)"; } else { feedbackStatus.textContent = `❌ Incorrect. The correct answer is: ${q.options[q.answer]}`; feedbackStatus.style.color = "var(--error)"; }
+        explanationEl.textContent = `💡 Explanation: ${q.explanation || 'No explanation provided.'}`; explanationEl.style.display = 'block';
+        updateTopBar(); nextBtn.style.display = 'block';
     }
 
-    nextBtn.onclick = () => {
-        currentQuestionIndex++;
-        if (currentQuestionIndex < questions.length) loadQuestion();
-        else showScore();
-    };
-
+    nextBtn.onclick = () => { currentQuestionIndex++; if (currentQuestionIndex < activeQuestions.length) loadQuestion(); else showScore(); };
+    
     function showScore() {
-        quizMain.style.display = 'none';
-        scoreScreen.style.display = 'block';
-        const percentage = Math.round((score / questions.length) * 100);
-        scoreCircle.textContent = `${percentage}%`;
-        scoreMessage.textContent = `You scored ${score} out of ${questions.length}`;
-        let msg = "";
-        if (percentage >= 90) msg = "Outstanding! You are ready for the exam! 🏆";
-        else if (percentage >= 70) msg = "Great job! Just a little more review needed. 👍";
-        else if (percentage >= 50) msg = "Good effort, but keep studying! 📚";
-        else msg = "Don't worry, review the lectures and try again! 💪";
+        quizMain.style.display = 'none'; scoreScreen.style.display = 'block';
+        const percent = Math.round((score / activeQuestions.length) * 100); scoreCircle.textContent = `${percent}%`;
+        scoreMessage.textContent = `You scored ${score} out of ${activeQuestions.length}`;
+        let msg = ""; if (percent >= 90) msg = "Outstanding! 🏆"; else if (percent >= 70) msg = "Great job! 👍"; else if (percent >= 50) msg = "Keep studying! 📚"; else msg = "Review and try again! 💪";
         scoreMessage.textContent += ` - ${msg}`;
     }
 
-    loadQuestion();
+    loadData();
 </script>
 </body>
 </html>

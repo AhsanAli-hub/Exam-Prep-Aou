@@ -8,559 +8,152 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --purple: #8b5cf6;
-            --purple-hover: #7c3aed;
-            --purple-light: #f5f3ff;
-            --success: #10b981;
-            --error: #ef4444;
-            --bg: #f9fafb;
-            --card-bg: #ffffff;
-            --text-main: #111827;
-            --text-muted: #6b7280;
-            --border: #e5e7eb;
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-        }
-        [data-theme="dark"] {
-            --bg: #0f172a; --card-bg: #1e293b; --text-main: #f1f5f9;
-            --text-muted: #94a3b8; --border: #334155; --purple-light: #312e81;
-        }
+        :root { --purple: #8b5cf6; --purple-hover: #7c3aed; --purple-light: #f5f3ff; --success: #10b981; --error: #ef4444; --bg: #f9fafb; --card-bg: #ffffff; --text-main: #111827; --text-muted: #6b7280; --border: #e5e7eb; --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05); --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1); --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1); }
+        [data-theme="dark"] { --bg: #0f172a; --card-bg: #1e293b; --text-main: #f1f5f9; --text-muted: #94a3b8; --border: #334155; --purple-light: #312e81; }
         * { box-sizing: border-box; transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; }
-        body { font-family: 'Inter', 'Segoe UI', system-ui, sans-serif; background-color: var(--bg); color: var(--text-main); margin: 0; padding: 20px; display: flex; justify-content: center; min-height: 100vh; }
-        
+        body { font-family: 'Inter', system-ui, sans-serif; background-color: var(--bg); color: var(--text-main); margin: 0; padding: 20px; display: flex; justify-content: center; min-height: 100vh; }
         .app-container { width: 100%; max-width: 800px; display: flex; flex-direction: column; gap: 20px; }
-        
         .main-header { background: var(--card-bg); padding: 18px 30px; border-radius: 16px; box-shadow: var(--shadow-sm); text-align: center; position: relative; border: 1px solid var(--border); }
-        .main-header h1 { margin: 0; color: var(--purple); font-size: 1.6rem; font-weight: 800; letter-spacing: -0.5px; }
+        .main-header h1 { margin: 0; color: var(--purple); font-size: 1.6rem; font-weight: 800; }
         .theme-toggle { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background: var(--purple-light); border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; }
-        .theme-toggle:hover { transform: translateY(-50%) scale(1.1); }
-
-        /* Top Bar with Progress + Score */
-        .top-bar { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            margin-bottom: 15px; 
-            gap: 15px; 
-        }
-        .progress-text { font-size: 0.85rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
-        .live-score { 
-            font-size: 0.95rem; 
-            font-weight: 800; 
-            color: var(--purple); 
-            background: var(--purple-light); 
-            padding: 6px 14px; 
-            border-radius: 20px; 
-            white-space: nowrap;
-        }
-
+        .chapter-menu { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; grid-auto-rows: 1fr; }
+        .menu-btn { background: var(--card-bg); border: 2px solid var(--border); border-radius: 16px; padding: 25px 20px; cursor: pointer; text-align: center; transition: all 0.2s; box-shadow: var(--shadow-sm); font-family: inherit; color: var(--text-main); }
+        .menu-btn:hover { border-color: var(--purple); transform: translateY(-4px); box-shadow: var(--shadow-md); background: var(--purple-light); }
+        .menu-btn h2 { margin: 0 0 8px 0; color: var(--purple); font-size: 1.25rem; font-weight: 800; }
+        .menu-btn p { margin: 0; color: var(--text-muted); font-size: 0.9rem; font-weight: 600; }
+        .quiz-main { background: var(--card-bg); padding: 40px; border-radius: 20px; box-shadow: var(--shadow-md); min-height: 500px; display: none; flex-direction: column; border: 1px solid var(--border); }
+        .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; gap: 15px; }
+        .progress-text { font-size: 0.85rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; }
+        .live-score { font-size: 0.95rem; font-weight: 800; color: var(--purple); background: var(--purple-light); padding: 6px 14px; border-radius: 20px; }
         .progress-bar-container { width: 100%; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; margin-bottom: 30px; }
-        .progress-bar { height: 100%; background: linear-gradient(90deg, var(--purple), #a78bfa); width: 0%; transition: width 0.4s ease; border-radius: 4px; }
-
-        .quiz-main { background: var(--card-bg); padding: 40px; border-radius: 20px; box-shadow: var(--shadow-md); min-height: 500px; display: flex; flex-direction: column; border: 1px solid var(--border); }
-
-        .question { font-size: 1.35rem; font-weight: 700; margin-bottom: 30px; line-height: 1.5; color: var(--text-main); }
+        .progress-bar { height: 100%; background: linear-gradient(90deg, var(--purple), #a78bfa); width: 0%; transition: width 0.4s ease; }
+        .question { font-size: 1.35rem; font-weight: 700; margin-bottom: 30px; line-height: 1.5; }
         .options { display: flex; flex-direction: column; gap: 12px; }
-        .option-btn { padding: 18px 22px; border: 2px solid var(--border); border-radius: 14px; background: var(--card-bg); cursor: pointer; text-align: left; font-size: 1.05rem; font-weight: 500; color: var(--text-main); font-family: inherit; transition: all 0.2s ease; display: flex; align-items: center; min-height: 55px; }
-        .option-btn:hover:not(:disabled) { border-color: var(--purple); background: var(--purple-light); transform: translateY(-2px); box-shadow: var(--shadow-md); }
-        .option-btn.correct { background: #ecfdf5; color: #065f46; border-color: var(--success); animation: pulse 0.4s ease; }
+        .option-btn { padding: 18px 22px; border: 2px solid var(--border); border-radius: 14px; background: var(--card-bg); cursor: pointer; text-align: left; font-size: 1.05rem; font-weight: 500; color: var(--text-main); font-family: inherit; transition: all 0.2s; min-height: 55px; }
+        .option-btn:hover:not(:disabled) { border-color: var(--purple); background: var(--purple-light); transform: translateY(-2px); }
+        .option-btn.correct { background: #ecfdf5; color: #065f46; border-color: var(--success); }
         .option-btn.wrong { background: #fef2f2; color: #991b1b; border-color: var(--error); }
         [data-theme="dark"] .option-btn.correct { background: #064e3b; color: #6ee7b7; }
         [data-theme="dark"] .option-btn.wrong { background: #7f1d1d; color: #fca5a5; }
-        .option-btn:disabled { cursor: not-allowed; opacity: 0.9; }
-        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
-
         .feedback-container { margin-top: 25px; min-height: 60px; }
         .feedback-status { font-weight: 700; font-size: 1.1rem; margin-bottom: 8px; }
-        .explanation { font-size: 0.95rem; color: var(--text-muted); font-weight: 500; font-style: italic; padding: 14px 18px; background: var(--purple-light); border-left: 4px solid var(--purple); border-radius: 8px; animation: fadeIn 0.3s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
-
-        .next-btn { margin-top: 20px; padding: 16px; background: var(--purple); color: white; border: none; border-radius: 14px; cursor: pointer; font-size: 1.05rem; font-weight: 700; transition: all 0.2s; display: none; width: 100%; font-family: inherit; letter-spacing: 0.3px; }
-        .next-btn:hover { background: var(--purple-hover); transform: translateY(-2px); box-shadow: var(--shadow-lg); }
-
+        .explanation { font-size: 0.95rem; color: var(--text-muted); font-weight: 500; font-style: italic; padding: 14px 18px; background: var(--purple-light); border-left: 4px solid var(--purple); border-radius: 8px; }
+        .next-btn { margin-top: 20px; padding: 16px; background: var(--purple); color: white; border: none; border-radius: 14px; cursor: pointer; font-size: 1.05rem; font-weight: 700; display: none; width: 100%; font-family: inherit; }
+        .next-btn:hover { background: var(--purple-hover); }
+        .back-btn { margin-top: 10px; padding: 14px; background: transparent; color: var(--purple); border: 2px solid var(--purple); border-radius: 14px; cursor: pointer; font-size: 0.95rem; font-weight: 700; width: 100%; font-family: inherit; }
         .score-screen { text-align: center; display: none; width: 100%; background: var(--card-bg); padding: 50px; border-radius: 20px; box-shadow: var(--shadow-lg); border: 1px solid var(--border); }
         .score-screen h2 { font-size: 2.2rem; color: var(--purple); margin-bottom: 20px; }
         .score-circle { width: 160px; height: 160px; border-radius: 50%; background: var(--purple-light); display: flex; justify-content: center; align-items: center; margin: 0 auto 20px; font-size: 2.5rem; font-weight: 800; color: var(--purple); border: 8px solid var(--purple); }
         .score-message { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 30px; }
-        .restart-btn { padding: 16px 32px; background: var(--purple); color: white; border: none; border-radius: 14px; cursor: pointer; font-size: 1rem; font-weight: 700; transition: all 0.2s; font-family: inherit; }
-        .restart-btn:hover { background: var(--purple-hover); transform: translateY(-2px); box-shadow: var(--shadow-lg); }
-
-        @media (max-width: 600px) { 
-            body { padding: 15px; }
-            .quiz-main { padding: 25px; } 
-            .main-header h1 { font-size: 1.2rem; } 
-            .question { font-size: 1.1rem; } 
-            .theme-toggle { width: 34px; height: 34px; font-size: 0.9rem; right: 12px; }
-            .option-btn { padding: 15px; font-size: 1rem; }
-            .live-score { font-size: 0.85rem; padding: 5px 10px; }
-        }
+        .restart-btn { padding: 16px 32px; background: var(--purple); color: white; border: none; border-radius: 14px; cursor: pointer; font-size: 1rem; font-weight: 700; font-family: inherit; }
+        .loading { text-align: center; padding: 40px; color: var(--text-muted); font-weight: 600; }
+        @media (max-width: 600px) { body { padding: 15px; } .quiz-main { padding: 25px; } .main-header h1 { font-size: 1.2rem; } .question { font-size: 1.1rem; } .option-btn { padding: 15px; } }
     </style>
 </head>
 <body>
-<div class="app-container" id="app-container">
+<div class="app-container">
     <header class="main-header">
         <h1>GT103 Mids Quiz</h1>
         <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()">🌙</button>
     </header>
-
+    <div id="chapter-menu" class="chapter-menu"><div class="loading">Loading chapters...</div></div>
     <div class="quiz-main" id="quiz-main">
-        <div class="top-bar">
-            <div class="progress-text" id="progress-text">Question 1</div>
-            <div class="live-score" id="live-score">⭐ Score: 0</div>
-        </div>
+        <div class="top-bar"><div class="progress-text" id="progress-text">Question 1</div><div class="live-score" id="live-score">⭐ Score: 0</div></div>
         <div class="progress-bar-container"><div class="progress-bar" id="progress-bar"></div></div>
-
         <div class="question" id="question">Loading question...</div>
         <div class="options" id="options"></div>
-
-        <div class="feedback-container">
-            <div class="feedback-status" id="feedback-status"></div>
-            <div class="explanation" id="explanation" style="display: none;"></div>
-        </div>
-
+        <div class="feedback-container"><div class="feedback-status" id="feedback-status"></div><div class="explanation" id="explanation" style="display: none;"></div></div>
         <button class="next-btn" id="next-btn">Next Question ➔</button>
+        <button class="back-btn" onclick="goBackToMenu()">← Back to Chapters</button>
     </div>
-
     <div class="score-screen" id="score-screen">
         <h2>Quiz Completed!</h2>
         <div class="score-circle" id="score-circle">0%</div>
         <div class="score-message" id="score-message">You scored 0 out of 0</div>
-        <button class="restart-btn" onclick="location.reload()">Retake Quiz 🔄</button>
+        <button class="restart-btn" onclick="goBackToMenu()">Back to Chapters 🔄</button>
     </div>
 </div>
-
 <script>
-
-    let questions = [
-
-        { q: "Artificial Intelligence was defined by John McCarthy as...", options: ["The study of making computers do things which people are better at", "The science and engineering of making intelligent machines", "Getting computers to do tasks which require human intelligence"], answer: 1, explanation: "John McCarthy defined AI as the science and engineering of making intelligent machines." },
-        { q: "Narrow AI (Weak AI) refers to...", options: ["AI that can replicate human intelligence completely", "AI research that aims to apply partial human intelligence in specific problem solving", "AI that can perform any intellectual task a human can do"], answer: 1, explanation: "Narrow AI is designed for specific tasks, unlike General AI which can do any intellectual task." },
-        { q: "Which of the following is the correct example of Narrow AI?", options: ["A robot that writes essays and engages in conversation", "Science fiction AI like C-3PO", "Siri converts speech to text and matches responses from a database"], answer: 2, explanation: "Siri is a classic example of Narrow AI because it performs specific tasks like speech recognition." },
-        { q: "General AI (Strong AI) is described as AI that...", options: ["Applies partial human intelligence in specific domains", "Can perform any intellectual task a human can do, with abilities to learn, reason, adapt, and solve problems across diverse domains", "Aims to replicate human intelligence completely"], answer: 1, explanation: "General AI (AGI) possesses human-level intelligence across a wide variety of tasks." },
-        { q: "The Turing Test was proposed by Alan Turing in...", options: ["1943", "1956", "1950"], answer: 2, explanation: "Alan Turing proposed the Turing Test in 1950 in his paper Computing Machinery and Intelligence." },
-        { q: "What is the purpose of the Turing Test?", options: ["To measure a computer's processing speed", "To determine if a machine's responses are indistinguishable from those of a human during a text-based conversation", "To test if a robot can physically behave like a human"], answer: 1, explanation: "The test checks if a machine's responses are indistinguishable from a human's during a text conversation." },
-        { q: "One limitation of the Turing Test mentioned in the lecture is...", options: ["It requires physical robots to participate", "Passing the test does not imply true understanding - chatbots simulate intelligence but lack awareness", "It can only be conducted in English"], answer: 1, explanation: "Passing the test does not imply true understanding or consciousness, only simulated intelligence." },
-        { q: "Which of the following is a key technique used in Symbolic AI?", options: ["Supervised Learning", "Reinforcement Learning", "Logical Inference"], answer: 2, explanation: "Symbolic AI uses symbols and rules, relying heavily on logical inference to simulate reasoning." },
-        { q: "Machine Learning is described in the lecture as...", options: ["Systems that use symbols and rules to simulate human reasoning", "Intelligence that emerges from patterns learned from data rather than predefined rules", "AI that replicates human intelligence completely"], answer: 1, explanation: "ML is a subset of AI that allows systems to learn patterns from data rather than relying on predefined rules." },
-        { q: "A weakness of Machine Learning mentioned in the lecture is that it often acts as a 'black box,' lacking transparency.", options: ["TRUE", "FALSE"], answer: 0, explanation: "ML models often act as black boxes because their internal decision-making processes lack transparency." },
-        { q: "TPUs (Tensor Processing Units) were developed by which company?", options: ["Microsoft", "NVIDIA", "Google"], answer: 2, explanation: "Google developed Tensor Processing Units (TPUs) specifically to accelerate AI computations." },
-        { q: "Which of the following is NOT listed as a Cloud AI example in the lecture?", options: ["Microsoft Azure AI", "NVIDIA CUDA", "Amazon Web Services (AWS)"], answer: 1, explanation: "NVIDIA CUDA is a hardware/software platform, not a cloud-based AI service like Azure or AWS." },
-        { q: "In the Short History of AI, the 1956 Dartmouth meeting is significant because...", options: ["It marked the first time AI beat a human in chess", "The term 'Artificial Intelligence' was officially adopted", "The first neural network was created"], answer: 1, explanation: "The 1956 Dartmouth Workshop is considered the birth of AI, where the term was officially adopted." },
-        { q: "The period 1970-1989 in AI history is characterized by...", options: ["Statistical approaches and resurgence of probability", "Knowledge-based approaches, including the expert systems boom and AI Winter", "Early AI programs like Samuel's checkers program"], answer: 1, explanation: "This era saw the rise of expert systems followed by an AI Winter due to unmet expectations." },
-        { q: "In 1943, McCulloch & Pitts contributed to AI history by developing...", options: ["The Logic Theorist program", "The Boolean circuit model of the brain", "The first expert system"], answer: 1, explanation: "McCulloch and Pitts developed the first mathematical model of a neural network based on Boolean circuits." },
-        { q: "An intelligent agent in AI is defined as an entity that...", options: ["Can only process text-based data", "Perceives its environment through sensors, makes decisions, and acts to achieve specific goals using actuators", "Works exclusively in fully observable environments"], answer: 1, explanation: "An agent uses sensors to perceive its environment and actuators to act upon it to achieve goals." },
-        { q: "In an intelligent agent system, actuators are responsible for...", options: ["Gathering information from the environment", "Executing actions based on the decisions made", "Storing the agent's internal model of the world"], answer: 1, explanation: "Actuators are the physical or software components that execute the actions decided by the agent." },
-        { q: "A chess game is an example of which type of environment in AI?", options: ["Partially Observable Environment", "Dynamic Environment", "Fully Observable Environment"], answer: 2, explanation: "Chess is fully observable because both players can see all pieces on the board at all times." },
-        { q: "A self-driving car where visibility is limited by sensors or weather conditions is an example of...", options: ["Static Environment", "Partially Observable Environment", "Fully Observable Environment"], answer: 1, explanation: "A self-driving car operates in a partially observable environment because its sensors cannot see everything." },
-        { q: "Simple Reflex Agents operate on...", options: ["A utility function that evaluates and ranks all possible actions", "A condition-action rule (if-then statements) with no memory or learning capability", "An internal model of the world to handle partially observable environments"], answer: 1, explanation: "Simple reflex agents use if-then rules based strictly on the current percept, lacking memory." },
-        { q: "Which of the following is a DISADVANTAGE of Simple Reflex Agents?", options: ["They are too computationally expensive", "They require a well-defined utility function", "They cannot handle complex or dynamic environments and fail when memory or planning is needed"], answer: 2, explanation: "Because they lack memory and planning, simple reflex agents fail in complex or dynamic environments." },
-        { q: "Goal-Based Agents make decisions by...", options: ["Reacting immediately to stimuli without future planning", "Evaluating how their actions align with predefined goals and planning future outcomes", "Using a utility function to maximize satisfaction metrics"], answer: 1, explanation: "Goal-based agents plan ahead and choose actions that help them reach a specific target state." },
-        { q: "Utility-Based Agents differ from Goal-Based Agents in that they...", options: ["Work without any memory of past states", "Only function in fully observable environments", "Optimize for the best outcome by evaluating trade-offs, rather than just achieving a goal"], answer: 2, explanation: "Utility-based agents use a utility function to evaluate and choose the action with the highest expected satisfaction." },
-        { q: "Model-Based Reflex Agents improve upon Simple Reflex Agents by...", options: ["Using only predefined rules without any memory", "Maintaining an internal model of the world to reason about the current state and handle partially observable environments", "Applying a utility function to rank all possible actions"], answer: 1, explanation: "Model-based agents maintain an internal state to track parts of the world they cannot currently see." },
-        { q: "Search in AI works by...", options: ["Randomly selecting a solution from a predefined list", "Systematically exploring different possibilities to find the best solution, moving step-by-step through choices until reaching the goal", "Asking the user to provide the correct answer"], answer: 1, explanation: "AI search systematically explores different states or actions to find the best solution path." },
-        { q: "Heuristics are defined in the lecture as...", options: ["Guaranteed algorithms that always find the optimal solution", "Rules of thumb that help AI make decisions faster by focusing on the most promising options", "Mathematical formulas that compute exact answers"], answer: 1, explanation: "Heuristics are rules of thumb that speed up decision-making by focusing on promising options." },
-        { q: "According to the lecture, heuristics guarantee the optimal solution.", options: ["TRUE", "FALSE"], answer: 1, explanation: "Heuristics trade mathematical perfection for speed, so they do not always guarantee the optimal solution." },
-        { q: "In the 8-puzzle example, the heuristic used by AI estimates which moves...", options: ["Use the most computational resources", "Reduce the number of misplaced tiles or bring the empty space closer to the goal tile", "Randomly try every tile without a guiding rule"], answer: 1, explanation: "The 8-puzzle heuristic estimates distance by counting how many tiles are misplaced from their goal positions." },
-        { q: "In self-driving cars, heuristic-based decision-making allows the vehicle to react instantly to obstacles, prioritizing...", options: ["Fuel efficiency over all other concerns", "Safety over exhaustive route calculations", "Passenger comfort over speed"], answer: 1, explanation: "Heuristics allow self-driving cars to prioritize safety and react instantly rather than calculating every possible outcome." },
-        { q: "The Minimax Algorithm is a decision-making strategy used in...", options: ["Medical diagnosis systems", "Competitive games like Chess and Tic-Tac-Toe, to help AI play smart by looking ahead at all possible moves", "Scheduling exam timetables"], answer: 1, explanation: "Minimax is used in zero-sum games to minimize the opponent's maximum possible payoff." },
-        { q: "In the Minimax Algorithm, the MAX player is located at...", options: ["The leaves of the game tree", "The root of the game tree", "Alternating positions with MIN throughout the tree"], answer: 1, explanation: "The MAX player is at the root of the tree, trying to maximize the utility value." },
-        { q: "Constraint Satisfaction Problems (CSPs) involve finding solutions that meet specific requirements or rules, prioritizing meeting the constraints rather than focusing on how to achieve a goal.", options: ["TRUE", "FALSE"], answer: 0, explanation: "CSPs focus on finding a state that satisfies all constraints, rather than the path taken to reach it." },
-        { q: "Which of the following is a real-life example of a CSP given in the lecture?", options: ["Using heuristics to find the shortest Google Maps route", "Sudoku Puzzle - filling a grid so that each row, column, and subgrid contains unique numbers", "Training a neural network on labeled data"], answer: 1, explanation: "Sudoku is a classic CSP where variables are cells, domains are numbers 1-9, and constraints prevent repeats." },
-        { q: "According to the lecture, CSPs break down problems into three parts. Which of the following is NOT one of them?", options: ["Variables", "Algorithms", "Domains"], answer: 1, explanation: "The three structural parts of a CSP are Variables, Domains, and Constraints, not Algorithms." },
-        { q: "Utility in AI refers to...", options: ["The speed at which AI processes information", "The measure of how desirable an outcome is, helping AI make informed decisions by assigning values to potential outcomes", "The memory capacity of an AI system"], answer: 1, explanation: "Utility is a measure of how desirable an outcome is, helping AI make rational decisions." },
-        { q: "How does AI handle uncertainty according to the lecture?", options: ["It waits for complete information before making any decision", "It uses probability and other models to estimate outcomes and analyzes patterns in past data to make predictions", "It asks the user for confirmation before every decision"], answer: 1, explanation: "AI uses probabilistic models to estimate likely outcomes when information is incomplete or noisy." },
-        { q: "According to the Basic Probability Rule in the lecture, the sum of all probabilities must equal...", options: ["0", "0.5", "1 (100%)"], answer: 2, explanation: "The sum of probabilities for all mutually exclusive outcomes in a distribution must equal 1." },
-        { q: "Bayesian Inference is a method where AI starts with an initial belief called a prior probability, and when new evidence appears, it updates this belief to get a more accurate probability called a posterior probability.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Bayesian Inference updates a prior belief with new evidence to calculate a more accurate posterior probability." },
-        { q: "Supervised learning is defined as...", options: ["Learning without any data", "A machine learning approach that uses labelled datasets to train algorithms", "A method that groups data without human intervention"], answer: 1, explanation: "Supervised learning trains algorithms using labeled datasets to map inputs to correct outputs." },
-        { q: "In supervised learning, the two main tasks are...", options: ["Clustering and Dimensionality Reduction", "Encoding and Decoding", "Classification and Regression"], answer: 2, explanation: "Supervised learning is divided into classification (categorical) and regression (continuous) tasks." },
-        { q: "Unsupervised learning is defined as...", options: ["Learning from labelled datasets with human supervision", "Learning through rewards and penalties from the environment", "Using algorithms to analyse and cluster unlabelled datasets to discover hidden patterns"], answer: 2, explanation: "Unsupervised learning analyzes unlabelled data to discover hidden patterns or groupings." },
-        { q: "The two main tasks in Unsupervised Learning mentioned in the lecture are...", options: ["Classification and Regression", "Clustering and Dimensionality Reduction", "Training and Deployment"], answer: 1, explanation: "Clustering groups similar data, while dimensionality reduction simplifies features." },
-        { q: "Reinforcement Learning is defined as...", options: ["Learning from pre-labelled datasets", "A subfield of ML where an agent learns to make decisions by interacting with an environment through trial and error", "A technique for grouping data based on similarities"], answer: 1, explanation: "RL agents learn by interacting with an environment and receiving rewards or penalties." },
-        { q: "The correct order of the Machine Learning Pipeline as presented in the lecture is...", options: ["Selecting Model -> Gathering Data -> Preparing Data -> Deploying Model", "Gathering Data -> Preparing Data -> Selecting & Training Model -> Testing & Deploying Model", "Testing Model -> Gathering Data -> Training Model -> Preparing Data"], answer: 1, explanation: "The standard ML pipeline starts with data gathering, followed by preparation, model training, and finally testing/deployment." },
-        { q: "According to the lecture, the typical split ratio for a training set in the ML pipeline is...", options: ["10-20%", "20-30%", "70-80%"], answer: 2, explanation: "Typically, 70-80% of data is used for training the model." },
-        { q: "The R-squared metric in model evaluation is used for...", options: ["Classification tasks", "Clustering tasks", "Regression tasks"], answer: 2, explanation: "R-squared evaluates how well a regression model fits the data." },
-        { q: "The Silhouette Score is used to evaluate...", options: ["How often a classification model is correct", "How well the model groups similar data points in clustering", "How closely the regression model follows real trends"], answer: 1, explanation: "The Silhouette Score evaluates how well data points fit within their assigned clusters." },
-        { q: "Artificial Neural Networks (ANN) are best described as...", options: ["Database management systems for storing large files", "A type of machine learning model that mimics the human brain to learn and make decisions", "Programming tools used only for data cleaning"], answer: 1, explanation: "Artificial Neural Networks are inspired by the structure and function of the human brain." },
-        { q: "The three main components (layers) of an ANN are...", options: ["Encoding Layer, Processing Layer, Decoding Layer", "Data Layer, Weight Layer, Bias Layer", "Input Layer, Hidden Layers, Output Layer"], answer: 2, explanation: "An ANN consists of an input layer, one or more hidden layers, and an output layer." },
-        { q: "In an ANN, the Input Layer is responsible for...", options: ["Producing the final prediction of the network", "Adjusting the weights during backpropagation", "Collecting all input information and passing it along for processing"], answer: 2, explanation: "The input layer receives and passes data into the network for processing." },
-        { q: "In the ANN working process, the 'loss function' is used to...", options: ["Select the best algorithm for the task", "Measure the difference between the predicted answer and the actual correct answer", "Collect training data from multiple sources"], answer: 1, explanation: "The loss function measures the difference between the network's prediction and the actual correct answer." },
-        { q: "Backpropagation in an ANN is described in the lecture as...", options: ["The process of feeding data into the input layer", "The final prediction step after training is complete", "The ANN's way of correcting itself by going backwards through the network and adjusting weights"], answer: 2, explanation: "Backpropagation adjusts the network's weights by propagating the error backward from the output layer." },
-                { q: "Deep Learning differs from traditional ML because it...", options: ["Requires no data", "Uses manual rules", "Learns features automatically through multiple layers", "Uses only linear models"], answer: 2, explanation: "Deep Learning automatically extracts features through multiple layers, unlike traditional ML which requires manual feature engineering." },
-        { q: "A neural network that processes sequential data (text, time-series) is...", options: ["CNN", "RNN", "SVM", "k-means"], answer: 1, explanation: "RNNs are specifically designed to process sequential data by retaining memory of previous inputs." },
-        { q: "CNNs are mainly used for...", options: ["Audio playback", "Vision and image processing", "Sorting numbers", "Compressing files"], answer: 1, explanation: "Convolutional Neural Networks (CNNs) are primarily used for image and visual data processing." },
-        { q: "The process of moving input forward through the network is called...", options: ["Data cleaning", "Forward propagation", "Backpropagation", "Tokenization"], answer: 1, explanation: "Forward propagation is the process of passing input data through the network to generate an output." },
-        { q: "The process of adjusting weights by sending error backward is...", options: ["Preprocessing", "Normalization", "Backpropagation", "Tokenization"], answer: 2, explanation: "Backpropagation adjusts weights by propagating the error backward through the network." },
-        { q: "Deep learning requires large amounts of...", options: ["Food", "Heat", "Data and computational power", "Manual programming"], answer: 2, explanation: "Deep learning models require massive datasets and high computational power (GPUs/TPUs)." },
-        { q: "RNNs are especially useful for...", options: ["Random guessing", "Static images", "Language translation and chatbots", "Hardware repair"], answer: 2, explanation: "RNNs are ideal for sequential data like language translation and chatbots due to their memory." },
-        { q: "ANNs can recognize complex patterns.", options: ["TRUE", "FALSE"], answer: 0, explanation: "ANNs are highly capable of recognizing complex, non-linear patterns in data." },
-        { q: "The output layer generates the final prediction of the network.", options: ["TRUE", "FALSE"], answer: 0, explanation: "The output layer produces the final prediction or classification result." },
-        { q: "CNNs are not used in medical imaging.", options: ["TRUE", "FALSE"], answer: 1, explanation: "CNNs are widely used in medical imaging for detecting tumors and abnormalities." },
-        { q: "RNNs have memory that helps them process sequences.", options: ["TRUE", "FALSE"], answer: 0, explanation: "RNNs have an internal memory that helps them process sequential data." },
-        { q: "Deep learning models cannot work with big data.", options: ["TRUE", "FALSE"], answer: 1, explanation: "Deep learning models thrive on big data and require it for optimal performance." },
-        { q: "Forward propagation occurs before backpropagation.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Forward propagation generates the prediction, then backpropagation updates the weights." },
-        { q: "ANNs always require labeled data.", options: ["TRUE", "FALSE"], answer: 1, explanation: "ANNs can also be used in unsupervised and reinforcement learning scenarios." },
-        { q: "CNNs are inspired by the structure of the human eye.", options: ["TRUE", "FALSE"], answer: 0, explanation: "CNNs are inspired by the visual cortex of the human eye." },
-        { q: "Deep learning automatically extracts features from data.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Deep learning models automatically learn and extract relevant features from raw data." },
-        { q: "Backpropagation improves the model by reducing errors.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Backpropagation minimizes the loss function by adjusting weights to reduce errors." },
-        { q: "Computer Vision is a field of AI that enables machines to...", options: ["Speak fluently", "Store large data", "Interpret and understand visual information", "Repair hardware"], answer: 2, explanation: "Computer Vision enables machines to interpret and understand visual information from the world." },
-        { q: "Human vision processes images using...", options: ["Muscles", "Eyes and brain", "Sensors and cables", "Random perception"], answer: 1, explanation: "Human vision relies on the eyes to capture images and the brain to process them." },
-        { q: "Computer vision systems capture scenes using...", options: ["Keyboards", "Cameras or sensors", "Speakers", "Screens"], answer: 1, explanation: "Computer vision systems use cameras or sensors to capture visual data." },
-        { q: "Which of the following is an example of visual data?", options: ["Text files", "Spreadsheet tables", "Images and videos", "Physical books"], answer: 2, explanation: "Images and videos are the primary forms of visual data." },
-        { q: "Thermal images are used to represent...", options: ["Emotions", "Temperature differences", "Sound waves", "Text language"], answer: 1, explanation: "Thermal images capture temperature differences and display them visually." },
-        { q: "Which task belongs to computer vision?", options: ["Translation", "Speech-to-text", "Object detection", "Recommendation systems"], answer: 2, explanation: "Object detection is a core task in computer vision that identifies and locates objects." },
-        { q: "Computer vision vs. image processing: CV focuses on...", options: ["Improving pixel quality", "Interpreting and making decisions based on visual data", "Compressing files", "Storing images"], answer: 1, explanation: "Computer Vision focuses on interpreting visual data, while image processing focuses on manipulation." },
-        { q: "Real-time video streams are examples of...", options: ["Offline data", "Dynamic visual input", "Static text", "Printed images"], answer: 1, explanation: "Real-time video streams are dynamic visual inputs that change over time." },
-        { q: "Medical imaging techniques such as MRI and X-rays are used in...", options: ["Robotics control", "Computer vision applications", "Financial forecasting", "Audio processing"], answer: 1, explanation: "Medical imaging techniques are widely used in computer vision for diagnosis and analysis." },
-        { q: "Computer vision is important today because...", options: ["There is less visual data", "Huge amounts of images/videos require automated analysis", "Humans no longer use cameras", "It replaces all manual work"], answer: 1, explanation: "The massive surge in visual content requires AI for automated analysis." },
-        { q: "Computer vision allows machines to interpret the surrounding scene.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Computer vision enables machines to interpret and understand their surroundings." },
-        { q: "Human vision and computer vision use identical biological structures.", options: ["TRUE", "FALSE"], answer: 1, explanation: "Human vision uses biological structures, while computer vision uses cameras and algorithms." },
-        { q: "Video frames are considered images.", options: ["TRUE", "FALSE"], answer: 0, explanation: "A video is essentially a sequence of images (frames) played in rapid succession." },
-        { q: "Grayscale images contain only black, white, and gray values.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Grayscale images contain only shades of gray, from black to white." },
-        { q: "Thermal images show sound frequencies.", options: ["TRUE", "FALSE"], answer: 1, explanation: "Thermal images show temperature differences, not sound frequencies." },
-        { q: "Computer vision systems rely on sensing devices like cameras.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Cameras and sensors are essential sensing devices for computer vision." },
-        { q: "Image processing and computer vision mean exactly the same thing.", options: ["TRUE", "FALSE"], answer: 1, explanation: "Image processing manipulates images, while computer vision interprets them." },
-        { q: "Computer vision can be used in agriculture and satellite monitoring.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Computer vision is used in agriculture for crop monitoring and in satellites for environmental tracking." },
-        { q: "Real-time processing is essential for applications like self-driving cars.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Self-driving cars require real-time processing to make immediate driving decisions." },
-        { q: "Computer vision has no role in automation.", options: ["TRUE", "FALSE"], answer: 1, explanation: "Computer vision plays a major role in automation, such as in robotics and manufacturing." },
-        { q: "Natural Language Processing (NLP) enables computers to...", options: ["Drive cars", "See images", "Understand and generate human language", "Repair devices"], answer: 2, explanation: "NLP enables computers to understand, interpret, and generate human language." },
-        { q: "Raw text is considered...", options: ["Structured data", "Numbers only", "Unstructured data", "Audio input"], answer: 2, explanation: "Raw text is unstructured data because it lacks a predefined format." },
-        { q: "Text preprocessing includes...", options: ["Adding more errors", "Removing punctuation, stopwords, and cleaning text", "Inserting random words", "Making text longer"], answer: 1, explanation: "Text preprocessing involves cleaning and preparing raw text for analysis." },
-        { q: "Tokenization is the process of...", options: ["Coloring text", "Splitting text into smaller units such as words or phrases", "Translating speech", "Encrypting data"], answer: 1, explanation: "Tokenization breaks text into smaller units called tokens." },
-        { q: "A language model is trained to...", options: ["Predict weather", "Sort images", "Learn patterns and relationships in language", "Play games"], answer: 2, explanation: "Language models learn statistical patterns and relationships in language." },
-        { q: "Which of the following is a real-world application of NLP?", options: ["Car engines", "Calculators", "Machine translation (e.g., Google Translate)", "Chemical mixing"], answer: 2, explanation: "Machine translation is a major real-world application of NLP." },
-        { q: "Virtual assistants like Siri or Alexa use NLP to...", options: ["Build websites", "Predict earthquakes", "Understand user questions and generate responses", "Monitor temperature"], answer: 2, explanation: "Virtual assistants use NLP to understand user queries and generate appropriate responses." },
-        { q: "Large Language Models (LLMs) differ from traditional models because they...", options: ["Use fewer parameters", "Depend only on images", "Are trained on massive datasets and perform multiple language tasks", "Ignore context"], answer: 2, explanation: "LLMs are trained on massive datasets and can perform a wide variety of language tasks." },
-        { q: "An example of an NLP lab task is...", options: ["Counting pixels", "Measuring temperature", "Extracting key phrases from text", "Drawing shapes"], answer: 2, explanation: "Extracting key phrases is a common NLP lab task." },
-        { q: "LLMs like GPT can...", options: ["Drive trucks", "Summarize, translate, and generate text", "Perform surgery", "Assemble machines"], answer: 1, explanation: "LLMs like GPT can summarize, translate, and generate human-like text." },
-        { q: "NLP deals with human languages such as Arabic and English.", options: ["TRUE", "FALSE"], answer: 0, explanation: "NLP deals with natural human languages like Arabic and English." },
-        { q: "Text must often be cleaned before machines can understand it.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Raw text often contains noise and must be cleaned before NLP models can process it." },
-        { q: "Tokenization breaks text into meaningful parts.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Tokenization breaks text into meaningful parts like words or subwords." },
-                { q: "Machine Learning (ML) is best described as...", options: ["A subset of AI that allows computers to perform tasks without being explicitly programmed", "A programming language used to build websites", "A hardware component that speeds up calculations", "A database management system"], answer: 0, explanation: "ML is a subset of AI that enables computers to learn from data without being explicitly programmed." },
-        { q: "According to Mitchell (1997), a computer program is said to learn from experience E if...", options: ["It stores more data over time", "Its performance on task T, as measured by P, improves with experience E", "It can connect to the internet automatically", "It requires less memory as it runs longer"], answer: 1, explanation: "Mitchell defined ML as a program improving its performance (P) on a task (T) with experience (E)." },
-        { q: "The two main components of Machine Learning are...", options: ["Hardware and Software", "Input and Output", "Data and Model", "Training and Testing only"], answer: 2, explanation: "ML consists of data (the fuel) and a model (the algorithm that learns from the data)." },
-        { q: "Data is referred to as 'The Fuel for Machine Learning' because...", options: ["It powers the electricity used by computers", "The quality, quantity, and diversity of training data determine how well the model learns", "It replaces the need for a model", "It is always structured and clean"], answer: 1, explanation: "The quality and quantity of data directly determine how well an ML model performs." },
-        { q: "Which of the following is NOT listed as a reason why we want an agent to learn...", options: ["Handling Uncertainty", "Real-Time Decision Making", "Manual Data Entry", "Adaptation to Dynamic Environments"], answer: 2, explanation: "Manual data entry is not a reason for agent learning; it is a repetitive task humans want to avoid." },
-        { q: "Supervised learning is defined as...", options: ["Learning without any data", "A machine learning approach that uses labelled datasets to train algorithms", "A method that groups data without human intervention", "Learning through trial and error with rewards"], answer: 1, explanation: "Supervised learning uses labeled datasets to train algorithms to map inputs to correct outputs." },
-        { q: "In supervised learning, the two main tasks are...", options: ["Clustering and Dimensionality Reduction", "Encoding and Decoding", "Classification and Regression", "Training and Deployment only"], answer: 2, explanation: "Supervised learning is divided into classification (categorical) and regression (continuous) tasks." },
-        { q: "Classification in supervised learning means...", options: ["Predicting a continuous real value like price or weight", "Sorting items into categories (binary or multi-class)", "Grouping unlabelled data based on similarity", "Reducing the number of features in a dataset"], answer: 1, explanation: "Classification predicts categorical labels, sorting items into predefined classes." },
-        { q: "Regression in supervised learning is used to...", options: ["Sort images into predefined labels", "Identify real-value outputs such as price or weight", "Cluster customers into groups", "Detect anomalies in unlabelled data"], answer: 1, explanation: "Regression predicts continuous numerical values rather than discrete categories." },
-        { q: "Which of the following is an example of a Classification application mentioned in the lecture...", options: ["House Price Prediction", "GPA Prediction", "Email Spam Detection", "Energy Consumption Forecasting"], answer: 2, explanation: "Email spam detection is a classification task that sorts emails into 'spam' or 'not spam'." },
-        { q: "Which of the following is an example of a Regression application mentioned in the lecture...", options: ["Customer Segmentation", "Image Segmentation", "Social Network Analysis", "Stock Price Prediction"], answer: 3, explanation: "Stock price prediction is a regression task because it predicts a continuous numerical value." },
-        { q: "Fraud Detection is classified under which type of supervised learning task...", options: ["Regression", "Clustering", "Classification", "Dimensionality Reduction"], answer: 2, explanation: "Fraud detection is a classification task that identifies transactions as fraudulent or legitimate." },
-        { q: "In the supervised learning classification example using cat and dog images, the training data is...", options: ["Unlabelled images", "Labelled images (with 'Cat' or 'Dog' tags)", "Random pixel values with no context", "Images collected from the internet without processing"], answer: 1, explanation: "Supervised learning requires labeled training data, such as images tagged 'Cat' or 'Dog'." },
-        { q: "In the supervised learning regression example using house prices, what does the model output...", options: ["A category label such as 'Expensive' or 'Cheap'", "A cluster group number", "A predicted real-value price", "A binary decision of yes or no"], answer: 2, explanation: "Regression models output continuous numerical values, such as predicted house prices." },
-        { q: "Which of the following algorithms is listed as a Supervised Learning algorithm in the lecture...", options: ["K-means clustering", "Principal Component Analysis", "Support Vector Machines", "Autoencoder"], answer: 2, explanation: "Support Vector Machines (SVMs) are classic supervised learning algorithms." },
-        { q: "Which of the following is listed as a challenge of Supervised Learning...", options: ["It can cluster data on its own without labels", "Datasets can have a higher likelihood of human error", "It does not require expertise to structure the model", "Training time is always very short"], answer: 1, explanation: "Supervised learning requires labeled data, which can be prone to human error during labeling." },
-        { q: "Unsupervised learning is defined as...", options: ["Learning from labelled datasets with human supervision", "Learning through rewards and penalties from the environment", "Using algorithms to analyse and cluster unlabelled datasets to discover hidden patterns", "Memorising all training examples without generalisation"], answer: 2, explanation: "Unsupervised learning analyzes unlabelled data to discover hidden patterns or groupings." },
-        { q: "The two main tasks in Unsupervised Learning mentioned in the lecture are...", options: ["Classification and Regression", "Clustering and Dimensionality Reduction", "Training and Deployment", "Encoding and Prediction"], answer: 1, explanation: "Clustering groups similar data, while dimensionality reduction simplifies features." },
-        { q: "Clustering is defined as...", options: ["Predicting future values based on historical data", "Sorting data into pre-labelled categories", "Grouping unlabelled data based on their similarities or differences", "Reducing features in a dataset to two dimensions"], answer: 2, explanation: "Clustering groups unlabelled data points based on their similarities." },
-        { q: "Dimensionality Reduction is used when...", options: ["The dataset has too few features", "Labels are missing from the dataset", "The number of features (dimensions) in a dataset is too high", "The model needs more training data"], answer: 2, explanation: "Dimensionality reduction is used to simplify datasets with too many features." },
-        { q: "Which of the following is a Clustering application mentioned in the lecture...", options: ["House Price Prediction", "GPA Prediction", "Customer Segmentation", "Fraud Detection"], answer: 2, explanation: "Customer segmentation groups customers with similar behaviors without predefined labels." },
-        { q: "In the Unsupervised Learning Clustering example in the lecture, the training data is...", options: ["Labelled with correct group assignments", "Unlabelled customer data", "A series of images with tags", "Financial transactions with fraud labels"], answer: 1, explanation: "Unsupervised learning uses unlabelled data, such as raw customer data." },
-        { q: "Which of the following algorithms is listed under Unsupervised Learning in the lecture...", options: ["Naive Bayes", "Neural Networks", "K-means Clustering", "K-Nearest Neighbour"], answer: 2, explanation: "K-means Clustering is a popular unsupervised algorithm for grouping data." },
-        { q: "Which of the following is a challenge of Unsupervised Learning mentioned in the lecture...", options: ["Requires expert labelling of all data points", "Cannot handle large volumes of data", "Lack of transparency into the basis on which data was clustered", "Always produces accurate results"], answer: 2, explanation: "It can be difficult to interpret exactly why an unsupervised model grouped data the way it did." },
-        { q: "Reinforcement Learning is defined as...", options: ["Learning from pre-labelled datasets", "A subfield of ML where an agent learns to make decisions by interacting with an environment through trial and error", "A technique for grouping data based on similarities", "A method to reduce the number of dimensions in a dataset"], answer: 1, explanation: "RL agents learn by interacting with an environment and receiving rewards or penalties." },
-        { q: "In Reinforcement Learning, the agent learns by...", options: ["Memorising text", "Interacting with an environment through rewards and penalties", "Using only supervised tasks", "Ignoring feedback"], answer: 1, explanation: "RL agents learn through trial and error by interacting with an environment and receiving rewards or penalties." },
-        { q: "Which of the following is listed as an application of Reinforcement Learning in the lecture...", options: ["Email spam detection", "House price prediction", "Self-driving cars", "Customer segmentation"], answer: 2, explanation: "Self-driving cars use RL to learn optimal driving policies through trial and error." },
-        { q: "In the self-driving car Reinforcement Learning example, which action would receive a POSITIVE reward...", options: ["Colliding with another vehicle", "Violating traffic rules", "Safe driving and staying within lanes", "Making abrupt manoeuvres"], answer: 2, explanation: "Safe driving and staying within lanes are rewarded to encourage optimal behavior." },
-        { q: "In the self-driving car RL example, the 'environment' refers to...", options: ["The car's internal CPU", "The road, other vehicles, pedestrians, and traffic signals", "The reward function only", "The car's fuel system"], answer: 1, explanation: "The environment is everything the agent interacts with, including roads, vehicles, and pedestrians." },
-        { q: "According to the lecture revision slide, the goal of Supervised Learning is...", options: ["To discover hidden patterns without human intervention", "To maximise a reward signal over time", "To learn a mapping from input features to the correct output labels", "To group data points into clusters"], answer: 2, explanation: "Supervised learning aims to map inputs to correct outputs using labeled training data." },
-        { q: "According to the lecture revision slide, the application example for Reinforcement Learning is...", options: ["Spam detection", "Anomaly detection", "Robotics", "Image compression"], answer: 2, explanation: "Robotics is a classic application of Reinforcement Learning." },
-        { q: "The lecture states that 'ML systems are only as good as...'", options: ["The hardware they run on", "The number of engineers who built them", "The data they learn from", "The programming language used"], answer: 2, explanation: "An ML model's performance is directly dependent on the quality of its training data." },
-        { q: "Data Quality in machine learning refers to data that is...", options: ["Very large in size regardless of relevance", "Accurate, unbiased, and relevant to the problem", "Collected from only one source for consistency", "Always structured and stored in rows and columns"], answer: 1, explanation: "High-quality data must be accurate, unbiased, and relevant to the problem at hand." },
-        { q: "Regarding Training Data Quantity, the lecture states that generally...", options: ["Less data leads to higher accuracy because the model is less confused", "The amount of data has no effect on model performance", "More data helps the model better understand complexity and make accurate predictions", "Data quantity only matters for unsupervised learning"], answer: 2, explanation: "More training data helps the model capture complexity and improve prediction accuracy." },
-        { q: "Structured Data is defined in the lecture as...", options: ["Information not organised in a predefined manner", "A mix of structured and unstructured data", "Data that is organised in rows and columns", "Data collected only from social media"], answer: 2, explanation: "Structured data is highly organized and formatted into rows and columns." },
-        { q: "Which of the following is an example of Internet of Things (IoT) data mentioned in the lecture...", options: ["Student grades and attendance records", "Sensor data from smart home devices such as thermostats and doorbells", "Stock prices and trading volumes", "Scientific experiments and surveys"], answer: 1, explanation: "IoT devices generate continuous data streams like temperature and motion sensor readings." },
-        { q: "The correct order of the Machine Learning Pipeline as presented in the lecture is...", options: ["Selecting Model -> Gathering Data -> Preparing Data -> Deploying Model", "Gathering Data -> Preparing Data -> Selecting & Training Model -> Testing & Deploying Model", "Testing Model -> Gathering Data -> Training Model -> Preparing Data", "Preparing Data -> Gathering Data -> Deploying Model -> Training Model"], answer: 1, explanation: "The standard ML pipeline starts with data gathering, followed by preparation, model training, and finally testing/deployment." },
-        { q: "In the ML Pipeline, Data Preparation involves...", options: ["Choosing the best algorithm for the problem", "Evaluating the model using testing data", "Cleaning data by removing duplicates, handling missing values, and restructuring rows and columns", "Collecting data from various sources"], answer: 2, explanation: "Data preparation involves cleaning and organizing raw data before training." },
-        { q: "According to the lecture, the typical split ratio for a training set in the ML pipeline is...", options: ["10-20%", "20-30%", "70-80%", "50-50%"], answer: 2, explanation: "Typically, 70-80% of data is used for training the model." },
-        { q: "In model evaluation for Classification tasks, the metric used is...", options: ["R-squared", "Silhouette Score", "Accuracy", "Mean Absolute Error"], answer: 2, explanation: "Accuracy measures the proportion of correct predictions in a classification task." },
-        { q: "The R-squared metric in model evaluation is used for...", options: ["Classification tasks", "Clustering tasks", "Regression tasks", "Reinforcement learning tasks"], answer: 2, explanation: "R-squared evaluates how well a regression model fits the data." },
-        { q: "The Silhouette Score is used to evaluate...", options: ["How often a classification model is correct", "How well the model groups similar data points in clustering", "How closely the regression model follows real trends", "How fast the model trains"], answer: 1, explanation: "The Silhouette Score evaluates how well data points fit within their assigned clusters." },
-        { q: "Microsoft Azure is described in the lecture as...", options: ["A programming language for AI", "A cloud computing platform that provides services for storing data, building applications, and running AI solutions", "An on-premises server for local data storage", "A hardware device for deep learning computations"], answer: 1, explanation: "Microsoft Azure is a cloud platform providing infrastructure and services for AI development." },
-        { q: "Azure AI's Automated Machine Learning (AutoML) allows...", options: ["Users to manually build models from scratch", "Azure to select and train the best AI model for a given problem automatically", "Developers to write custom algorithms in assembly language", "Users to replace cloud computing with local processing"], answer: 1, explanation: "AutoML automates the selection and training of the best model for a given dataset." },
-        { q: "Which of the following is listed as a reason to use Azure for AI in the lecture...", options: ["It requires powerful local computers", "It only supports large enterprises", "It is scalable and can handle small to large datasets effortlessly", "It requires advanced coding skills for all tasks"], answer: 2, explanation: "Azure is highly scalable, making it suitable for both small and large datasets." },
-        { q: "The lecture states that data can come in three types of real-world nature. Semi-structured data is described as...", options: ["Data organised only in rows and columns", "Data with no organisation at all", "A mix of structured and unstructured data", "Data collected only from sensors"], answer: 2, explanation: "Semi-structured data contains elements of both structured and unstructured data." },
-        { q: "In the ML Pipeline, the purpose of the Testing Set is...", options: ["To fine-tune model hyperparameters", "To train the model's parameters", "For final, unbiased evaluation of the model", "To gather raw data from multiple sources"], answer: 2, explanation: "The testing set is used for final evaluation after the model has been trained." },
-        { q: "According to the lecture, which of the following is TRUE about the importance of data in machine learning...", options: ["Only data quantity matters; quality is irrelevant", "Real-world phenomena are simple and small datasets are sufficient", "A larger dataset captures complexity and helps build models closer to reality", "Data diversity has no effect on model learning"], answer: 2, explanation: "A larger, more diverse dataset helps the model capture real-world complexity." },
-        { q: "The validation set in the ML pipeline is described as...", options: ["Mandatory and represents 50% of the data", "Optional and used for fine-tuning and preventing overfitting (10-15%)", "Used only after deployment in production", "The same as the testing set"], answer: 1, explanation: "The validation set (often 10-15%) is used to tune the model during training to prevent overfitting." },
-        { q: "According to the lecture, Handwriting Recognition is an example of which type of supervised learning task...", options: ["Regression", "Clustering", "Reinforcement Learning", "Classification"], answer: 3, explanation: "Handwriting recognition classifies handwritten characters into specific letters or digits." },
-                { q: "According to the lecture, ANNs are referred to as...", options: ["The backbone of supervised learning only", "The heart of deep learning algorithms", "The replacement for traditional databases", "The foundation of unsupervised clustering"], answer: 1, explanation: "ANNs are considered the heart of deep learning algorithms." },
-        { q: "In an ANN, the Input Layer is responsible for...", options: ["Producing the final prediction of the network", "Adjusting the weights during backpropagation", "Collecting all input information and passing it along for processing", "Measuring the error between prediction and actual output"], answer: 2, explanation: "The input layer collects all input information and passes it for processing." },
-        { q: "According to the lecture, which of the following is a reason why ANNs are important...", options: ["They only work with small datasets", "They require manual feature engineering for all tasks", "They can handle and process large datasets, extracting meaningful insights", "They replace the need for any data collection"], answer: 2, explanation: "ANNs are important because they can handle large datasets and extract meaningful insights." },
-        { q: "The Flexibility of ANNs means that they...", options: ["Only work on classification tasks", "Can be applied to various tasks from regression and classification to generative tasks like image and text generation", "Always require supervised learning", "Are limited to processing structured data only"], answer: 1, explanation: "ANNs are flexible and can be applied to a wide variety of tasks beyond just classification." },
-        { q: "In the ANN working process, Step 01 is called 'Data Input.' What happens during this step...", options: ["The network adjusts its weights based on errors", "The loss function is calculated", "The input layer collects all information and passes it along for processing", "The model produces its final output prediction"], answer: 2, explanation: "Step 01 is Data Input, where the input layer collects and passes data into the network." },
-        { q: "During Forward Propagation in an ANN, each neuron assigns a level of importance to the data. This importance is referred to as...", options: ["A loss function score", "A weight (signal strength)", "A backpropagation correction", "A clustering label"], answer: 1, explanation: "During forward propagation, weights represent the importance or signal strength of the data." },
-        { q: "In the ANN working process, the 'loss function' is used to...", options: ["Select the best algorithm for the task", "Measure the difference between the predicted answer and the actual correct answer", "Collect training data from multiple sources", "Assign neurons to different layers of the network"], answer: 1, explanation: "The loss function measures the difference between the model's prediction and the actual correct answer." },
-        { q: "According to the lecture, what does the ANN change during Backpropagation...", options: ["The number of layers in the network", "The type of activation function used", "The importance (weights) of different features to make a better guess next time", "The size of the training dataset"], answer: 2, explanation: "Backpropagation adjusts the weights of features to improve the model's future predictions." },
-        { q: "After many rounds of training, the ANN reaches Step 05 - 'Model Output.' Which of the following is an example given in the lecture of what a well-trained ANN can do...", options: ["Collect more data from the internet automatically", "If trained on medical images, it can accurately identify diseases", "Replace the hidden layers with output layers", "Reduce the number of features in the dataset manually"], answer: 1, explanation: "A well-trained ANN can accurately identify diseases if trained on medical images." },
-        { q: "The correct order of how an ANN works, as presented in the lecture, is...", options: ["Backpropagation -> Forward Propagation -> Data Input -> Error Calculation -> Model Output", "Data Input -> Error Calculation -> Forward Propagation -> Backpropagation -> Model Output", "Data Input -> Forward Propagation -> Error Calculation -> Backpropagation -> Model Output", "Forward Propagation -> Data Input -> Model Output -> Error Calculation -> Backpropagation"], answer: 2, explanation: "The correct order is Data Input -> Forward Propagation -> Error Calculation -> Backpropagation -> Model Output." },
-        { q: "Deep Learning is defined in the lecture as...", options: ["A type of unsupervised learning that clusters unlabelled data", "A subset of machine learning that uses ANNs with multiple layers (deep neural networks) to automatically learn patterns from data", "A programming language used to build neural networks", "A data collection method for training supervised learning models"], answer: 1, explanation: "Deep Learning is a subset of ML using ANNs with multiple layers to learn patterns automatically." },
-        { q: "The word 'deep' in Deep Learning refers to...", options: ["The depth of the training dataset used", "The complexity of the loss function", "Many hidden layers in neural networks", "The number of input features provided to the model"], answer: 2, explanation: "The word 'deep' refers to the many hidden layers in deep neural networks." },
-        { q: "According to the lecture, the correct hierarchical relationship between AI, ML, and Deep Learning is...", options: ["Deep Learning -> Machine Learning -> Artificial Intelligence", "Artificial Intelligence -> Machine Learning -> Deep Learning", "Machine Learning -> Artificial Intelligence -> Deep Learning", "They are three completely separate and unrelated fields"], answer: 1, explanation: "The hierarchy is Artificial Intelligence -> Machine Learning -> Deep Learning." },
-        { q: "According to the lecture, which of the following is TRUE about Machine Learning compared to Deep Learning...", options: ["Machine Learning works best with large datasets", "Machine Learning requires high computational power like GPUs and TPUs", "Machine Learning requires manual feature engineering", "Machine Learning automatically extracts features from data"], answer: 2, explanation: "Traditional ML requires manual feature engineering, unlike Deep Learning." },
-        { q: "According to the lecture, Deep Learning works with...", options: ["Structured data only", "Small datasets only", "Both structured and unstructured data such as images, text, and speech", "Numerical tabular data only"], answer: 2, explanation: "Deep Learning can work with both structured and unstructured data like images and text." },
-        { q: "Deep Learning requires high computational power such as...", options: ["CPUs and RAM only", "GPUs and TPUs", "Standard laptops with no special hardware", "Cloud storage and internet bandwidth only"], answer: 1, explanation: "Deep Learning relies heavily on GPUs and TPUs for computational power." },
-        { q: "According to the lecture, Machine Learning performs well with...", options: ["Large unstructured datasets like images and audio", "Automatic feature extraction pipelines", "Small datasets", "Deep neural networks with many hidden layers"], answer: 2, explanation: "Traditional Machine Learning performs well with small datasets, unlike Deep Learning." },
-        { q: "A 'Feature' in machine learning is defined in the lecture as...", options: ["A layer inside a neural network", "A measurable property or characteristic used as input for a machine learning model (e.g., age, height, number of clicks)", "The output label produced by a model", "The error score calculated during training"], answer: 1, explanation: "A feature is a measurable property or characteristic used as input for an ML model." },
-        { q: "Feature Engineering is defined in the lecture as...", options: ["The process of deploying a trained model to production", "The process of splitting data into training and testing sets", "The process performed by data scientists to prepare and optimize data for a machine learning model; it involves Feature Selection and Feature Extraction", "The process of collecting raw data from multiple sources"], answer: 2, explanation: "Feature engineering is the process of preparing and optimizing data for an ML model." },
-        { q: "Feature Selection is defined as...", options: ["Creating new features from existing data", "Reducing the number of hidden layers in a model", "Choosing the most relevant features", "Automatically extracting patterns from raw images"], answer: 2, explanation: "Feature selection is the process of choosing the most relevant features for the model." },
-        { q: "In Machine Learning, how is Feature Selection handled compared to Deep Learning...", options: ["Machine Learning automatically selects features; Deep Learning does it manually", "Both Machine Learning and Deep Learning handle feature selection in the same way", "In Machine Learning, important features are manually chosen to avoid complexity; in Deep Learning, no manual selection is needed", "Neither approach requires feature selection"], answer: 2, explanation: "ML requires manual feature selection, while DL automatically learns relevant features." },
-        { q: "Feature Extraction in Deep Learning is...", options: ["Done manually by data scientists using domain knowledge", "Automatically performed using deep neural networks such as CNNs for images and RNNs for sequences", "Not required because Deep Learning works with structured data only", "Only used during the deployment phase of the ML pipeline"], answer: 1, explanation: "Deep Learning automatically extracts features using networks like CNNs and RNNs." },
-        { q: "'End-to-end learning' in Deep Learning means...", options: ["The model is trained from start to finish without any data", "The model learns both feature extraction and the final task in a unified manner directly from raw data", "The model only learns the final classification task without feature extraction", "The model requires separate pipelines for feature extraction and classification"], answer: 1, explanation: "End-to-end learning means the model learns feature extraction and the final task together from raw data." },
-        { q: "End-to-end learning in Deep Learning reduces the need for...", options: ["Large datasets", "Backpropagation", "Handcrafted feature engineering", "Hidden layers in the network"], answer: 2, explanation: "End-to-end learning reduces the need for manual, handcrafted feature engineering." },
-        { q: "CNN stands for...", options: ["Computed Neuron Network", "Convolutional Neural Network", "Connected Node Network", "Clustered Neuron Node"], answer: 1, explanation: "CNN stands for Convolutional Neural Network." },
-        { q: "A Convolutional Neural Network (CNN) is best described as...", options: ["A deep learning model designed for sequential data processing that retains memory of previous inputs", "A deep learning model designed for image recognition and processing that automatically extracts features like edges, textures, and patterns", "A machine learning algorithm that requires manual feature engineering for image tasks", "A reinforcement learning model used for reward-based decision making"], answer: 1, explanation: "CNNs are designed for image recognition, automatically extracting features like edges and textures." },
-        { q: "According to the lecture, CNN is described as...", options: ["A single-layer neural network for text classification", "A multi-layered neural network with a unique architecture designed to extract increasingly complex features at each layer", "A shallow model that requires manual feature selection", "A recurrent model that processes data sequences"], answer: 1, explanation: "CNNs are multi-layered networks designed to extract increasingly complex features at each layer." },
-        { q: "In the CNN image recognition process described in the lecture, what does the CNN receive as input...", options: ["A sequence of words converted into numerical vectors", "A set of labelled transactions marked as fraud or legitimate", "An image, which in computer terms is a collection of pixels", "A table of structured numerical data with rows and columns"], answer: 2, explanation: "A CNN receives an image as input, which is essentially a collection of pixels." },
-        { q: "According to the lecture, during the feature learning (hidden layers) phase in a CNN, the network...", options: ["Compares the output to a stored database directly", "Identifies unique features such as the tail and ear of a cat", "Converts images into tabular data for further processing", "Applies backpropagation to all input pixels simultaneously"], answer: 1, explanation: "During feature learning, CNNs identify unique features like the tail or ear of a cat." },
-        { q: "When a CNN has fully learned to recognize images, how does it make its final prediction...", options: ["It randomly selects a label from the training set", "It assigns equal probability to all known labels and selects the first one", "The label with the highest probability becomes the prediction of the network", "It uses the loss function score directly as the output label"], answer: 2, explanation: "The CNN predicts the label with the highest probability based on its learned features." },
-        { q: "Face Recognition as a CNN application allows machines to...", options: ["Predict stock prices based on facial expressions", "Translate spoken language into text", "Identify and verify human faces from images or video by extracting facial features and comparing them against stored databases", "Detect fraudulent financial transactions using facial biometrics"], answer: 2, explanation: "CNNs power face recognition by extracting facial features and comparing them to stored data." },
-        { q: "In Medical Imaging, CNN-based models analyze medical scans such as MRI, CT, and X-rays to...", options: ["Generate new medical records automatically", "Detect patterns associated with diseases like cancer, brain disorders, and fractures", "Replace doctors entirely in all clinical decisions", "Classify patients into financial risk categories"], answer: 1, explanation: "CNNs analyze medical scans to detect patterns associated with diseases like cancer." },
-        { q: "Autonomous vehicles use CNNs to...", options: ["Process sequential language data for voice commands", "Cluster road conditions into predefined categories without any visual input", "Process visual data and predict vehicle movements", "Store GPS location data and compare it to historical routes"], answer: 2, explanation: "Autonomous vehicles use CNNs to process visual data and predict vehicle movements." },
-        { q: "RNN stands for...", options: ["Recursive Node Network", "Recurrent Neural Network", "Redundant Neuron Node", "Randomised Neural Network"], answer: 1, explanation: "RNN stands for Recurrent Neural Network." },
-        { q: "A Recurrent Neural Network (RNN) is best described as...", options: ["A deep learning model designed for image recognition that extracts visual features", "A machine learning model used only for tabular structured data", "A deep learning model designed for sequential data processing that retains memory of previous inputs", "A reinforcement learning agent that maximises rewards over time"], answer: 2, explanation: "RNNs are designed for sequential data, retaining memory of previous inputs." },
-        { q: "The key structural difference between an RNN and other neural networks is that RNNs...", options: ["Have no hidden layers", "Use only one neuron for all computations", "Have connections between neurons that include loops, allowing them to store information in context nodes", "Do not have an output layer"], answer: 2, explanation: "RNNs have loops in their connections, allowing them to store information in context nodes." },
-        { q: "Unlike CNNs, RNNs are specifically designed for...", options: ["Image classification and object detection", "Sequential data processing with memory of previous inputs", "Reducing the number of dimensions in a dataset", "Detecting edges, textures, and patterns in visual data"], answer: 1, explanation: "RNNs are specifically designed for sequential data processing with memory of previous inputs." },
-        { q: "In the RNN word prediction example from the lecture ('Do you want a...?'), what happens during the 'Remembering Context' step...", options: ["The network selects the word with the highest frequency in the training data", "The network keeps track of previous words by feeding outputs back into itself", "The network assigns equal probability to all possible next words", "The network resets its memory and starts the sequence again"], answer: 1, explanation: "RNNs remember context by feeding previous outputs back into the network." },
-        { q: "After processing all words in a sentence, the RNN makes its Final Prediction by...", options: ["Selecting the word that appeared most often in the training corpus", "Choosing the label with the lowest loss function score", "Predicting the most likely next word based on learned probabilities", "Comparing the sentence to a stored database of complete sentences"], answer: 2, explanation: "RNNs predict the most likely next word based on learned probabilities from the sequence." },
-        { q: "In the RNN application of Language Translation, the RNN decoder's role is to...", options: ["Encode the input sentence into a fixed vector", "Generate the translated text sequence word by word", "Cluster similar words together", "Extract features from images"], answer: 1, explanation: "The RNN decoder generates the translated text sequence word by word." },
-        { q: "In the RNN application of Stock Market Prediction, which of the following is listed as input data...", options: ["Images of company logos and product advertisements", "Stock prices, trading volumes, financial indicators, and news sentiment", "Medical records and patient diagnoses", "GPS location data and traffic flow information"], answer: 1, explanation: "RNNs use stock prices, trading volumes, and news sentiment as input data." },
-        { q: "Deep Learning is a subset of Machine Learning...", options: ["TRUE", "FALSE"], answer: 0, explanation: "Deep Learning is explicitly defined as a subset of Machine Learning." },
-        { q: "According to the lecture, RNNs are better suited than CNNs for tasks like language translation and chatbots because RNNs retain memory of previous inputs and process data as sequences...", options: ["TRUE", "FALSE"], answer: 0, explanation: "RNNs are better for language tasks because they retain memory of previous inputs." },
-        { q: "What is Computer Vision (CV)?", options: ["A branch of AI that enables machines to interpret and understand visual information", "A tool for editing and enhancing image quality", "A database system for storing images and videos", "A hardware component for capturing photos"], answer: 0, explanation: "CV is a branch of AI that enables machines to interpret and understand visual information." },
-        { q: "Computer Vision enables machines to analyze and make decisions based on...", options: ["Audio data", "Visual data", "Textual data", "Sensor data only"], answer: 1, explanation: "CV enables machines to analyze and make decisions based on visual data." },
-        { q: "Deep learning models in Computer Vision use images from cameras and videos to...", options: ["Store images in the cloud", "Accurately identify and classify objects", "Convert images to text format", "Enhance image resolution"], answer: 1, explanation: "Deep learning models in CV use images to accurately identify and classify objects." },
-        { q: "In Human Vision, what plays the role of a 'sensing device'?", options: ["The brain", "The eye", "The perception system", "The optic nerve"], answer: 1, explanation: "In human vision, the eye plays the role of the sensing device." },
-        { q: "In Computer Vision, what component is equivalent to the human brain?", options: ["The camera", "The sensing device", "The computer vision algorithm/system", "The image processor"], answer: 2, explanation: "In CV, the computer vision algorithm or system processes what the sensing device captures, like the brain." },
-        { q: "The 'scene' in Computer Vision refers to...", options: ["The final output of the algorithm", "The environment or object being observed, captured by a sensing device", "The image processing stage", "The training dataset"], answer: 1, explanation: "The 'scene' refers to the environment or object being observed and captured by the sensing device." },
-        { q: "In Computer Vision, the sensing device is typically...", options: ["A microphone or speaker", "A camera or sensor array", "A keyboard and mouse", "A display monitor"], answer: 1, explanation: "The sensing device in CV is typically a camera or sensor array." },
-        { q: "Which of the following correctly describes Image Processing?", options: ["It enables computers to make decisions based on visual data like humans do", "It deals with manipulating images to improve quality or extract features", "It classifies images into categories using deep learning", "It stores and organizes large video files"], answer: 1, explanation: "Image Processing deals with manipulating images to improve quality or extract features." },
-        { q: "Computer Vision seeks to enable computers to...", options: ["Manipulate images and improve their resolution", "Interpret and make decisions based on visual data, similarly to how humans do", "Store and organize large video files", "Compress image data for transmission"], answer: 1, explanation: "CV seeks to enable computers to interpret and make decisions based on visual data." },
-                { q: "The key difference between Computer Vision and Image Processing is...", options: ["CV works only with videos; Image Processing works only with images", "CV aims at interpretation and decision-making; Image Processing focuses on manipulation and enhancement", "CV and Image Processing are the same field", "CV is faster than Image Processing"], answer: 1, explanation: "CV focuses on interpreting visual data for decisions, while Image Processing manipulates images to enhance them." },
-        { q: "A video in Computer Vision is understood as...", options: ["A collection of audio signals", "A sequence of frames (images)", "A single high-resolution image", "A continuous analog signal"], answer: 1, explanation: "A video is essentially a sequence of images (frames) played in rapid succession." },
-        { q: "In digital images, each pixel is typically represented by three color channels. These channels are...", options: ["Red, Yellow, Blue", "Red, Green, Blue", "Cyan, Magenta, Yellow", "Black, White, Gray"], answer: 1, explanation: "Digital images use the RGB color model: Red, Green, and Blue channels." },
-        { q: "Thermal images are captured using...", options: ["Standard digital cameras", "Infrared sensors", "X-ray machines", "Ultrasound devices"], answer: 1, explanation: "Thermal images are captured using infrared sensors to detect temperature differences." },
-        { q: "Satellite images are commonly used for which of the following?", options: ["Face recognition and OCR", "Mapping, agriculture, and environmental monitoring", "Medical diagnosis and CT scans", "Audio processing and speech recognition"], answer: 1, explanation: "Satellite images are used for mapping, agriculture, and environmental monitoring." },
-        { q: "Medical images include which of the following types?", options: ["Thermal and satellite images", "X-rays, MRIs, CT scans, and ultrasounds", "Grayscale and infrared images only", "Photographs and paintings"], answer: 1, explanation: "Medical imaging includes X-rays, MRIs, CT scans, and ultrasounds." },
-        { q: "Real-time streams in Computer Vision refer to...", options: ["Recorded video files stored on a server", "Live feeds such as from CCTV cameras or webcams", "High-resolution satellite imagery", "Pre-processed datasets"], answer: 1, explanation: "Real-time streams are live feeds like CCTV or webcam footage." },
-        { q: "Grayscale images are best described as...", options: ["Images captured using infrared technology", "Black and white or monochromatic images", "Images with only red and blue channels", "3D rendered images"], answer: 1, explanation: "Grayscale images contain only black, white, and shades of gray." },
-        { q: "Once an image/video is captured, the processing stages in CV can include...", options: ["Compression, transmission, and deletion", "Pre-processing, feature extraction, and final interpretation using CV algorithms", "Encryption, storage, and retrieval", "Conversion to audio format"], answer: 1, explanation: "CV processing includes pre-processing, feature extraction, and interpretation." },
-        { q: "The Surge of Visual Content is listed as an importance factor of CV because...", options: ["Humans can easily analyze all visual content available", "There is an urgent need for AI to automatically analyze the vast amounts of visual content, a task beyond human capacity", "Visual content is decreasing and needs to be archived", "Visual content is always structured and easy to process"], answer: 1, explanation: "The massive amount of visual content requires AI for automated analysis beyond human capacity." },
-        { q: "Automation and Efficiency as a benefit of Computer Vision means...", options: ["CV automates text generation", "CV can automate tasks previously performed by humans, such as driving cars", "CV reduces the size of image files automatically", "CV replaces all human decision-making"], answer: 1, explanation: "CV automates tasks previously done by humans, like driving and quality inspection." },
-        { q: "Facilitating Real-time Processing in CV refers to...", options: ["Saving images for later analysis", "Allowing instantaneous analysis of visual data to ensure timely reactions to dynamic situations", "Uploading data to the cloud in batches", "Storing images in a database"], answer: 1, explanation: "Real-time processing allows instantaneous analysis for timely reactions." },
-        { q: "Empowering Decision-Making through CV means...", options: ["CV replaces human decision-makers entirely in all fields", "CV supports more informed and rapid decision-making by enabling machines to see and understand visual data", "CV makes decisions only in medical fields", "CV ignores visual data and relies on text"], answer: 1, explanation: "CV supports informed and rapid decision-making by enabling machines to understand visual data." },
-        { q: "Which of the following is the FIRST primary task of Computer Vision listed in the lecture?", options: ["Segmentation", "Detection", "Recognition", "Tracking"], answer: 2, explanation: "Recognition is listed as the first primary task of Computer Vision." },
-        { q: "In Computer Vision, Recognition involves...", options: ["Following the movement of an object across video frames", "Training a model to categorize images into predefined classes or categories", "Labeling each pixel with its corresponding object class", "Estimating the 3D pose of a person"], answer: 1, explanation: "Recognition involves categorizing images into predefined classes." },
-        { q: "Which of the following are examples of Recognition tasks?", options: ["Object tracking and pose estimation", "Face Recognition and Optical Character Recognition (OCR)", "Image segmentation and bounding box detection", "Motion detection and video compression"], answer: 1, explanation: "Face recognition and OCR are classic examples of recognition tasks." },
-        { q: "Detection in Computer Vision goes beyond classification by...", options: ["Removing background from images", "Identifying objects and providing their precise location through bounding boxes", "Estimating the 3D pose of a person", "Labeling each pixel with its object class"], answer: 1, explanation: "Detection identifies objects and provides their precise location via bounding boxes." },
-        { q: "Which of the following is a real-world application of Object Detection?", options: ["Estimating body posture in sports", "Tracking products on store shelves for inventory management", "Removing image backgrounds for editing", "Generating text captions"], answer: 1, explanation: "Object detection is used for inventory management by tracking products on shelves." },
-        { q: "In Computer Vision, Segmentation is defined as...", options: ["Tracking objects across multiple video frames", "Dividing an image into multiple regions, each corresponding to a meaningful part of the image", "Identifying a single object and drawing a bounding box around it", "Classifying an image into a predefined category"], answer: 1, explanation: "Segmentation divides an image into regions corresponding to meaningful parts." },
-        { q: "Image segmentation partitions an image into regions with similar...", options: ["Object names and labels", "Properties such as color, intensity, texture, or object boundaries", "Frame rates and resolutions", "Compression ratios"], answer: 1, explanation: "Segmentation groups pixels by properties like color, intensity, or texture." },
-        { q: "Which of the following is a correct application of Segmentation?", options: ["Tracking a football player across video frames", "Identifying and isolating specific structures or abnormalities in medical images", "Estimating the 3D position of a cricket player", "Detecting edges in an image"], answer: 1, explanation: "Segmentation is used to isolate specific structures in medical imaging." },
-        { q: "What is the difference between Detection and Segmentation?", options: ["Detection classifies single objects; Segmentation classifies multiple objects with bounding boxes", "Detection uses bounding boxes to locate objects; Segmentation labels each pixel with the corresponding object class", "There is no difference; they are the same task", "Detection is for images; Segmentation is for videos"], answer: 1, explanation: "Detection uses bounding boxes to locate objects, while Segmentation labels each pixel." },
-        { q: "Tracking as a primary CV task involves...", options: ["Labeling each pixel in an image", "Following the movement of an object across a sequence of image frames in a video", "Classifying an image into a predefined category", "Estimating the 3D pose of a person"], answer: 1, explanation: "Tracking follows the movement of objects across video frames." },
-        { q: "Which of the following is NOT listed as an application of Object Tracking?", options: ["Sports Analysis - tracking players and the ball", "Medical Imaging - identifying tumors in MRIs", "Augmented Reality - tracking objects or markers for AR applications", "Traffic monitoring - tracking vehicles"], answer: 1, explanation: "Medical imaging tumor identification is typically segmentation, not tracking." },
-        { q: "Pose Estimation in Computer Vision aims to...", options: ["Detect and count objects in a single image", "Determine the position and orientation of objects or people in an image or video", "Extract text from images using OCR", "Track objects across video frames"], answer: 1, explanation: "Pose estimation determines the position and orientation of objects or people." },
-        { q: "Pose Estimation involves identifying which of the following on a person or object?", options: ["Color channels and pixel values", "Key points, landmarks, or joints and estimating their 2D or 3D positions", "Audio signals and speech patterns", "Bounding boxes and class labels"], answer: 1, explanation: "Pose estimation identifies key points or joints to estimate their 2D or 3D positions." },
-        { q: "Which of the following is listed as a Healthcare application of Pose Estimation?", options: ["Monitoring crop health using drones", "Physical therapy and sports training to monitor body movements and posture", "Tracking vehicles for collision avoidance", "Detecting tumors in medical images"], answer: 1, explanation: "Pose estimation is used in physical therapy and sports training to monitor body movements." },
-        { q: "Computer Vision is used in the Automotive Industry for...", options: ["Inventory management and personalized shopping", "Autonomous driving, driver assistance systems, and traffic management", "Monitoring deforestation and climate change", "Detecting tumors in CT scans"], answer: 1, explanation: "CV is used in automotive for autonomous driving and driver assistance systems." },
-        { q: "In the Security domain, Computer Vision is used for...", options: ["Crop monitoring and livestock management", "Facial recognition, surveillance, and threat detection", "Medical diagnosis and treatment", "Inventory management in retail stores"], answer: 1, explanation: "CV is used in security for facial recognition, surveillance, and threat detection." },
-        { q: "Precision agriculture uses Computer Vision to...", options: ["Track patients in hospitals", "Monitor crop health, detect diseases, and optimize resource allocation", "Identify defects in electronic circuits", "Manage inventory in retail stores"], answer: 1, explanation: "Precision agriculture uses CV to monitor crop health and optimize resources." },
-        { q: "Computer Vision is used in Environmental Monitoring for...", options: ["Detecting tumors in CT scans", "Monitoring satellite and drone imagery for tracking deforestation, climate change, and wildlife populations", "Managing inventory in retail stores", "Tracking patients in hospitals"], answer: 1, explanation: "CV monitors satellite and drone imagery to track environmental changes." },
-        { q: "In Robotics, Computer Vision allows machines to...", options: ["Process natural language commands", "Perceive and interact with their environment in real-time using sensors and cameras", "Generate text descriptions of images", "Store large datasets"], answer: 1, explanation: "CV allows robots to perceive and interact with their environment in real-time." },
-        { q: "Which of the following is a correct example of CV in robotics mentioned in the lecture?", options: ["Using VR headsets to track body movement", "Robotic arms identifying and picking objects from a conveyor belt", "Generating text captions for images", "Monitoring crop health using drones"], answer: 1, explanation: "Robotic arms using CV to identify and pick objects is a classic robotics application." },
-        { q: "Augmented Reality (AR) is defined in the lecture as...", options: ["A technology that replaces the real world with a virtual environment", "A technology that overlays digital information into the real world", "A deep learning technique for image classification", "A method for compressing image data"], answer: 1, explanation: "AR overlays digital information into the real world." },
-        { q: "Computer Vision plays a crucial role in AR by...", options: ["Compressing image data for faster transmission", "Enabling devices to recognize and track objects in the environment so virtual content integrates seamlessly", "Converting analog signals to digital images", "Storing large datasets of images"], answer: 1, explanation: "CV enables AR devices to recognize and track objects for seamless integration." },
-        { q: "Azure Computer Vision Services are described in the lecture as...", options: ["On-premise tools that require local hardware installations", "Powerful cloud-based AI tools that analyze images and videos, including object detection, text recognition, and facial analysis", "Open-source libraries for academic research only", "Hardware devices for image processing"], answer: 1, explanation: "Azure CV services are powerful cloud-based tools for analyzing images and videos." },
-        { q: "In Azure Vision Studio, Optical Character Recognition (OCR) is used to...", options: ["Track people's movements in a space for safety monitoring", "Extract text from images and documents", "Generate multiple human-readable captions for different detected objects", "Detect faces and their emotions"], answer: 1, explanation: "OCR in Azure Vision Studio extracts text from images and documents." },
-        { q: "The Spatial Analysis feature in Azure Vision Studio is primarily used for...", options: ["Generating text captions for images", "Real-time monitoring by tracking people's movements in a space, often for safety and security", "Extracting text from scanned documents", "Detecting faces and their emotions"], answer: 1, explanation: "Spatial Analysis tracks people's movements in a space for safety and security." },
-        { q: "The Dense Captioning feature in Azure AI Vision differs from regular captioning in that it...", options: ["Generates a single sentence describing the whole image", "Generates multiple human-readable captions for different detected objects within the image", "Detects only faces and their emotions", "Extracts text from images"], answer: 1, explanation: "Dense Captioning generates multiple captions for different detected objects within an image." },
-        { q: "Computer Vision and Image Processing are the same field with different names...", options: ["TRUE", "FALSE"], answer: 1, explanation: "They are different; Image Processing manipulates images, while CV interprets and makes decisions." },
-        { q: "Pose Estimation can be applied in Virtual Reality to track the position and movement of the user's body...", options: ["TRUE", "FALSE"], answer: 0, explanation: "Pose estimation tracks body movement for VR applications." },
-        { q: "NLP deals with human languages such as Arabic and English...", options: ["TRUE", "FALSE"], answer: 0, explanation: "NLP deals with natural human languages like Arabic and English." },
-        { q: "Text must often be cleaned before machines can understand it...", options: ["TRUE", "FALSE"], answer: 0, explanation: "Raw text often contains noise and must be cleaned before NLP models can process it." },
-        { q: "Tokenization breaks text into meaningful parts...", options: ["TRUE", "FALSE"], answer: 0, explanation: "Tokenization breaks text into meaningful parts like words or subwords." },
-        { q: "LLMs are trained on small datasets only...", options: ["TRUE", "FALSE"], answer: 1, explanation: "LLMs are trained on massive datasets, not small ones." },
-        { q: "NLP is used in customer service chatbots...", options: ["TRUE", "FALSE"], answer: 0, explanation: "NLP powers customer service chatbots by understanding and generating language." },
-        { q: "Preprocessing removes unnecessary elements from text...", options: ["TRUE", "FALSE"], answer: 0, explanation: "Preprocessing removes punctuation, stopwords, and other unnecessary elements." },
-        { q: "All NLP tasks require labeled data...", options: ["TRUE", "FALSE"], answer: 1, explanation: "Unsupervised NLP tasks like clustering do not require labeled data." },
-        { q: "LLMs cannot generate new text; they only classify...", options: ["TRUE", "FALSE"], answer: 1, explanation: "LLMs can generate new text, translate, summarize, and more." },
-        { q: "Speech recognition is an NLP application...", options: ["TRUE", "FALSE"], answer: 0, explanation: "Speech recognition converts spoken language into text, a core NLP application." },
-        { q: "NLP improves human-computer communication...", options: ["TRUE", "FALSE"], answer: 0, explanation: "NLP bridges the gap between human language and computer understanding." },
-                { q: "Generative AI is a type of AI designed to...", options: ["Delete content", "Only classify data", "Create new content such as text, images, or audio", "Translate languages only"], answer: 2, explanation: "Generative AI is designed to create new content like text, images, or audio." },
-        { q: "Generative AI can produce...", options: ["Only numbers", "New images, text, videos, and music", "Only tables", "Only 3D models"], answer: 1, explanation: "Generative AI can produce new images, text, videos, and music." },
-        { q: "A key difference between generative AI and traditional AI is that generative AI...", options: ["Cannot create anything", "Uses only numeric data", "Generates new outputs beyond its training data", "Works without training"], answer: 2, explanation: "Generative AI generates new outputs beyond its training data, unlike traditional AI." },
-        { q: "Generative AI models rely on...", options: ["Motors", "Deep neural networks and large datasets", "Paper documents", "Simple rule-based logic"], answer: 1, explanation: "Generative AI models rely on deep neural networks and massive datasets." },
-        { q: "An example of a generative AI output is...", options: ["A spam filter result", "A stock price prediction", "A newly generated image of a city", "A hardcoded message"], answer: 2, explanation: "A newly generated image of a city is an example of generative AI output." },
-        { q: "One major benefit of generative AI is...", options: ["Decreasing innovation", "Increased productivity through content generation", "Slower workflows", "Higher costs"], answer: 1, explanation: "Generative AI increases productivity by automating content generation." },
-        { q: "Which of the following is a risk of generative AI?", options: ["Clear and transparent outputs", "Hallucinations and misinformation", "Guaranteed accuracy", "Zero energy consumption"], answer: 1, explanation: "Hallucinations and misinformation are major risks of generative AI." },
-        { q: "A challenge in generative AI is...", options: ["Small model size", "High computational and energy requirements", "No training data needed", "Models explain themselves automatically"], answer: 1, explanation: "Generative AI requires massive computational power and energy to train." },
-        { q: "Bias in generative AI occurs when...", options: ["Data is perfect", "The training data favors certain groups or patterns", "The model has no samples", "The model avoids text"], answer: 1, explanation: "Bias occurs when training data favors certain groups or patterns." },
-        { q: "Prompt engineering refers to...", options: ["Designing hardware circuits", "Crafting effective inputs to improve AI outputs", "Building robotic parts", "Cleaning datasets manually"], answer: 1, explanation: "Prompt engineering involves crafting effective inputs to improve AI outputs." },
-        { q: "Generative AI can create content that did not previously exist.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Generative AI creates novel content that did not previously exist." },
-        { q: "All outputs of generative AI are always accurate.", options: ["TRUE", "FALSE"], answer: 1, explanation: "Generative AI can produce hallucinations and inaccurate outputs." },
-        { q: "Hallucinations occur when a model generates incorrect information.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Hallucinations occur when a model generates incorrect information." },
-        { q: "Generative AI can be used for summarization and translation.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Generative AI is capable of summarizing and translating text." },
-        { q: "Energy consumption is a challenge when training large models.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Training large models requires significant energy, posing a challenge." },
-        { q: "Generative AI models can sometimes include private or sensitive data.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Generative AI models can inadvertently memorize and output private data." },
-        { q: "Intellectual property concerns exist in generative AI.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Generative AI raises intellectual property concerns regarding training data." },
-        { q: "Generative AI does not pose any ethical risk.", options: ["TRUE", "FALSE"], answer: 1, explanation: "Generative AI poses ethical risks like bias, misinformation, and privacy issues." },
-        { q: "Bias in generative AI can come from biased training data.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Biased training data leads to biased outputs in generative AI." },
-        { q: "Prompt engineering helps improve the quality of model outputs.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Prompt engineering improves the quality of AI model outputs." },
-        { q: "AI Ethics focuses on...", options: ["Hardware design", "Software installation", "Ensuring AI systems are fair, transparent, and responsible", "Increasing robot speed"], answer: 2, explanation: "AI Ethics ensures AI systems are fair, transparent, and responsible." },
-        { q: "A major ethical concern in AI is...", options: ["Battery life", "Bias in decision-making", "File size", "Number of users"], answer: 1, explanation: "Bias in decision-making is a major ethical concern in AI." },
-        { q: "AI in medicine raises concerns about...", options: ["Music selection", "Privacy, bias, and misdiagnosis", "Emoji design", "Smartphone battery"], answer: 1, explanation: "AI in medicine raises concerns about privacy, bias, and misdiagnosis." },
-        { q: "AI in education must ensure...", options: ["Students buy more textbooks", "Fair grading and student privacy", "Fewer teachers", "Autonomy of robots"], answer: 1, explanation: "AI in education must ensure fair grading and student privacy." },
-        { q: "A risk of AI in hiring is...", options: ["Cleaner office desks", "Discrimination based on gender, race, or background", "Faster internet", "Extra resumes"], answer: 1, explanation: "AI in hiring risks discrimination based on gender, race, or background." },
-        { q: "'Black box' AI refers to models that...", options: ["Are physically black", "Lack transparency and are hard to interpret", "Never make errors", "Are used only in gaming"], answer: 1, explanation: "'Black box' AI refers to models lacking transparency and hard to interpret." },
-        { q: "AI Ethics in finance is important because AI is used for...", options: ["Painting buildings", "Loan approvals and trading", "Cleaning streets", "Designing clothes"], answer: 1, explanation: "AI in finance is used for loan approvals and trading, making ethics vital." },
-        { q: "AI in law enforcement can be risky because...", options: ["Police become faster", "Facial recognition may misidentify individuals", "Cars stop working", "Maps become slower"], answer: 1, explanation: "AI in law enforcement risks misidentification by facial recognition." },
-        { q: "Responsible AI encourages...", options: ["Avoiding all data", "Removing all regulations", "Fairness, transparency, privacy, and accountability", "Replacing all humans"], answer: 2, explanation: "Responsible AI encourages fairness, transparency, privacy, and accountability." },
-        { q: "Regulations and AI laws are designed to...", options: ["Slow down technology", "Protect users and ensure safe AI deployment", "Remove AI completely", "Increase AI cost"], answer: 1, explanation: "AI laws are designed to protect users and ensure safe AI deployment." },
-        { q: "AI can reinforce existing human biases if trained on biased data.", options: ["TRUE", "FALSE"], answer: 0, explanation: "AI reinforces existing biases if trained on biased data." },
-        { q: "Ethical AI improves trust between humans and technology.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Ethical AI improves trust between humans and technology." },
-        { q: "Privacy is not an ethical concern in AI systems.", options: ["TRUE", "FALSE"], answer: 1, explanation: "Privacy is a major ethical concern in AI systems." },
-        { q: "Transparent AI systems help users understand decisions.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Transparent AI systems help users understand AI decisions." },
-        { q: "AI can impact people's lives in areas like hiring and finance.", options: ["TRUE", "FALSE"], answer: 0, explanation: "AI impacts people's lives in hiring, finance, and other critical areas." },
-        { q: "AI should always replace human judgment in critical decisions.", options: ["TRUE", "FALSE"], answer: 1, explanation: "AI should not replace human judgment in critical decisions." },
-        { q: "Bias audits can help reduce unfair outcomes in AI models.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Bias audits help reduce unfair outcomes in AI models." },
-        { q: "Copyright issues may arise when AI generates content based on protected data.", options: ["TRUE", "FALSE"], answer: 0, explanation: "AI-generated content raises copyright issues with protected data." },
-        { q: "Responsible AI includes human oversight.", options: ["TRUE", "FALSE"], answer: 0, explanation: "Responsible AI includes human oversight to ensure safety." },
-        { q: "Ethical AI development is optional and not important.", options: ["TRUE", "FALSE"], answer: 1, explanation: "Ethical AI development is essential, not optional." },
-        { q: "In the Turing Test, if the computer succeeds in fooling the interrogator, it means...", options: ["The computer is conscious", "The computer has demonstrated intelligent behavior indistinguishable from a human", "The computer is faster than a human", "The computer has emotions"], answer: 1, explanation: "Fooling the interrogator means the computer demonstrated human-like intelligent behavior." },
-        { q: "According to the lecture, Agentic AI differs from regular AI in that it...", options: ["Only automates specific predefined tasks", "Is autonomous, comprehends nuanced instructions, sets goals, and adapts to changes", "Relies solely on symbolic reasoning and rule-based systems", "Cannot learn from its environment"], answer: 1, explanation: "Agentic AI is autonomous, comprehends nuanced instructions, sets goals, and adapts." },
-        { q: "In the CSP scheduling exams example, what represents the 'Domain'...", options: ["Each exam that needs to be scheduled", "Available time slots and rooms", "Two exams for the same student cannot be at the same time", "The number of students"], answer: 1, explanation: "The domain represents the available time slots and rooms for scheduling." },
-        { q: "According to the lecture, beyond probability, AI also uses other tools to handle uncertainty. Which of the following tools are mentioned...", options: ["Heuristics, CSPs, and Minimax", "Fuzzy logic, neural networks, and rule-based systems", "Decision trees, ontologies, and logical inference", "SVM, K-means, and PCA"], answer: 1, explanation: "AI uses fuzzy logic, neural networks, and rule-based systems to handle uncertainty." },
-        { q: "Which of the following algorithms is listed as a Supervised Learning algorithm in the lecture...", options: ["K-means clustering", "Principal Component Analysis", "Support Vector Machines", "Autoencoder"], answer: 2, explanation: "Support Vector Machines (SVMs) are supervised learning algorithms." },
-        { q: "According to the lecture, the correct order of how an ANN works is...", options: ["Backpropagation -> Forward Propagation -> Data Input -> Error Calculation -> Model Output", "Data Input -> Error Calculation -> Forward Propagation -> Backpropagation -> Model Output", "Data Input -> Forward Propagation -> Error Calculation -> Backpropagation -> Model Output", "Forward Propagation -> Data Input -> Model Output -> Error Calculation -> Backpropagation"], answer: 2, explanation: "The correct order is Data Input, Forward Propagation, Error Calculation, Backpropagation, Model Output." },
-        { q: "Which of the following is NOT listed as an application of Object Tracking...", options: ["Sports Analysis - tracking players and the ball", "Medical Imaging - identifying tumors in MRIs", "Augmented Reality - tracking objects or markers for AR applications", "Traffic monitoring - tracking vehicles"], answer: 1, explanation: "Medical imaging tumor identification is segmentation, not object tracking." },
-        { q: "In the RNN application of Language Translation, the RNN decoder's role is to...", options: ["Encode the input sentence into a fixed vector", "Generate the translated text sequence word by word", "Cluster similar words together", "Extract features from images"], answer: 1, explanation: "The RNN decoder generates the translated text sequence word by word." },
-        { q: "Which of the following correctly describes Image Processing...", options: ["It enables computers to make decisions based on visual data like humans do", "It deals with manipulating images to improve quality or extract features", "It classifies images into categories using deep learning", "It stores and organizes large video files"], answer: 1, explanation: "Image processing manipulates images to improve quality or extract features." },
-        { q: "The lecture states that data can come in three types of real-world nature. Semi-structured data is described as...", options: ["Data organised only in rows and columns", "Data with no organisation at all", "A mix of structured and unstructured data", "Data collected only from sensors"], answer: 2, explanation: "Semi-structured data is a mix of structured and unstructured data." }
-           ];
-
-    // Dark Mode
-    function toggleTheme() {
-        const html = document.documentElement;
-        const btn = document.getElementById('theme-toggle');
-        if (html.getAttribute('data-theme') === 'dark') {
-            html.setAttribute('data-theme', 'light');
-            btn.textContent = '🌙';
-            localStorage.setItem('theme', 'light');
-        } else {
-            html.setAttribute('data-theme', 'dark');
-            btn.textContent = '☀️';
-            localStorage.setItem('theme', 'dark');
-        }
-    }
-    if (localStorage.getItem('theme') === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        document.getElementById('theme-toggle').textContent = '☀️';
-    }
-
-    questions.sort(() => Math.random() - 0.5);
-    let currentQuestionIndex = 0; let score = 0; let answered = false;
-
-    const questionEl = document.getElementById('question');
-    const optionsEl = document.getElementById('options');
-    const nextBtn = document.getElementById('next-btn');
-    const progressText = document.getElementById('progress-text');
-    const liveScoreEl = document.getElementById('live-score');
-    const feedbackStatus = document.getElementById('feedback-status');
-    const explanationEl = document.getElementById('explanation');
-    const quizMain = document.getElementById('quiz-main');
-    const scoreScreen = document.getElementById('score-screen');
-    const scoreCircle = document.getElementById('score-circle');
-    const scoreMessage = document.getElementById('score-message');
+    let allQuestions = []; let activeQuestions = []; let currentQuestionIndex = 0; let score = 0; let answered = false;
+    const questionEl = document.getElementById('question'); const optionsEl = document.getElementById('options');
+    const nextBtn = document.getElementById('next-btn'); const progressText = document.getElementById('progress-text');
+    const liveScoreEl = document.getElementById('live-score'); const feedbackStatus = document.getElementById('feedback-status');
+    const explanationEl = document.getElementById('explanation'); const chapterMenu = document.getElementById('chapter-menu');
+    const quizMain = document.getElementById('quiz-main'); const scoreScreen = document.getElementById('score-screen');
+    const scoreCircle = document.getElementById('score-circle'); const scoreMessage = document.getElementById('score-message');
     const progressBarEl = document.getElementById('progress-bar');
 
-    function updateTopBar() {
-        liveScoreEl.textContent = `⭐ Score: ${score}`;
-        const progressPercent = (currentQuestionIndex / questions.length) * 100;
-        progressBarEl.style.width = progressPercent + '%';
+    function toggleTheme() { const html = document.documentElement; const btn = document.getElementById('theme-toggle'); if (html.getAttribute('data-theme') === 'dark') { html.setAttribute('data-theme', 'light'); btn.textContent = '🌙'; localStorage.setItem('theme', 'light'); } else { html.setAttribute('data-theme', 'dark'); btn.textContent = '☀️'; localStorage.setItem('theme', 'dark'); } }
+    if (localStorage.getItem('theme') === 'dark') { document.documentElement.setAttribute('data-theme', 'dark'); document.getElementById('theme-toggle').textContent = '☀️'; }
+
+    async function loadData() {
+        try {
+            const response = await fetch('./data/gt103.json'); //  FILES
+            if (!response.ok) throw new Error('Failed to load JSON');
+            allQuestions = await response.json();
+            const seen = new Set();
+            allQuestions = allQuestions.filter(q => { const key = q.q.trim().toLowerCase(); if (seen.has(key)) return false; seen.add(key); return true; });
+            buildChapterMenu();
+        } catch (error) {
+            chapterMenu.innerHTML = '<div class="loading" style="color: #ef4444;">⚠️ Error loading questions. Make sure data/gt103.json exists.</div>';
+        }
     }
 
-    function loadQuestion() {
-        answered = false;
-        feedbackStatus.textContent = '';
-        explanationEl.style.display = 'none';
-        explanationEl.textContent = '';
-        nextBtn.style.display = 'none';
-        optionsEl.innerHTML = '';
-
-        const currentQuestion = questions[currentQuestionIndex];
-        progressText.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
-        updateTopBar();
-
-        questionEl.textContent = currentQuestion.q;
-
-        currentQuestion.options.forEach((option, index) => {
-            const button = document.createElement('button');
-            button.classList.add('option-btn');
-            button.textContent = option;
-            button.onclick = () => selectOption(index);
-            optionsEl.appendChild(button);
+    function buildChapterMenu() {
+        // Robust sorting for "Chapter 1", "Chapter 2", "Chapter 12" etc.
+        const chapters = [...new Set(allQuestions.map(q => q.chapter))].sort((a, b) => 
+            a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' })
+        );
+        
+        chapterMenu.innerHTML = '';
+        chapterMenu.innerHTML += `<button class="menu-btn" onclick="startQuiz('all')"><h2>📚 All Chapters</h2><p>${allQuestions.length} Questions</p></button>`;
+        
+        chapters.forEach(ch => { 
+            const count = allQuestions.filter(q => q.chapter === ch).length; 
+            // THE FIX IS HERE: Wrapping ${ch} in single quotes so it's treated as a string
+            chapterMenu.innerHTML += `<button class="menu-btn" onclick="startQuiz('${ch}')"><h2>${ch}</h2><p>${count} Questions</p></button>`; 
         });
+    }
+
+    function startQuiz(chapter) {
+        if (chapter === 'all') { activeQuestions = [...allQuestions]; } else { activeQuestions = allQuestions.filter(q => q.chapter === chapter); }
+        activeQuestions.sort(() => Math.random() - 0.5);
+        currentQuestionIndex = 0; score = 0;
+        chapterMenu.style.display = 'none'; scoreScreen.style.display = 'none'; quizMain.style.display = 'flex';
+        loadQuestion();
+    }
+
+    function goBackToMenu() { quizMain.style.display = 'none'; scoreScreen.style.display = 'none'; chapterMenu.style.display = 'grid'; }
+    function updateTopBar() { liveScoreEl.textContent = `⭐ Score: ${score}`; const percent = (currentQuestionIndex / activeQuestions.length) * 100; progressBarEl.style.width = percent + '%'; }
+    
+    function loadQuestion() {
+        answered = false; feedbackStatus.textContent = ''; explanationEl.style.display = 'none'; explanationEl.textContent = ''; nextBtn.style.display = 'none'; optionsEl.innerHTML = '';
+        const q = activeQuestions[currentQuestionIndex];
+        progressText.textContent = `Question ${currentQuestionIndex + 1} of ${activeQuestions.length}`;
+        updateTopBar(); questionEl.textContent = q.q;
+        q.options.forEach((option, index) => { const btn = document.createElement('button'); btn.classList.add('option-btn'); btn.textContent = option; btn.onclick = () => selectOption(index); optionsEl.appendChild(btn); });
     }
 
     function selectOption(selectedIndex) {
-        if (answered) return;
-        answered = true;
-
-        const currentQuestion = questions[currentQuestionIndex];
-        const buttons = document.querySelectorAll('.option-btn');
-        
-        buttons.forEach((button, index) => {
-            button.disabled = true;
-            if (index === currentQuestion.answer) button.classList.add('correct');
-            else if (index === selectedIndex) button.classList.add('wrong');
-        });
-
-        if (selectedIndex === currentQuestion.answer) {
-            score++;
-            feedbackStatus.textContent = "✅ Correct!";
-            feedbackStatus.style.color = "var(--success)";
-        } else {
-            feedbackStatus.textContent = `❌ Incorrect. The correct answer is: ${currentQuestion.options[currentQuestion.answer]}`;
-            feedbackStatus.style.color = "var(--error)";
-        }
-
-        if (currentQuestion.explanation) {
-            explanationEl.textContent = `💡 Explanation: ${currentQuestion.explanation}`;
-            explanationEl.style.display = 'block';
-        } else {
-            explanationEl.textContent = `💡 Explanation: No explanation provided.`;
-            explanationEl.style.display = 'block';
-        }
-
-        updateTopBar();
-        nextBtn.style.display = 'block';
+        if (answered) return; answered = true;
+        const q = activeQuestions[currentQuestionIndex]; const buttons = document.querySelectorAll('.option-btn');
+        buttons.forEach((btn, index) => { btn.disabled = true; if (index === q.answer) btn.classList.add('correct'); else if (index === selectedIndex) btn.classList.add('wrong'); });
+        if (selectedIndex === q.answer) { score++; feedbackStatus.textContent = "✅ Correct!"; feedbackStatus.style.color = "var(--success)"; } else { feedbackStatus.textContent = `❌ Incorrect. The correct answer is: ${q.options[q.answer]}`; feedbackStatus.style.color = "var(--error)"; }
+        explanationEl.textContent = `💡 Explanation: ${q.explanation || 'No explanation provided.'}`; explanationEl.style.display = 'block';
+        updateTopBar(); nextBtn.style.display = 'block';
     }
 
-    nextBtn.onclick = () => {
-        currentQuestionIndex++;
-        if (currentQuestionIndex < questions.length) loadQuestion();
-        else showScore();
-    };
-
+    nextBtn.onclick = () => { currentQuestionIndex++; if (currentQuestionIndex < activeQuestions.length) loadQuestion(); else showScore(); };
+    
     function showScore() {
-        quizMain.style.display = 'none';
-        scoreScreen.style.display = 'block';
-        const percentage = Math.round((score / questions.length) * 100);
-        scoreCircle.textContent = `${percentage}%`;
-        scoreMessage.textContent = `You scored ${score} out of ${questions.length}`;
-        let msg = "";
-        if (percentage >= 90) msg = "Outstanding! You are ready for the exam! 🏆";
-        else if (percentage >= 70) msg = "Great job! Just a little more review needed. 👍";
-        else if (percentage >= 50) msg = "Good effort, but keep studying! 📚";
-        else msg = "Don't worry, review the lectures and try again! 💪";
+        quizMain.style.display = 'none'; scoreScreen.style.display = 'block';
+        const percent = Math.round((score / activeQuestions.length) * 100); scoreCircle.textContent = `${percent}%`;
+        scoreMessage.textContent = `You scored ${score} out of ${activeQuestions.length}`;
+        let msg = ""; if (percent >= 90) msg = "Outstanding! 🏆"; else if (percent >= 70) msg = "Great job! 👍"; else if (percent >= 50) msg = "Keep studying! 📚"; else msg = "Review and try again! 💪";
         scoreMessage.textContent += ` - ${msg}`;
     }
 
-    loadQuestion();
+    loadData();
 </script>
 </body>
 </html>
