@@ -1,0 +1,1451 @@
+[
+  {
+    "chapter": "Chapter 1",
+    "q": "The main goal of Artificial Intelligence (AI) is to:",
+    "options": ["Perform artistic tasks", "Create machines that simulate human intelligence", "Replace all jobs", "Increase device size"],
+    "answer": 1,
+    "explanation": "AI aims to create machines that can simulate human intelligence."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "A real-world example of AI is:",
+    "options": ["Mechanical calculators", "Smart assistants like Siri", "A basic wristwatch", "A paper calendar"],
+    "answer": 1,
+    "explanation": "Smart assistants like Siri are powered by AI."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "Narrow AI systems are designed to:",
+    "options": ["Think exactly like humans", "Perform one specific task", "Solve all types of problems", "Demonstrate emotions"],
+    "answer": 1,
+    "explanation": "Narrow AI is designed to perform a specific task."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "Which of the following is NOT an AI application?",
+    "options": ["Speech recognition", "Self-driving cars", "Sorting papers manually", "Face recognition"],
+    "answer": 2,
+    "explanation": "Sorting papers manually is not an AI application."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "General AI (AGI) refers to:",
+    "options": ["AI that outperforms humans in all tasks", "AI limited to one domain", "AI that equals human-level intelligence", "AI that works only in robots"],
+    "answer": 2,
+    "explanation": "General AI refers to AI that equals human-level intelligence."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "The Turing Test evaluates:",
+    "options": ["The speed of a computer", "Whether a machine behaves intelligently like a human", "The lifespan of a robot", "The network strength of AI systems"],
+    "answer": 1,
+    "explanation": "The Turing Test evaluates whether a machine can exhibit human-like intelligence."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "Machine Learning is a branch of AI that enables systems to:",
+    "options": ["Learn from data", "Avoid using data", "Only store information", "Perform manual tasks"],
+    "answer": 0,
+    "explanation": "Machine Learning enables systems to learn from data."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "Which of the following uses AI to recommend content to users?",
+    "options": ["Video recorders", "Social media feeds", "Typewriters", "Calculators"],
+    "answer": 1,
+    "explanation": "Social media feeds use AI to recommend content."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "Which device commonly uses embedded AI?",
+    "options": ["Microwave", "Smart thermostat", "Stapler", "Mechanical keyboard"],
+    "answer": 1,
+    "explanation": "Smart thermostats commonly use embedded AI."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "AI-powered systems that recognize speech (e.g., Alexa) are based on:",
+    "options": ["Probability only", "Natural Language Processing", "Manual programming", "Basic automation"],
+    "answer": 1,
+    "explanation": "Speech recognition is based on Natural Language Processing."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "AI is only used in industrial applications.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "AI is used in many domains, not just industrial."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "AI can improve decision-making by analyzing large amounts of data.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "AI can analyze large data to improve decisions."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "Narrow AI is the type of AI currently used in most applications.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Most current AI applications are Narrow AI."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "Self-driving cars are an example of General AI.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Self-driving cars are Narrow AI, not General AI."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "All AI systems require training data.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Most AI systems require training data."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "AI can identify patterns that humans may not notice.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "AI can identify subtle patterns."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "AI cannot be used in healthcare because it is too risky.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "AI is used in healthcare."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "The Turing Test checks whether AI behaves like a human.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "The Turing Test checks human-like behavior."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "A calculator is considered an AI system.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "A calculator is not an AI system."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "AI technologies can be combined with IoT devices.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "AI can be combined with IoT."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "What are the three levels of Artificial Intelligence (AI) mentioned in the sources?",
+    "options": ["Reflexive, Goal-Based, and Utility AI", "Weak, Strong, and AGI", "Narrow, General, and Super AI", "Symbolic, Statistical, and Agent AI"],
+    "answer": 2,
+    "explanation": "The three levels are Narrow, General, and Super AI."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "Who proposed the Turing Test in 1950 to evaluate whether a machine can exhibit human-like intelligence?",
+    "options": ["John McCarthy", "Patrick Henry", "Alan Turing", "Elaine Rich"],
+    "answer": 2,
+    "explanation": "Alan Turing proposed the Turing Test."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "According to John McCarthy, what is Artificial Intelligence?",
+    "options": ["The study of making computers do things which, at the moment, people are better", "The science and engineering of making intelligent machines", "Getting computers to do tasks which require human intelligence", "Automating routine tasks and enhancing decision-making"],
+    "answer": 1,
+    "explanation": "John McCarthy defined AI as the science and engineering of making intelligent machines."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "What event occurred in 1956 that formalized the field of AI?",
+    "options": ["The development of Mycin for infectious diseases.", "The Dartmouth meeting, where 'Artificial Intelligence' was adopted.", "Robinson's complete algorithm for logical reasoning was published.", "Turing published 'Computing Machinery and Intelligence.'"],
+    "answer": 1,
+    "explanation": "The Dartmouth meeting in 1956 formally adopted the term 'Artificial Intelligence'."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "What period saw the 'Expert systems industry bust,' also known as the 'AI Winter'?",
+    "options": ["1969-79", "1980-88", "1988-93", "1950s"],
+    "answer": 2,
+    "explanation": "The AI Winter occurred from 1988-93."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "What is a major limitation of the Turing Test?",
+    "options": ["It requires extensive computational power (GPUs).", "Passing the test does not imply true understanding (e.g., chatbots lack awareness).", "It can only be applied to games like Chess.", "It is only applicable to Symbolic AI."],
+    "answer": 1,
+    "explanation": "Passing the Turing Test does not imply true understanding."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "What is a core weakness of Symbolic AI?",
+    "options": ["It struggles with ambiguity and unstructured environments.", "It requires large datasets and computational resources.", "It lacks transparency and interpretability.", "It cannot draw logical conclusions from known facts."],
+    "answer": 0,
+    "explanation": "Symbolic AI struggles with ambiguity and unstructured environments."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "Which AI approach focuses on how systems store, structure, and manipulate symbols and rules to simulate human-like knowledge?",
+    "options": ["Machine Learning", "Reinforcement Learning", "Statistical Approaches", "Symbolic AI"],
+    "answer": 3,
+    "explanation": "Symbolic AI uses symbols and rules."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "What is the defining characteristic of Machine Learning intelligence?",
+    "options": ["Intelligence emerges from predefined rules created by experts.", "Intelligence emerges from patterns learned from data.", "It relies entirely on condition-action rules.", "It is inherently transparent and interpretable."],
+    "answer": 1,
+    "explanation": "Machine Learning intelligence emerges from patterns learned from data."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "What computing unit was originally designed for rendering graphics in video games but is now widely used in AI research for parallel processing?",
+    "options": ["CPUs (Central Processing Units)", "TPUs (Tensor Processing Units)", "GPUs (Graphics Processing Units)", "RAM"],
+    "answer": 2,
+    "explanation": "GPUs were originally for graphics and are now used for AI parallel processing."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "Which specialized computing units were developed by Google specifically for AI tasks, especially neural network computations?",
+    "options": ["GPUs", "TPUs", "CPUs", "ASICs"],
+    "answer": 1,
+    "explanation": "Google developed TPUs for AI tasks."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "What is the key advantage of Cloud AI regarding cost?",
+    "options": ["It eliminates the need for any data input.", "It offers powerful computing resources that are always free.", "It is Cost-Effective: users pay only for what they use.", "It increases the need for expensive local hardware."],
+    "answer": 2,
+    "explanation": "Cloud AI is cost-effective: pay only for what you use."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "What feature of Cloud AI democratizes AI development, making it accessible to non-experts?",
+    "options": ["TPUs", "Scalability", "Cloud AI accessibility", "Expert systems"],
+    "answer": 2,
+    "explanation": "Cloud AI accessibility makes AI available to non-experts."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "Which of the following is an example of AI enhancing convenience in the home?",
+    "options": ["Industrial Robots", "Threat Detection Systems", "Smart Thermostats like Nest learning user preferences.", "Scientific Modeling"],
+    "answer": 2,
+    "explanation": "Smart thermostats like Nest learn user preferences."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "How does AI contribute to Traffic Optimization?",
+    "options": ["By providing language conversion.", "By performing repetitive tasks in manufacturing.", "By reducing congestion by predicting traffic flow and adjusting routes.", "By automating customer support via Chatbots."],
+    "answer": 2,
+    "explanation": "AI reduces congestion by predicting traffic flow and adjusting routes."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "In which application does AI identify emotions in text for customer feedback?",
+    "options": ["Autonomous Navigation", "Scientific Modeling", "Sentiment Analysis", "Object Recognition"],
+    "answer": 2,
+    "explanation": "Sentiment Analysis identifies emotions in text."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "What distinguishes Agentic AI from traditional AI agents?",
+    "options": ["It operates primarily on condition-action rules.", "It is autonomous, comprehends nuanced instructions, sets goals, and adapts to changes.", "It only automates specific, repetitive tasks.", "It only uses Simple Reflex Agents."],
+    "answer": 1,
+    "explanation": "Agentic AI is autonomous, comprehends nuanced instructions, sets goals, and adapts."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "What is a key challenge machines face compared to humans, even when performing well in structured tasks like chess?",
+    "options": ["They struggle with performing parallel processing.", "They lack understanding of their actions and face challenges with ambiguity or emotional reasoning.", "They require less data than humans to learn.", "They cannot handle well-defined environments."],
+    "answer": 1,
+    "explanation": "Machines lack understanding of their actions and struggle with ambiguity or emotional reasoning."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "Which AI application uses AI systems to detect defects in manufacturing?",
+    "options": ["Document Summarization", "Quality Assurance", "Gaming", "Mental Health Support"],
+    "answer": 1,
+    "explanation": "Quality Assurance uses AI to detect defects in manufacturing."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "In what sector does AI assist researchers in creating predictive models and analyzing patterns?",
+    "options": ["E-commerce Platforms", "Gaming", "Scientific Modeling", "Industrial Robots"],
+    "answer": 2,
+    "explanation": "Scientific Modeling uses AI to create predictive models and analyze patterns."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "What is the primary purpose of the Turing Test?",
+    "options": ["To measure a computer's processing speed", "To determine if a machine's responses are indistinguishable from those of a human during a text-based conversation", "To test if a robot can physically behave like a human", "To evaluate the energy efficiency of AI systems"],
+    "answer": 1,
+    "explanation": "The Turing Test determines if a machine's responses are indistinguishable from a human's."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "Which of the following is NOT a characteristic of Narrow AI?",
+    "options": ["It is designed for a specific task", "It cannot generalise to other tasks", "It has human-like general intelligence", "It is the most common type of AI today"],
+    "answer": 2,
+    "explanation": "Narrow AI does not have human-like general intelligence."
+  },
+  {
+    "chapter": "Chapter 1",
+    "q": "What is the main difference between Symbolic AI and Machine Learning?",
+    "options": ["Symbolic AI uses rules and symbols; Machine Learning learns from data", "Symbolic AI requires more data than Machine Learning", "Machine Learning is transparent; Symbolic AI is a black box", "Symbolic AI is used only for games; Machine Learning for all other tasks"],
+    "answer": 0,
+    "explanation": "Symbolic AI uses rules and symbols; Machine Learning learns from data."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "An AI agent perceives its environment using:",
+    "options": ["Actuators", "Sensors", "Batteries", "Screens"],
+    "answer": 1,
+    "explanation": "AI agents perceive using sensors."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "Actuators are responsible for:",
+    "options": ["Thinking", "Acting", "Storing memory", "Pre-processing data"],
+    "answer": 1,
+    "explanation": "Actuators are responsible for acting."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "A simple reflex agent acts based on:",
+    "options": ["Goals", "Utility", "Current percept", "Long-term planning"],
+    "answer": 2,
+    "explanation": "Simple reflex agents act based on current percept."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "A partially observable environment example is:",
+    "options": ["Chess", "Self-driving car", "Crossword puzzle", "Tic-tac-toe"],
+    "answer": 1,
+    "explanation": "Self-driving car operates in a partially observable environment."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "Goal-based agents:",
+    "options": ["Do not use goals", "Choose actions to achieve goals", "React only to current input", "Ignore all states"],
+    "answer": 1,
+    "explanation": "Goal-based agents choose actions to achieve goals."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "Utility-based agents aim to:",
+    "options": ["Minimize performance", "Maximize satisfaction/utility", "Reduce memory", "Disable feedback"],
+    "answer": 1,
+    "explanation": "Utility-based agents aim to maximize satisfaction/utility."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "Model-based reflex agents use:",
+    "options": ["Historical memory / internal state", "Only current percept", "No logic", "Only actuators"],
+    "answer": 0,
+    "explanation": "Model-based reflex agents use historical memory/internal state."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "Dynamic environments change:",
+    "options": ["Only when the agent acts", "Independently of the agent", "Never", "Only in games"],
+    "answer": 1,
+    "explanation": "Dynamic environments change independently of the agent."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "A static environment example is:",
+    "options": ["Weather", "Crossword puzzle", "Traffic", "Stock market"],
+    "answer": 1,
+    "explanation": "A crossword puzzle is a static environment."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "Siri or Google Assistant is an example of:",
+    "options": ["None", "Intelligent agent", "Mechanical device", "Static agent"],
+    "answer": 1,
+    "explanation": "Siri or Google Assistant is an example of an intelligent agent."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "Reflex agents cannot use memory.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Reflex agents have no memory."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "A self-driving car operates in a dynamic environment.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "A self-driving car operates in a dynamic environment."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "Actuators collect information from the environment.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Sensors collect information, not actuators."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "Sensors update the environment through actions.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Actuators update the environment through actions."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "All agents must have goals.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Not all agents have goals; simple reflex agents do not."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "Utility-based agents consider performance and preferences.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Utility-based agents consider performance and preferences."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "Fully observable environments provide complete information.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Fully observable environments provide complete information."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "Most real-world environments are partially observable.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Most real-world environments are partially observable."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "Goal-based agents ignore utility.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Goal-based agents focus on goals, not utility."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "Intelligent agents can be software or hardware.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Intelligent agents can be software or hardware."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "What component of an AI agent gathers information from the environment (e.g., cameras, microphones)?",
+    "options": ["Actuators", "Actuations", "Effectors", "Sensors"],
+    "answer": 3,
+    "explanation": "Sensors gather information from the environment."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "What component of an AI agent executes actions based on the decisions made (e.g., robotic arms)?",
+    "options": ["Percepts", "Internal Function", "Actuators/Effectors", "Sensors"],
+    "answer": 2,
+    "explanation": "Actuators/Effectors execute actions."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "What type of environment is represented by a crossword puzzle, where the problem remains unchanged while the agent works?",
+    "options": ["Dynamic Environment", "Fully Observable Environment", "Static Environment", "Partially Observable Environment"],
+    "answer": 2,
+    "explanation": "A crossword puzzle is a static environment."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "Which environment is exemplified by stock market trading, where changes occur independently of the agent's actions?",
+    "options": ["Fully Observable Environment", "Partially Observable Environment", "Dynamic Environment", "Static Environment"],
+    "answer": 2,
+    "explanation": "Stock market trading is a dynamic environment."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "Which type of agent operates on a simple stimulus-response mechanism without considering future consequences?",
+    "options": ["Utility-Based Agents", "Simple Reflex Agents", "Goal-Based Agents", "Model-Based Reflex Agents"],
+    "answer": 1,
+    "explanation": "Simple Reflex Agents operate on a stimulus-response mechanism."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "A thermostat that turns on heating when the temperature falls below a threshold is an example of which type of agent?",
+    "options": ["Model-Based Reflex Agents", "Goal-Based Agents", "Utility-Based Agents", "Simple Reflex Agents"],
+    "answer": 3,
+    "explanation": "A thermostat is a Simple Reflex Agent."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "Which agents plan actions by considering future outcomes and evaluating how their actions align with predefined goals?",
+    "options": ["Simple Reflex Agents", "Utility-Based Agents", "Goal-Based Agents", "Model-Based Reflex Agents"],
+    "answer": 2,
+    "explanation": "Goal-Based Agents plan actions by considering future outcomes."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "Which type of agent optimizes actions by evaluating trade-offs and selecting outcomes that maximize utility?",
+    "options": ["Simple Reflex Agents", "Goal-Based Agents", "Utility-Based Agents", "Model-Based Reflex Agents"],
+    "answer": 2,
+    "explanation": "Utility-Based Agents optimize actions by maximizing utility."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "What is the main drawback of Utility-Based Agents?",
+    "options": ["They cannot handle well-defined environments.", "They cannot adapt over time.", "The computational cost can be high.", "They lack memory."],
+    "answer": 2,
+    "explanation": "The computational cost of Utility-Based Agents can be high."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "Which agents maintain an internal model of the world and use memory of past states to inform decisions?",
+    "options": ["Goal-Based Agents", "Simple Reflex Agents", "Utility-Based Agents", "Model-Based Reflex Agents"],
+    "answer": 3,
+    "explanation": "Model-Based Reflex Agents maintain an internal model and use memory."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "How can Model-Based Reflex Agents handle Partially Observable Environments?",
+    "options": ["By relying solely on immediate percepts.", "By ignoring all past states.", "By inferring hidden information using the internal model.", "By calculating the utility score."],
+    "answer": 2,
+    "explanation": "Model-Based Reflex Agents infer hidden information using the internal model."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "What is the primary function of the Internal Function within an AI agent's architecture?",
+    "options": ["To execute actions.", "To gather information (percepts).", "To define how the agent processes information and decides on actions.", "To represent the external environment."],
+    "answer": 2,
+    "explanation": "The Internal Function defines how the agent processes information and decides on actions."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "Which characteristic describes a Fully Observable Environment?",
+    "options": ["Visibility is limited by sensors or weather conditions.", "All pieces and moves are visible (e.g., Chess).", "Changes occur independently of the agent's actions.", "The environment remains unchanged while the agent works."],
+    "answer": 1,
+    "explanation": "In a fully observable environment, all pieces and moves are visible, like in Chess."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "What is one of the advantages of Model-Based Reflex Agents?",
+    "options": ["They are simple and efficient in well-defined environments.", "They are more robust in dynamic and partially observable environments.", "They require less computation and memory.", "They do not require a clear definition of goals."],
+    "answer": 1,
+    "explanation": "Model-Based Reflex Agents are more robust in dynamic and partially observable environments."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "What is an example of an Agentic AI capability?",
+    "options": ["Automating specific tasks.", "Operating only on 'if-then' statements.", "Planning steps to achieve objectives and adapting workflows as situations evolve.", "Reacting immediately to stimuli without considering future consequences."],
+    "answer": 2,
+    "explanation": "Agentic AI can plan steps to achieve objectives and adapt workflows."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "Which of the following correctly orders AI agent types from simplest to most complex?",
+    "options": ["Utility -> Goal -> Model -> Simple", "Simple -> Model -> Goal -> Utility", "Goal -> Simple -> Utility -> Model", "Model -> Simple -> Utility -> Goal"],
+    "answer": 1,
+    "explanation": "The correct order from simplest to most complex is Simple, Model, Goal, Utility."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "Which agent type does NOT use memory?",
+    "options": ["Model-based", "Goal-based", "Utility-based", "Simple reflex"],
+    "answer": 3,
+    "explanation": "Simple reflex agents do not use memory."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "Which agent type is MOST intelligent?",
+    "options": ["Simple reflex", "Model-based", "Goal-based", "Utility-based"],
+    "answer": 3,
+    "explanation": "Utility-based agents are the most intelligent as they maximize utility."
+  },
+  {
+    "chapter": "Chapter 2",
+    "q": "Which agent uses both memory AND rules?",
+    "options": ["Simple reflex", "Model-based", "Goal-based", "Utility-based"],
+    "answer": 1,
+    "explanation": "Model-based agents use both memory and rules."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "AI uses search to:",
+    "options": ["Increase errors", "Explore possible solutions", "Avoid decision making", "Remove constraints"],
+    "answer": 1,
+    "explanation": "AI uses search to explore possible solutions."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "A constraint satisfaction problem (CSP) involves:",
+    "options": ["No rules", "Variables, domains, and constraints", "Random choices", "Unlimited freedom"],
+    "answer": 1,
+    "explanation": "CSP involves variables, domains, and constraints."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "Heuristics are:",
+    "options": ["Exact solutions", "Very slow methods", "Smart shortcuts to speed problem-solving", "Random guesses"],
+    "answer": 2,
+    "explanation": "Heuristics are smart shortcuts to speed problem-solving."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "An example of heuristic use is:",
+    "options": ["Guessing passwords", "Google Maps finding the best route", "Listening to music", "Writing letters"],
+    "answer": 1,
+    "explanation": "Google Maps uses heuristics to find the best route."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "Strategic thinking is common in:",
+    "options": ["Cooking", "Games", "Sleeping", "Washing dishes"],
+    "answer": 1,
+    "explanation": "Strategic thinking is common in games."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "Utility-based decision-making involves:",
+    "options": ["Choosing randomly", "Evaluating the usefulness/value of outcomes", "Shuffling choices", "Ignoring preferences"],
+    "answer": 1,
+    "explanation": "Utility-based decision-making evaluates the usefulness/value of outcomes."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "In scheduling problems, AI aims to:",
+    "options": ["Add conflicts", "Avoid clashes and optimize time", "Reduce efficiency", "Increase randomness"],
+    "answer": 1,
+    "explanation": "AI aims to avoid clashes and optimize time in scheduling problems."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "Search in AI:",
+    "options": ["Explores different possible states or solutions", "Reduces memory", "Removes data", "Avoids goals"],
+    "answer": 0,
+    "explanation": "Search in AI explores different possible states or solutions."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "A real-life example of search in AI is:",
+    "options": ["Sleeping", "Painting", "Allocating hospital rooms efficiently", "Drinking coffee"],
+    "answer": 2,
+    "explanation": "Allocating hospital rooms efficiently is a real-life example of search in AI."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "Heuristics do NOT:",
+    "options": ["Speed up decisions", "Guarantee optimal results", "Reduce complexity", "Guide search"],
+    "answer": 1,
+    "explanation": "Heuristics do not guarantee optimal results."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "Heuristics guarantee perfect solutions.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Heuristics do not guarantee perfect solutions."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "AI uses search in games like chess.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "AI uses search in games like chess."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "CSPs do not follow rules.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "CSPs follow constraints (rules)."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "Utility assigns value to different choices.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Utility assigns value to different choices."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "Scheduling is an AI application used in universities and hospitals.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Scheduling is used in universities and hospitals."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "Problem-solving is a core function of AI.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Problem-solving is a core function of AI."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "Search algorithms explore a space of possible solutions.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Search algorithms explore a space of possible solutions."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "AI cannot perform route planning.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "AI can perform route planning."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "Games like chess require strategy and planning.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Games like chess require strategy and planning."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "AI always uses brute force search.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "AI does not always use brute force search; it often uses heuristics."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "What is the fundamental approach AI uses to solve problems by systematically exploring different possibilities to find the best solution?",
+    "options": ["Utility Maximization", "Search", "Bayesian Inference", "Machine Learning"],
+    "answer": 1,
+    "explanation": "Search is the fundamental approach."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "What are Heuristics in the context of AI problem-solving?",
+    "options": ["Algorithms that guarantee the optimal solution.", "Statistical models used for probability prediction.", "Rules of thumb that help AI make decisions faster by focusing on the most promising options.", "The total set of possible actions in an environment."],
+    "answer": 2,
+    "explanation": "Heuristics are rules of thumb."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "How does Google Maps use a heuristic estimate to find the shortest path?",
+    "options": ["By predicting the opponent's moves.", "By reducing the number of misplaced tiles.", "By prioritizing roads based on the straight-line distance.", "By solving a Constraint Satisfaction Problem (CSP)."],
+    "answer": 2,
+    "explanation": "Google Maps uses straight-line distance as a heuristic."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "What trade-off is often acceptable when using heuristics in practical scenarios like self-driving cars?",
+    "options": ["Trading efficiency for complexity.", "Trading speed for accuracy, as fast, reasonable choices are crucial.", "Trading high computational cost for simplicity.", "Trading structured data for unstructured data."],
+    "answer": 1,
+    "explanation": "Trading speed for accuracy is acceptable; fast, reasonable choices are crucial."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "In the 8-puzzle game, how does heuristic search help the AI?",
+    "options": ["By randomly trying every possible move.", "By prioritizing moves that bring tiles closer to their goal positions.", "By finding the lowest estimated travel time.", "By using only memory of past states."],
+    "answer": 1,
+    "explanation": "Heuristic search prioritizes moves that bring tiles closer to their goal positions."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "What is the purpose of Strategic Thinking in Games for AI?",
+    "options": ["To play randomly to confuse the opponent.", "To predict the opponent's moves, evaluate outcomes, and pick the best possible option.", "To focus only on maximizing the agent's current percept.", "To find a satisfactory solution rather than an optimal one."],
+    "answer": 1,
+    "explanation": "Strategic thinking in games predicts opponent moves and picks the best option."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "What are the three simple parts into which Constraint Satisfaction Problems (CSPs) break down problems?",
+    "options": ["Input, Output, and Rules", "Variables, Domains (possible values), and Constraints (rules).", "Speed, Cost, and Accuracy", "Training Set, Validation Set, and Testing Set"],
+    "answer": 1,
+    "explanation": "CSPs break problems into Variables, Domains, and Constraints."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "Which of the following is a real-life example of using CSPs?",
+    "options": ["Predicting house prices.", "Assigning colors to regions on a map so no two adjacent regions share the same color (Map Coloring).", "Training a deep neural network.", "Detecting spam email."],
+    "answer": 1,
+    "explanation": "Map Coloring is a real-life example of CSP."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "What does Utility represent in AI decision-making?",
+    "options": ["The speed at which an agent can execute an action.", "The measure of how desirable an outcome is (describing an agent's preferences).", "The level of ambiguity in the environment.", "The amount of experience (E) a program has learned from."],
+    "answer": 1,
+    "explanation": "Utility is a measure of how desirable an outcome is."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "In utility-driven decision making, which option does the AI choose?",
+    "options": ["The option with the lowest computational cost.", "The option with the highest probability.", "The option with the highest utility value.", "The first option that meets any constraint."],
+    "answer": 2,
+    "explanation": "The AI chooses the option with the highest utility value."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "Which application uses AI systems to prioritize critical patients in emergency rooms?",
+    "options": ["Navigation Apps", "Recommendation Systems (Netflix)", "Healthcare AI systems", "Sudoku Puzzle Solving"],
+    "answer": 2,
+    "explanation": "Healthcare AI systems prioritize critical patients in emergency rooms."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "What is an example of an outcome or state of the world that contributes to an agent's utility, as described in the sources?",
+    "options": ["Actuators", "More money, less time, clean floor.", "Percepts", "Variables"],
+    "answer": 1,
+    "explanation": "More money, less time, clean floor are examples of utility outcomes."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "What is the primary purpose of Search in AI?",
+    "options": ["To gather unstructured data.", "To systematically explore different possibilities to find the best solution.", "To prevent overfitting in models.", "To define the agent's internal model."],
+    "answer": 1,
+    "explanation": "Search systematically explores possibilities to find the best solution."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "What real-world problem uses CSPs to allocate classrooms, schedule exams, and organize timetables to avoid conflicts?",
+    "options": ["Resource Allocation in Hospitals", "Travel Planning", "Scheduling (e.g., in Universities)", "Gaming (e.g., Chess)"],
+    "answer": 2,
+    "explanation": "Scheduling in universities uses CSPs."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "Why is problem-solving considered fundamental to intelligence in AI?",
+    "options": ["Because it reduces the need for large datasets.", "Because AI systems are designed to make decisions, optimize solutions, and automate complex tasks.", "Because it relies solely on the condition-action rule.", "Because it avoids the need for defining clear goals."],
+    "answer": 1,
+    "explanation": "Problem-solving is fundamental because AI systems make decisions, optimize solutions, and automate complex tasks."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "What is the term for the system that replicates the decision-making ability of human experts using predefined rules?",
+    "options": ["Machine Learning Models", "Expert Systems", "Utility-Based Agents", "Neural Networks"],
+    "answer": 1,
+    "explanation": "Expert Systems replicate human expert decision-making."
+  },
+  {
+    "chapter": "Chapter 3",
+    "q": "Which problem-solving approach is crucial for real-time navigation where the AI must react instantly to obstacles?",
+    "options": ["CSPs", "Heuristics", "Statistical Models", "Goal-Based Planning"],
+    "answer": 1,
+    "explanation": "Heuristics are crucial for real-time navigation."
+  },
+  {
+    "chapter": "Chapter 4",
+    "q": "Uncertainty in AI arises mainly from:",
+    "options": ["Perfect data", "Incomplete or missing information", "Fixed environments", "Excess storage"],
+    "answer": 1,
+    "explanation": "Uncertainty arises from incomplete or missing information."
+  },
+  {
+    "chapter": "Chapter 4",
+    "q": "AI typically handles uncertainty using:",
+    "options": ["Random guesses", "Probability and statistical models", "Infinite loops", "Fixed rules only"],
+    "answer": 1,
+    "explanation": "AI handles uncertainty using probability and statistical models."
+  },
+  {
+    "chapter": "Chapter 4",
+    "q": "An example of ambiguous input is:",
+    "options": ["A clear number", "The word 'bank'", "A precise measurement", "A labeled dataset"],
+    "answer": 1,
+    "explanation": "The word 'bank' is ambiguous."
+  },
+  {
+    "chapter": "Chapter 4",
+    "q": "Sensor errors are especially problematic in:",
+    "options": ["Paper printers", "Self-driving cars", "Kitchen appliances", "Textbooks"],
+    "answer": 1,
+    "explanation": "Sensor errors are problematic in self-driving cars."
+  },
+  {
+    "chapter": "Chapter 4",
+    "q": "AI predictions rely heavily on:",
+    "options": ["Patterns learned from past data", "Physical movement", "Coin tosses", "Internet speed"],
+    "answer": 0,
+    "explanation": "AI predictions rely on patterns learned from past data."
+  },
+  {
+    "chapter": "Chapter 4",
+    "q": "Which situation represents environmental uncertainty?",
+    "options": ["Solving a simple math problem", "Fog affecting a car's camera sensors", "Writing a book manually", "Copying text"],
+    "answer": 1,
+    "explanation": "Fog affecting sensors represents environmental uncertainty."
+  },
+  {
+    "chapter": "Chapter 4",
+    "q": "AI dealing with uncertainty provides outputs that are:",
+    "options": ["Always 100% correct", "Probabilistic", "Unrelated", "Guaranteed accurate"],
+    "answer": 1,
+    "explanation": "AI provides probabilistic outputs under uncertainty."
+  },
+  {
+    "chapter": "Chapter 4",
+    "q": "Incomplete sentences demonstrate uncertainty in:",
+    "options": ["Robotics", "Natural Language Processing (NLP)", "Face recognition", "Reinforcement learning"],
+    "answer": 1,
+    "explanation": "Incomplete sentences demonstrate uncertainty in NLP."
+  },
+  {
+    "chapter": "Chapter 4",
+    "q": "Uncertainty caused by changing environments is common in:",
+    "options": ["Stock market prediction", "Solving puzzles", "Reading books", "Static images"],
+    "answer": 0,
+    "explanation": "Stock market prediction is affected by changing environments."
+  },
+  {
+    "chapter": "Chapter 4",
+    "q": "A blurred image example demonstrates uncertainty in:",
+    "options": ["Audio AI", "Computer vision", "Robotics arms", "Databases"],
+    "answer": 1,
+    "explanation": "A blurred image demonstrates uncertainty in computer vision."
+  },
+  {
+    "chapter": "Chapter 4",
+    "q": "Uncertainty means lack of complete confidence in outcomes.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Uncertainty means lack of complete confidence."
+  },
+  {
+    "chapter": "Chapter 4",
+    "q": "AI systems often operate with perfect datasets.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "AI systems often operate with imperfect datasets."
+  },
+  {
+    "chapter": "Chapter 4",
+    "q": "Ambiguous data can cause uncertainty for AI.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Ambiguous data causes uncertainty."
+  },
+  {
+    "chapter": "Chapter 4",
+    "q": "Probability is used by AI to estimate unknowns.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Probability is used to estimate unknowns."
+  },
+  {
+    "chapter": "Chapter 4",
+    "q": "Sensor noise never affects AI decision-making.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Sensor noise affects AI decision-making."
+  },
+  {
+    "chapter": "Chapter 4",
+    "q": "Real-world environments can change unexpectedly.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Real-world environments can change unexpectedly."
+  },
+  {
+    "chapter": "Chapter 4",
+    "q": "AI can fully eliminate uncertainty in all cases.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "AI cannot fully eliminate uncertainty."
+  },
+  {
+    "chapter": "Chapter 4",
+    "q": "Low-quality images increase uncertainty for vision systems.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Low-quality images increase uncertainty."
+  },
+  {
+    "chapter": "Chapter 4",
+    "q": "Missing or incomplete text can create uncertainty in NLP.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Missing text creates uncertainty in NLP."
+  },
+  {
+    "chapter": "Chapter 4",
+    "q": "Probabilistic inference helps AI make the best possible guess.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Probabilistic inference helps make the best guess."
+  },
+  {
+    "chapter": "Chapter 4",
+    "q": "What is Uncertainty in AI defined as?",
+    "options": ["The reliance on symbolic reasoning.", "The lack of complete certainty or confidence about outcomes.", "The high computational cost of planning.", "The presence of a static environment."],
+    "answer": 1,
+    "explanation": "Uncertainty is the lack of complete certainty or confidence about outcomes."
+  },
+  {
+    "chapter": "Chapter 4",
+    "q": "Which of the following is a source of uncertainty in AI, particularly for systems relying on cameras or external input?",
+    "options": ["Cost-effectiveness", "Sensor Errors (e.g., a camera in fog).", "Large Datasets", "Utility functions"],
+    "answer": 1,
+    "explanation": "Sensor errors are a source of uncertainty."
+  },
+  {
+    "chapter": "Chapter 4",
+    "q": "If the input 'bank' is given, requiring the AI to distinguish between a riverbank or a financial bank, what source of uncertainty is the AI facing?",
+    "options": ["Changing Environments", "Ambiguity", "Incomplete Data", "Sensor Errors"],
+    "answer": 1,
+    "explanation": "The word 'bank' is ambiguous."
+  },
+  {
+    "chapter": "Chapter 4",
+    "q": "What does Probability measure in AI?",
+    "options": ["The exact outcome of an event.", "The complexity of the algorithm.", "The likelihood of an event happening.", "The maximum utility score."],
+    "answer": 2,
+    "explanation": "Probability measures the likelihood of an event happening."
+  },
+  {
+    "chapter": "Chapter 4",
+    "q": "In a spam detection system, when does the AI move an email to the spam folder?",
+    "options": ["When the probability of it being spam is the highest (e.g., 90%).", "When the email contains urgent phrases.", "When the probability is exactly 50%.", "When the sender is from a known list."],
+    "answer": 0,
+    "explanation": "The AI moves email to spam when the probability of spam is highest."
+  },
+  {
+    "chapter": "Chapter 4",
+    "q": "What does a Probability Distribution show?",
+    "options": ["The highest possible utility score.", "How likely different outcomes are.", "The total number of outcomes.", "The cost of computation."],
+    "answer": 1,
+    "explanation": "A probability distribution shows how likely different outcomes are."
+  },
+  {
+    "chapter": "Chapter 4",
+    "q": "What is the process of using probability to infer the most likely explanation from observed data, which updates predictions as new information is received?",
+    "options": ["Utility Maximization", "Simple Reflex Action", "Probabilistic Inference", "Dimensionality Reduction"],
+    "answer": 2,
+    "explanation": "Probabilistic inference infers the most likely explanation and updates predictions."
+  },
+  {
+    "chapter": "Chapter 4",
+    "q": "What is Bayesian Inference used for in AI applications like spam detection or medical diagnosis?",
+    "options": ["To rely solely on predefined rules.", "To reset previous probabilities to zero.", "To dynamically update probability estimates (beliefs) when new evidence appears.", "To ensure the decision is always 100% correct."],
+    "answer": 2,
+    "explanation": "Bayesian inference dynamically updates probability estimates when new evidence appears."
+  },
+  {
+    "chapter": "Chapter 4",
+    "q": "Besides probability, what other tools does AI utilize to handle uncertainty?",
+    "options": ["Simple Reflex Agents and Goal-Based Agents.", "Fuzzy logic, neural networks, and rule-based systems.", "CSPs and Heuristics.", "TPUs and GPUs."],
+    "answer": 1,
+    "explanation": "AI also uses fuzzy logic, neural networks, and rule-based systems."
+  },
+  {
+    "chapter": "Chapter 4",
+    "q": "How does AI traffic apps like Google Maps use probabilities?",
+    "options": ["To eliminate all traffic conditions.", "To suggest alternative routes if heavy traffic is likely.", "To predict the exact arrival time without error.", "To ensure the environment is static."],
+    "answer": 1,
+    "explanation": "Google Maps suggests alternative routes based on traffic probabilities."
+  },
+  {
+    "chapter": "Chapter 4",
+    "q": "What is the key difference between heuristic methods and probability-based AI?",
+    "options": ["Heuristic methods always guarantee the optimal solution.", "Heuristic methods rely on experience-driven rules, while probability-based AI uses statistical models.", "Probability-based AI always makes the correct decision.", "Probability-based AI does not require data."],
+    "answer": 1,
+    "explanation": "Heuristics rely on experience-driven rules; probability-based AI uses statistical models."
+  },
+  {
+    "chapter": "Chapter 4",
+    "q": "If an AI system suggests a movie based on past trends, but a new trend emerges that it hasn't seen before, what source of uncertainty is illustrated?",
+    "options": ["Sensor Errors", "Ambiguity", "Changing Environments", "Incomplete Data"],
+    "answer": 2,
+    "explanation": "Changing environments cause uncertainty when new trends emerge."
+  },
+  {
+    "chapter": "Chapter 4",
+    "q": "In the context of a self-driving car deciding if an object is a pedestrian or a shadow, what determines the car's action?",
+    "options": ["The rule of thumb.", "The option with the lowest perceived risk.", "The highest probability assigned to the object (e.g., 95% pedestrian means the car stops).", "The computational cost of the action."],
+    "answer": 2,
+    "explanation": "The car acts based on the highest probability assigned to the object."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "Machine Learning is best defined as:",
+    "options": ["Writing manual rules for every task", "A method where computers learn patterns from data", "Repeating instructions exactly", "Replacing computer hardware"],
+    "answer": 1,
+    "explanation": "Machine Learning is a method where computers learn patterns from data."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "The performance of a machine learning model improves with:",
+    "options": ["More electricity", "More devices", "More experience/data", "More colors"],
+    "answer": 2,
+    "explanation": "Performance improves with more experience/data."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "Which of the following is an application of Machine Learning?",
+    "options": ["Paper filing", "Email spam detection", "Hammering nails", "Manual grading"],
+    "answer": 1,
+    "explanation": "Email spam detection is an application of Machine Learning."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "The fuel of machine learning is:",
+    "options": ["Algorithms", "Data", "Buttons", "Hardware tools"],
+    "answer": 1,
+    "explanation": "Data is the fuel of machine learning."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "A system that recommends movies (like Netflix) relies on:",
+    "options": ["Rule-based coding", "Machine Learning models", "Handwritten logic", "Only human inputs"],
+    "answer": 1,
+    "explanation": "Netflix relies on Machine Learning models."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "Structured data includes:",
+    "options": ["Images", "Rows and columns organized in tables", "Videos", "Audio files"],
+    "answer": 1,
+    "explanation": "Structured data is organized in rows and columns."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "Unstructured data refers to:",
+    "options": ["Numbers in spreadsheets", "Texts, images, videos without fixed format", "Tables", "Sensor logs only"],
+    "answer": 1,
+    "explanation": "Unstructured data has no fixed format."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "Supervised learning requires:",
+    "options": ["No labels", "Random guesses", "Labeled data", "Only images"],
+    "answer": 2,
+    "explanation": "Supervised learning requires labeled data."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "Unsupervised learning is used to:",
+    "options": ["Identify correct answers", "Discover hidden patterns in unlabeled data", "Perform surgery", "Fix hardware"],
+    "answer": 1,
+    "explanation": "Unsupervised learning discovers hidden patterns in unlabeled data."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "Reinforcement learning involves:",
+    "options": ["Memorizing text", "Learning by interacting with an environment through rewards and penalties", "Using only supervised tasks", "Ignoring feedback"],
+    "answer": 1,
+    "explanation": "Reinforcement learning learns through rewards and penalties."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "Machine learning is a subset of artificial intelligence.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Machine learning is a subset of AI."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "The quality of training data affects model accuracy.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Quality of training data affects accuracy."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "Real-world data is always clean and perfect.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Real-world data is often messy."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "Machine learning can analyze large datasets that humans cannot process easily.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "ML can analyze large datasets."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "ML models do not need testing; training is enough.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "ML models need testing."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "Navigation apps use machine learning to find optimal routes.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Navigation apps use ML for optimal routes."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "Supervised learning cannot be used for classification.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Supervised learning is used for classification."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "Unsupervised learning can group similar items together.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Unsupervised learning can group similar items."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "Reinforcement learning uses rewards to learn.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Reinforcement learning uses rewards."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "A machine learning pipeline includes gathering, preparing, training, and deploying data.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "ML pipeline includes these steps."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "What is the definition of Machine Learning (ML) according to Mitchel (1997)?",
+    "options": ["The science and engineering of making intelligent machines.", "Intelligence emerging from patterns learned from data.", "A computer program said to learn from experience E with respect to some task T and performance measure P, if its performance on T, as measured by P, improves with experience E.", "Sorting items into categories (Classification)."],
+    "answer": 2,
+    "explanation": "Mitchel defined ML as learning from experience E on task T with performance P."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "Why would an AI agent want to learn?",
+    "options": ["To simplify the environment into a static state.", "To reduce the need for computational resources.", "To adapt to dynamic environments, handle uncertainty, and improve performance.", "To always operate as a Simple Reflex Agent."],
+    "answer": 2,
+    "explanation": "AI agents learn to adapt, handle uncertainty, and improve performance."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "What is referred to as 'The Fuel for Machine Learning'?",
+    "options": ["The Model", "The Hyperparameters", "Data", "The Actuators"],
+    "answer": 2,
+    "explanation": "Data is the fuel for Machine Learning."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "What are the three main components of Machine Learning?",
+    "options": ["Sensors, Actuators, and Environment", "Data, Model, and ML Pipeline", "Classification, Regression, and Clustering", "Training, Validation, and Testing"],
+    "answer": 1,
+    "explanation": "The three main components are Data, Model, and ML Pipeline."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "What determines how well a model learns in the training phase?",
+    "options": ["The cost-effectiveness of the cloud platform", "The quality, quantity, and diversity of training data", "The time spent in the Model Deployment phase", "The transparency of the black box"],
+    "answer": 1,
+    "explanation": "Quality, quantity, and diversity of training data determine learning."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "What kind of data is organized in rows and columns?",
+    "options": ["Unstructured Data", "Semi-structured Data", "Structured Data", "IoT Data"],
+    "answer": 2,
+    "explanation": "Structured data is organized in rows and columns."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "Which type of data includes patient medical records, diagnoses, and lab results?",
+    "options": ["E-commerce Data", "Transportation Data", "Healthcare Data", "Financial Data"],
+    "answer": 2,
+    "explanation": "Patient medical records are healthcare data."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "What is the first step in the Machine Learning Pipeline?",
+    "options": ["Selecting & Training the Model", "Preparing Data", "Data Gathering (or Collection)", "Testing & Deploying the Model"],
+    "answer": 2,
+    "explanation": "The first step is Data Gathering."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "What percentage of the dataset is typically used for the Training Set?",
+    "options": ["10-20%", "70-80%", "100%", "50%"],
+    "answer": 1,
+    "explanation": "Typically 70-80% is used for training."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "What is the purpose of the Testing Set (10-20% of data) in the ML pipeline?",
+    "options": ["To train the model and optimize parameters.", "To fine-tune the model and prevent overfitting.", "To conduct the final, unbiased evaluation of the model's performance.", "To gather data from various sources."],
+    "answer": 2,
+    "explanation": "The testing set is for final, unbiased evaluation."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "What metric is used to evaluate model performance for Classification tasks?",
+    "options": ["R-squared", "Silhouette Score", "Accuracy", "Utility Value"],
+    "answer": 2,
+    "explanation": "Accuracy is used for classification."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "What metric measures how well the model explains the actual values and is used to evaluate Regression tasks?",
+    "options": ["R-squared", "Accuracy", "Silhouette Score", "Mean Absolute Error"],
+    "answer": 0,
+    "explanation": "R-squared is used for regression."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "What metric measures how well the model groups similar data points and is used for Clustering tasks?",
+    "options": ["R-squared", "Accuracy", "Silhouette Score", "Confusion Matrix"],
+    "answer": 2,
+    "explanation": "Silhouette Score is used for clustering."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "What is the objective of the Model Deployment stage?",
+    "options": ["To adjust hyperparameters", "To integrate the trained model into a production environment (e.g., application or web service).", "To clean data by removing duplicates.", "To discover hidden patterns in unlabeled data."],
+    "answer": 1,
+    "explanation": "Deployment integrates the model into a production environment."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "What is the process during training where the model updates its internal parameters to minimize errors?",
+    "options": ["Data Gathering", "Hyperparameter Tuning", "Training, where the model updates its internal parameters to minimize errors.", "Testing with real-world data."],
+    "answer": 2,
+    "explanation": "Training updates internal parameters to minimize errors."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "Which step in the ML Pipeline involves cleaning data, handling missing values, and restructuring rows and columns?",
+    "options": ["Data Gathering", "Data Preparation and Splitting", "Model Deployment", "Testing & Deployment"],
+    "answer": 1,
+    "explanation": "Data Preparation and Splitting cleans and prepares data."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "What determines the efficiency of the output in the Data Gathering step?",
+    "options": ["The choice of the actuator.", "The quantity and quality of the collected data.", "The complexity of the CSPs used.", "The application of heuristics."],
+    "answer": 1,
+    "explanation": "Quantity and quality of data determine output efficiency."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "Which example of data includes streaming history on platforms like Netflix or Spotify?",
+    "options": ["Education Data", "Financial Data", "Entertainment Data", "Healthcare Data"],
+    "answer": 2,
+    "explanation": "Streaming history is entertainment data."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "What is the importance of having a larger dataset for model training?",
+    "options": ["It reduces the computational complexity.", "It provides a more comprehensive representation of the scenario, improving accuracy.", "It avoids the need for a validation set.", "It guarantees the optimal solution."],
+    "answer": 1,
+    "explanation": "Larger datasets provide a more comprehensive representation, improving accuracy."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "What is the fundamental difference between the Symbolic AI approach and the Machine Learning approach?",
+    "options": ["Symbolic AI is a 'black box,' while ML is transparent.", "Symbolic AI uses symbols and rules to simulate knowledge, while ML creates intelligence from learned patterns in data.", "ML only works well in structured, well-defined environments.", "Symbolic AI requires large datasets and computational resources."],
+    "answer": 1,
+    "explanation": "Symbolic AI uses symbols and rules; ML learns from data patterns."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "Which machine learning approach uses labeled datasets to train algorithms into classifying data or predicting outcomes?",
+    "options": ["Unsupervised Learning", "Reinforcement Learning", "Supervised Learning", "Agentic AI"],
+    "answer": 2,
+    "explanation": "Supervised learning uses labeled datasets."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "What are the two primary techniques of Supervised Learning?",
+    "options": ["Clustering and Dimensionality Reduction", "Classification and Regression", "Heuristics and CSPs", "Trial and Error and Reward Maximization"],
+    "answer": 1,
+    "explanation": "The two techniques are Classification and Regression."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "Which supervised learning technique is used to sort items into categories (binary or multi-classifier)?",
+    "options": ["Regression", "Dimensionality Reduction", "Classification", "Clustering"],
+    "answer": 2,
+    "explanation": "Classification sorts items into categories."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "Which supervised learning technique is used to identify a real value such as price, weight, or temperature?",
+    "options": ["Classification", "Regression", "Clustering", "Principal Component Analysis"],
+    "answer": 1,
+    "explanation": "Regression identifies real values."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "Which application of Classification determines whether a loan applicant is likely to repay the loan?",
+    "options": ["House Price Prediction", "Temperature Forecasting", "Credit Scoring", "Market Basket Analysis"],
+    "answer": 2,
+    "explanation": "Credit Scoring is a classification application."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "Which application of Regression is used by insurance companies to estimate costs for policyholders?",
+    "options": ["Image Classification", "Healthcare Cost Prediction", "Fraud Detection", "Sentiment Analysis"],
+    "answer": 1,
+    "explanation": "Healthcare Cost Prediction is a regression application."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "What is the main objective of Unsupervised Learning?",
+    "options": ["To learn a mapping from input features to the correct output labels.", "To discover patterns or hidden structures in unlabeled data sets.", "To maximize a reward signal over time.", "To operate solely on if-then statements."],
+    "answer": 1,
+    "explanation": "Unsupervised learning discovers patterns in unlabeled data."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "What unsupervised learning technique groups unlabeled data based on their similarities or differences?",
+    "options": ["Regression", "Classification", "Clustering", "Bayesian Inference"],
+    "answer": 2,
+    "explanation": "Clustering groups unlabeled data by similarity."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "Which technique is used when the number of features (dimensions) in a given dataset is too high?",
+    "options": ["Clustering", "Dimensionality reduction", "Classification", "Linear Regression"],
+    "answer": 1,
+    "explanation": "Dimensionality reduction is used when there are too many features."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "Identifying communities or groups within a social network is an application of which unsupervised technique?",
+    "options": ["Regression", "Social Network Analysis (using Clustering)", "Fraud Detection", "Handwriting Recognition"],
+    "answer": 1,
+    "explanation": "Social Network Analysis uses clustering."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "Which machine learning subfield involves an agent learning to make decisions by interacting with an environment based on trial and error and maximizing a reward signal?",
+    "options": ["Supervised Learning", "Unsupervised Learning", "Reinforcement Learning (RL)", "Symbolic AI"],
+    "answer": 2,
+    "explanation": "Reinforcement Learning learns by trial and error to maximize reward."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "In a self-driving car using Reinforcement Learning, what are Negative Rewards assigned for?",
+    "options": ["Safe driving and staying within lanes.", "Reaching the destination efficiently.", "Collisions, violating traffic rules, abrupt maneuvers, and driving too close to other vehicles.", "Predicting traffic flow."],
+    "answer": 2,
+    "explanation": "Negative rewards are for collisions, traffic violations, etc."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "What defines the Action Space for a self-driving car in RL?",
+    "options": ["Its position, speed, and orientation.", "The road, other vehicles, and pedestrians.", "The possible control inputs the car can apply (accelerating, braking, steering, changing lanes).", "The positive rewards received."],
+    "answer": 2,
+    "explanation": "Action space is the possible control inputs."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "What are the unsupervised learning algorithms mentioned in the sources?",
+    "options": ["Linear regression and Naive Bayes", "Principal component analysis and K-means clustering", "Support vector machines and Neural networks", "Classification and Regression"],
+    "answer": 1,
+    "explanation": "PCA and K-means clustering are unsupervised algorithms."
+  },
+  {
+    "chapter": "Chapter 5",
+    "q": "Which of the following is an application of Reinforcement Learning?",
+    "options": ["Spam detection", "Customer Segmentation", "Robotics and Self-driving cars", "Diagnosing diseases"],
+    "answer": 2,
+    "explanation": "Robotics and self-driving cars are RL applications."
+  }
+]
