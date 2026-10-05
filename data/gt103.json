@@ -1198,7 +1198,7 @@
   },
   {
     "chapter": "Lecture 5",
-    "q": "A machine learning pipeline includes gathering, preparing, training, and deploying data.",
+    "q": "A machine learning pipeline includes gathering, preparing, training, and deploying model.",
     "options": ["True", "False"],
     "answer": 0,
     "explanation": "ML pipeline includes these steps."
