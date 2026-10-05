@@ -99,7 +99,7 @@
             font-size: 0.92rem;
             line-height: 1.7;
             color: var(--text-main);
-            max-height: 340px;
+            max-height: 420px;
             overflow-y: auto;
             white-space: pre-wrap;
             display: none;
@@ -282,7 +282,6 @@
     const passageBody    = document.getElementById('passage-body');
     const passageHeader  = document.getElementById('passage-header');
 
-    // Toggle passage open/closed when header is clicked
     passageHeader.addEventListener('click', () => {
         passageBox.classList.toggle('open');
     });
@@ -360,14 +359,11 @@
             if (!response.ok) throw new Error('Failed to load JSON');
             const raw = await response.json();
 
-            // --- Normalize both shapes into one flat list ---
             let flat = [];
 
             if (Array.isArray(raw)) {
-                // Old flat-array format
                 flat = raw;
             } else {
-                // New { passages, questions } format
                 if (Array.isArray(raw.passages)) {
                     raw.passages.forEach(p => {
                         (p.questions || []).forEach(q => {
@@ -388,7 +384,6 @@
                 }
             }
 
-            // De-dupe by question text
             const seen = new Set();
             allQuestions = flat.filter(q => {
                 const key = (q.q || '').trim().toLowerCase();
@@ -539,9 +534,6 @@
         progressBarEl.style.width = percent + '%';
     }
 
-    // Track which passage is currently shown so we only reset scroll when it changes
-    let lastShownPassageTitle = null;
-
     function loadQuestion() {
         answered = false;
         feedbackStatus.textContent = '';
@@ -562,18 +554,16 @@
             passageTitle.textContent = q.passageTitle || 'Passage';
             passageBody.textContent = q.passageText;
 
-            // Only auto-open and reset scroll if the passage changed
-            if (lastShownPassageTitle !== q.passageTitle) {
-                passageBox.classList.add('open');
+            // Always open + reset scroll to top (after browser lays out)
+            passageBox.classList.add('open');
+            requestAnimationFrame(() => {
                 passageBody.scrollTop = 0;
-                lastShownPassageTitle = q.passageTitle;
-            }
+                window.scrollTo({ top: 0, behavior: 'auto' });
+            });
         } else {
             passageBox.classList.remove('show', 'open');
-            lastShownPassageTitle = null;
         }
 
-        // Shuffle options and remember the new correct index
         const pairs = q.options.map((text, i) => ({ text, isCorrect: i === q.answer }));
         shuffle(pairs);
         q._shuffledOptions = pairs.map(p => p.text);
