@@ -1,933 +1,248 @@
 [
-  {
-    "chapter": "Unit 1",
-    "q": "The main goal of education according to Unit 1 is to:",
-    "options": ["Memorize facts", "Facilitate learning and acquire knowledge through systematic teaching", "Replace teachers with technology", "Standardize all students"],
-    "answer": 1,
-    "explanation": "Education is the process of acquiring knowledge, skills, and values through teaching and learning."
-  },
-  {
-    "chapter": "Unit 1",
-    "q": "What is the 'flipped classroom' approach?",
-    "options": ["Teachers lecture during class and students do homework at home", "Students watch videos at home and do practice in class with teacher guidance", "Students teach the class instead of teachers", "No homework is given"],
-    "answer": 1,
-    "explanation": "In a flipped classroom, students review materials (videos/readings) before class and engage in discussions and hands-on activities during class."
-  },
-  {
-    "chapter": "Unit 1",
-    "q": "The present perfect continuous is used to:",
-    "options": ["Talk about completed actions", "Talk about recent, continuing actions or how long something has been happening", "Talk about future plans", "Talk about past habits"],
-    "answer": 1,
-    "explanation": "Present perfect continuous is used for recent, continuing actions or to say how long something has been happening."
-  },
-  {
-    "chapter": "Unit 1",
-    "q": "Complete the sentence: 'I ______ chocolate since I was born.'",
-    "options": ["liked", "have liked", "has liked", "likes"],
-    "answer": 1,
-    "explanation": "Use present perfect simple (have liked) with 'since' to talk about experiences."
-  },
-  {
-    "chapter": "Unit 1",
-    "q": "What does the word 'illiterate' mean?",
-    "options": ["Unable to read or write", "Unable to speak", "Unable to walk", "Unable to see"],
-    "answer": 0,
-    "explanation": "Illiterate means unable to read or write."
-  },
-  {
-    "chapter": "Unit 1",
-    "q": "A mentor is:",
-    "options": ["A student who struggles", "An experienced and trusted advisor or guide", "A type of technology", "A school building"],
-    "answer": 1,
-    "explanation": "A mentor is an experienced and trusted advisor or guide."
-  },
-  {
-    "chapter": "Unit 1",
-    "q": "In the context of education, 'digital literacy' refers to:",
-    "options": ["The ability to read and write", "The ability to use digital technology and online resources effectively", "The ability to fix computers", "The ability to program in Python"],
-    "answer": 1,
-    "explanation": "Digital literacy is the ability to use digital technology and online resources effectively."
-  },
-  {
-    "chapter": "Unit 1",
-    "q": "What is 'problem-solving'?",
-    "options": ["Creating new problems", "The process of finding solutions to difficult or complex issues", "Ignoring problems", "Memorizing solutions"],
-    "answer": 1,
-    "explanation": "Problem-solving is the process of finding solutions to difficult or complex issues."
-  },
-  {
-    "chapter": "Unit 1",
-    "q": "Choose the correct form: 'She decided ______ two miles every day.'",
-    "options": ["Running", "Run", "To run", "Runs"],
-    "answer": 2,
-    "explanation": "Decided + to + verb in infinitive. She decided to run."
-  },
-  {
-    "chapter": "Unit 1",
-    "q": "What is the meaning of 'obsolete'?",
-    "options": ["Very modern", "No longer in use or outdated", "Extremely useful", "Expensive"],
-    "answer": 1,
-    "explanation": "Obsolete means no longer in use or outdated."
-  },
-  {
-    "chapter": "Unit 1",
-    "q": "In the context of education, what does 'digital literacy' refer to?",
-    "options": ["The ability to read and write", "The ability to use digital technology and online resources effectively", "The ability to fix computers", "The ability to program in Python"],
-    "answer": 1,
-    "explanation": "Digital literacy is the ability to use digital technology and online resources effectively."
-  },
-  {
-    "chapter": "Unit 2",
-    "q": "Networking is:",
-    "options": ["Connecting computers", "The practice of making professional connections and relationships", "Watching television", "A type of software"],
-    "answer": 1,
-    "explanation": "Networking is the practice of making professional connections and relationships."
-  },
-  {
-    "chapter": "Unit 2",
-    "q": "What does 'rapport' mean?",
-    "options": ["A type of report", "A close and harmonious relationship or connection", "A formal meeting", "A business card"],
-    "answer": 1,
-    "explanation": "Rapport is a close and harmonious relationship or connection."
-  },
-  {
-    "chapter": "Unit 2",
-    "q": "In networking, what should you do when you enter a room?",
-    "options": ["Wait for people to come to you", "Approach groups of three people that contain at least one woman", "Avoid eye contact", "Stand alone in a corner"],
-    "answer": 1,
-    "explanation": "Networking tips suggest approaching groups of three people that contain at least one woman."
-  },
-  {
-    "chapter": "Unit 2",
-    "q": "What is the past perfect tense used for?",
-    "options": ["Actions happening now", "An event that occurred before another event in the past", "Future plans", "Daily routines"],
-    "answer": 1,
-    "explanation": "Past perfect is used to talk about an event that occurred before another event in the past."
-  },
-  {
-    "chapter": "Unit 2",
-    "q": "Complete the sentence: 'We were late for the plane because we ______ our passports.'",
-    "options": ["Have forgotten", "Forget", "Had forgotten", "Forgot"],
-    "answer": 2,
-    "explanation": "Use past perfect (had forgotten) for an action completed before another past action."
-  },
-  {
-    "chapter": "Unit 2",
-    "q": "What does 'collaboration' mean?",
-    "options": ["Working alone", "The act of working together or cooperating with others", "Competing with others", "Ignoring others"],
-    "answer": 1,
-    "explanation": "Collaboration is the act of working together or cooperating with others."
-  },
-  {
-    "chapter": "Unit 2",
-    "q": "A 'seminar' is:",
-    "options": ["A type of exam", "A conference or meeting for discussion and learning", "A holiday", "A sports event"],
-    "answer": 1,
-    "explanation": "A seminar is a conference or meeting for discussion and learning."
-  },
-  {
-    "chapter": "Unit 2",
-    "q": "What is 'body language'?",
-    "options": ["A type of exercise", "Non-verbal communication through gestures, posture, and facial expressions", "A language spoken in one country", "A written language"],
-    "answer": 1,
-    "explanation": "Body language is non-verbal communication through gestures, posture, and facial expressions."
-  },
-  {
-    "chapter": "Unit 2",
-    "q": "What does 'potential' mean?",
-    "options": ["Having no ability", "Having the capability to develop or achieve something", "Being very old", "Being very tired"],
-    "answer": 1,
-    "explanation": "Potential means having the capability to develop or achieve something."
-  },
-  {
-    "chapter": "Unit 3",
-    "q": "What is 'etiquette'?",
-    "options": ["A type of food", "The customary code of polite behavior in society", "A type of technology", "A language"],
-    "answer": 1,
-    "explanation": "Etiquette is the customary code of polite behavior in society or among a group."
-  },
-  {
-    "chapter": "Unit 3",
-    "q": "What does 'monochronic' refer to?",
-    "options": ["Doing many things at once", "A cultural preference for doing one thing at a time and valuing punctuality", "A type of color", "A type of music"],
-    "answer": 1,
-    "explanation": "Monochronic relates to a cultural preference for doing one thing at a time and valuing punctuality."
-  },
-  {
-    "chapter": "Unit 3",
-    "q": "What does 'polychronic' refer to?",
-    "options": ["Doing one thing at a time", "A cultural preference for doing multiple tasks at once and valuing flexibility", "A type of government", "A type of art"],
-    "answer": 1,
-    "explanation": "Polychronic relates to a cultural preference for doing multiple tasks at once and valuing flexibility."
-  },
-  {
-    "chapter": "Unit 3",
-    "q": "A 'stereotype' is:",
-    "options": ["A scientific fact", "A widely held but oversimplified belief or idea about a particular type of person", "A type of music", "A historical event"],
-    "answer": 1,
-    "explanation": "A stereotype is a widely held but oversimplified belief or idea about a particular type of person or thing."
-  },
-  {
-    "chapter": "Unit 3",
-    "q": "What does 'tolerance' mean?",
-    "options": ["The acceptance of different opinions, beliefs, or practices", "The refusal to accept differences", "A type of disease", "A type of building"],
-    "answer": 0,
-    "explanation": "Tolerance is the acceptance of different opinions, beliefs, or practices."
-  },
-  {
-    "chapter": "Unit 3",
-    "q": "What is 'proxemics'?",
-    "options": ["The study of space in communication", "The study of numbers", "The study of ancient civilizations", "The study of weather"],
-    "answer": 0,
-    "explanation": "Proxemics is the study of the use of space in communication."
-  },
-  {
-    "chapter": "Unit 3",
-    "q": "What does 'assume' mean?",
-    "options": ["To prove something", "To take for granted without proof; suppose", "To question something", "To deny something"],
-    "answer": 1,
-    "explanation": "Assume means to take for granted without proof; suppose."
-  },
-  {
-    "chapter": "Unit 3",
-    "q": "What is an 'artefact'?",
-    "options": ["A modern invention", "An object made by a human being, typically of historical or cultural significance", "A type of food", "A type of animal"],
-    "answer": 1,
-    "explanation": "An artefact is an object made by a human being, typically one of historical or cultural significance."
-  },
-  {
-    "chapter": "Unit 3",
-    "q": "What does 'controversial' mean?",
-    "options": ["Agreed upon by everyone", "Causing disagreement or dispute", "Very old", "Very new"],
-    "answer": 1,
-    "explanation": "Controversial means causing disagreement or dispute; often due to differing opinions."
-  },
-  {
-    "chapter": "Unit 3",
-    "q": "What is a 'researcher'?",
-    "options": ["A person who teaches", "A person who conducts investigations to gather information and knowledge", "A person who sells products", "A person who drives cars"],
-    "answer": 1,
-    "explanation": "A researcher is a person who conducts investigations to gather information and knowledge."
-  },
-  {
-    "chapter": "Vocabulary",
-    "q": "What is the opposite meaning of being able to read and write?",
-    "options": ["Unliterate", "Illiterate", "Literate", "Unknowledgeable"],
-    "answer": 1,
-    "explanation": "Illiterate means unable to read or write."
-  },
-  {
-    "chapter": "Vocabulary",
-    "q": "In the context of research, what does 'statistics' refer to?",
-    "options": ["The art of storytelling through data", "The study of living organisms", "The study of ancient civilizations", "The collection and analysis of numerical data"],
-    "answer": 3,
-    "explanation": "Statistics is the collection, analysis, interpretation, and presentation of numerical data."
-  },
-  {
-    "chapter": "Vocabulary",
-    "q": "In the future, robots might be used in ______ labor, or to perform other hazardous tasks.",
-    "options": ["Initiative", "Delicate", "Manual", "Reliable"],
-    "answer": 2,
-    "explanation": "Manual labor refers to physical work done by humans."
-  },
-  {
-    "chapter": "Vocabulary",
-    "q": "The following has the same meaning as the word 'GLOBAL'.",
-    "options": ["Individual", "Specific", "Universal", "Particular"],
-    "answer": 2,
-    "explanation": "Global means worldwide or universal."
-  },
-  {
-    "chapter": "Vocabulary",
-    "q": "______ is someone who provides guidance to learners telling them how to do something.",
-    "options": ["A pilot", "An actor", "A tutor", "A pirate"],
-    "answer": 2,
-    "explanation": "A tutor provides guidance to learners."
-  },
-  {
-    "chapter": "Vocabulary",
-    "q": "The president's family was a humble ______; they were poor people without a good position in society.",
-    "options": ["Cultures", "Dimensions", "Nationalities", "Origins"],
-    "answer": 3,
-    "explanation": "Origins refer to a person's background or family history."
-  },
-  {
-    "chapter": "Vocabulary",
-    "q": "In the context of including or containing, what is a synonym for the word 'comprise'?",
-    "options": ["Exclude", "Remove", "Divide", "Encompass"],
-    "answer": 3,
-    "explanation": "Comprise means to include or contain; encompass is a synonym."
-  },
-  {
-    "chapter": "Vocabulary",
-    "q": "Our professor ______ a lot of research on stem cells.",
-    "options": ["Made", "Did", "Won", "Achieved"],
-    "answer": 1,
-    "explanation": "Did research is the correct verb-noun combination."
-  },
-  {
-    "chapter": "Vocabulary",
-    "q": "What is the opposite of the word 'polychronic'?",
-    "options": ["Monochronic", "Multichronic", "Simultaneous", "Chronological"],
-    "answer": 0,
-    "explanation": "Monochronic is the opposite of polychronic."
-  },
-  {
-    "chapter": "Vocabulary",
-    "q": "She is ______; she has a PhD in neuroscience.",
-    "options": ["Well-educated", "Good-educated", "Wel-educated", "High-educated"],
-    "answer": 0,
-    "explanation": "Well-educated is the correct compound adjective."
-  },
-  {
-    "chapter": "Vocabulary",
-    "q": "The project was completed on time due to the team's ______.",
-    "options": ["Sense of humor", "Dedication", "Effortless efforts", "Charity"],
-    "answer": 1,
-    "explanation": "Dedication means commitment and hard work."
-  },
-  {
-    "chapter": "Vocabulary",
-    "q": "An unfair and unreasonable opinion or feeling, especially when formed without enough thought or knowledge.",
-    "options": ["Karma", "Prejudice", "Justice", "Fairness"],
-    "answer": 1,
-    "explanation": "Prejudice is an unfair and unreasonable opinion or feeling."
-  },
-  {
-    "chapter": "Vocabulary",
-    "q": "______ has become a powerful asset in the current workplace.",
-    "options": ["Currying favor", "Unoriginally", "Emotional intelligence", "Strength"],
-    "answer": 2,
-    "explanation": "Emotional intelligence is a powerful asset in the workplace."
-  },
-  {
-    "chapter": "Vocabulary",
-    "q": "It's a cheap ring but it has a great sentimental ______ for me.",
-    "options": ["Value", "Tradition", "Belief", "Fashion"],
-    "answer": 0,
-    "explanation": "Sentimental value refers to the emotional importance of an object."
-  },
-  {
-    "chapter": "Vocabulary",
-    "q": "Includes transportation systems, communication networks, sewage, water and school systems.",
-    "options": ["Infrastructure", "Overpopulation", "Overcrowding", "Biodiversity"],
-    "answer": 0,
-    "explanation": "Infrastructure refers to the fundamental systems and facilities necessary for society."
-  },
-  {
-    "chapter": "Vocabulary",
-    "q": "What does the term 'millennial' refer to?",
-    "options": ["A type of ancient writing system", "A scientific measurement of time", "A type of renewable energy source", "A person belonging to the generation between the 1980s and 2000s"],
-    "answer": 3,
-    "explanation": "A millennial is a person born between the early 1980s and late 1990s."
-  },
-  {
-    "chapter": "Vocabulary",
-    "q": "The city flourished in the post-war period, witnessed rapid growth and revitalization. The prefix 'post' means:",
-    "options": ["After", "Before", "Since", "During"],
-    "answer": 0,
-    "explanation": "The prefix 'post' means after."
-  },
-  {
-    "chapter": "Vocabulary",
-    "q": "Can I connect to your ______ please? I don't have enough data on my phone.",
-    "options": ["Cookie", "Browser", "Mobile hotspot", "Power bank"],
-    "answer": 2,
-    "explanation": "A mobile hotspot allows you to share your phone's internet connection."
-  },
-  {
-    "chapter": "Vocabulary",
-    "q": "The factory's old machines were causing pollution and were ______, so they had to be replaced.",
-    "options": ["Unsustainable", "Insustainable", "Dissustainable", "Insustainable"],
-    "answer": 0,
-    "explanation": "Unsustainable means not capable of being maintained without causing harm."
-  },
-  {
-    "chapter": "Vocabulary",
-    "q": "Archaeologists study artifacts and fossils to uncover the mysteries of human life in PREHISTORY.",
-    "options": ["After the outbreak of COVID-19", "An account of 20th-century technological advancements", "The detailed records of a medieval kingdom", "A time before written records"],
-    "answer": 3,
-    "explanation": "Prehistory refers to the time before written records."
-  },
-  {
-    "chapter": "Vocabulary",
-    "q": "The painting in the museum is ______ but there are hundreds of copies.",
-    "options": ["Global", "Cultural", "Original", "Critical"],
-    "answer": 2,
-    "explanation": "Original means it is the first or authentic version."
-  },
-  {
-    "chapter": "Vocabulary",
-    "q": "You need to plan ahead to ______ your goals.",
-    "options": ["Do", "Study", "Become", "Achieve"],
-    "answer": 3,
-    "explanation": "Achieve goals is the correct verb-noun combination."
-  },
-  {
-    "chapter": "Vocabulary",
-    "q": "Digital literacy is becoming ______ these days.",
-    "options": ["Fashionable", "Popular", "Interesting", "Obsolete"],
-    "answer": 1,
-    "explanation": "Digital literacy is becoming popular (or increasingly important)."
-  },
-  {
-    "chapter": "Vocabulary",
-    "q": "An operation is beginning to try to save species of crocodile from ______.",
-    "options": ["Extinction", "Prediction", "Tension", "Suspension"],
-    "answer": 0,
-    "explanation": "Extinction means the complete disappearance of a species."
-  },
-  {
-    "chapter": "Vocabulary",
-    "q": "I can't ______ accessing this website! My laptop might get hacked.",
-    "options": ["Link", "Risk", "Log", "Access"],
-    "answer": 1,
-    "explanation": "Risk accessing means to take the risk of accessing."
-  },
-  {
-    "chapter": "Vocabulary",
-    "q": "I can't think of a better ______ for the job.",
-    "options": ["Candidate", "Offer", "Boss", "Competition"],
-    "answer": 0,
-    "explanation": "Candidate is a person applying for a job."
-  },
-  {
-    "chapter": "Vocabulary",
-    "q": "Choose the appropriate prefix to the word 'do'.",
-    "options": ["Non-", "Im-", "Un-", "Dis-"],
-    "answer": 2,
-    "explanation": "Undo (Un- + do) means to reverse an action."
-  },
-  {
-    "chapter": "Vocabulary",
-    "q": "Have you ever been to ______ Paris?",
-    "options": ["The", "An", "A", "No (zero) article"],
-    "answer": 3,
-    "explanation": "No article is used before city names like Paris."
-  },
-  {
-    "chapter": "Vocabulary",
-    "q": "I like reading ______ short stories.",
-    "options": ["The", "No (zero) article", "A", "An"],
-    "answer": 1,
-    "explanation": "No article is needed when speaking generally about plural nouns."
-  },
-  {
-    "chapter": "Vocabulary",
-    "q": "What is the meaning of 'outstanding'?",
-    "options": ["Expensive", "Excellent", "Energetic", "Expected"],
-    "answer": 1,
-    "explanation": "Outstanding means exceptionally good; excellent."
-  },
-  {
-    "chapter": "Reading",
-    "q": "According to the 'Flipped Classroom' article, what is the primary advantage of this model?",
-    "options": ["It promotes active learning and student engagement", "It requires less teacher involvement", "It relies heavily on technology", "It eliminates the need for classroom discussions"],
-    "answer": 0,
-    "explanation": "The flipped classroom promotes active learning and student engagement."
-  },
-  {
-    "chapter": "Reading",
-    "q": "In the 'Age of Exploration' passage, which country was the first to send explorers to search for a sea route to Asia?",
-    "options": ["Spain", "Portugal", "France", "England"],
-    "answer": 1,
-    "explanation": "Portugal was the first country to send explorers to search for a sea route to Asia."
-  },
-  {
-    "chapter": "Reading",
-    "q": "In the 'Eyeless Sight' passage, what could Rosa Kuleshova do?",
-    "options": ["See with her fingers", "Hear with her nose", "Smell with her ears", "Taste with her hands"],
-    "answer": 0,
-    "explanation": "Rosa Kuleshova could see with her fingers."
-  },
-  {
-    "chapter": "Reading",
-    "q": "According to the 'Birds' passage, how do warblers navigate during daylight?",
-    "options": ["They use the stars", "They rely on the sun for guidance", "They use landmarks only", "They circle helplessly"],
-    "answer": 1,
-    "explanation": "Warblers use the sun for guidance during daylight."
-  },
-  {
-    "chapter": "Reading",
-    "q": "In the 'Packaging' passage, what is the author's main concern?",
-    "options": ["Packaging is too expensive", "Packaging is using up scarce energy and resources and spoiling the environment", "Packaging is not attractive enough", "Packaging is too difficult to open"],
-    "answer": 1,
-    "explanation": "The author is concerned that packaging uses up scarce energy and resources and spoils the environment."
-  },
-  {
-    "chapter": "Reading",
-    "q": "According to the 'Emperor Penguin' passage, where do Emperor Penguins breed?",
-    "options": ["Along the coast", "In the water", "South America", "The Antarctic interior"],
-    "answer": 3,
-    "explanation": "Emperor Penguins breed in the Antarctic interior."
-  },
-  {
-    "chapter": "Reading",
-    "q": "In the 'Los Angeles' passage, what contributed to the meteoric rise of Los Angeles?",
-    "options": ["The construction of an aqueduct", "The gold rush", "The invention of the internet", "The discovery of diamonds"],
-    "answer": 0,
-    "explanation": "The construction of a 225-mile aqueduct to tap the water of the Owens River contributed to the rise of Los Angeles."
-  },
-  {
-    "chapter": "Reading",
-    "q": "According to the 'Tools of Persuasion' passage, what is Ethos?",
-    "options": ["Appeal to emotion", "Appeal to logic", "A speaker's way of convincing the audience that he is a credible source", "A type of ancient Greek tool"],
-    "answer": 2,
-    "explanation": "Ethos is a speaker's way of convincing the audience that he is a credible source."
-  },
-  {
-    "chapter": "Reading",
-    "q": "In the 'Human Brain' passage, what does the left hemisphere deal with?",
-    "options": ["Feelings and colors", "Rules, lists of information, and short-term memory", "Long-term memory", "Creativity"],
-    "answer": 1,
-    "explanation": "The left hemisphere deals with rules, lists of information, and short-term memory."
-  },
-  {
-    "chapter": "Reading",
-    "q": "In 'A Christmas in March', why did the family keep the Christmas tree up until March?",
-    "options": ["They forgot to take it down", "They wanted to celebrate Christmas twice", "Their son Clifton asked them to leave it up until he returned", "They were too lazy to remove it"],
-    "answer": 2,
-    "explanation": "Clifton asked them to leave the Christmas tree up until he made it back."
-  },
-  {
-    "chapter": "Reading",
-    "q": "According to the 'Beautiful, Powerful Jaguar' passage, what is the jaguar's coloration used for?",
-    "options": ["Attracting mates", "Camouflage", "Warning predators", "Regulating body temperature"],
-    "answer": 1,
-    "explanation": "The jaguar's coloration serves as camouflage."
-  },
-  {
-    "chapter": "Reading",
-    "q": "According to the 'Nocturnal Animals' passage, why are owls effective nocturnal hunters?",
-    "options": ["They have great night vision and excellent hearing", "They have a strong sense of smell", "They are very fast", "They are very large"],
-    "answer": 0,
-    "explanation": "Owls have great night vision and excellent hearing, and their softer feathers allow them to swoop silently."
-  },
-  {
-    "chapter": "Reading",
-    "q": "According to the 'Power of Habit' passage, what are the three components of the habit loop?",
-    "options": ["Procrastination, stress, and reward", "Routine, action, and outcome", "Cue, routine, and reward", "Trigger, behavior, and consequence"],
-    "answer": 2,
-    "explanation": "The habit loop consists of the cue, the routine, and the reward."
-  },
-  {
-    "chapter": "Reading",
-    "q": "According to the 'YouTube' passage, what was the first video uploaded to YouTube?",
-    "options": ["A music video", "Me at the zoo", "A comedy sketch", "A news clip"],
-    "answer": 1,
-    "explanation": "The first YouTube video was entitled 'Me at the zoo'."
-  },
-  {
-    "chapter": "Reading",
-    "q": "According to the 'Museums' passage, where was Madame Tussauds' first permanent exhibition located?",
-    "options": ["Baker Street in London", "Dam Square in Amsterdam", "Las Vegas in Nevada", "Times Square in New York"],
-    "answer": 0,
-    "explanation": "Madame Tussauds established her first permanent exhibition in London's Baker Street."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'I know you will not believe it. I hate ______ video games very much.'",
-    "options": ["Played", "Playing", "Play", "Plays"],
-    "answer": 1,
-    "explanation": "Hate/love/like/enjoy + verb with -ing."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'He will be in his office in ______ hour.'",
-    "options": ["A", "An", "No article", "The"],
-    "answer": 1,
-    "explanation": "Use 'an' before words starting with a vowel sound. 'Hour' starts with a vowel sound."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'You are not allowed ______ class without taking permission.'",
-    "options": ["Leaves", "To leave", "Leave", "Leaving"],
-    "answer": 1,
-    "explanation": "Allowed + to + verb infinitive."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Which prefix is used to indicate too much of something?",
-    "options": ["Over-", "Un-", "Re-", "Under-"],
-    "answer": 0,
-    "explanation": "The prefix 'Over-' indicates too much of something (e.g., overdramatic, overshared)."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'In 2025, my brother ______ international law at the university.'",
-    "options": ["Studying", "Studies", "Study", "Will be studying"],
-    "answer": 3,
-    "explanation": "Future continuous: will + be + verb with -ing."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'The food here is awful, I don't think people in this restaurant ______ cook.'",
-    "options": ["Have to", "Can", "Shouldn't", "Can't"],
-    "answer": 1,
-    "explanation": "Modal verb 'can' is used for ability."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'If you had worked hard, you ______ a raise.'",
-    "options": ["Would have gotten", "Would get", "Will get", "Get"],
-    "answer": 0,
-    "explanation": "Third conditional: if + past perfect, would have + v3."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'If you buy her flowers, she ______ happy.'",
-    "options": ["Be", "Will be", "Would be", "Would have been"],
-    "answer": 1,
-    "explanation": "First conditional: if + present simple, will + infinitive."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'He forgot how ______ the microwave.'",
-    "options": ["To use", "Use", "Using", "Uses"],
-    "answer": 0,
-    "explanation": "Forget how + to + infinitive."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'Our sales ______ in the recent five years and are still going up.'",
-    "options": ["Increase", "Increased", "Have increased", "Increases"],
-    "answer": 2,
-    "explanation": "Present perfect: have/has + v3 (used with 'recent', 'since', 'for')."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'Somebody ______ my cookies. There are very few left.'",
-    "options": ["Ate", "Has been eating", "Had been eating", "Have been eating"],
-    "answer": 1,
-    "explanation": "Present perfect continuous: has/have been + verb with -ing."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'We were late for the plane because we ______ our passports.'",
-    "options": ["Have forgotten", "Forget", "Had forgotten", "Forgot"],
-    "answer": 2,
-    "explanation": "Past perfect (had + v3) is used for an action completed before another past action."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'The candidate ______ a meeting with the CEO. Before that, he had met the manager.'",
-    "options": ["Has", "Had", "Had had", "Have"],
-    "answer": 2,
-    "explanation": "Past perfect: had + v3. 'Had had' is the past perfect form of the verb 'have'."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'Prices ______ nowadays; it doesn't seem it will stop rising anytime soon.'",
-    "options": ["Soars", "Soaring", "Are soaring", "Soared"],
-    "answer": 2,
-    "explanation": "Present continuous: subject + verb to be + verb with -ing (key words: nowadays)."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'If you had worked hard, you ______ a raise.'",
-    "options": ["Would have gotten", "Would get", "Will get", "Get"],
-    "answer": 0,
-    "explanation": "Third conditional: if + past perfect, would have + v3."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'If you buy her flowers, she ______ happy.'",
-    "options": ["Be", "Will be", "Would be", "Would have been"],
-    "answer": 1,
-    "explanation": "First conditional: if + present simple, will + infinitive."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'The food here is awful, I don't think people in this restaurant ______ cook.'",
-    "options": ["Have to", "Can", "Shouldn't", "Can't"],
-    "answer": 1,
-    "explanation": "Modal verb 'can' is used for ability."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'You are not allowed ______ class without taking permission.'",
-    "options": ["Leaves", "To leave", "Leave", "Leaving"],
-    "answer": 1,
-    "explanation": "Allowed + to + verb infinitive."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'In 2025, my brother ______ international law at the university.'",
-    "options": ["Studying", "Studies", "Study", "Will be studying"],
-    "answer": 3,
-    "explanation": "Future continuous: will + be + verb with -ing."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "What is the active form of: 'Handball is played'?",
-    "options": ["Handball was played", "They play handball", "They are playing handball", "They played handball"],
-    "answer": 1,
-    "explanation": "Passive 'is played' converts to active 'They play handball' (present simple)."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "What is the passive form of: 'Julia rescued three cats'?",
-    "options": ["Three cats are rescued by Julia", "Three cats were rescued by Julia", "Three cats had been rescued by Julia", "Julia had rescued three cats"],
-    "answer": 1,
-    "explanation": "Past simple passive: object + was/were + v3 + by + subject."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'The project depends ______ the newly approved budget.'",
-    "options": ["On", "For", "Into", "At"],
-    "answer": 0,
-    "explanation": "Depends + on."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'Many accidents are caused ______ people driving too fast.'",
-    "options": ["At", "With", "By", "For"],
-    "answer": 2,
-    "explanation": "Caused + by."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Change to reported speech: 'Ahmad said, \"I am sorry\"'",
-    "options": ["Ahmad said that I was sorry", "Ahmad said that he is sorry", "Ahmad said that he was sorry", "Ahmad said that he had been sorry"],
-    "answer": 2,
-    "explanation": "Present simple 'am' changes to past simple 'was' in reported speech. Pronoun changes from 'I' to 'he'."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Change to reported speech: 'She said, \"I have broken your pen\"'",
-    "options": ["She told me that I had broken her pen", "She told me that she had broken my pen", "She told me that she has broken my pen", "She told me that she broke your pen"],
-    "answer": 1,
-    "explanation": "Present perfect 'have broken' changes to past perfect 'had broken'. 'Your' changes to 'my'."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Change to reported speech: 'Ali said, \"I am studying now\"'",
-    "options": ["Ali said that he was studying then", "Ali said that he is studying now", "Ali said that he was studying now", "Ali said that he had been studying then"],
-    "answer": 0,
-    "explanation": "Present continuous 'am studying' changes to past continuous 'was studying'. 'Now' changes to 'then'."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'She asked her colleague ______ offer some help.'",
-    "options": ["To", "For", "With", "At"],
-    "answer": 0,
-    "explanation": "Asked + subject + to + infinitive."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'He is fed up ______ this meeting.'",
-    "options": ["With", "At", "About", "On"],
-    "answer": 0,
-    "explanation": "Fed up + with."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'She spends so much money and time ______ clothes and shopping.'",
-    "options": ["At", "On", "For", "In"],
-    "answer": 1,
-    "explanation": "Spends + time/money/effort + on."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Which prefix is used to indicate too much of something?",
-    "options": ["Over-", "Un-", "Re-", "Under-"],
-    "answer": 0,
-    "explanation": "The prefix 'Over-' indicates too much of something (e.g., overdramatic, overshared)."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Choose the appropriate prefix to the word 'do'.",
-    "options": ["Non-", "Im-", "Un-", "Dis-"],
-    "answer": 2,
-    "explanation": "Undo (Un- + do) means to reverse an action."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'I'm looking forward to ______ her soon.'",
-    "options": ["Met", "Meeting", "Meet", "Meets"],
-    "answer": 1,
-    "explanation": "Looking forward to + verb with -ing."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'She remembered how ______ an essay.'",
-    "options": ["Write", "To write", "Writes", "Writing"],
-    "answer": 1,
-    "explanation": "Remember how + to + infinitive."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'Our sales ______ in the recent five years and are still going up.'",
-    "options": ["Have increased", "Increased", "Increase", "Increases"],
-    "answer": 0,
-    "explanation": "Present perfect: have/has + v3 (recent - since - for)."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'Somebody ______ my cookies. There are very few left.'",
-    "options": ["Ate", "Has been eating", "Had been eating", "Have been eating"],
-    "answer": 1,
-    "explanation": "Present perfect continuous: has/have been + verb with -ing."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'This year we ______ new teaching methods.'",
-    "options": ["Have been using", "Are been using", "Is using", "Has been using"],
-    "answer": 0,
-    "explanation": "Present perfect continuous: subject + have/has + been + v-ing."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'Prices ______ nowadays; it doesn't seem it will stop rising anytime soon.'",
-    "options": ["Soars", "Soaring", "Are soaring", "Soared"],
-    "answer": 2,
-    "explanation": "Present continuous: subject + verb to be + verb with -ing."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'She ______ drive her father's car when she was only 15.'",
-    "options": ["Has been allowed to", "Is allowed to", "Was allowed to", "Allowed to"],
-    "answer": 2,
-    "explanation": "Past simple passive: was/were + allowed to."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'The candidate ______ a meeting with the CEO. Before that, he had met the manager.'",
-    "options": ["Has", "Had", "Had had", "Have"],
-    "answer": 2,
-    "explanation": "Past perfect: had + v3. 'Had had' is the past perfect of 'have'."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'Professor Fouad is specialized ______ Mechanical Engineering.'",
-    "options": ["With", "On", "In", "At"],
-    "answer": 2,
-    "explanation": "Specialized + in."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'She asked her colleague ______ offer some help.'",
-    "options": ["To", "For", "With", "At"],
-    "answer": 0,
-    "explanation": "Asked + subject + to + infinitive."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'He is fed up ______ this meeting.'",
-    "options": ["With", "At", "About", "On"],
-    "answer": 0,
-    "explanation": "Fed up + with."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'She requested this information ______ forwarded to her e-mail.'",
-    "options": ["Be", "To", "To be", "Being"],
-    "answer": 2,
-    "explanation": "Requested + to + be + v3."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'Does this dictionary belong ______ you?'",
-    "options": ["About", "To", "For", "With"],
-    "answer": 1,
-    "explanation": "Belong + to + subject."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'She spends so much money and time ______ clothes and shopping.'",
-    "options": ["At", "On", "For", "In"],
-    "answer": 1,
-    "explanation": "Spends + time/money/effort + on."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'Many accidents are caused ______ people driving too fast.'",
-    "options": ["At", "With", "By", "For"],
-    "answer": 2,
-    "explanation": "Caused + by."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'The project depends ______ the newly approved budget.'",
-    "options": ["On", "For", "Into", "At"],
-    "answer": 0,
-    "explanation": "Depends + on."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'I find it very difficult to concentrate ______ the presentation when I am hungry.'",
-    "options": ["After", "With", "On", "At"],
-    "answer": 2,
-    "explanation": "Concentrate + on."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'You shouldn't be critical ______ others.'",
-    "options": ["On", "Of", "Off", "At"],
-    "answer": 1,
-    "explanation": "Critical + of."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'I'm looking forward to ______ her soon.'",
-    "options": ["Met", "Meeting", "Meet", "Meets"],
-    "answer": 1,
-    "explanation": "Looking forward to + verb with -ing."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'This book deals ______ the idea of National Independence.'",
-    "options": ["With", "For", "That", "At"],
-    "answer": 0,
-    "explanation": "Deals + with."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'He suggested ______ to Spain for Christmas holidays.'",
-    "options": ["To going", "Going", "Racing", "Go"],
-    "answer": 1,
-    "explanation": "Suggested + verb with -ing."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'I prefer tea ______ coffee.'",
-    "options": ["With", "Over", "To", "Than"],
-    "answer": 2,
-    "explanation": "Prefer 'a' to 'b'."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'She remembered ______ the book on the shelf.'",
-    "options": ["Have put", "Put", "Putting", "Puts"],
-    "answer": 2,
-    "explanation": "Remembered + verb with -ing."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'She provided us ______ the missing data.'",
-    "options": ["With", "For", "In", "At"],
-    "answer": 0,
-    "explanation": "Provide + subject + with."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "Complete the sentence: 'I am thinking ______ buying a new house.'",
-    "options": ["Of", "On", "Off", "At"],
-    "answer": 0,
-    "explanation": "Thinking + of + verb with -ing."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "What is the active form of: 'Handball is played'?",
-    "options": ["Handball was played", "They played handball", "They are playing handball", "They play handball"],
-    "answer": 3,
-    "explanation": "Passive 'is played' converts to active 'They play handball' (present simple)."
-  },
-  {
-    "chapter": "Grammar",
-    "q": "What is the passive form of: 'Julia rescued three cats'?",
-    "options": ["Three cats are rescued by Julia", "Three cats had been rescued by Julia", "Three cats were rescued by Julia", "Julia had rescued three cats"],
-    "answer": 2,
-    "explanation": "Past simple passive: object + was/were + v3 + by + subject."
-  }
+  { "chapter": "Unit 1", "q": "The main goal of education according to Unit 1 is to:", "options": ["Memorize facts", "Facilitate learning and acquire knowledge through systematic teaching", "Replace teachers with technology", "Standardize all students"], "answer": 1, "explanation": "Education is the process of acquiring knowledge, skills, and values through teaching and learning." },
+  { "chapter": "Unit 1", "q": "What is the 'flipped classroom' approach?", "options": ["Teachers lecture during class and students do homework at home", "Students watch videos at home and do practice in class with teacher guidance", "Students teach the class instead of teachers", "No homework is given"], "answer": 1, "explanation": "In a flipped classroom, students review materials (videos/readings) before class and engage in discussions and hands-on activities during class." },
+  { "chapter": "Unit 1", "q": "The present perfect continuous is used to:", "options": ["Talk about completed actions", "Talk about recent, continuing actions or how long something has been happening", "Talk about future plans", "Talk about past habits"], "answer": 1, "explanation": "Present perfect continuous is used for recent, continuing actions or to say how long something has been happening." },
+  { "chapter": "Unit 1", "q": "Complete the sentence: 'I ______ chocolate since I was born.'", "options": ["liked", "have liked", "has liked", "likes"], "answer": 1, "explanation": "Use present perfect simple (have liked) with 'since' to talk about experiences." },
+  { "chapter": "Unit 1", "q": "What does the word 'illiterate' mean?", "options": ["Unable to read or write", "Unable to speak", "Unable to walk", "Unable to see"], "answer": 0, "explanation": "Illiterate means unable to read or write." },
+  { "chapter": "Unit 1", "q": "A mentor is:", "options": ["A student who struggles", "An experienced and trusted advisor or guide", "A type of technology", "A school building"], "answer": 1, "explanation": "A mentor is an experienced and trusted advisor or guide." },
+  { "chapter": "Unit 1", "q": "In the context of education, 'digital literacy' refers to:", "options": ["The ability to read and write", "The ability to use digital technology and online resources effectively", "The ability to fix computers", "The ability to program in Python"], "answer": 1, "explanation": "Digital literacy is the ability to use digital technology and online resources effectively." },
+  { "chapter": "Unit 1", "q": "What is 'problem-solving'?", "options": ["Creating new problems", "The process of finding solutions to difficult or complex issues", "Ignoring problems", "Memorizing solutions"], "answer": 1, "explanation": "Problem-solving is the process of finding solutions to difficult or complex issues." },
+  { "chapter": "Unit 1", "q": "Choose the correct form: 'She decided ______ two miles every day.'", "options": ["Running", "Run", "To run", "Runs"], "answer": 2, "explanation": "Decided + to + verb in infinitive. She decided to run." },
+  { "chapter": "Unit 1", "q": "What is the meaning of 'obsolete'?", "options": ["Very modern", "No longer in use or outdated", "Extremely useful", "Expensive"], "answer": 1, "explanation": "Obsolete means no longer in use or outdated." },
+  { "chapter": "Unit 2", "q": "Networking is:", "options": ["Connecting computers", "The practice of making professional connections and relationships", "Watching television", "A type of software"], "answer": 1, "explanation": "Networking is the practice of making professional connections and relationships." },
+  { "chapter": "Unit 2", "q": "What does 'rapport' mean?", "options": ["A type of report", "A close and harmonious relationship or connection", "A formal meeting", "A business card"], "answer": 1, "explanation": "Rapport is a close and harmonious relationship or connection." },
+  { "chapter": "Unit 2", "q": "In networking, what should you do when you enter a room?", "options": ["Wait for people to come to you", "Approach groups of three people that contain at least one woman", "Avoid eye contact", "Stand alone in a corner"], "answer": 1, "explanation": "Networking tips suggest approaching groups of three people that contain at least one woman." },
+  { "chapter": "Unit 2", "q": "What is the past perfect tense used for?", "options": ["Actions happening now", "An event that occurred before another event in the past", "Future plans", "Daily routines"], "answer": 1, "explanation": "Past perfect is used to talk about an event that occurred before another event in the past." },
+  { "chapter": "Unit 2", "q": "Complete the sentence: 'We were late for the plane because we ______ our passports.'", "options": ["Have forgotten", "Forget", "Had forgotten", "Forgot"], "answer": 2, "explanation": "Use past perfect (had forgotten) for an action completed before another past action." },
+  { "chapter": "Unit 2", "q": "What does 'collaboration' mean?", "options": ["Working alone", "The act of working together or cooperating with others", "Competing with others", "Ignoring others"], "answer": 1, "explanation": "Collaboration is the act of working together or cooperating with others." },
+  { "chapter": "Unit 2", "q": "A 'seminar' is:", "options": ["A type of exam", "A conference or meeting for discussion and learning", "A holiday", "A sports event"], "answer": 1, "explanation": "A seminar is a conference or meeting for discussion and learning." },
+  { "chapter": "Unit 2", "q": "What is 'body language'?", "options": ["A type of exercise", "Non-verbal communication through gestures, posture, and facial expressions", "A language spoken in one country", "A written language"], "answer": 1, "explanation": "Body language is non-verbal communication through gestures, posture, and facial expressions." },
+  { "chapter": "Unit 2", "q": "What does 'potential' mean?", "options": ["Having no ability", "Having the capability to develop or achieve something", "Being very old", "Being very tired"], "answer": 1, "explanation": "Potential means having the capability to develop or achieve something." },
+  { "chapter": "Unit 3", "q": "What is 'etiquette'?", "options": ["A type of food", "The customary code of polite behavior in society", "A type of technology", "A language"], "answer": 1, "explanation": "Etiquette is the customary code of polite behavior in society or among a group." },
+  { "chapter": "Unit 3", "q": "What does 'monochronic' refer to?", "options": ["Doing many things at once", "A cultural preference for doing one thing at a time and valuing punctuality", "A type of color", "A type of music"], "answer": 1, "explanation": "Monochronic relates to a cultural preference for doing one thing at a time and valuing punctuality." },
+  { "chapter": "Unit 3", "q": "What does 'polychronic' refer to?", "options": ["Doing one thing at a time", "A cultural preference for doing multiple tasks at once and valuing flexibility", "A type of government", "A type of art"], "answer": 1, "explanation": "Polychronic relates to a cultural preference for doing multiple tasks at once and valuing flexibility." },
+  { "chapter": "Unit 3", "q": "A 'stereotype' is:", "options": ["A scientific fact", "A widely held but oversimplified belief or idea about a particular type of person", "A type of music", "A historical event"], "answer": 1, "explanation": "A stereotype is a widely held but oversimplified belief or idea about a particular type of person or thing." },
+  { "chapter": "Unit 3", "q": "What does 'tolerance' mean?", "options": ["The acceptance of different opinions, beliefs, or practices", "The refusal to accept differences", "A type of disease", "A type of building"], "answer": 0, "explanation": "Tolerance is the acceptance of different opinions, beliefs, or practices." },
+  { "chapter": "Unit 3", "q": "What is 'proxemics'?", "options": ["The study of space in communication", "The study of numbers", "The study of ancient civilizations", "The study of weather"], "answer": 0, "explanation": "Proxemics is the study of the use of space in communication." },
+  { "chapter": "Unit 3", "q": "What does 'assume' mean?", "options": ["To prove something", "To take for granted without proof; suppose", "To question something", "To deny something"], "answer": 1, "explanation": "Assume means to take for granted without proof; suppose." },
+  { "chapter": "Unit 3", "q": "What is an 'artefact'?", "options": ["A modern invention", "An object made by a human being, typically of historical or cultural significance", "A type of food", "A type of animal"], "answer": 1, "explanation": "An artefact is an object made by a human being, typically one of historical or cultural significance." },
+  { "chapter": "Unit 3", "q": "What does 'controversial' mean?", "options": ["Agreed upon by everyone", "Causing disagreement or dispute", "Very old", "Very new"], "answer": 1, "explanation": "Controversial means causing disagreement or dispute; often due to differing opinions." },
+  { "chapter": "Unit 3", "q": "What is a 'researcher'?", "options": ["A person who teaches", "A person who conducts investigations to gather information and knowledge", "A person who sells products", "A person who drives cars"], "answer": 1, "explanation": "A researcher is a person who conducts investigations to gather information and knowledge." },
+  { "chapter": "Vocabulary", "q": "What is the opposite meaning of being able to read and write?", "options": ["Unliterate", "Illiterate", "Literate", "Unknowledgeable"], "answer": 1, "explanation": "Illiterate means unable to read or write." },
+  { "chapter": "Vocabulary", "q": "In the context of research, what does 'statistics' refer to?", "options": ["The art of storytelling through data", "The study of living organisms", "The study of ancient civilizations", "The collection and analysis of numerical data"], "answer": 3, "explanation": "Statistics is the collection, analysis, interpretation, and presentation of numerical data." },
+  { "chapter": "Vocabulary", "q": "In the future, robots might be used in ______ labor, or to perform other hazardous tasks.", "options": ["Initiative", "Delicate", "Manual", "Reliable"], "answer": 2, "explanation": "Manual labor refers to physical work done by humans." },
+  { "chapter": "Vocabulary", "q": "The following has the same meaning as the word 'GLOBAL'.", "options": ["Individual", "Specific", "Universal", "Particular"], "answer": 2, "explanation": "Global means worldwide or universal." },
+  { "chapter": "Vocabulary", "q": "______ is someone who provides guidance to learners telling them how to do something.", "options": ["A pilot", "An actor", "A tutor", "A pirate"], "answer": 2, "explanation": "A tutor provides guidance to learners." },
+  { "chapter": "Vocabulary", "q": "The president's family was a humble ______; they were poor people without a good position in society.", "options": ["Cultures", "Dimensions", "Nationalities", "Origins"], "answer": 3, "explanation": "Origins refer to a person's background or family history." },
+  { "chapter": "Vocabulary", "q": "In the context of including or containing, what is a synonym for the word 'comprise'?", "options": ["Exclude", "Remove", "Divide", "Encompass"], "answer": 3, "explanation": "Comprise means to include or contain; encompass is a synonym." },
+  { "chapter": "Vocabulary", "q": "Our professor ______ a lot of research on stem cells.", "options": ["Made", "Did", "Won", "Achieved"], "answer": 1, "explanation": "Did research is the correct verb-noun combination." },
+  { "chapter": "Vocabulary", "q": "What is the opposite of the word 'polychronic'?", "options": ["Monochronic", "Multichronic", "Simultaneous", "Chronological"], "answer": 0, "explanation": "Monochronic is the opposite of polychronic." },
+  { "chapter": "Vocabulary", "q": "She is ______; she has a PhD in neuroscience.", "options": ["Well-educated", "Good-educated", "Wel-educated", "High-educated"], "answer": 0, "explanation": "Well-educated is the correct compound adjective." },
+  { "chapter": "Vocabulary", "q": "The project was completed on time due to the team's ______.", "options": ["Sense of humor", "Dedication", "Effortless efforts", "Charity"], "answer": 1, "explanation": "Dedication means commitment and hard work." },
+  { "chapter": "Vocabulary", "q": "An unfair and unreasonable opinion or feeling, especially when formed without enough thought or knowledge.", "options": ["Karma", "Prejudice", "Justice", "Fairness"], "answer": 1, "explanation": "Prejudice is an unfair and unreasonable opinion or feeling." },
+  { "chapter": "Vocabulary", "q": "______ has become a powerful asset in the current workplace.", "options": ["Currying favor", "Unoriginally", "Emotional intelligence", "Strength"], "answer": 2, "explanation": "Emotional intelligence is a powerful asset in the workplace." },
+  { "chapter": "Vocabulary", "q": "It's a cheap ring but it has a great sentimental ______ for me.", "options": ["Value", "Tradition", "Belief", "Fashion"], "answer": 0, "explanation": "Sentimental value refers to the emotional importance of an object." },
+  { "chapter": "Vocabulary", "q": "Includes transportation systems, communication networks, sewage, water and school systems.", "options": ["Infrastructure", "Overpopulation", "Overcrowding", "Biodiversity"], "answer": 0, "explanation": "Infrastructure refers to the fundamental systems and facilities necessary for society." },
+  { "chapter": "Vocabulary", "q": "What does the term 'millennial' refer to?", "options": ["A type of ancient writing system", "A scientific measurement of time", "A type of renewable energy source", "A person belonging to the generation between the 1980s and 2000s"], "answer": 3, "explanation": "A millennial is a person born between the early 1980s and late 1990s." },
+  { "chapter": "Vocabulary", "q": "The city flourished in the post-war period, witnessed rapid growth and revitalization. The prefix 'post' means:", "options": ["After", "Before", "Since", "During"], "answer": 0, "explanation": "The prefix 'post' means after." },
+    { "chapter": "Vocabulary", "q": "Scientists ______ any possibility that the earth is flat.", "options": ["Disprove", "Prove", "Dysfunction"], "answer": 0, "explanation": "Scientists disprove (show to be false) any possibility that the earth is flat." },
+  { "chapter": "Vocabulary", "q": "Governments should depend on ______ to get reliable researches.", "options": ["Research organizations", "Scientific journals", "Foundation"], "answer": 0, "explanation": "Research organizations are reliable sources for research." },
+  { "chapter": "Vocabulary", "q": "USA is known for its cultural ______.", "options": ["Flexibility", "Amount", "Diversity"], "answer": 2, "explanation": "The USA is known for its cultural diversity." },
+  { "chapter": "Vocabulary", "q": "We challenged his political ______.", "options": ["Believes", "Talks", "Beliefs"], "answer": 2, "explanation": "Beliefs is the correct noun form here." },
+  { "chapter": "Vocabulary", "q": "I cannot ______.", "options": ["Get along with", "Get through", "Get the point"], "answer": 2, "explanation": "Get the point means understand." },
+  { "chapter": "Vocabulary", "q": "Customs officers must ______ our passport before travelling.", "options": ["Allow", "Validate"], "answer": 1, "explanation": "Validate means to check or confirm officially." },
+  { "chapter": "Vocabulary", "q": "The weather looked bad but they insisted on continuing their picnic ______.", "options": ["Regardless", "Definitely", "Absolutely"], "answer": 0, "explanation": "Regardless means without being affected by the weather." },
+  { "chapter": "Vocabulary", "q": "His boss ______ him for his bad work habits.", "options": ["Criticized", "Praised", "Pretend"], "answer": 0, "explanation": "Criticized means expressed disapproval." },
+  { "chapter": "Vocabulary", "q": "He ______ photos from his digital camera to his computer.", "options": ["Uploaded", "Signed", "Saved"], "answer": 0, "explanation": "Uploaded means transferred from a device to a computer." },
+  { "chapter": "Vocabulary", "q": "The company has a plan to ______ a new product.", "options": ["Cancel", "Launch", "Buy"], "answer": 1, "explanation": "Launch a new product means introduce it." },
+  { "chapter": "Vocabulary", "q": "He showed ______ against women in particular.", "options": ["Tendency", "Admiration", "Bias"], "answer": 2, "explanation": "Bias means prejudice." },
+  { "chapter": "Vocabulary", "q": "Changing one's mind many times about a specific decision shows ______ and hesitation.", "options": ["Corruption", "Comfort", "Uncertainty"], "answer": 2, "explanation": "Uncertainty means not being sure." },
+  { "chapter": "Vocabulary", "q": "The word ______ refers to a group of people living in the same place or having a particular characteristic in common.", "options": ["Circle", "Community", "Band"], "answer": 1, "explanation": "Community is the correct term." },
+  { "chapter": "Vocabulary", "q": "Before writing your essay, please read the question ______ carefully.", "options": ["Promotion", "Prompt", "Response"], "answer": 1, "explanation": "Prompt means the question or instruction." },
+  { "chapter": "Vocabulary", "q": "One type of learners is the ______ learner who needs to view material in order to effectively learn.", "options": ["Recurrent", "Visual", "Reluctant"], "answer": 1, "explanation": "Visual learners learn by seeing." },
+  { "chapter": "Vocabulary", "q": "The ______ idea of your project is good but it needs further details.", "options": ["Initial", "Formal", "Repeated"], "answer": 0, "explanation": "Initial means first or beginning." },
+  { "chapter": "Vocabulary", "q": "The report has so many mistakes. The operations department will take the ______ for drafting such a report.", "options": ["Act", "Blame", "Refuse"], "answer": 1, "explanation": "Take the blame means accept responsibility." },
+  { "chapter": "Vocabulary", "q": "A tutor should ______ students to pose questions in class.", "options": ["Response", "Encourage", "Progress"], "answer": 1, "explanation": "Encourage means support or motivate." },
+  { "chapter": "Vocabulary", "q": "A child needs to ______ with the surrounding objects.", "options": ["Experiment", "Cover", "Recognize"], "answer": 0, "explanation": "Experiment with means try out." },
+  { "chapter": "Vocabulary", "q": "I was absent last lecture and my ______ says that the lecturer needs a draft of the research paper by next week.", "options": ["janitor", "classmate", "manager"], "answer": 1, "explanation": "A classmate would inform you about the lecture." },
+  { "chapter": "Vocabulary", "q": "The third type of memory is the ______ memory that has to do with our senses.", "options": ["Fragile", "Short-term", "Sensory"], "answer": 2, "explanation": "Sensory memory relates to the senses." },
+  { "chapter": "Vocabulary", "q": "The presenter has successfully ______ all audience.", "options": ["Involved", "Invaded", "Performed"], "answer": 0, "explanation": "Involved all audience means engaged them." },
+  { "chapter": "Vocabulary", "q": "The report ______ section informs that the project has to reach a closer within the next 6 months.", "options": ["Found", "findings", "Employees"], "answer": 1, "explanation": "Findings section reports results." },
+  { "chapter": "Vocabulary", "q": "A ______ plan gives a clue to the consequences that are going to happen in the near future.", "options": ["Short term", "Long-term", "Moderate-term"], "answer": 0, "explanation": "Short-term plan deals with the near future." },
+  { "chapter": "Vocabulary", "q": "I don't know the name of the man, but I can surely ______ his face.", "options": ["Refill", "recognize", "Redeem"], "answer": 1, "explanation": "Recognize means identify." },
+  { "chapter": "Vocabulary", "q": "This project's budget will ______ be 10,000,000 $.", "options": ["Average", "Approximately", "Difficult"], "answer": 1, "explanation": "Approximately means about." },
+  { "chapter": "Vocabulary", "q": "The word 'major' is a ______ for the word 'important'.", "options": ["Antonym", "Synonym", "Acronym"], "answer": 1, "explanation": "Synonym means same meaning." },
+  { "chapter": "Vocabulary", "q": "I need to hire an ______ secretary with five years experience.", "options": ["Affective", "Affect", "Efficient"], "answer": 2, "explanation": "Efficient means productive." },
+  { "chapter": "Vocabulary", "q": "The ______ decided to operate on the infected leg tomorrow morning.", "options": ["Surgeon", "Clown", "Professor"], "answer": 0, "explanation": "A surgeon performs operations." },
+  { "chapter": "Vocabulary", "q": "After your accident, I decided to put ______ cycling.", "options": ["Out", "On", "Off"], "answer": 2, "explanation": "Put off means postpone or stop." },
+  { "chapter": "Vocabulary", "q": "For many cultures, the handshake is a sign of ______.", "options": ["Fleeting", "Grieving", "Greeting"], "answer": 2, "explanation": "Greeting is the correct word." },
+  { "chapter": "Vocabulary", "q": "Arranging ______ means arranging a place to stay.", "options": ["Accounting", "Accommodations", "Acclamations"], "answer": 1, "explanation": "Accommodations means lodging." },
+  { "chapter": "Vocabulary", "q": "Competitors usually compete on the ______.", "options": ["Ice rink", "Iceberg", "Ice ring"], "answer": 0, "explanation": "Ice rink is where skating/competitions happen." },
+  { "chapter": "Vocabulary", "q": "Let's ______ the situation.", "options": ["Make up", "Make good", "Make the most of"], "answer": 2, "explanation": "Make the most of means use well." },
+  { "chapter": "Vocabulary", "q": "To look at the differences between two or more things is to ______.", "options": ["A ruin", "Compare", "Startle"], "answer": 1, "explanation": "Compare means examine differences." },
+  { "chapter": "Vocabulary", "q": "I'm ______ to go.", "options": ["Already", "Readily", "All ready"], "answer": 2, "explanation": "All ready means fully prepared." },
+  { "chapter": "Vocabulary", "q": "My bookcase is a mess. I need to ______ my books.", "options": ["sort out", "put up", "fix up"], "answer": 0, "explanation": "Sort out means organize." },
+  { "chapter": "Vocabulary", "q": "He finally ______ his mind and decided to retire early.", "options": ["Ran into", "Bought into", "Made up"], "answer": 2, "explanation": "Made up his mind means decided." },
+  { "chapter": "Vocabulary", "q": "'The band is going to play live later today.' Find the antonym for the word 'live'.", "options": ["Great", "Alive", "Recorded"], "answer": 2, "explanation": "Recorded is the opposite of live." },
+  { "chapter": "Vocabulary", "q": "Helping animals is what ______. He just can't stand it.", "options": ["Makes him tick", "Makes no difference", "Makes no him tick"], "answer": 0, "explanation": "Makes him tick means motivates him." },
+  { "chapter": "Vocabulary", "q": "The workers stayed on the job till ______.", "options": ["Daydream", "Daylight", "Daybreak"], "answer": 1, "explanation": "Till daylight means until morning." },
+  { "chapter": "Vocabulary", "q": "That is an ______ different problem.", "options": ["All together", "Altogether", "Ill together"], "answer": 1, "explanation": "Altogether means completely." },
+  { "chapter": "Vocabulary", "q": "I can ______ the shopping tonight.", "options": ["Make", "Do", "Go"], "answer": 1, "explanation": "Do the shopping is the correct collocation." },
+  { "chapter": "Vocabulary", "q": "A small booklet with pictures and information about a product is called a ______.", "options": ["Brochure", "Novel", "Autobiography"], "answer": 0, "explanation": "Brochure is a small booklet." },
+  { "chapter": "Vocabulary", "q": "I forgot to ______ you to my friend Jennifer.", "options": ["Inform", "Introduce", "Bring"], "answer": 1, "explanation": "Introduce someone to someone else." },
+  { "chapter": "Vocabulary", "q": "Guess who I ______ yesterday?", "options": ["Made up", "Put on", "Ran into"], "answer": 2, "explanation": "Ran into means met by chance." },
+  { "chapter": "Vocabulary", "q": "George can't stand his work anymore. If I were in his shoes I would ______ that lousy job.", "options": ["Quit", "Quiz", "Quote"], "answer": 0, "explanation": "Quit means leave a job." },
+  { "chapter": "Vocabulary", "q": "I like seafood especially ______.", "options": ["Seals", "Shrimps", "Jellyfish"], "answer": 1, "explanation": "Shrimps are seafood." },
+  { "chapter": "Vocabulary", "q": "Let's ______ skiing.", "options": ["Play", "Go", "Do"], "answer": 1, "explanation": "Go skiing is the correct collocation." },
+  { "chapter": "Vocabulary", "q": "A carpenter ______.", "options": ["Cleans homes", "Builds homes", "Demolishes homes"], "answer": 1, "explanation": "A carpenter builds/repairs wooden structures." },
+  { "chapter": "Vocabulary", "q": "Her ______ in music showed at an early age.", "options": ["Talent", "Ability", "Distaste"], "answer": 0, "explanation": "Talent in music is the correct collocation." },
+  { "chapter": "Vocabulary", "q": "In which word are the letters 'gh' silent?", "options": ["Rough", "Enough", "Neighbor"], "answer": 2, "explanation": "In neighbor, gh is silent." },
+  { "chapter": "Vocabulary", "q": "In which word is the letter 'g' silent?", "options": ["Lgnore", "Sign", "finger"], "answer": 1, "explanation": "In sign, g is silent." },
+  { "chapter": "Vocabulary", "q": "He has 'a great deal' of patience. What does 'a great deal' mean?", "options": ["Most", "Very little", "A lot of"], "answer": 2, "explanation": "A great deal means a lot of." },
+  { "chapter": "Vocabulary", "q": "Mountain climbing is a ______ sport.", "options": ["Dangerly", "Dangerous", "Dangerously"], "answer": 1, "explanation": "Dangerous is the adjective." },
+  { "chapter": "Vocabulary", "q": "This cake is delicious! What are the ______?", "options": ["recipes", "flavours", "ingredients", "materials"], "answer": 2, "explanation": "Ingredients are what a cake is made from." },
+  { "chapter": "Vocabulary", "q": "This medicine is very ______ tasting.", "options": ["worse", "annoying", "bitter", "worst"], "answer": 2, "explanation": "Bitter is a taste." },
+  { "chapter": "Vocabulary", "q": "We took the children for ice cream at a shop that has over 30 different ______.", "options": ["kinds", "flavours"], "answer": 1, "explanation": "Flavours of ice cream." },
+  { "chapter": "Vocabulary", "q": "She made a ______ drink using a banana, milk, and frozen blueberries.", "options": ["delicious", "great", "smooth", "delicate"], "answer": 2, "explanation": "Smooth drink/smoothie is correct." },
+  { "chapter": "Vocabulary", "q": "The tea was very hot so she had to ______ it very slowly.", "options": ["drinking", "sip", "drink", "sipping"], "answer": 1, "explanation": "Sip means drink slowly." },
+  { "chapter": "Vocabulary", "q": "Can I connect to your ______ please? I don't have enough data on my phone.", "options": ["Cookie", "Browser", "Mobile hotspot", "Power bank"], "answer": 2, "explanation": "A mobile hotspot allows you to share your phone's internet connection." },
+  { "chapter": "Vocabulary", "q": "The factory's old machines were causing pollution and were ______, so they had to be replaced.", "options": ["Unsustainable", "Insustainable", "Dissustainable", "Sustainable"], "answer": 0, "explanation": "Unsustainable means not capable of being maintained without causing harm." },
+  { "chapter": "Vocabulary", "q": "Archaeologists study artifacts and fossils to uncover the mysteries of human life in PREHISTORY.", "options": ["After the outbreak of COVID-19", "An account of 20th-century technological advancements", "The detailed records of a medieval kingdom", "A time before written records"], "answer": 3, "explanation": "Prehistory refers to the time before written records." },
+  { "chapter": "Vocabulary", "q": "The painting in the museum is ______ but there are hundreds of copies.", "options": ["Global", "Cultural", "Original", "Critical"], "answer": 2, "explanation": "Original means it is the first or authentic version." },
+  { "chapter": "Vocabulary", "q": "You need to plan ahead to ______ your goals.", "options": ["Do", "Study", "Become", "Achieve"], "answer": 3, "explanation": "Achieve goals is the correct verb-noun combination." },
+  { "chapter": "Vocabulary", "q": "Digital literacy is becoming ______ these days.", "options": ["Fashionable", "Popular", "Interesting", "Obsolete"], "answer": 1, "explanation": "Digital literacy is becoming popular (or increasingly important)." },
+  { "chapter": "Vocabulary", "q": "An operation is beginning to try to save species of crocodile from ______.", "options": ["Extinction", "Prediction", "Tension", "Suspension"], "answer": 0, "explanation": "Extinction means the complete disappearance of a species." },
+  { "chapter": "Vocabulary", "q": "I can't ______ accessing this website! My laptop might get hacked.", "options": ["Link", "Risk", "Log", "Access"], "answer": 1, "explanation": "Risk accessing means to take the risk of accessing." },
+  { "chapter": "Vocabulary", "q": "I can't think of a better ______ for the job.", "options": ["Candidate", "Offer", "Boss", "Competition"], "answer": 0, "explanation": "Candidate is a person applying for a job." },
+  { "chapter": "Vocabulary", "q": "Choose the appropriate prefix to the word 'do'.", "options": ["Non-", "Im-", "Un-", "Dis-"], "answer": 2, "explanation": "Undo (Un- + do) means to reverse an action." },
+  { "chapter": "Vocabulary", "q": "Have you ever been to ______ Paris?", "options": ["The", "An", "A", "No (zero) article"], "answer": 3, "explanation": "No article is used before city names like Paris." },
+  { "chapter": "Vocabulary", "q": "I like reading ______ short stories.", "options": ["The", "No (zero) article", "A", "An"], "answer": 1, "explanation": "No article is needed when speaking generally about plural nouns." },
+  { "chapter": "Vocabulary", "q": "What is the meaning of 'outstanding'?", "options": ["Expensive", "Excellent", "Energetic", "Expected"], "answer": 1, "explanation": "Outstanding means exceptionally good; excellent." },
+  { "chapter": "Reading", "q": "According to the 'Flipped Classroom' article, what is the primary advantage of this model?", "options": ["It promotes active learning and student engagement", "It requires less teacher involvement", "It relies heavily on technology", "It eliminates the need for classroom discussions"], "answer": 0, "explanation": "The flipped classroom promotes active learning and student engagement." },
+  { "chapter": "Reading", "q": "In the 'Age of Exploration' passage, which country was the first to send explorers to search for a sea route to Asia?", "options": ["Spain", "Portugal", "France", "England"], "answer": 1, "explanation": "Portugal was the first country to send explorers to search for a sea route to Asia." },
+  { "chapter": "Reading", "q": "In the 'Eyeless Sight' passage, what could Rosa Kuleshova do?", "options": ["See with her fingers", "Hear with her nose", "Smell with her ears", "Taste with her hands"], "answer": 0, "explanation": "Rosa Kuleshova could see with her fingers." },
+  { "chapter": "Reading", "q": "According to the 'Birds' passage, how do warblers navigate during daylight?", "options": ["They use the stars", "They rely on the sun for guidance", "They use landmarks only", "They circle helplessly"], "answer": 1, "explanation": "Warblers use the sun for guidance during daylight." },
+    { "chapter": "Reading", "q": "Which cat species is smaller than a jaguar?", "options": ["African lion", "Mountain lion", "Asiatic lion", "Tiger"], "answer": 1, "explanation": "The mountain lion is smaller than a jaguar." },
+  { "chapter": "Reading", "q": "A camouflage helps an animal to ______.", "options": ["jump and attack the prey", "hibernate", "blend in better", "none of the above"], "answer": 2, "explanation": "Camouflage helps an animal blend in." },
+  { "chapter": "Reading", "q": "Baby jaguars stay with their mothers for ______ before going off on their own.", "options": ["one year", "two years", "three years", "four years"], "answer": 1, "explanation": "The passage states baby jaguars stay for two years." },
+  { "chapter": "Reading", "q": "Jaguars and leopards are different because ______.", "options": ["jaguars live in North and South America.", "leopards live in Africa and Asia.", "jaguars have heavier chests, legs, and heads.", "all the above"], "answer": 3, "explanation": "All of these differences are mentioned." },
+  { "chapter": "Reading", "q": "All the following statements are true EXCEPT ______.", "options": ["Jaguars can climb trees.", "Jaguars can sometimes be found in streams or ponds.", "Jaguars live in large groups throughout most of their lives."], "answer": 2, "explanation": "Jaguars are solitary, not group animals." },
+  { "chapter": "Reading", "q": "What does stable mean?", "options": ["decreasing", "increasing", "staying the same", "uncertain"], "answer": 2, "explanation": "Stable means staying the same." },
+  { "chapter": "Reading", "q": "Which of the following animals only preys on Penguin chicks?", "options": ["skuas", "seals", "sharks", "orcas"], "answer": 0, "explanation": "Skuas prey on penguin chicks." },
+  { "chapter": "Reading", "q": "Which of the following is NOT part of the diet of the Emperor Penguin?", "options": ["fish", "crustaceans", "kill", "insects"], "answer": 3, "explanation": "Insects are not part of the Emperor Penguin's diet." },
+  { "chapter": "Reading", "q": "How many eggs are laid by the female Emperor Penguin?", "options": ["3", "2", "1", "0"], "answer": 2, "explanation": "The female Emperor Penguin lays one egg." },
+  { "chapter": "Reading", "q": "To use ethos, a speaker:", "options": ["cites facts and statistics.", "makes use of analogy.", "provides examples.", "maintains credibility through a trustworthy and a reliable figure."], "answer": 3, "explanation": "Ethos is about credibility." },
+  { "chapter": "Reading", "q": "A TV anchor who highlights the miseries of underprivileged social classes is appealing to:", "options": ["Pathos", "Ethos", "Logos", "None"], "answer": 0, "explanation": "Pathos appeals to emotion." },
+  { "chapter": "Reading", "q": "As used in paragraph 2, the opposite of the word credible is:", "options": ["unintelligent", "boring", "dishonest", "amazing"], "answer": 2, "explanation": "Dishonest is the opposite of credible." },
+  { "chapter": "Reading", "q": "According to the passage, logos can build ethos because:", "options": ["an audience is more easily convinced by facts than emotions such as pity or fear.", "an audience is more likely to trust a speaker who uses evidence to support his argument.", "a speaker who overuses pathos might make the audience too emotional and unlikely to be persuaded.", "a speaker can use misleading or false information to make his argument seem more convincing."], "answer": 1, "explanation": "Evidence makes a speaker more trustworthy." },
+  { "chapter": "Reading", "q": "Gestures, body language and facial expressions all reveal:", "options": ["Pathos", "Ethos", "Logos", "None"], "answer": 0, "explanation": "Body language often appeals to pathos." },
+  { "chapter": "Reading", "q": "According to the passage, the most effective tool of persuasion is:", "options": ["Ethos, because you can't persuade an audience that doesn't trust you.", "Logos, because it can also be used to build ethos.", "A combination of ethos, pathos and logos.", "Pathos, because human beings are most easily persuaded by emotions."], "answer": 2, "explanation": "The passage supports a combination of all three." },
+  { "chapter": "Reading", "q": "Aristotle's proposed five basic tools of persuasion.", "options": ["True", "False"], "answer": 1, "explanation": "False. Aristotle proposed three: ethos, pathos, and logos." },
+  { "chapter": "Reading", "q": "The soap commercial was an example given to prove logos.", "options": ["True", "False"], "answer": 1, "explanation": "False. A soap commercial is typically an example of pathos." },
+  { "chapter": "Reading", "q": "Pathos aims at reducing the audience's ability to make a judgment.", "options": ["True", "False"], "answer": 0, "explanation": "Pathos appeals to emotion, which can reduce objective judgment." },
+  { "chapter": "Reading", "q": "Ethos respects the mind of the audience and his ability to judge facts.", "options": ["True", "False"], "answer": 0, "explanation": "Ethos builds trust and respects the audience's judgment." },
+  { "chapter": "Reading", "q": "In the 'Packaging' passage, what is the author's main concern?", "options": ["Packaging is too expensive", "Packaging is using up scarce energy and resources and spoiling the environment", "Packaging is not attractive enough", "Packaging is too difficult to open"], "answer": 1, "explanation": "The author is concerned that packaging uses up scarce energy and resources and spoils the environment." },
+  { "chapter": "Reading", "q": "According to the 'Emperor Penguin' passage, where do Emperor Penguins breed?", "options": ["Along the coast", "In the water", "South America", "The Antarctic interior"], "answer": 3, "explanation": "Emperor Penguins breed in the Antarctic interior." },
+  { "chapter": "Reading", "q": "In the 'Los Angeles' passage, what contributed to the meteoric rise of Los Angeles?", "options": ["The construction of an aqueduct", "The gold rush", "The invention of the internet", "The discovery of diamonds"], "answer": 0, "explanation": "The construction of a 225-mile aqueduct to tap the water of the Owens River contributed to the rise of Los Angeles." },
+  { "chapter": "Reading", "q": "According to the 'Tools of Persuasion' passage, what is Ethos?", "options": ["Appeal to emotion", "Appeal to logic", "A speaker's way of convincing the audience that he is a credible source", "A type of ancient Greek tool"], "answer": 2, "explanation": "Ethos is a speaker's way of convincing the audience that he is a credible source." },
+  { "chapter": "Reading", "q": "In the 'Human Brain' passage, what does the left hemisphere deal with?", "options": ["Feelings and colors", "Rules, lists of information, and short-term memory", "Long-term memory", "Creativity"], "answer": 1, "explanation": "The left hemisphere deals with rules, lists of information, and short-term memory." },
+  { "chapter": "Reading", "q": "In 'A Christmas in March', why did the family keep the Christmas tree up until March?", "options": ["They forgot to take it down", "They wanted to celebrate Christmas twice", "Their son Clifton asked them to leave it up until he returned", "They were too lazy to remove it"], "answer": 2, "explanation": "Clifton asked them to leave the Christmas tree up until he made it back." },
+  { "chapter": "Reading", "q": "According to the 'Beautiful, Powerful Jaguar' passage, what is the jaguar's coloration used for?", "options": ["Attracting mates", "Camouflage", "Warning predators", "Regulating body temperature"], "answer": 1, "explanation": "The jaguar's coloration serves as camouflage." },
+  { "chapter": "Reading", "q": "According to the 'Nocturnal Animals' passage, why are owls effective nocturnal hunters?", "options": ["They have great night vision and excellent hearing", "They have a strong sense of smell", "They are very fast", "They are very large"], "answer": 0, "explanation": "Owls have great night vision and excellent hearing, and their softer feathers allow them to swoop silently." },
+  { "chapter": "Reading", "q": "According to the 'Power of Habit' passage, what are the three components of the habit loop?", "options": ["Procrastination, stress, and reward", "Routine, action, and outcome", "Cue, routine, and reward", "Trigger, behavior, and consequence"], "answer": 2, "explanation": "The habit loop consists of the cue, the routine, and the reward." },
+  { "chapter": "Reading", "q": "According to the 'YouTube' passage, what was the first video uploaded to YouTube?", "options": ["A music video", "Me at the zoo", "A comedy sketch", "A news clip"], "answer": 1, "explanation": "The first YouTube video was entitled 'Me at the zoo'." },
+  { "chapter": "Reading", "q": "According to the 'Museums' passage, where was Madame Tussauds' first permanent exhibition located?", "options": ["Baker Street in London", "Dam Square in Amsterdam", "Las Vegas in Nevada", "Times Square in New York"], "answer": 0, "explanation": "Madame Tussauds established her first permanent exhibition in London's Baker Street." },
+  { "chapter": "Grammar", "q": "Complete the sentence: 'I know you will not believe it. I hate ______ video games very much.'", "options": ["Played", "Playing", "Play", "Plays"], "answer": 1, "explanation": "Hate/love/like/enjoy + verb with -ing." },
+  { "chapter": "Grammar", "q": "Complete the sentence: 'He will be in his office in ______ hour.'", "options": ["A", "An", "No article", "The"], "answer": 1, "explanation": "Use 'an' before words starting with a vowel sound. 'Hour' starts with a vowel sound." },
+  { "chapter": "Grammar", "q": "Complete the sentence: 'You are not allowed ______ class without taking permission.'", "options": ["Leaves", "To leave", "Leave", "Leaving"], "answer": 1, "explanation": "Allowed + to + verb infinitive." },
+   { "chapter": "Grammar", "q": "Please remind me ______ the dishes.", "options": ["to wash", "to washes", "washing"], "answer": 0, "explanation": "Remind + to + infinitive." },
+  { "chapter": "Grammar", "q": "She agreed ______ us next week.", "options": ["to visiting", "visiting", "to visit"], "answer": 2, "explanation": "Agree + to + infinitive." },
+  { "chapter": "Grammar", "q": "We ______ all the books we had yesterday.", "options": ["sell", "sold", "selling"], "answer": 1, "explanation": "Past simple sold matches yesterday." },
+  { "chapter": "Grammar", "q": "Websites that help students to find scholarships to study abroad ______.", "options": ["are not very reliable", "which are not very reliable", "they are not very reliable"], "answer": 0, "explanation": "The main clause needs a verb: are not very reliable." },
+  { "chapter": "Grammar", "q": "The percentage of divorce in Sweden is ______ in France.", "options": ["as high as", "as high", "high as"], "answer": 0, "explanation": "Comparative equality: as high as." },
+  { "chapter": "Grammar", "q": "Companies which ______ by young directors are a good example of successful business.", "options": ["are led", "are leading", "they are led"], "answer": 0, "explanation": "Passive voice: are led." },
+  { "chapter": "Grammar", "q": "If I ______ you, I would accept his offer.", "options": ["would be", "were", "am"], "answer": 1, "explanation": "Second conditional uses were." },
+  { "chapter": "Grammar", "q": "When one ignores a problem, it ______ worse.", "options": ["would get", "gets", "will get"], "answer": 1, "explanation": "Zero conditional/general truth: gets worse." },
+  { "chapter": "Grammar", "q": "Julius Caesar conquered the world. He was still betrayed. The best way to join the two sentences is:", "options": ["He conquered the world, Julius Caesar who was still betrayed.", "Julius Caesar, who conquered the world, was still betrayed.", "Julius Caesar, who was still betrayed, he conquered the world."], "answer": 1, "explanation": "Non-defining relative clause: Julius Caesar, who conquered the world, was still betrayed." },
+  { "chapter": "Grammar", "q": "How come ______ so early?", "options": ["he arrived", "did he arrived", "did he arrive"], "answer": 2, "explanation": "How come + auxiliary + subject + base verb: did he arrive." },
+  { "chapter": "Grammar", "q": "Sarah travelled to Spain, ______ she studied engineering and got her Masters.", "options": ["which", "where", "that"], "answer": 1, "explanation": "Where refers to a place: Spain." },
+  { "chapter": "Grammar", "q": "To be able to fit in a new community, you should deal ______ all sorts of people.", "options": ["for", "with", "to"], "answer": 1, "explanation": "Deal with means interact with." },
+  { "chapter": "Grammar", "q": "Books that contain inappropriate content ______.", "options": ["must to be banned.", "they must be banned.", "must be banned."], "answer": 2, "explanation": "Modal passive: must be banned." },
+  { "chapter": "Grammar", "q": "This issue ______ very infuriating.", "options": ["also is", "also be", "is also"], "answer": 2, "explanation": "Correct word order: is also." },
+  { "chapter": "Grammar", "q": "Barak Obama, the president of the U.S., stayed for two successful terms in his post.", "options": ["who was", "who he was", "which was"], "answer": 0, "explanation": "Non-defining relative clause: who was." },
+  { "chapter": "Grammar", "q": "You love her, ______ you?", "options": ["are", "do", "don't"], "answer": 2, "explanation": "Question tag: don't you?" },
+  { "chapter": "Grammar", "q": "I miss the old days, when I was just a child and I ______ stay with my grandparents all the time.", "options": ["used to", "used", "am used to"], "answer": 0, "explanation": "Used to + infinitive for past habits." },
+  { "chapter": "Grammar", "q": "Ahmed: 'Could you help me with my research, Sara?' Sara: ______ Use 'Ask'", "options": ["Ahmed asked me to help him with his research.", "Ahmed promised to help Sara with her research.", "Sara asked him to help her with the research."], "answer": 0, "explanation": "Reported request: Ahmed asked me to help him." },
+  { "chapter": "Grammar", "q": "______ brushing her teeth, she likes to read in bed before sleeping.", "options": ["After", "As", "When"], "answer": 0, "explanation": "After + v-ing." },
+  { "chapter": "Grammar", "q": "The verb 'sleep' is an example of an ______ verb. It doesn't require an object.", "options": ["Transitive", "Intransitive", "Reported"], "answer": 1, "explanation": "Intransitive verbs do not take a direct object." },
+  { "chapter": "Grammar", "q": "The verb 'give' is an example of a ______ verb. It needs two objects.", "options": ["Transitive", "Intransitive", "Transformative"], "answer": 0, "explanation": "Transitive verbs can take objects." },
+  { "chapter": "Grammar", "q": "I think ______ you can emphasize an apology by saying really or very.", "options": ["in", "of", "that"], "answer": 2, "explanation": "I think that + clause." },
+  { "chapter": "Grammar", "q": "I am going to discuss ______.", "options": ["how we encode sensory information.", "how are we encoding sensory information.", "how will we encode sensory information?"], "answer": 0, "explanation": "Embedded question uses statement order." },
+  { "chapter": "Grammar", "q": "In which of the following sentences, can we delete that?", "options": ["That is the end.", "That is what I found.", "I think that this is the end!"], "answer": 2, "explanation": "That can be omitted after think." },
+  { "chapter": "Grammar", "q": "To make strong recommendation, we can use the following.", "options": ["Visual learners could make notes of all lectures.", "Visual learners should make notes of all lectures.", "Visual learners shall make notes of all lectures."], "answer": 1, "explanation": "Should expresses strong recommendation." },
+  { "chapter": "Grammar", "q": "She asked me if I ______ her father in London.", "options": ["had met", "meet", "have met"], "answer": 0, "explanation": "Reported speech: past perfect had met." },
+  { "chapter": "Grammar", "q": "A verb is a main sentence ______.", "options": ["Component", "Comprise", "Campus"], "answer": 0, "explanation": "Component means part." },
+  { "chapter": "Grammar", "q": "Choose the correct sentence.", "options": ["I think I'll have the chicken.", "I'll have the chicken I think.", "Have the chicken I think I'll"], "answer": 0, "explanation": "Standard word order." },
+  { "chapter": "Grammar", "q": "______ you like ice-cream? How unusual!", "options": ["Don't", "Are", "Do"], "answer": 2, "explanation": "Do you like ice-cream?" },
+  { "chapter": "Grammar", "q": "I've ______ in many countries during my career.", "options": ["Been living", "Lived", "Live"], "answer": 1, "explanation": "Present perfect: I've lived." },
+  { "chapter": "Grammar", "q": "Don't worry. I won't tell ______.", "options": ["Anyone", "Somebody", "Someone"], "answer": 0, "explanation": "Won't tell anyone is correct." },
+  { "chapter": "Grammar", "q": "That grass ______ for weeks. It looks dreadful.", "options": ["Has not been cut", "Had not being cut", "Has been cut"], "answer": 0, "explanation": "Present perfect passive: has not been cut." },
+  { "chapter": "Grammar", "q": "I found ______ to park in the city center.", "options": ["Anywhere", "Somewhere", "Somehow"], "answer": 1, "explanation": "Somewhere means a place." },
+  { "chapter": "Grammar", "q": "She couldn't believe she ______ Brad Pitt.", "options": ["Saw", "had seen", "Is seeing"], "answer": 1, "explanation": "Past perfect: had seen." },
+  { "chapter": "Grammar", "q": "Do you think he'll have finished? ______.", "options": ["Well, he should has", "Well, he should have by now", "Yes, he shouldn't"], "answer": 1, "explanation": "Should have by now is correct." },
+  { "chapter": "Grammar", "q": "Lisa ______ an easy time at work this year.", "options": ["Hasn't", "Didn't have", "Hasn't had"], "answer": 2, "explanation": "Present perfect: hasn't had." },
+  { "chapter": "Grammar", "q": "The baby ______ Her life completely, I never see her nowadays.", "options": ["Taken over", "Has taken over", "Has took over"], "answer": 1, "explanation": "Present perfect: has taken over." },
+  { "chapter": "Grammar", "q": "'Is Jane coming?' 'I ______. I hate her.'", "options": ["hope not", "Are hoping not", "Hope so"], "answer": 0, "explanation": "Hope not is the correct response." },
+  { "chapter": "Grammar", "q": "You ______ find people driving small cars in Kuwait.", "options": ["I'll wouldn't", "I'll shouldn't", "Will not"], "answer": 2, "explanation": "Will not is the correct modal." },
+  { "chapter": "Grammar", "q": "Have you visited Allan's home recently? He ______. It remodeled.", "options": ["Had had", "Has have", "Has had"], "answer": 2, "explanation": "Has had it remodeled." },
+  { "chapter": "Grammar", "q": "Lisa was watching T.V then she ______.", "options": ["Went out", "She goes out", "Go out"], "answer": 0, "explanation": "Past simple: went out." },
+  { "chapter": "Grammar", "q": "______? 'he's fine. He's got a new job.'", "options": ["How's Ed", "What does Ed look like", "What's Ed like"], "answer": 0, "explanation": "How's Ed asks about his condition." },
+  { "chapter": "Grammar", "q": "I couldn't pay. I ______ my wallet at home.", "options": ["Had been leaving", "Had left", "Leave"], "answer": 1, "explanation": "Past perfect: had left." },
+  { "chapter": "Grammar", "q": "It'll be good to see Ken, Won't it? ______.", "options": ["Oh, it'll be great!", "Well, he should be by now!", "No, I can't wait!"], "answer": 0, "explanation": "Oh, it'll be great! is the natural response." },
+  { "chapter": "Grammar", "q": "I ______ Ahmad about the money, I've decided he should know.", "options": ["Will tell", "Am going to tell", "Will have told"], "answer": 1, "explanation": "Going to for a decision already made." },
+  { "chapter": "Grammar", "q": "Choose the correct form.", "options": ["Where have you seen in the zoo?", "What are you seeing in the zoo?", "Which animals have you seen in the zoo?"], "answer": 2, "explanation": "Which animals have you seen is correct." },
+  { "chapter": "Grammar", "q": "Have you finished the project? ______.", "options": ["No, I can't", "No, I wouldn't", "No, I haven't"], "answer": 2, "explanation": "Present perfect short answer: No, I haven't." },
+  { "chapter": "Grammar", "q": "I usually study in the evenings, but today I ______.", "options": ["Am watch", "Am watching", "Watch"], "answer": 1, "explanation": "Present continuous for today: am watching." },
+  { "chapter": "Grammar", "q": "A pilot ______ train for many years.", "options": ["A pilot doesn't has to train for many years.", "A pilot don't have to train for many years.", "A pilot has to train for many years."], "answer": 2, "explanation": "Has to train is correct." },
+  { "chapter": "Grammar", "q": "Nora ______ to the concert.", "options": ["Wants to goes", "Wants to go", "Want to go"], "answer": 1, "explanation": "Wants to go is correct." },
+  { "chapter": "Grammar", "q": "I ______ not think that is a good idea.", "options": ["I don't think that's a good idea.", "I do think that's a good idea", "I can't think that's good idea."], "answer": 0, "explanation": "I don't think that's a good idea is correct." },
+  { "chapter": "Grammar", "q": "Emily is six years old. Her brother is nine, so he is ______.", "options": ["oldest", "older", "old", "more older"], "answer": 1, "explanation": "Older is the comparative." },
+  { "chapter": "Grammar", "q": "He ______ a book.", "options": ["quick reads", "quickly reading", "quickly reads", "quick reading"], "answer": 2, "explanation": "Quickly reads is the correct adverb + verb." },
+  { "chapter": "Grammar", "q": "The blackboard in my teacher's class is huge however ______ not very clean.", "options": ["it's", "it isn't", "it", "its"], "answer": 0, "explanation": "However it's not very clean." },
+  { "chapter": "Grammar", "q": "Max is a ______ singer than John.", "options": ["better", "much gooder", "good", "best"], "answer": 0, "explanation": "Better is the comparative of good." },
+  { "chapter": "Grammar", "q": "Which prefix is used to indicate too much of something?", "options": ["Over-", "Un-", "Re-", "Under-"], "answer": 0, "explanation": "The prefix 'Over-' indicates too much of something (e.g., overdramatic, overshared)." },
+  { "chapter": "Grammar", "q": "Complete the sentence: 'In 2025, my brother ______ international law at the university.'", "options": ["Studying", "Studies", "Study", "Will be studying"], "answer": 3, "explanation": "Future continuous: will + be + verb with -ing." },
+  { "chapter": "Grammar", "q": "Complete the sentence: 'The food here is awful, I don't think people in this restaurant ______ cook.'", "options": ["Have to", "Can", "Shouldn't", "Can't"], "answer": 1, "explanation": "Modal verb 'can' is used for ability." },
+  { "chapter": "Grammar", "q": "Complete the sentence: 'If you had worked hard, you ______ a raise.'", "options": ["Would have gotten", "Would get", "Will get", "Get"], "answer": 0, "explanation": "Third conditional: if + past perfect, would have + v3." },
+  { "chapter": "Grammar", "q": "Complete the sentence: 'If you buy her flowers, she ______ happy.'", "options": ["Be", "Will be", "Would be", "Would have been"], "answer": 1, "explanation": "First conditional: if + present simple, will + infinitive." },
+  { "chapter": "Grammar", "q": "Complete the sentence: 'He forgot how ______ the microwave.'", "options": ["To use", "Use", "Using", "Uses"], "answer": 0, "explanation": "Forget how + to + infinitive." },
+  { "chapter": "Grammar", "q": "Complete the sentence: 'Our sales ______ in the recent five years and are still going up.'", "options": ["Increase", "Increased", "Have increased", "Increases"], "answer": 2, "explanation": "Present perfect: have/has + v3 (used with 'recent', 'since', 'for')." },
+  { "chapter": "Grammar", "q": "Complete the sentence: 'Somebody ______ my cookies. There are very few left.'", "options": ["Ate", "Has been eating", "Had been eating", "Have been eating"], "answer": 1, "explanation": "Present perfect continuous: has/have been + verb with -ing." },
+  { "chapter": "Grammar", "q": "Complete the sentence: 'The candidate ______ a meeting with the CEO. Before that, he had met the manager.'", "options": ["Has", "Had", "Had had", "Have"], "answer": 2, "explanation": "Past perfect: had + v3. 'Had had' is the past perfect form of the verb 'have'." },
+  { "chapter": "Grammar", "q": "Complete the sentence: 'Prices ______ nowadays; it doesn't seem it will stop rising anytime soon.'", "options": ["Soars", "Soaring", "Are soaring", "Soared"], "answer": 2, "explanation": "Present continuous: subject + verb to be + verb with -ing (key words: nowadays)." },
+  { "chapter": "Grammar", "q": "What is the active form of: 'Handball is played'?", "options": ["Handball was played", "They played handball", "They are playing handball", "They play handball"], "answer": 3, "explanation": "Passive 'is played' converts to active 'They play handball' (present simple)." },
+  { "chapter": "Grammar", "q": "What is the passive form of: 'Julia rescued three cats'?", "options": ["Three cats are rescued by Julia", "Three cats had been rescued by Julia", "Three cats were rescued by Julia", "Julia had rescued three cats"], "answer": 2, "explanation": "Past simple passive: object + was/were + v3 + by + subject." },
+  { "chapter": "Grammar", "q": "Complete the sentence: 'The project depends ______ the newly approved budget.'", "options": ["On", "For", "Into", "At"], "answer": 0, "explanation": "Depends + on." },
+  { "chapter": "Grammar", "q": "Complete the sentence: 'Many accidents are caused ______ people driving too fast.'", "options": ["At", "With", "By", "For"], "answer": 2, "explanation": "Caused + by." },
+  { "chapter": "Grammar", "q": "Change to reported speech: 'Ahmad said, \"I am sorry\"'", "options": ["Ahmad said that I was sorry", "Ahmad said that he is sorry", "Ahmad said that he was sorry", "Ahmad said that he had been sorry"], "answer": 2, "explanation": "Present simple 'am' changes to past simple 'was' in reported speech. Pronoun changes from 'I' to 'he'." },
+  { "chapter": "Grammar", "q": "Change to reported speech: 'She said, \"I have broken your pen\"'", "options": ["She told me that I had broken her pen", "She told me that she had broken my pen", "She told me that she has broken my pen", "She told me that she broke your pen"], "answer": 1, "explanation": "Present perfect 'have broken' changes to past perfect 'had broken'. 'Your' changes to 'my'." },
+  { "chapter": "Grammar", "q": "Change to reported speech: 'Ali said, \"I am studying now\"'", "options": ["Ali said that he was studying then", "Ali said that he is studying now", "Ali said that he was studying now", "Ali said that he had been studying then"], "answer": 0, "explanation": "Present continuous 'am studying' changes to past continuous 'was studying'. 'Now' changes to 'then'." },
+  { "chapter": "Grammar", "q": "Complete the sentence: 'She asked her colleague ______ offer some help.'", "options": ["To", "For", "With", "At"], "answer": 0, "explanation": "Asked + subject + to + infinitive." },
+  { "chapter": "Grammar", "q": "Complete the sentence: 'He is fed up ______ this meeting.'", "options": ["With", "At", "About", "On"], "answer": 0, "explanation": "Fed up + with." },
+  { "chapter": "Grammar", "q": "Complete the sentence: 'She spends so much money and time ______ clothes and shopping.'", "options": ["At", "On", "For", "In"], "answer": 1, "explanation": "Spends + time/money/effort + on." },
+  { "chapter": "Grammar", "q": "Complete the sentence: 'I'm looking forward to ______ her soon.'", "options": ["Met", "Meeting", "Meet", "Meets"], "answer": 1, "explanation": "Looking forward to + verb with -ing." },
+  { "chapter": "Grammar", "q": "Complete the sentence: 'She remembered how ______ an essay.'", "options": ["Write", "To write", "Writes", "Writing"], "answer": 1, "explanation": "Remember how + to + infinitive." },
+  { "chapter": "Grammar", "q": "Complete the sentence: 'This year we ______ new teaching methods.'", "options": ["Have been using", "Are been using", "Is using", "Has been using"], "answer": 0, "explanation": "Present perfect continuous: subject + have/has + been + v-ing." },
+  { "chapter": "Grammar", "q": "Complete the sentence: 'She ______ drive her father's car when she was only 15.'", "options": ["Has been allowed to", "Is allowed to", "Was allowed to", "Allowed to"], "answer": 2, "explanation": "Past simple passive: was/were + allowed to." },
+  { "chapter": "Grammar", "q": "Complete the sentence: 'Professor Fouad is specialized ______ Mechanical Engineering.'", "options": ["With", "On", "In", "At"], "answer": 2, "explanation": "Specialized + in." },
+  { "chapter": "Grammar", "q": "Complete the sentence: 'She requested this information ______ forwarded to her e-mail.'", "options": ["Be", "To", "To be", "Being"], "answer": 2, "explanation": "Requested + to + be + v3." },
+  { "chapter": "Grammar", "q": "Complete the sentence: 'Does this dictionary belong ______ you?'", "options": ["About", "To", "For", "With"], "answer": 1, "explanation": "Belong + to + subject." },
+  { "chapter": "Grammar", "q": "Complete the sentence: 'I find it very difficult to concentrate ______ the presentation when I am hungry.'", "options": ["After", "With", "On", "At"], "answer": 2, "explanation": "Concentrate + on." },
+  { "chapter": "Grammar", "q": "Complete the sentence: 'You shouldn't be critical ______ others.'", "options": ["On", "Of", "Off", "At"], "answer": 1, "explanation": "Critical + of." },
+  { "chapter": "Grammar", "q": "Complete the sentence: 'This book deals ______ the idea of National Independence.'", "options": ["With", "For", "That", "At"], "answer": 0, "explanation": "Deals + with." },
+  { "chapter": "Grammar", "q": "Complete the sentence: 'He suggested ______ to Spain for Christmas holidays.'", "options": ["To going", "Going", "Racing", "Go"], "answer": 1, "explanation": "Suggested + verb with -ing." },
+  { "chapter": "Grammar", "q": "Complete the sentence: 'I prefer tea ______ coffee.'", "options": ["With", "Over", "To", "Than"], "answer": 2, "explanation": "Prefer 'a' to 'b'." },
+  { "chapter": "Grammar", "q": "Complete the sentence: 'She remembered ______ the book on the shelf.'", "options": ["Have put", "Put", "Putting", "Puts"], "answer": 2, "explanation": "Remembered + verb with -ing." },
+  { "chapter": "Grammar", "q": "Complete the sentence: 'She provided us ______ the missing data.'", "options": ["With", "For", "In", "At"], "answer": 0, "explanation": "Provide + subject + with." },
+  { "chapter": "Grammar", "q": "Complete the sentence: 'I am thinking ______ buying a new house.'", "options": ["Of", "On", "Off", "At"], "answer": 0, "explanation": "Thinking + of + verb with -ing." }
 ]
