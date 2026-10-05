@@ -69,6 +69,44 @@
         .live-timer { font-size: 0.95rem; font-weight: 800; color: var(--text-muted); background: var(--border); padding: 6px 14px; border-radius: 20px; font-variant-numeric: tabular-nums; }
         .progress-bar-container { width: 100%; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; margin-bottom: 30px; }
         .progress-bar { height: 100%; background: linear-gradient(90deg, var(--purple), #a78bfa); width: 0%; transition: width 0.4s ease; }
+
+        /* ---------- PASSAGE BOX ---------- */
+        .passage-box {
+            display: none;
+            margin-bottom: 24px;
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--purple);
+            border-radius: 12px;
+            background: var(--purple-light);
+            overflow: hidden;
+        }
+        .passage-box.show { display: block; }
+        .passage-header {
+            padding: 12px 18px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 800;
+            color: var(--purple);
+            font-size: 0.95rem;
+            user-select: none;
+        }
+        .passage-header .chev { transition: transform 0.2s; font-size: 0.85rem; }
+        .passage-box.open .passage-header .chev { transform: rotate(90deg); }
+        .passage-body {
+            padding: 0 18px 18px 18px;
+            font-size: 0.92rem;
+            line-height: 1.7;
+            color: var(--text-main);
+            max-height: 340px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            display: none;
+        }
+        .passage-box.open .passage-body { display: block; }
+        [data-theme="dark"] .passage-box { background: var(--card-bg); }
+
         .question { font-size: 1.35rem; font-weight: 700; margin-bottom: 30px; line-height: 1.5; }
         .options { display: flex; flex-direction: column; gap: 12px; }
         .show-answer-btn { margin-top: 14px; padding: 12px; background: transparent; color: var(--purple); border: 2px dashed var(--purple); border-radius: 14px; cursor: pointer; font-size: 0.95rem; font-weight: 700; font-family: inherit; width: 100%; }
@@ -146,6 +184,16 @@
             <div class="live-score" id="live-score">⭐ Score: 0</div>
         </div>
         <div class="progress-bar-container"><div class="progress-bar" id="progress-bar"></div></div>
+
+        <!-- PASSAGE BOX (hidden unless current question has one) -->
+        <div class="passage-box" id="passage-box">
+            <div class="passage-header" id="passage-header">
+                <span id="passage-title">Passage</span>
+                <span class="chev">▸</span>
+            </div>
+            <div class="passage-body" id="passage-body"></div>
+        </div>
+
         <div class="question" id="question">Loading question...</div>
         <div class="options" id="options"></div>
         <button class="show-answer-btn" id="show-answer-btn">💡 Show Answer</button>
@@ -188,7 +236,6 @@
 
 <script>
     /* ====================== SUBJECT CONFIG ====================== */
-    // ⚠️ CHANGE THESE 2 LINES for each subject file:
     const SUBJECT = {
         key: 'el112',
         dataFile: './data/el112.json'
@@ -230,6 +277,15 @@
     const reviewSection  = document.getElementById('review-section');
     const reviewList     = document.getElementById('review-list');
     const reviewCount    = document.getElementById('review-count');
+    const passageBox     = document.getElementById('passage-box');
+    const passageTitle   = document.getElementById('passage-title');
+    const passageBody    = document.getElementById('passage-body');
+    const passageHeader  = document.getElementById('passage-header');
+
+    // Toggle passage open/closed when header is clicked
+    passageHeader.addEventListener('click', () => {
+        passageBox.classList.toggle('open');
+    });
 
     /* ====================== THEME ====================== */
     function toggleTheme() {
@@ -302,19 +358,51 @@
         try {
             const response = await fetch(SUBJECT.dataFile);
             if (!response.ok) throw new Error('Failed to load JSON');
-            allQuestions = await response.json();
+            const raw = await response.json();
 
+            // --- Normalize both shapes into one flat list ---
+            let flat = [];
+
+            if (Array.isArray(raw)) {
+                // Old flat-array format
+                flat = raw;
+            } else {
+                // New { passages, questions } format
+                if (Array.isArray(raw.passages)) {
+                    raw.passages.forEach(p => {
+                        (p.questions || []).forEach(q => {
+                            flat.push({
+                                chapter: 'Reading',
+                                passageTitle: p.title,
+                                passageText: p.text,
+                                q: q.q,
+                                options: q.options,
+                                answer: q.answer,
+                                explanation: q.explanation
+                            });
+                        });
+                    });
+                }
+                if (Array.isArray(raw.questions)) {
+                    flat = flat.concat(raw.questions);
+                }
+            }
+
+            // De-dupe by question text
             const seen = new Set();
-            allQuestions = allQuestions.filter(q => {
+            allQuestions = flat.filter(q => {
                 const key = (q.q || '').trim().toLowerCase();
                 if (seen.has(key)) return false;
                 seen.add(key);
                 return true;
             });
 
+            if (allQuestions.length === 0) throw new Error('No questions found');
+
             buildSetupScreen();
         } catch (error) {
-            setupScreen.innerHTML = '<div class="loading" style="color:#ef4444;">⚠️ Error loading questions. Make sure ' + SUBJECT.dataFile + ' exists.</div>';
+            console.error(error);
+            setupScreen.innerHTML = '<div class="loading" style="color:#ef4444;">⚠️ Error loading questions.<br><small>' + escapeHtml(error.message) + '</small><br><br>Make sure ' + SUBJECT.dataFile + ' exists and the page is served from a local server (not file://).</div>';
         }
     }
 
@@ -451,6 +539,9 @@
         progressBarEl.style.width = percent + '%';
     }
 
+    // Track which passage is currently shown so we only reset scroll when it changes
+    let lastShownPassageTitle = null;
+
     function loadQuestion() {
         answered = false;
         feedbackStatus.textContent = '';
@@ -464,6 +555,23 @@
         showAnswerBtn.onclick = revealAnswer;
 
         const q = activeQuestions[currentQuestionIndex];
+
+        // ---- Passage handling ----
+        if (q.passageText) {
+            passageBox.classList.add('show');
+            passageTitle.textContent = q.passageTitle || 'Passage';
+            passageBody.textContent = q.passageText;
+
+            // Only auto-open and reset scroll if the passage changed
+            if (lastShownPassageTitle !== q.passageTitle) {
+                passageBox.classList.add('open');
+                passageBody.scrollTop = 0;
+                lastShownPassageTitle = q.passageTitle;
+            }
+        } else {
+            passageBox.classList.remove('show', 'open');
+            lastShownPassageTitle = null;
+        }
 
         // Shuffle options and remember the new correct index
         const pairs = q.options.map((text, i) => ({ text, isCorrect: i === q.answer }));
