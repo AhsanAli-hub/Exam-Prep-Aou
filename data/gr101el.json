@@ -1,0 +1,1372 @@
+[
+  {
+    "chapter": "Unit 1: KSA (Knowledge, Skills, Abilities)",
+    "q": "Understanding something based on facts or objectives is:",
+    "options": ["Skill", "Knowledge", "Ability", "Competence"],
+    "answer": 1,
+    "explanation": "Knowledge is understanding something based on facts or objectives."
+  },
+  {
+    "chapter": "Unit 1: KSA (Knowledge, Skills, Abilities)",
+    "q": "Practical application of knowledge is:",
+    "options": ["Knowledge", "Skill", "Ability", "Competence"],
+    "answer": 1,
+    "explanation": "Skill is the practical application of knowledge."
+  },
+  {
+    "chapter": "Unit 1: KSA (Knowledge, Skills, Abilities)",
+    "q": "Natural talents acquired without formal training are:",
+    "options": ["Skills", "Knowledge", "Abilities", "Competencies"],
+    "answer": 2,
+    "explanation": "Abilities are natural talents acquired without formal training."
+  },
+  {
+    "chapter": "Unit 1: KSA (Knowledge, Skills, Abilities)",
+    "q": "Which of the following is an example of 'Knowledge'?",
+    "options": ["Riding a bicycle", "Understanding programming theory", "Being naturally athletic", "Playing the piano expertly"],
+    "answer": 1,
+    "explanation": "Knowledge is theoretical understanding, e.g., understanding programming theory."
+  },
+  {
+    "chapter": "Unit 1: KSA (Knowledge, Skills, Abilities)",
+    "q": "Demonstrating skill to complete a task means:",
+    "options": ["Having theoretical understanding", "Applying knowledge to perform the task", "Being naturally talented", "Having a positive attitude"],
+    "answer": 1,
+    "explanation": "Demonstrating skill means applying knowledge to complete a task."
+  },
+  {
+    "chapter": "Unit 1: KSA (Knowledge, Skills, Abilities)",
+    "q": "Skills are developed over time through:",
+    "options": ["Genetics only", "Regular practice and task performance", "Formal training only", "Natural talent only"],
+    "answer": 1,
+    "explanation": "Skills are acquired through regular practice and task performance."
+  },
+  {
+    "chapter": "Unit 1: KSA (Knowledge, Skills, Abilities)",
+    "q": "An 'Ability' that is difficult to measure is:",
+    "options": ["Typing speed", "Dedication to work", "Reading comprehension", "Mathematical calculation"],
+    "answer": 1,
+    "explanation": "Dedication to work is an example of an ability that is difficult to measure."
+  },
+  {
+    "chapter": "Unit 1: KSA (Knowledge, Skills, Abilities)",
+    "q": "Employers use KSA criteria to:",
+    "options": ["Entertain employees", "Match candidates to job requirements", "Increase salaries", "Reduce training costs"],
+    "answer": 1,
+    "explanation": "Employers use KSA criteria to match candidates to job requirements."
+  },
+  {
+    "chapter": "Unit 1: KSA (Knowledge, Skills, Abilities)",
+    "q": "People often use KSA terms interchangeably without knowing the difference.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "People often use KSA terms interchangeably without knowing the difference."
+  },
+  {
+    "chapter": "Unit 1: KSA (Knowledge, Skills, Abilities)",
+    "q": "Skills are talents that appear from within naturally.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "False — skills are developed through practice; abilities are natural talents."
+  },
+  {
+    "chapter": "Unit 1: KSA (Knowledge, Skills, Abilities)",
+    "q": "Knowledge, Skills, and Abilities complement each other.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — KSA components work together to support performance."
+  },
+  {
+    "chapter": "Unit 1: KSA (Knowledge, Skills, Abilities)",
+    "q": "Studying programming theory ensures immediate skill development.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "False — theory alone doesn't produce skill; practice is required."
+  },
+  {
+    "chapter": "Unit 1: KSA (Knowledge, Skills, Abilities)",
+    "q": "Dedication to work is considered an example of an 'Ability'.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — dedication is an example of an ability (difficult to measure)."
+  },
+  {
+    "chapter": "Unit 1: KSA (Knowledge, Skills, Abilities)",
+    "q": "Skills are acquired through regular practice and task performance.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — skills develop through repeated practice and task performance."
+  },
+  {
+    "chapter": "Unit 1: KSA (Knowledge, Skills, Abilities)",
+    "q": "Knowledge is only acquired via study; experience has no role.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "False — experience also contributes to knowledge."
+  },
+  {
+    "chapter": "Unit 1: KSA (Knowledge, Skills, Abilities)",
+    "q": "Competence means a high level of skill or expertise.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — competence refers to a high level of skill or expertise."
+  },
+  {
+    "chapter": "Unit 1: KSA (Knowledge, Skills, Abilities)",
+    "q": "Abilities are usually acquired via formal and intensive training.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "False — abilities are natural talents, not acquired through formal training."
+  },
+  {
+    "chapter": "Unit 1: KSA (Knowledge, Skills, Abilities)",
+    "q": "Self-development in KSA increases career advancement chances.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — developing KSA improves career advancement opportunities."
+  },
+
+  {
+    "chapter": "Unit 1: Learning Styles",
+    "q": "In VARK, the letter 'V' stands for:",
+    "options": ["Aural", "Kinesthetic", "Visual", "Reading"],
+    "answer": 2,
+    "explanation": "VARK: V = Visual, A = Aural, R = Reading/Writing, K = Kinesthetic."
+  },
+  {
+    "chapter": "Unit 1: Learning Styles",
+    "q": "Learning through lectures and discussions follows which style?",
+    "options": ["Visual", "Aural", "Kinesthetic", "Logical"],
+    "answer": 1,
+    "explanation": "Aural learners prefer listening — lectures and discussions."
+  },
+  {
+    "chapter": "Unit 1: Learning Styles",
+    "q": "Learning style focusing on practical activities and experiments:",
+    "options": ["Kinesthetic", "Aural", "Spatial", "Linguistic"],
+    "answer": 0,
+    "explanation": "Kinesthetic learners learn best through practical, hands-on activities."
+  },
+  {
+    "chapter": "Unit 1: Learning Styles",
+    "q": "Multiple Intelligences Theory (1983) belongs to:",
+    "options": ["Newton", "Fitts", "Howard Gardner", "Posner"],
+    "answer": 2,
+    "explanation": "Howard Gardner proposed the Multiple Intelligences Theory in 1983."
+  },
+  {
+    "chapter": "Unit 1: Learning Styles",
+    "q": "Intelligence characterized by recognizing patterns and tones:",
+    "options": ["Logical", "Musical", "Spatial", "Interactive"],
+    "answer": 1,
+    "explanation": "Musical intelligence involves recognizing patterns, tones, and rhythms."
+  },
+  {
+    "chapter": "Unit 1: Learning Styles",
+    "q": "Ability to build positive relationships and evaluate others:",
+    "options": ["Personal", "Linguistic", "Interpersonal", "Naturalist"],
+    "answer": 2,
+    "explanation": "Interpersonal intelligence is the ability to relate to and understand others."
+  },
+  {
+    "chapter": "Unit 1: Learning Styles",
+    "q": "The HBDI scale explores styles of:",
+    "options": ["Personality", "Thinking", "Muscles", "Memory"],
+    "answer": 1,
+    "explanation": "The Herrmann Brain Dominance Instrument explores thinking styles."
+  },
+  {
+    "chapter": "Unit 1: Learning Styles",
+    "q": "A suitable profession for Logical/Math intelligence is:",
+    "options": ["Athlete", "Accountant", "Artist", "Singer"],
+    "answer": 1,
+    "explanation": "Logical/Mathematical intelligence suits careers like accounting."
+  },
+  {
+    "chapter": "Unit 1: Learning Styles",
+    "q": "There is no single correct way to learn; everyone has their own.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — learning styles vary from person to person."
+  },
+  {
+    "chapter": "Unit 1: Learning Styles",
+    "q": "The 'Cognitive' stage in skill learning is error-free.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "False — the cognitive stage involves errors as learners begin."
+  },
+  {
+    "chapter": "Unit 1: Learning Styles",
+    "q": "The 'Associative' stage is the longest stage in learning a skill.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — the associative stage is the longest stage of skill learning."
+  },
+  {
+    "chapter": "Unit 1: Learning Styles",
+    "q": "In the 'Autonomous' stage, skill is performed with little thought.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — in the autonomous stage, performance becomes automatic."
+  },
+  {
+    "chapter": "Unit 1: Learning Styles",
+    "q": "Spatial intelligence excels in interpreting graphs and charts.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — spatial intelligence involves visual and spatial reasoning."
+  },
+  {
+    "chapter": "Unit 1: Learning Styles",
+    "q": "Intrapersonal intelligence refers to communication between people.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "False — intrapersonal is self-awareness; interpersonal is between people."
+  },
+  {
+    "chapter": "Unit 1: Learning Styles",
+    "q": "Naturalist intelligence is interested in botany and zoology.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — naturalist intelligence relates to nature, plants, and animals."
+  },
+  {
+    "chapter": "Unit 1: Learning Styles",
+    "q": "Fitts & Posner model focuses on memory processing stages.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "False — Fitts & Posner model focuses on stages of skill acquisition."
+  },
+  {
+    "chapter": "Unit 1: Learning Styles",
+    "q": "The Read/Write style includes learning via note-taking.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — Read/Write learners prefer text and note-taking."
+  },
+  {
+    "chapter": "Unit 1: Learning Styles",
+    "q": "The Kinesthetic style is linked to 'practical' and 'tangible'.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — kinesthetic learners prefer hands-on, tangible activities."
+  },
+
+  {
+    "chapter": "Unit 1: Memory Systems",
+    "q": "Memory holding information temporarily for 15-30 seconds:",
+    "options": ["Sensory", "Short-term", "Long-term", "Procedural"],
+    "answer": 1,
+    "explanation": "Short-term memory holds information for about 15-30 seconds."
+  },
+  {
+    "chapter": "Unit 1: Memory Systems",
+    "q": "Memory storing facts/general concepts (e.g., capitals):",
+    "options": ["Episodic", "Semantic", "Emotional", "Working"],
+    "answer": 1,
+    "explanation": "Semantic memory stores general facts and concepts."
+  },
+  {
+    "chapter": "Unit 1: Memory Systems",
+    "q": "Remembering your last birthday falls under which memory?",
+    "options": ["Semantic", "Episodic", "Procedural", "Sensory"],
+    "answer": 1,
+    "explanation": "Episodic memory stores personal experiences and events."
+  },
+  {
+    "chapter": "Unit 1: Memory Systems",
+    "q": "Memory allowing bike riding or typing unconsciously:",
+    "options": ["Working", "Explicit", "Procedural", "Semantic"],
+    "answer": 2,
+    "explanation": "Procedural memory stores skills performed without conscious thought."
+  },
+  {
+    "chapter": "Unit 1: Memory Systems",
+    "q": "Implicit memory is characterized by:",
+    "options": ["Needs awareness", "No awareness needed", "Very short duration", "Only visual data"],
+    "answer": 1,
+    "explanation": "Implicit memory operates without conscious awareness."
+  },
+  {
+    "chapter": "Unit 1: Memory Systems",
+    "q": "The main memory element through which the mind recalls is:",
+    "options": ["Neglect", "Attention", "High Volume", "Deep Sleep"],
+    "answer": 1,
+    "explanation": "Attention is the main element through which the mind recalls."
+  },
+  {
+    "chapter": "Unit 1: Memory Systems",
+    "q": "Linking info to something you already know is providing:",
+    "options": ["Structure", "Context", "Repetition", "Visualization"],
+    "answer": 1,
+    "explanation": "Providing context by linking to existing knowledge aids memory."
+  },
+  {
+    "chapter": "Unit 1: Memory Systems",
+    "q": "Working Memory is closely linked to:",
+    "options": ["Height", "Intelligence", "Weight", "Eye Color"],
+    "answer": 1,
+    "explanation": "Working memory is closely linked to intelligence."
+  },
+  {
+    "chapter": "Unit 1: Memory Systems",
+    "q": "Sensory memory saves scenes and sounds for a very long time.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "False — sensory memory is very brief, lasting only a moment."
+  },
+  {
+    "chapter": "Unit 1: Memory Systems",
+    "q": "Long-term memory stores info from days to a lifetime.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — long-term memory can last from days to a lifetime."
+  },
+  {
+    "chapter": "Unit 1: Memory Systems",
+    "q": "Semantic memory is necessary for using and understanding language.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — semantic memory is essential for language use."
+  },
+  {
+    "chapter": "Unit 1: Memory Systems",
+    "q": "Repetition and organization decrease the chance of LTM transfer.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "False — repetition and organization increase LTM transfer."
+  },
+  {
+    "chapter": "Unit 1: Memory Systems",
+    "q": "Emotional memory affects the recall of strong emotion experiences.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — emotional memories are often recalled more vividly."
+  },
+  {
+    "chapter": "Unit 1: Memory Systems",
+    "q": "Sleep has no relation to improving recall and learning skills.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "False — sleep improves recall and learning."
+  },
+  {
+    "chapter": "Unit 1: Memory Systems",
+    "q": "Visualization helps in remembering, especially for visual learners.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — visualization supports memory, especially for visual learners."
+  },
+  {
+    "chapter": "Unit 1: Memory Systems",
+    "q": "Declarative memory is linked to conscious recall of information.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — declarative memory involves conscious recall."
+  },
+  {
+    "chapter": "Unit 1: Memory Systems",
+    "q": "Procedural memory is part of short-term memory.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "False — procedural memory is part of long-term memory."
+  },
+  {
+    "chapter": "Unit 1: Memory Systems",
+    "q": "Retrieving stored information is known as 'Recalling'.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — recalling is the process of retrieving stored information."
+  },
+
+  {
+    "chapter": "Unit 1: Study Skills",
+    "q": "Reading aimed at scanning headings and intros for a general idea:",
+    "options": ["Careful", "Critical", "Fast/Skimming", "Scanning"],
+    "answer": 2,
+    "explanation": "Fast/Skimming is used for getting a general idea by scanning headings."
+  },
+  {
+    "chapter": "Unit 1: Study Skills",
+    "q": "In the Eisenhower Matrix, 'Urgent & Important' tasks should be:",
+    "options": ["Delegated", "Scheduled", "Done First", "Deleted"],
+    "answer": 2,
+    "explanation": "Urgent & Important tasks should be done first."
+  },
+  {
+    "chapter": "Unit 1: Study Skills",
+    "q": "The Pomodoro technique involves focused work for:",
+    "options": ["60 min", "25 min", "10 min", "45 min"],
+    "answer": 1,
+    "explanation": "Pomodoro uses 25-minute focused work intervals."
+  },
+  {
+    "chapter": "Unit 1: Study Skills",
+    "q": "The Cornell method for note-taking divides the page into areas, symbols, and summary.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — the Cornell method divides the page into specific areas."
+  },
+  {
+    "chapter": "Unit 1: Study Skills",
+    "q": "Breaking large tasks into smaller steps aims to:",
+    "options": ["Waste time", "Reduce anxiety", "Delay work", "Increase stress"],
+    "answer": 1,
+    "explanation": "Breaking tasks into smaller steps reduces anxiety."
+  },
+  {
+    "chapter": "Unit 1: Study Skills",
+    "q": "Scanning is used to find specific info like a date or name.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — scanning is used to find specific information."
+  },
+  {
+    "chapter": "Unit 1: Study Skills",
+    "q": "Procrastination is delaying what must be achieved now.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — procrastination is the act of delaying tasks."
+  },
+  {
+    "chapter": "Unit 1: Study Skills",
+    "q": "Delegation means evading responsibility and always giving work to others.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "False — delegation is assigning tasks appropriately, not evading responsibility."
+  },
+  {
+    "chapter": "Unit 1: Study Skills",
+    "q": "Saying 'No' to distractions is a time management skill.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — saying no to distractions is a key time management skill."
+  },
+  {
+    "chapter": "Unit 1: Study Skills",
+    "q": "SMART goals must be general and not time-bound.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "False — SMART goals must be specific, measurable, achievable, relevant, and time-bound."
+  },
+
+  {
+    "chapter": "Unit 2: Self-Awareness",
+    "q": "What is Self-Awareness?",
+    "options": ["Ignoring feelings", "Understanding self-aspects", "Imitating others", "Escaping reality"],
+    "answer": 1,
+    "explanation": "Self-awareness is understanding your own self-aspects."
+  },
+  {
+    "chapter": "Unit 2: Self-Awareness",
+    "q": "Which is NOT an element of self-awareness?",
+    "options": ["Values", "Skills", "Favorite food", "Aspirations"],
+    "answer": 2,
+    "explanation": "Favorite food is not an element of self-awareness."
+  },
+  {
+    "chapter": "Unit 2: Self-Awareness",
+    "q": "'Aspirations' in self-awareness refer to:",
+    "options": ["The past", "Hopes and dreams", "Physical flaws", "Debts"],
+    "answer": 1,
+    "explanation": "Aspirations are your hopes and dreams for the future."
+  },
+  {
+    "chapter": "Unit 2: Self-Awareness",
+    "q": "Self-awareness focuses psychological state on:",
+    "options": ["Others", "World problems", "The Self", "Technology"],
+    "answer": 2,
+    "explanation": "Self-awareness focuses on the self."
+  },
+  {
+    "chapter": "Unit 2: Self-Awareness",
+    "q": "'Values' are behavioral principles and one's judgment of:",
+    "options": ["What's important in life", "Others' wealth", "Weather", "Fashion"],
+    "answer": 0,
+    "explanation": "Values reflect what's important in life."
+  },
+  {
+    "chapter": "Unit 2: Self-Awareness",
+    "q": "Self-awareness allows you to manage emotions:",
+    "options": ["Negatively", "Positively", "Aggressively", "Randomly"],
+    "answer": 1,
+    "explanation": "Self-awareness helps you manage emotions positively."
+  },
+  {
+    "chapter": "Unit 2: Self-Awareness",
+    "q": "Developing self-awareness skills increases chances of:",
+    "options": ["Sleep", "Employment", "Travel", "Forgetfulness"],
+    "answer": 1,
+    "explanation": "Self-awareness improves employability."
+  },
+  {
+    "chapter": "Unit 2: Self-Awareness",
+    "q": "'Physical' self-awareness relates to:",
+    "options": ["The Mind", "The Body", "The Soul", "Imagination"],
+    "answer": 1,
+    "explanation": "Physical self-awareness relates to the body."
+  },
+  {
+    "chapter": "Unit 2: Self-Awareness",
+    "q": "Realizing strengths and areas for improvement is:",
+    "options": ["Ignorance", "Self-awareness", "Arrogance", "Dependency"],
+    "answer": 1,
+    "explanation": "Recognizing strengths and weaknesses is self-awareness."
+  },
+  {
+    "chapter": "Unit 2: Self-Awareness",
+    "q": "In interviews, self-awareness helps portray:",
+    "options": ["Fear", "Self-confidence", "Hesitation", "Fatigue"],
+    "answer": 1,
+    "explanation": "Self-awareness projects self-confidence in interviews."
+  },
+  {
+    "chapter": "Unit 2: Self-Awareness",
+    "q": "Self-awareness is a skill highly valued by employers.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — employers value self-awareness."
+  },
+  {
+    "chapter": "Unit 2: Self-Awareness",
+    "q": "Self-awareness is not related to success in personal and professional life.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "False — self-awareness is linked to success."
+  },
+  {
+    "chapter": "Unit 2: Self-Awareness",
+    "q": "Self-awareness requires thinking about things under your control.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — focus on things within your control."
+  },
+  {
+    "chapter": "Unit 2: Self-Awareness",
+    "q": "Reaching a good level of self-awareness allows you to experience the present moment.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — self-awareness helps you experience the present."
+  },
+  {
+    "chapter": "Unit 2: Self-Awareness",
+    "q": "Self-awareness is a purely technical skill unrelated to emotions.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "False — self-awareness is deeply tied to emotions."
+  },
+  {
+    "chapter": "Unit 2: Self-Awareness",
+    "q": "A person with undeveloped self-awareness finds social situations difficult to understand.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — low self-awareness makes social situations harder."
+  },
+  {
+    "chapter": "Unit 2: Self-Awareness",
+    "q": "Journaling is an effective way to develop self-awareness.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — journaling helps develop self-awareness."
+  },
+  {
+    "chapter": "Unit 2: Self-Awareness",
+    "q": "Mindfulness means focusing on the future only.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "False — mindfulness focuses on the present moment."
+  },
+  {
+    "chapter": "Unit 2: Self-Awareness",
+    "q": "Self-awareness helps you stand out and get promoted.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — self-awareness helps career advancement."
+  },
+  {
+    "chapter": "Unit 2: Self-Awareness",
+    "q": "There is no right or wrong answer in assessing personal interests.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — personal interests are subjective."
+  },
+
+  {
+    "chapter": "Unit 2: Johari Window",
+    "q": "The Johari area containing info known to you & others:",
+    "options": ["Blind", "Open", "Hidden (Façade)", "Unknown"],
+    "answer": 1,
+    "explanation": "The Open area is known to self and others."
+  },
+  {
+    "chapter": "Unit 2: Johari Window",
+    "q": "The 'Blind Spot' refers to things about ourselves:",
+    "options": ["We know", "Others know, we don't", "Nobody knows", "Only we know"],
+    "answer": 1,
+    "explanation": "The Blind Spot is known to others but not to self."
+  },
+  {
+    "chapter": "Unit 2: Johari Window",
+    "q": "How can you reduce the Blind Spot?",
+    "options": ["Isolation", "Receiving feedback", "Lying", "Ignoring people"],
+    "answer": 1,
+    "explanation": "Receiving feedback reduces the Blind Spot."
+  },
+  {
+    "chapter": "Unit 2: Johari Window",
+    "q": "The 'Façade' in Johari Window is also called:",
+    "options": ["Open self", "Hidden self", "Blind self", "Unknown self"],
+    "answer": 1,
+    "explanation": "The Façade is the Hidden self — known to self, not others."
+  },
+  {
+    "chapter": "Unit 2: Johari Window",
+    "q": "The 'Unknown' area is usually largest among:",
+    "options": ["Elderly", "Inexperienced youth", "Experts", "Senior staff"],
+    "answer": 1,
+    "explanation": "The Unknown area is largest among inexperienced youth."
+  },
+  {
+    "chapter": "Unit 2: Johari Window",
+    "q": "The goal of using Johari Window is to expand the:",
+    "options": ["Blind area", "Open area", "Hidden area", "Unknown area"],
+    "answer": 1,
+    "explanation": "The goal is to expand the Open area."
+  },
+  {
+    "chapter": "Unit 2: Johari Window",
+    "q": "Info hidden from others due to fear lies in:",
+    "options": ["Open", "Hidden (Façade)", "Unknown", "Blind"],
+    "answer": 1,
+    "explanation": "Fearful information is in the Hidden (Façade) area."
+  },
+  {
+    "chapter": "Unit 2: Johari Window",
+    "q": "'Self-Disclosure' helps move from Hidden to:",
+    "options": ["Open", "Blind", "Unknown", "Obscure"],
+    "answer": 0,
+    "explanation": "Self-disclosure moves info from Hidden to Open."
+  },
+  {
+    "chapter": "Unit 2: Johari Window",
+    "q": "Expanding the Open Area leads to increased:",
+    "options": ["Ignorance", "Self-awareness", "Problems", "Conflicts"],
+    "answer": 1,
+    "explanation": "Expanding the Open area increases self-awareness."
+  },
+  {
+    "chapter": "Unit 2: Johari Window",
+    "q": "The Unknown area shrinks through:",
+    "options": ["Sleep", "Trying new things", "Staying stagnant", "Fear"],
+    "answer": 1,
+    "explanation": "Trying new things shrinks the Unknown area."
+  },
+  {
+    "chapter": "Unit 2: Johari Window",
+    "q": "The Johari Window is often used in business to develop awareness.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — Johari Window is used in business for awareness development."
+  },
+  {
+    "chapter": "Unit 2: Johari Window",
+    "q": "One doesn't need effort to meet new people to expand awareness.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "False — effort is needed to meet new people and expand awareness."
+  },
+  {
+    "chapter": "Unit 2: Johari Window",
+    "q": "Mindfulness is the foundation of Emotional Intelligence (EQ).",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — mindfulness is foundational for EQ."
+  },
+  {
+    "chapter": "Unit 2: Johari Window",
+    "q": "'Acceptance' in mindfulness means despair and surrender.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "False — acceptance means acknowledging without judgment."
+  },
+  {
+    "chapter": "Unit 2: Johari Window",
+    "q": "Focusing on the 'Current Moment' prevents future anxiety.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — present-moment focus reduces future anxiety."
+  },
+  {
+    "chapter": "Unit 2: Johari Window",
+    "q": "Practicing mindfulness requires a lot of patience.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — mindfulness requires patience."
+  },
+  {
+    "chapter": "Unit 2: Johari Window",
+    "q": "Mindfulness helps increase social interaction and build connections.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — mindfulness improves social interaction."
+  },
+  {
+    "chapter": "Unit 2: Johari Window",
+    "q": "Self-awareness does not affect the decision-making process.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "False — self-awareness affects decision-making."
+  },
+  {
+    "chapter": "Unit 2: Johari Window",
+    "q": "Self-confidence is believing in personal skills and abilities.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — self-confidence is belief in your skills and abilities."
+  },
+  {
+    "chapter": "Unit 2: Johari Window",
+    "q": "Emotional Intelligence (EQ) is the same as Intelligent Quotient (IQ).",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "False — EQ and IQ are different constructs."
+  },
+
+  {
+    "chapter": "Unit 2: Mindfulness & Benefits",
+    "q": "The three components of Mindfulness are:",
+    "options": ["Past/Present/Future", "Awareness/Current Moment/Acceptance", "Eat/Sleep/Work", "Think/Feel/Act"],
+    "answer": 1,
+    "explanation": "Mindfulness: Awareness, Current Moment, and Acceptance."
+  },
+  {
+    "chapter": "Unit 2: Mindfulness & Benefits",
+    "q": "What is the benefit of 'Acceptance' in Mindfulness?",
+    "options": ["Laziness", "Seeing positives & living a satisfying life", "Ignoring laws", "Avoiding reality"],
+    "answer": 1,
+    "explanation": "Acceptance helps see positives and live a satisfying life."
+  },
+  {
+    "chapter": "Unit 2: Mindfulness & Benefits",
+    "q": "Emotional Intelligence is also known as:",
+    "options": ["CPU", "EQ", "GPS", "IQ"],
+    "answer": 1,
+    "explanation": "Emotional Intelligence is commonly abbreviated as EQ."
+  },
+  {
+    "chapter": "Unit 2: Mindfulness & Benefits",
+    "q": "A benefit of Emotional Intelligence is reducing:",
+    "options": ["Wealth", "Stress", "Happiness", "Experience"],
+    "answer": 1,
+    "explanation": "EQ helps reduce stress."
+  },
+  {
+    "chapter": "Unit 2: Mindfulness & Benefits",
+    "q": "Self-awareness leads to success by building:",
+    "options": ["Debt", "Self-confidence", "Enemies", "Barriers"],
+    "answer": 1,
+    "explanation": "Self-awareness builds self-confidence, leading to success."
+  },
+  {
+    "chapter": "Unit 2: Mindfulness & Benefits",
+    "q": "To not lose your identity, it is recommended NOT to:",
+    "options": ["Study", "Compare yourself to others", "Work", "Exercise"],
+    "answer": 1,
+    "explanation": "Comparing yourself to others can harm your identity."
+  },
+  {
+    "chapter": "Unit 2: Mindfulness & Benefits",
+    "q": "Achieving a personal goal or purpose is called:",
+    "options": ["Failure", "Success", "Coincidence", "Routine"],
+    "answer": 1,
+    "explanation": "Success is achieving personal goals or purpose."
+  },
+  {
+    "chapter": "Unit 2: Mindfulness & Benefits",
+    "q": "'Honesty' in self-awareness gives you strength to show:",
+    "options": ["Others' flaws", "Your true self", "Money", "Anger"],
+    "answer": 1,
+    "explanation": "Honesty helps you show your true self."
+  },
+  {
+    "chapter": "Unit 2: Mindfulness & Benefits",
+    "q": "Self-care (healthy eating, enough sleep) is:",
+    "options": ["Waste of time", "Priority for success", "Secondary", "For weak only"],
+    "answer": 1,
+    "explanation": "Self-care is a priority for success."
+  },
+  {
+    "chapter": "Unit 2: Mindfulness & Benefits",
+    "q": "True success stems from things that:",
+    "options": ["Others own", "Mean a lot to you", "Appear on Social Media", "Are expensive"],
+    "answer": 1,
+    "explanation": "True success comes from things that are meaningful to you."
+  },
+
+  {
+    "chapter": "Unit 2: EQ Components",
+    "q": "The 4 areas of EQ: Self-Management, Self-Awareness, Social-Awareness, and...",
+    "options": ["Time management", "Relationship management", "Money management", "Storage management"],
+    "answer": 1,
+    "explanation": "The four EQ areas: Self-Management, Self-Awareness, Social-Awareness, Relationship Management."
+  },
+  {
+    "chapter": "Unit 2: EQ Components",
+    "q": "The ability to understand others' feelings and share them:",
+    "options": ["Ego", "Empathy", "Ignoring", "Sarcasm"],
+    "answer": 1,
+    "explanation": "Empathy is understanding and sharing others' feelings."
+  },
+  {
+    "chapter": "Unit 2: EQ Components",
+    "q": "The ability to control impulsive feelings is:",
+    "options": ["Social awareness", "Self-Management", "Façade", "Unknown"],
+    "answer": 1,
+    "explanation": "Self-Management involves controlling impulses."
+  },
+  {
+    "chapter": "Unit 2: EQ Components",
+    "q": "Work-life balance is a trait of people who are:",
+    "options": ["Failures", "Emotionally Intelligent (EQ)", "Lazy", "Impulsive"],
+    "answer": 1,
+    "explanation": "Emotionally intelligent people maintain work-life balance."
+  },
+  {
+    "chapter": "Unit 2: EQ Components",
+    "q": "Using 'Positive Self-Talk' helps:",
+    "options": ["Insanity", "Enhancing happy feelings", "Sleep", "Forgetting"],
+    "answer": 1,
+    "explanation": "Positive self-talk enhances happy feelings."
+  },
+  {
+    "chapter": "Unit 2: EQ Components",
+    "q": "An emotionally intelligent person accepts change with:",
+    "options": ["Fear", "Welcoming & seizing opportunities", "Rejection", "Anger"],
+    "answer": 1,
+    "explanation": "EQ people welcome change and seize opportunities."
+  },
+  {
+    "chapter": "Unit 2: EQ Components",
+    "q": "EQ helps in leadership through:",
+    "options": ["Threatening", "Guiding others", "Managing conflict", "Shouting"],
+    "answer": 1,
+    "explanation": "EQ supports leadership by guiding others."
+  },
+  {
+    "chapter": "Unit 2: EQ Components",
+    "q": "A sign of low Emotional Intelligence:",
+    "options": ["Listening", "Blaming others", "Empathy", "Honesty"],
+    "answer": 1,
+    "explanation": "Blaming others is a sign of low EQ."
+  },
+  {
+    "chapter": "Unit 2: EQ Components",
+    "q": "A person with low EQ is usually:",
+    "options": ["Ambitious", "Impulsive & easily distracted", "Active", "Committed"],
+    "answer": 1,
+    "explanation": "Low EQ individuals tend to be impulsive and easily distracted."
+  },
+  {
+    "chapter": "Unit 2: EQ Components",
+    "q": "Any job requiring high human interaction needs EQ:",
+    "options": ["High", "Low", "Zero", "Technical only"],
+    "answer": 0,
+    "explanation": "Jobs with high human interaction require high EQ."
+  },
+
+  {
+    "chapter": "Unit 2: EQ in Work & Life",
+    "q": "Emotional Intelligence can be developed with time, patience, and commitment.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — EQ can be developed over time."
+  },
+  {
+    "chapter": "Unit 2: EQ in Work & Life",
+    "q": "Low EQ can cause heart disease and high blood pressure.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — low EQ is linked to stress-related health issues."
+  },
+  {
+    "chapter": "Unit 2: EQ in Work & Life",
+    "q": "Emotionally intelligent people are quickly annoyed by others' comments.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "False — emotionally intelligent people manage reactions."
+  },
+  {
+    "chapter": "Unit 2: EQ in Work & Life",
+    "q": "Humor in the right situation helps build relationships with others.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — appropriate humor builds relationships."
+  },
+  {
+    "chapter": "Unit 2: EQ in Work & Life",
+    "q": "EQ doesn't matter in technical jobs like programming.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "False — EQ matters in all jobs, including technical ones."
+  },
+  {
+    "chapter": "Unit 2: EQ in Work & Life",
+    "q": "Treating disagreements as opportunities is part of Relationship Management.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — relationship management includes handling disagreements constructively."
+  },
+  {
+    "chapter": "Unit 2: EQ in Work & Life",
+    "q": "Comparing your wealth with others brings happiness and satisfaction.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "False — comparison often reduces happiness."
+  },
+  {
+    "chapter": "Unit 2: EQ in Work & Life",
+    "q": "Social Awareness means the ability to read others' emotional cues.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — social awareness involves reading emotional cues."
+  },
+  {
+    "chapter": "Unit 2: EQ in Work & Life",
+    "q": "Stress does not affect our ability to think and perform.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "False — stress affects thinking and performance."
+  },
+  {
+    "chapter": "Unit 2: EQ in Work & Life",
+    "q": "EQ is an indispensable skill for advancing to leadership positions.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — EQ is essential for leadership."
+  },
+  {
+    "chapter": "Unit 2: EQ in Work & Life",
+    "q": "Which is NOT a component of Mindfulness?",
+    "options": ["Acceptance", "Awareness", "Self-critique", "Current moment"],
+    "answer": 2,
+    "explanation": "Self-critique is not a component of mindfulness."
+  },
+  {
+    "chapter": "Unit 2: EQ in Work & Life",
+    "q": "A person who always thinks they are right suffers from low EQ.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — always thinking you're right indicates low EQ."
+  },
+  {
+    "chapter": "Unit 2: EQ in Work & Life",
+    "q": "Emotional Intelligence helps maintain mental health.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — EQ supports mental health."
+  },
+  {
+    "chapter": "Unit 2: EQ in Work & Life",
+    "q": "Adaptability is part of:",
+    "options": ["Awareness", "Self-Management", "Unknown", "Façade"],
+    "answer": 1,
+    "explanation": "Adaptability is a Self-Management component."
+  },
+  {
+    "chapter": "Unit 2: EQ in Work & Life",
+    "q": "Social Media can increase the trap of comparing yourself to others.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — social media increases comparison traps."
+  },
+  {
+    "chapter": "Unit 2: EQ in Work & Life",
+    "q": "Organizational Awareness is part of:",
+    "options": ["Self-Management", "Social Awareness", "Façade", "Unknown"],
+    "answer": 1,
+    "explanation": "Organizational Awareness is part of Social Awareness."
+  },
+  {
+    "chapter": "Unit 2: EQ in Work & Life",
+    "q": "Conflict Resolution is a skill that follows:",
+    "options": ["Self-Awareness", "Relationship Management", "Ignorance", "Isolation"],
+    "answer": 1,
+    "explanation": "Conflict resolution is part of Relationship Management."
+  },
+  {
+    "chapter": "Unit 2: EQ in Work & Life",
+    "q": "You must always be thankful and appreciative of what you have to achieve happiness.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — gratitude contributes to happiness."
+  },
+  {
+    "chapter": "Unit 2: EQ in Work & Life",
+    "q": "Self-awareness is the cornerstone of Emotional Intelligence.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — self-awareness is foundational to EQ."
+  },
+  {
+    "chapter": "Unit 2: EQ in Work & Life",
+    "q": "Emotionally intelligent people avoid taking responsibility.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "False — EQ people take responsibility."
+  },
+
+  {
+    "chapter": "Unit 3: Communication Process",
+    "q": "The word 'Communication' is derived from a Latin word meaning:",
+    "options": ["Talking", "Sharing", "Writing", "Listening"],
+    "answer": 1,
+    "explanation": "Communication comes from a Latin word meaning 'sharing'."
+  },
+  {
+    "chapter": "Unit 3: Communication Process",
+    "q": "The person who starts the message in the process is called:",
+    "options": ["Receiver", "Medium", "Sender", "Reference"],
+    "answer": 2,
+    "explanation": "The sender initiates the communication."
+  },
+  {
+    "chapter": "Unit 3: Communication Process",
+    "q": "Communication is successful when both parties understand:",
+    "options": ["Language", "Info", "Feelings", "All of the above"],
+    "answer": 3,
+    "explanation": "Successful communication requires understanding language, info, and feelings."
+  },
+  {
+    "chapter": "Unit 3: Communication Process",
+    "q": "The 2020 pandemic emphasized communication through:",
+    "options": ["Stopping", "Adapting to new ways", "Isolation", "Silence"],
+    "answer": 1,
+    "explanation": "The pandemic emphasized adapting to new communication methods."
+  },
+  {
+    "chapter": "Unit 3: Communication Process",
+    "q": "Which is NOT a primary purpose of communication?",
+    "options": ["Media", "Influence", "Sleeping", "Imagination"],
+    "answer": 2,
+    "explanation": "Sleeping is not a purpose of communication."
+  },
+  {
+    "chapter": "Unit 3: Communication Process",
+    "q": "The first step in the communication process is:",
+    "options": ["Sending", "Defining source/message", "Feedback", "Receiving"],
+    "answer": 1,
+    "explanation": "The first step is defining the source/message."
+  },
+  {
+    "chapter": "Unit 3: Communication Process",
+    "q": "The Receiver in the communication process is:",
+    "options": ["Initiator", "Target Audience", "Medium", "Reference"],
+    "answer": 1,
+    "explanation": "The receiver is the target audience."
+  },
+  {
+    "chapter": "Unit 3: Communication Process",
+    "q": "Effectiveness of communication is measured by:",
+    "options": ["Speed", "Clarity & Understanding", "Message length", "Volume"],
+    "answer": 1,
+    "explanation": "Effectiveness is measured by clarity and understanding."
+  },
+  {
+    "chapter": "Unit 3: Communication Process",
+    "q": "Communication is a vital life skill developed throughout life.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — communication is a lifelong skill."
+  },
+  {
+    "chapter": "Unit 3: Communication Process",
+    "q": "If the receiver fails to understand, communication is still effective.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "False — if the receiver doesn't understand, communication fails."
+  },
+  {
+    "chapter": "Unit 3: Communication Process",
+    "q": "Verbal communication is the only type of communication.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "False — non-verbal communication also exists."
+  },
+  {
+    "chapter": "Unit 3: Communication Process",
+    "q": "A head nod is a non-verbal acknowledgment of understanding.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — head nods are non-verbal cues."
+  },
+  {
+    "chapter": "Unit 3: Communication Process",
+    "q": "The 'imaginative' purpose of communication is used in storytelling.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — imaginative communication is used in stories."
+  },
+  {
+    "chapter": "Unit 3: Communication Process",
+    "q": "The Sender is also referred to as the 'Communicator'.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — the sender is the communicator."
+  },
+  {
+    "chapter": "Unit 3: Communication Process",
+    "q": "The communication process consists of only 3 steps.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "False — the process has multiple steps including feedback."
+  },
+  {
+    "chapter": "Unit 3: Communication Process",
+    "q": "Meeting social expectations is one purpose of communication.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — meeting social expectations is a communication purpose."
+  },
+  {
+    "chapter": "Unit 3: Communication Process",
+    "q": "Effective communication reduces the likelihood of conflicts.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — effective communication reduces conflicts."
+  },
+  {
+    "chapter": "Unit 3: Communication Process",
+    "q": "Transferring information from one place to another defines communication.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — transferring information is part of communication."
+  },
+  {
+    "chapter": "Unit 3: Communication Process",
+    "q": "Identifying the type of communication always precedes content definition.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "False — content definition typically comes first."
+  },
+  {
+    "chapter": "Unit 3: Communication Process",
+    "q": "Communication fosters trust and respect between parties.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — communication builds trust and respect."
+  },
+
+  {
+    "chapter": "Unit 3: Importance & Workplace Tech",
+    "q": "Employers prioritize candidates with high:",
+    "options": ["Height", "Communication IQ", "Age", "Wealth"],
+    "answer": 1,
+    "explanation": "Employers prioritize candidates with high communication IQ."
+  },
+  {
+    "chapter": "Unit 3: Importance & Workplace Tech",
+    "q": "Digital interactions require:",
+    "options": ["Long messages", "Clear and concise messaging", "Technical jargon", "Formal letters"],
+    "answer": 1,
+    "explanation": "Digital interactions require clear and concise messaging."
+  },
+  {
+    "chapter": "Unit 3: Importance & Workplace Tech",
+    "q": "Effective communication in the workplace reduces:",
+    "options": ["Productivity", "Errors and speeds up task completion", "Teamwork", "Innovation"],
+    "answer": 1,
+    "explanation": "Good communication reduces errors and speeds up tasks."
+  },
+  {
+    "chapter": "Unit 3: Importance & Workplace Tech",
+    "q": "Tech agility in communication refers to:",
+    "options": ["Physical fitness", "Ability to adapt to digital communication tools", "Typing speed", "Programming skills"],
+    "answer": 1,
+    "explanation": "Tech agility is the ability to adapt to digital communication tools."
+  },
+  {
+    "chapter": "Unit 3: Importance & Workplace Tech",
+    "q": "Good communication skills are essential for:",
+    "options": ["Isolation", "Employability and career growth", "Avoiding teamwork", "Reducing productivity"],
+    "answer": 1,
+    "explanation": "Communication skills are essential for employability and career growth."
+  },
+  {
+    "chapter": "Unit 3: Importance & Workplace Tech",
+    "q": "Communication in the workplace primarily helps to:",
+    "options": ["Create confusion", "Build relationships and coordinate tasks", "Delay projects", "Increase conflicts"],
+    "answer": 1,
+    "explanation": "Workplace communication builds relationships and coordinates tasks."
+  },
+  {
+    "chapter": "Unit 3: Importance & Workplace Tech",
+    "q": "Which of the following is a benefit of effective communication?",
+    "options": ["Increased errors", "Improved productivity", "Higher turnover", "More conflicts"],
+    "answer": 1,
+    "explanation": "Effective communication improves productivity."
+  },
+  {
+    "chapter": "Unit 3: Importance & Workplace Tech",
+    "q": "In the digital age, communication has become:",
+    "options": ["Slower", "More instant and widespread", "Less important", "More formal only"],
+    "answer": 1,
+    "explanation": "Digital communication is more instant and widespread."
+  },
+  {
+    "chapter": "Unit 3: Importance & Workplace Tech",
+    "q": "Poor communication in the workplace can lead to:",
+    "options": ["Better teamwork", "Mistakes and misunderstandings", "Higher profits", "Faster completion"],
+    "answer": 1,
+    "explanation": "Poor communication causes mistakes and misunderstandings."
+  },
+  {
+    "chapter": "Unit 3: Importance & Workplace Tech",
+    "q": "Communication skills are considered:",
+    "options": ["Optional", "Soft skills essential for success", "Only for managers", "Irrelevant in tech"],
+    "answer": 1,
+    "explanation": "Communication skills are essential soft skills for success."
+  },
+
+  {
+    "chapter": "Unit 3: Types & Mehrabian's Rule",
+    "q": "According to Mehrabian, body language represents:",
+    "options": ["55%", "38%", "7%", "93%"],
+    "answer": 0,
+    "explanation": "Mehrabian: Body language = 55% of communication impact."
+  },
+  {
+    "chapter": "Unit 3: Types & Mehrabian's Rule",
+    "q": "Which of the following is non-verbal communication?",
+    "options": ["Email", "Facial Expressions", "Phone call", "Text message"],
+    "answer": 1,
+    "explanation": "Facial expressions are non-verbal communication."
+  },
+  {
+    "chapter": "Unit 3: Types & Mehrabian's Rule",
+    "q": "Using 'Visual Aids' is categorized as:",
+    "options": ["Verbal", "Written", "Visual", "Non-verbal"],
+    "answer": 2,
+    "explanation": "Visual aids are categorized as visual communication."
+  },
+  {
+    "chapter": "Unit 3: Types & Mehrabian's Rule",
+    "q": "Written communication is characterized by:",
+    "options": ["Tone reliance", "Record keeping", "Vocal speed", "Body language"],
+    "answer": 1,
+    "explanation": "Written communication is characterized by record keeping."
+  },
+  {
+    "chapter": "Unit 3: Types & Mehrabian's Rule",
+    "q": "If verbal and non-verbal messages differ, we believe:",
+    "options": ["Verbal", "None", "Non-verbal", "Longest"],
+    "answer": 2,
+    "explanation": "When verbal and non-verbal conflict, we believe non-verbal."
+  },
+  {
+    "chapter": "Unit 3: Types & Mehrabian's Rule",
+    "q": "SMS Text messages are considered:",
+    "options": ["Verbal", "Visual", "Written", "Non-verbal"],
+    "answer": 2,
+    "explanation": "SMS text messages are written communication."
+  },
+  {
+    "chapter": "Unit 3: Types & Mehrabian's Rule",
+    "q": "Tone of voice in the Mehrabian model represents:",
+    "options": ["100%", "38%", "7%", "55%"],
+    "answer": 1,
+    "explanation": "Tone of voice = 38% of communication impact."
+  },
+  {
+    "chapter": "Unit 3: Types & Mehrabian's Rule",
+    "q": "Formal communication is mostly used:",
+    "options": ["Family", "Work", "Friends", "Trips"],
+    "answer": 1,
+    "explanation": "Formal communication is mostly used at work."
+  },
+  {
+    "chapter": "Unit 3: Types & Mehrabian's Rule",
+    "q": "Spoken words represent 93% of the communication process.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "False — spoken words represent only 7% per Mehrabian."
+  },
+  {
+    "chapter": "Unit 3: Types & Mehrabian's Rule",
+    "q": "Mind maps are tools of visual communication.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "True — mind maps are visual communication tools."
+  },
+
+  {
+    "chapter": "Unit 3: Receptive & Production Skills",
+    "q": "'Receptive' skills in communication include:",
+    "options": ["Talking", "Writing", "Reading & Listening", "Speaking"],
+    "answer": 2,
+    "explanation": "Receptive skills are reading and listening."
+  },
+  {
+    "chapter": "Unit 3: Receptive & Production Skills",
+    "q": "To improve speaking, you must pay attention to:",
+    "options": ["What you say", "How you say it", "Tone", "All of the above"],
+    "answer": 3,
+    "explanation": "Improving speaking requires attention to what, how, and tone."
+  },
+  {
+    "chapter": "Unit 3: Receptive & Production Skills",
+    "q": "Listening with 'empathy' helps to:",
+    "options": ["Control", "Understand thoughts/feelings", "Argue", "Interrupt"],
+    "answer": 1,
+    "explanation": "Empathic listening helps understand thoughts and feelings."
+  },
+  {
+    "chapter": "Unit 3: Receptive & Production Skills",
+    "q": "'Brevity' in writing means:",
+    "options": ["Deleting info", "Much info in few words", "Obscurity", "Verbosity"],
+    "answer": 1,
+    "explanation": "Brevity means conveying much information in few words."
+  },
+  {
+    "chapter": "Unit 3: Receptive & Production Skills",
+    "q": "'Production' skills in communication include:",
+    "options": ["Listening", "Speaking & Writing", "Reading", "Observing"],
+    "answer": 1,
+    "explanation": "Production skills include speaking and writing."
+  },
+  {
+    "chapter": "Unit 3: Receptive & Production Skills",
+    "q": "Preparing for expected questions increases:",
+    "options": ["Stress", "Self-confidence", "Fear", "Forgetting"],
+    "answer": 1,
+    "explanation": "Preparing for expected questions increases self-confidence."
+  },
+  {
+    "chapter": "Unit 3: Receptive & Production Skills",
+    "q": "What helps in improving verbal communication?",
+    "options": ["Reading", "Preparation", "Listening more", "All of the above"],
+    "answer": 3,
+    "explanation": "Reading, preparation, and listening all improve verbal communication."
+  },
+  {
+    "chapter": "Unit 3: Receptive & Production Skills",
+    "q": "Active listening focuses on the message:",
+    "options": ["Passively", "Fully & Actively", "Partially", "Selectively"],
+    "answer": 1,
+    "explanation": "Active listening focuses fully and actively on the message."
+  },
+  {
+    "chapter": "Unit 3: Receptive & Production Skills",
+    "q": "Before speaking, you should always consider:",
+    "options": ["Height", "Audience", "Clothes price", "Weather"],
+    "answer": 1,
+    "explanation": "Always consider your audience before speaking."
+  },
+  {
+    "chapter": "Unit 3: Receptive & Production Skills",
+    "q": "Reading is a receptive skill because it requires:",
+    "options": ["Producing words", "Understanding content", "Loud voice", "Writing notes"],
+    "answer": 1,
+    "explanation": "Reading is receptive because it requires understanding content."
+  }
+]
