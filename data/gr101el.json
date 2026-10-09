@@ -63,6 +63,10 @@
   {"chapter":"Unit 1","q":"Delegation means evading responsibility and always giving work to others.","options":["True","False"],"answer":1,"explanation":"False — proper assignment."},
   {"chapter":"Unit 1","q":"Saying 'No' to distractions is a time management skill.","options":["True","False"],"answer":0,"explanation":"True — key skill."},
   {"chapter":"Unit 1","q":"SMART goals must be general and not time-bound.","options":["True","False"],"answer":1,"explanation":"False — specific + time-bound."},
+  {"chapter":"Unit 1","q":"Which is an example of a Skill?","options":["Knowing Newton's laws","Driving a car","Being dedicated","Having attention to detail"],"answer":1,"explanation":"Skill is the practical application of knowledge."},
+  {"chapter":"Unit 1","q":"Which is an example of an Ability?","options":["Understanding programming theory","Performing CPR","Attention to detail","Taking notes"],"answer":2,"explanation":"Ability is often natural or intrinsic, e.g. attention to detail."},
+  {"chapter":"Unit 1","q":"In Fitts & Posner, which stage has lots of errors and information gathering?","options":["Cognitive","Associative","Autonomous","Expert"],"answer":0,"explanation":"The Cognitive stage is beginner-level with many errors."},
+  {"chapter":"Unit 1","q":"In Fitts & Posner, which stage is the longest?","options":["Cognitive","Associative","Autonomous","None"],"answer":1,"explanation":"The Associative stage is the longest."},
 
   {"chapter":"Unit 2","q":"What is Self-Awareness?","options":["Ignoring feelings","Understanding self-aspects","Imitating others","Escaping reality"],"answer":1,"explanation":"Understanding self-aspects."},
   {"chapter":"Unit 2","q":"Which is NOT an element of self-awareness?","options":["Values","Skills","Favorite food","Aspirations"],"answer":2,"explanation":"Favorite food."},
@@ -144,6 +148,7 @@
   {"chapter":"Unit 2","q":"You must always be thankful and appreciative of what you have to achieve happiness.","options":["True","False"],"answer":0,"explanation":"True — gratitude."},
   {"chapter":"Unit 2","q":"Self-awareness is the cornerstone of Emotional Intelligence.","options":["True","False"],"answer":0,"explanation":"True."},
   {"chapter":"Unit 2","q":"Emotionally intelligent people avoid taking responsibility.","options":["True","False"],"answer":1,"explanation":"False — take responsibility."},
+  {"chapter":"Unit 2","q":"Self-awareness is the cornerstone of which concept?","options":["IQ","EQ","Memory","Reading"],"answer":1,"explanation":"Self-awareness is foundational to emotional intelligence."},
 
   {"chapter":"Unit 3","q":"The word 'Communication' is derived from a Latin word meaning:","options":["Talking","Sharing","Writing","Listening"],"answer":1,"explanation":"Sharing."},
   {"chapter":"Unit 3","q":"The person who starts the message in the process is called:","options":["Receiver","Medium","Sender","Reference"],"answer":2,"explanation":"Sender."},
