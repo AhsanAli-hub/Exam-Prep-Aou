@@ -1391,5 +1391,1120 @@
     "options": ["Producing words", "Understanding content", "Loud voice", "Writing notes"],
     "answer": 1,
     "explanation": "Reading is receptive — you receive and decode written information. It's not about producing words (that's writing) but about comprehending them."
+  },
+  [
+  {
+    "chapter": "Unit 4",
+    "q": "Stress is the reaction to change requiring:",
+    "options": ["Ignoring", "Adjustment/Response", "Sleeping", "Anger"],
+    "answer": 1,
+    "explanation": "Stress is a natural physical and emotional response to changes that require us to adjust or respond."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "\"Fight or Flight\" occurs when feeling:",
+    "options": ["Happiness", "Threatened", "Hunger", "Drowsiness"],
+    "answer": 1,
+    "explanation": "The fight-or-flight response is triggered when we perceive a threat or danger, preparing the body to face or escape it."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Skills for positive stress management:",
+    "options": ["Isolation", "Emotional Intelligence", "Negative Thinking", "Avoidance"],
+    "answer": 1,
+    "explanation": "Emotional intelligence helps you recognize, manage, and regulate your emotions effectively during stressful situations."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Anxiety differs from stress as it occurs:",
+    "options": ["Before an event", "Reaction to stress", "As an alternative", "Rarely"],
+    "answer": 0,
+    "explanation": "While stress is typically a reaction to a current trigger, anxiety is often future-oriented, occurring in anticipation of a potential event."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Reasonable healthy stress helps in:",
+    "options": ["Failure", "Motivating performance", "Illness", "Despair"],
+    "answer": 1,
+    "explanation": "Healthy stress (eustress) provides the motivation and energy needed to meet challenges, improve performance, and reach goals."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "\"Freeze\" response happens when:",
+    "options": ["Funny", "Fails to decide", "We face or escape", "Relaxed"],
+    "answer": 1,
+    "explanation": "The freeze response is a trauma response where a person feels paralyzed and cannot decide whether to fight or flee."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Stress is not always bad and can keep you safe.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Short-term stress can be protective, alerting us to danger and keeping us focused and alert."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "In fight response, blood flow increases to surface areas.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "During a fight response, blood flow actually decreases at the surface (causing pallor) and shifts to core muscles to prepare for action."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Pupil dilation allows more light for better vision.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "During stress, pupils dilate (mydriasis) to let in more light, improving visual acuity to assess the threat."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Blood clotting ability decreases during stress.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Stress actually increases blood clotting to prevent excessive bleeding in case of injury during a threatening situation."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Trembling happens as muscles become tense/ready.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Muscles tense in preparation for action. The buildup of energy and tension can manifest as physical trembling."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Flight response involves immediate withdrawal.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "The flight response prompts an individual to quickly escape or withdraw from a perceived danger."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Genetic/Environment don't affect stress levels.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Both genetics (biological predispositions) and environment (upbringing, current circumstances) heavily influence how one handles stress."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Tension headache (band around head) is caused by:",
+    "options": ["Hunger", "Stress", "Sports", "Reading"],
+    "answer": 1,
+    "explanation": "Tension headaches are commonly caused by stress, which leads to the tightening of muscles in the head and neck."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Heart palpitations from stress indicate:",
+    "options": ["Heart stop", "Accelerated/Irregular beats", "Slow pulse", "Calmness"],
+    "answer": 1,
+    "explanation": "Stress triggers the release of adrenaline, which causes the heart to beat faster and sometimes irregularly."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Digestive bloating/cramps are signs of:",
+    "options": ["Mental health issues", "Happiness", "Memory strength", "Physical fitness"],
+    "answer": 0,
+    "explanation": "Stress and mental health issues disrupt the gut-brain axis, leading to digestive problems like bloating and cramps."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "\"Chronic Pain\" refers to pain lasting over:",
+    "options": ["A week", "A month", "6 Months", "2 Years"],
+    "answer": 2,
+    "explanation": "Chronic pain is medically defined as pain that lasts for more than 3 to 6 months."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Lack of body energy due to stress is:",
+    "options": ["Vitality", "Exhaustion/Fatigue", "Passion", "Focus"],
+    "answer": 1,
+    "explanation": "Prolonged stress drains the body's energy reserves, resulting in chronic fatigue and exhaustion."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Accumulation of physical effects occurs:",
+    "options": ["Immediately", "Over time", "In sleep", "When eating"],
+    "answer": 1,
+    "explanation": "The physical toll of chronic stress accumulates gradually over time, leading to long-term health issues."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "A stressed person may feel lonely even when surrounded by people.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Stress can cause emotional withdrawal and isolation, making one feel lonely even in a crowd."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Mood swings always occur for clear and obvious reasons.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Mood swings can be triggered by underlying stress, hormonal imbalances, or chemical changes, even without an obvious external reason."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Loss of passion means withdrawing from activities previously enjoyed.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Anhedonia (loss of interest in previously enjoyed activities) is a common emotional warning sign of stress and depression."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Stress does not affect concentration or memory ability at all.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "High stress impairs cognitive function, making it difficult to concentrate and remember things."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Sudden angry outbursts may result from long-term accumulated stress.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "When stress is bottled up over time, it can lower the threshold for frustration, leading to sudden angry outbursts."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Temporary sadness or frustration is the same as clinical depression.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Temporary sadness is a normal emotional response; clinical depression is a persistent, severe medical condition lasting weeks or months."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Early recognition of stress signs prevents the deterioration of health.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Identifying stress early allows you to implement coping strategies before it escalates into severe physical or mental health issues."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Who developed the General Adaptation Syndrome (GAS) theory?",
+    "options": ["Freud", "Hans Selye", "Maslow", "Skinner"],
+    "answer": 1,
+    "explanation": "Hans Selye developed the General Adaptation Syndrome to describe the body's short-term and long-term reactions to stress."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "First stage of General Adaptation Syndrome:",
+    "options": ["Resistance", "Alarm", "Exhaustion", "Recovery"],
+    "answer": 1,
+    "explanation": "The Alarm stage is the initial, immediate reaction to a stressor where the fight-or-flight response is activated."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Cortisol is released mainly in:",
+    "options": ["Sleep", "Alarm stage", "Recovery", "Diet"],
+    "answer": 1,
+    "explanation": "During the Alarm stage, the adrenal glands release cortisol (the stress hormone) to help the body manage the stressful situation."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Stage where body tries to return to normal:",
+    "options": ["Breakdown", "Resistance", "Alarm", "Exhaustion"],
+    "answer": 1,
+    "explanation": "In the Resistance stage, the body attempts to adapt to the stressor and return to a state of equilibrium (homeostasis)."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "If stress continues long-term, body reaches:",
+    "options": ["Strength", "Exhaustion", "Focus", "Immunity"],
+    "answer": 1,
+    "explanation": "The Exhaustion stage occurs when the body's resources are depleted after prolonged exposure to stress."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Signs of the Exhaustion stage:",
+    "options": ["Activity", "Burnout", "Weight gain", "Euphoria"],
+    "answer": 1,
+    "explanation": "The exhaustion stage is characterized by burnout, fatigue, and a weakened immune system as the body's energy is depleted."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Depression is a persistent and severe low mood.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Clinical depression is defined by persistent and severe feelings of sadness, hopelessness, and loss of interest."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Mental health is just the absence of illness.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Mental health is not merely the absence of mental illness, but a state of well-being where one can cope with normal stresses and work productively."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Exercise releases endorphins to help depression.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Physical exercise triggers the release of endorphins, which are natural mood elevators that help alleviate symptoms of depression."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Anxiety is always obvious like a broken arm.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Unlike a broken arm, anxiety is an invisible internal struggle and is not always obvious to others."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "The pandemic increased global health issues.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "The COVID-19 pandemic led to a global increase in mental health issues like anxiety and depression due to isolation and uncertainty."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Stigma prevents people from seeking help.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "The fear of being judged or stigmatized for having a mental health issue often stops people from seeking professional help."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Acute stress always leads to chronic illness.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Acute (short-term) stress does not always lead to chronic illness; in fact, it is a normal part of life. Chronic (long-term) stress is what causes harm."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "High cortisol increases fat especially around:",
+    "options": ["Head", "Abdomen", "Feet", "Hands"],
+    "answer": 1,
+    "explanation": "High levels of the stress hormone cortisol are linked to an increase in visceral fat, which is fat stored around the abdomen."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Stress worsens Type 2 Diabetes by increasing:",
+    "options": ["Insulin", "Glucose", "Water", "Vitamins"],
+    "answer": 1,
+    "explanation": "Stress hormones cause blood sugar (glucose) levels to rise, making it harder for people with Type 2 Diabetes to manage their condition."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Brain disease worsened by stress:",
+    "options": ["Flu", "Alzheimer's", "Asthma", "Measles"],
+    "answer": 1,
+    "explanation": "Chronic stress can negatively affect brain function and is known to exacerbate neurodegenerative conditions like Alzheimer's disease."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Heartburn/IBS are issues related to:",
+    "options": ["Bones", "Digestive System", "Hearing", "Vision"],
+    "answer": 1,
+    "explanation": "Heartburn and Irritable Bowel Syndrome (IBS) are gastrointestinal issues directly related to the digestive system, often triggered by stress."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Persistent stress eventually risks:",
+    "options": ["Youth", "Premature Death", "Height", "Wealth"],
+    "answer": 1,
+    "explanation": "Chronic stress increases the risk of serious health conditions like heart disease and stroke, which can lead to premature death."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Obesity may result from coping via:",
+    "options": ["Fasting", "Overeating", "Sleep", "Exercise"],
+    "answer": 1,
+    "explanation": "Using overeating (especially comfort foods) as a coping mechanism for stress can lead to weight gain and obesity."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Prevention is better than cure.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "In stress management, preventing stress from building up is far more effective than trying to cure the negative health effects once they occur."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Social media shows reality.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Social media is often a highlight reel of curated, filtered lives, not an accurate representation of reality."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Less social media = less comparison.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Reducing social media usage limits exposure to the curated lives of others, which helps reduce the harmful habit of social comparison."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Only intense exercise counts.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Any form of physical activity, including light exercise or walking, is beneficial for stress reduction and overall health."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Helping others reduces self-stress.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Altruism and helping others releases endorphins (the 'helper's high'), which reduces stress and promotes a sense of well-being."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Reading provides a quiet mind.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Reading can be a meditative activity that distracts the mind from stressors and promotes relaxation."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Practice something fun daily.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Engaging in daily enjoyable activities is an essential part of stress reduction and maintaining a balanced life."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Mindfulness focuses on past errors.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Mindfulness is about focusing on the present moment, not dwelling on past mistakes or worrying about the future."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "The 4 A's: Avoid, Alter, Adapt, and...",
+    "options": ["Escape", "Accept", "Scream", "Withdraw"],
+    "answer": 1,
+    "explanation": "The 4 A's of stress management are Avoid, Alter, Adapt, and Accept."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "When you cannot change a situation:",
+    "options": ["Anger", "Acceptance", "Escape", "Denial"],
+    "answer": 1,
+    "explanation": "If a stressor cannot be avoided or changed, the healthiest approach is to accept it and change your reaction to it."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Realistic to-do lists reduce feelings of:",
+    "options": ["Joy", "Defeat/Pressure", "Power", "Confidence"],
+    "answer": 1,
+    "explanation": "Realistic to-do lists prevent overwhelm by ensuring tasks are achievable, reducing feelings of defeat and pressure."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "\"Adapting\" means:",
+    "options": ["Rejection", "Adjusting standards", "Giving up", "Ignoring"],
+    "answer": 1,
+    "explanation": "Adapting involves changing your expectations or standards to fit a stressful situation, making it more manageable."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Important Stress Diary question:",
+    "options": ["Weight?", "What caused the stress?", "Name?", "Height?"],
+    "answer": 1,
+    "explanation": "A stress diary tracks the triggers and causes of stress, helping you identify patterns to manage them better."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Using a \"Calendar\" helps completion with:",
+    "options": ["Randomness", "Efficiency/Order", "Difficulty", "Confusion"],
+    "answer": 1,
+    "explanation": "Using a calendar organizes tasks and schedules, improving efficiency and bringing order to daily responsibilities."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Overthinking is thinking longer than necessary.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Overthinking is dwelling on a situation or decision well past the point where it is helpful, leading to stress."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Perfectionism leads to frustration/stress.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Striving for unattainable perfection often results in chronic frustration, disappointment, and high stress."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Fear of failure always motivates people.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "While fear of failure can sometimes motivate, it more often paralyzes people and causes severe anxiety and procrastination."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Perspective = Will it matter in a year?",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Asking if a stressor will matter in a year is a great way to gain perspective and reduce the impact of trivial daily frustrations."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Expecting every outcome helps enjoyment.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Trying to control or expect every single outcome leads to anxiety. Letting go of rigid expectations increases enjoyment."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Gratitude expresses thanks for life wonders.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Practicing gratitude shifts focus to the positive aspects of life, improving mental health and reducing stress."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Focusing on positives reduces anxiety.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Intentionally focusing on positive events or feelings counteracts the brain's natural negativity bias, reducing anxiety."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "What is the primary stress hormone?",
+    "options": ["Adrenaline", "Cortisol", "Insulin", "Glucose"],
+    "answer": 1,
+    "explanation": "Cortisol is the primary stress hormone, released by the adrenal glands to help the body manage stress."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Stress leads to immune weakness.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Chronic stress suppresses the immune system, making the body more susceptible to infections and illnesses."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Digestive issues are physical/emotional.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Digestive issues can be caused by both physical factors (diet) and emotional factors (stress, anxiety) due to the gut-brain axis."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Body movement improves mood.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Physical movement releases mood-enhancing endorphins and reduces stress hormones, improving overall mood."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Which stage of GAS follows the Alarm stage?",
+    "options": ["Exhaustion", "Resistance", "Recovery", "Burnout"],
+    "answer": 1,
+    "explanation": "Following the Alarm stage, the body enters the Resistance stage, attempting to adapt to the stressor and return to normal."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Over-responsibility causes stress.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Taking on too many responsibilities without delegating or setting boundaries leads to overwhelming stress."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Overthinking is often a result of:",
+    "options": ["Joy", "Fear", "Confidence", "Anger"],
+    "answer": 1,
+    "explanation": "Fear of making a wrong decision, failing, or facing uncertainty is a primary driver of overthinking."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Forgiveness is part of Acceptance.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Acceptance involves letting go of resentment and forgiving yourself or others for past events you cannot change."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "BP rises immediately in stress.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "During the acute stress response, blood pressure rises immediately to pump more blood to muscles and vital organs."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Depression typically increases:",
+    "options": ["Positivity", "Negativity", "Energy", "Socializing"],
+    "answer": 1,
+    "explanation": "Depression is characterized by a negative cognitive bias, where individuals focus heavily on negative thoughts and outcomes."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Seek doctor if stress is long-term.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "If stress becomes chronic and interferes with daily life, it's important to seek professional medical or psychological help."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Time management reduces stress.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Effective time management reduces the pressure of looming deadlines and helps create a sense of control."
+  },
+  {
+    "chapter": "Unit 4",
+    "q": "Stress is an inseparable part of life and must be managed, not denied.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Stress is a normal part of life. The goal is not to eliminate it entirely, but to learn healthy ways to manage it."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Leadership is the ability to:",
+    "options": ["Force others", "Guide and inspire others", "Ignore team", "Work alone"],
+    "answer": 1,
+    "explanation": "Leadership is fundamentally about guiding, motivating, and inspiring a group of people to achieve a common goal."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Style where leader dictates orders without consultation:",
+    "options": ["Democratic", "Autocratic", "Laissez-faire", "Transformational"],
+    "answer": 1,
+    "explanation": "Autocratic leadership involves a leader who makes decisions independently without seeking input from the team."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "\"Do what I say\" is common for which leadership?",
+    "options": ["Autocratic", "Democratic", "Strategic", "Coaching"],
+    "answer": 0,
+    "explanation": "The phrase 'Do what I say' is a hallmark of autocratic leadership, where obedience and strict adherence to orders are expected."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Which style involves the team in decision-making?",
+    "options": ["Autocratic", "Bureaucratic", "Democratic", "Transactional"],
+    "answer": 2,
+    "explanation": "Democratic leadership (or participative leadership) encourages team members to contribute to the decision-making process."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Laissez-faire (Non-intervention) leadership relies on:",
+    "options": ["Full control", "Giving power to team", "Threatening", "Rewards"],
+    "answer": 1,
+    "explanation": "Laissez-faire leaders take a hands-off approach, giving team members the authority and freedom to make decisions."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Transformational leadership aims to:",
+    "options": ["Keep status quo", "Empower team and create change", "Punish", "Individual work"],
+    "answer": 1,
+    "explanation": "Transformational leaders inspire and motivate their teams to innovate and create positive change, transforming the organization."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Leadership is not just a title or position, but:",
+    "options": ["Physical strength", "Responsibility and influence", "Financial wealth", "Means of control"],
+    "answer": 1,
+    "explanation": "True leadership is defined by the ability to influence others and take responsibility, regardless of one's formal title."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Most appropriate style in emergencies requiring immediate decisions:",
+    "options": ["Democratic", "Autocratic", "Laissez-faire", "Transformational"],
+    "answer": 1,
+    "explanation": "In an emergency, an autocratic style is most effective because it allows for quick, decisive action without the delay of consultation."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "The advantage of Democratic leadership is:",
+    "options": ["Super speed", "Higher morale and loyalty", "Absence of responsibility", "Individual control"],
+    "answer": 1,
+    "explanation": "Involving the team in decisions boosts morale, engagement, and loyalty, as members feel valued and respected."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Example of leadership in daily life:",
+    "options": ["Professor", "Head of family", "Team captain", "All of the above"],
+    "answer": 3,
+    "explanation": "Leadership occurs in many contexts—at work, at home, and in sports. Anyone who guides and influences others is leading."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Real leadership is only about power and job status.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Leadership is about influence and responsibility, not just holding a position of power or a fancy job title."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Good leaders adapt their approach based on the situation.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Situational leadership means adapting your style depending on the team's needs and the specific circumstances."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "In Autocratic leadership, communication is one-way.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Autocratic leaders primarily give orders downward; there is little to no feedback or upward communication."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Democratic leadership often increases employee engagement.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "When employees have a say in decisions, they feel more invested in their work, leading to higher engagement."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Laissez-faire fits teams with new, inexperienced employees.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Laissez-faire works best with highly skilled and experienced teams. Inexperienced employees need more guidance and structure."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Transformational leaders work close with the team for change.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Transformational leaders engage closely with their team, motivating and supporting them through the process of change."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Consistency and honesty are essential traits of success.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Leaders who are consistent and honest build trust and credibility with their teams, which is essential for long-term success."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Leadership skills cannot be learned; they are only innate.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "While some people may have natural leadership tendencies, leadership skills can absolutely be learned and developed over time."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Bureaucratic leadership relies strictly on rules and systems.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Bureaucratic leaders follow established rules and procedures rigorously, focusing on compliance and process."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Great leaders lead through passion and inspiration.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Passion and inspiration are powerful tools that motivate teams to go above and beyond their basic duties."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Strategic thinking focuses on:",
+    "options": ["Daily tasks", "Long-term success", "Blaming others", "Ignoring data"],
+    "answer": 1,
+    "explanation": "Strategic thinking involves looking at the big picture and planning for the long-term growth and success of the organization."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Ability to convince others to trust a cause:",
+    "options": ["Planning", "Persuasion and influence", "Tech management", "Innovation"],
+    "answer": 1,
+    "explanation": "Persuasion and influence are key leadership skills used to build consensus and motivate people to support a shared vision."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Which trait means the leader's honesty in their principles?",
+    "options": ["Motivation", "Integrity", "Intelligence", "Openness"],
+    "answer": 1,
+    "explanation": "Integrity is the quality of being honest, having strong moral principles, and adhering to them consistently."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "A leader who listens actively to messages has:",
+    "options": ["Strong communication", "Planning", "Delivery", "Strategy"],
+    "answer": 0,
+    "explanation": "Active listening is a crucial component of strong communication. It ensures the leader understands the team's concerns and ideas."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "\"Knowledge of the work\" means the leader:",
+    "options": ["Needs no experience", "Must be expert in their field", "Relies only on IQ", "Ignores details"],
+    "answer": 1,
+    "explanation": "To effectively guide a team, a leader should have a deep understanding and expertise in the work they are managing."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Emotional Intelligence is essential because it helps:",
+    "options": ["Control team", "Build positive work relationships", "Salary increase", "Work alone"],
+    "answer": 1,
+    "explanation": "Emotional Intelligence allows leaders to understand and manage emotions, fostering a positive, collaborative, and supportive work environment."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Change management requires the leader to convey clear:",
+    "options": ["Mistakes", "Vision and Mission", "Competitors", "Past"],
+    "answer": 1,
+    "explanation": "During times of change, a leader must clearly communicate the vision and mission to give the team a sense of direction and purpose."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Successful leaders are usually:",
+    "options": ["Proactive", "Hesitant", "Negative", "Introverted"],
+    "answer": 0,
+    "explanation": "Proactive leaders anticipate problems and take action before issues arise, rather than just reacting to events."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "\"Delivery\" skill in leadership means:",
+    "options": ["Giving up", "Completing the project successfully", "Handing over power", "Leaving team"],
+    "answer": 1,
+    "explanation": "Delivery refers to a leader's ability to execute plans and successfully bring projects to completion."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Innovation in leadership refers to:",
+    "options": ["Traditional methods", "New ideas", "Hiding info", "Routine"],
+    "answer": 1,
+    "explanation": "Innovation involves encouraging new ideas, creative problem-solving, and adapting to improve processes and outcomes."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Strategic thinking requires focusing on \"The Full Picture\".",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Strategic leaders must see the big picture, understanding how different parts of the organization and market interact."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "A good leader should use threats to force the team.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Using threats creates a toxic, fearful environment. Good leaders use motivation, support, and inspiration instead."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Self-confidence helps others trust and follow the leader.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "A confident leader projects certainty and competence, which makes followers feel secure and willing to follow their direction."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Openness means the leader should be friendly and social.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Openness involves being approachable, transparent, and willing to listen to new ideas and feedback from the team."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Leadership doesn't require working with people at different levels.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Effective leaders must communicate and build relationships with people at all levels—from frontline staff to senior executives."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Effective project management relies on accurate planning.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Accurate planning sets clear objectives, timelines, and resource allocations, which are essential for project success."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Mental intelligence (IQ) alone is enough to be a leader.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "While helpful, IQ alone is not enough. Leadership requires emotional intelligence, communication skills, and the ability to inspire others."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "A leader supports words with actions and sets a good example.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Leading by example is a powerful way to build trust. Actions must align with words to maintain credibility."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Non-verbal communication (body language) isn't important.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Non-verbal communication is highly important. Body language, facial expressions, and tone heavily influence how messages are received."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Self-esteem allows a leader to find solutions to obstacles.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "A leader with healthy self-esteem is resilient and confident enough to face challenges and seek out solutions rather than giving up."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "The first stage in Tuckman's model of team development is:",
+    "options": ["Forming", "Storming", "Norming", "Performing"],
+    "answer": 0,
+    "explanation": "Forming is the initial stage where team members are polite, getting to know each other, and orienting themselves to the task."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Stage where members \"cross boundaries\" and conflict begins:",
+    "options": ["Forming", "Storming", "Norming", "Adjourning"],
+    "answer": 1,
+    "explanation": "Storming is characterized by conflict and competition as individual personalities and ideas start to clash."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Stage where team resolves conflicts and values strengths:",
+    "options": ["Storming", "Norming", "Performing", "Mourning"],
+    "answer": 1,
+    "explanation": "In the Norming stage, the team resolves its differences, appreciates each other's strengths, and establishes cohesion and unity."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "\"Virtual Teams\" rely mainly for working together on:",
+    "options": ["Spatial presence", "Technology", "Paper", "Chance"],
+    "answer": 1,
+    "explanation": "Virtual teams are geographically dispersed and depend heavily on technology (like video conferencing and collaboration tools) to communicate and work together."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Primary purpose of Team Building is:",
+    "options": ["Competition", "Trust and bonding", "Increase absence", "Reduce creativity"],
+    "answer": 1,
+    "explanation": "Team building activities are designed to improve interpersonal relationships, build trust, and foster a sense of bonding among team members."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Accountability in a team means:",
+    "options": ["Escaping", "Taking responsibility for actions", "Blaming", "Ignoring"],
+    "answer": 1,
+    "explanation": "Accountability is the willingness to take responsibility for one's actions, decisions, and outcomes within the team."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Teams with no specific leader that control their decisions are:",
+    "options": ["Self-managed teams", "Operational", "Project teams", "Fake teams"],
+    "answer": 0,
+    "explanation": "Self-managed (or self-directed) teams operate without a traditional appointed leader, collectively making decisions and managing their work."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "The \"Performing\" stage is characterized by the team working as:",
+    "options": ["Scatter", "Independent and interdependent unit", "Conflict group", "New team"],
+    "answer": 1,
+    "explanation": "In the Performing stage, the team functions at a high level, working independently while also seamlessly cooperating and relying on each other."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Improving \"Productivity\" in a team is done through:",
+    "options": ["Individual work", "Distributing tasks based on strengths", "Increasing conflict", "Reducing trust"],
+    "answer": 1,
+    "explanation": "Assigning tasks based on individual strengths maximizes efficiency and leverages the team's diverse talents."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Final stage where team is dissolved is called:",
+    "options": ["Performing", "Norming", "Adjourning (Mourning)", "Storming"],
+    "answer": 2,
+    "explanation": "Adjourning (often referred to as Mourning) is the final stage in Tuckman's model where the project is complete and the team disbands."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Teamwork is collaborative effort for a common cause.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Teamwork is defined by individuals working together cooperatively towards a shared goal or common cause."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Team building should be limited to one day a year.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Team building is an ongoing process, not a one-time event. It should be integrated into daily operations for lasting effect."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Trust within the team helps tasks get done faster.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "High trust reduces the need for constant monitoring and micromanagement, allowing tasks to flow more quickly and smoothly."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Clear accountability increases blaming among members.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Clear accountability actually reduces blaming because everyone knows exactly what they are responsible for."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Virtual teams felt isolation challenges during the 2020 pandemic.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "The sudden shift to remote work during the pandemic caused many employees to experience feelings of isolation and disconnect."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Healthy competition aims to embarrass others.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Healthy competition is about striving for excellence and personal bests, not about embarrassing or undermining others."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Constructive feedback is essential for accountability.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Constructive feedback helps team members understand expectations, correct course, and remain accountable for their work."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "In Forming, roles are very clear from the beginning.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "In the Forming stage, roles and responsibilities are often unclear and need to be defined as the team begins to work together."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Positive culture reduces absence and improves performance.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "A positive, supportive work culture increases employee satisfaction and engagement, leading to lower absenteeism and higher performance."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Every team passes Tuckman's stages at same speed.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Teams progress through Tuckman's stages at different rates depending on factors like team composition, task complexity, and leadership."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Coaching leadership focuses on developing skills.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Coaching leadership is centered on helping team members improve their skills, overcome challenges, and reach their full potential."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Operational teams always have a specific end date.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Operational teams are ongoing, permanent teams that handle regular, daily business operations. They do not have an end date."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "\"Clarity is key\" in the process of team accountability.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "For accountability to work, expectations, roles, and goals must be crystal clear to all team members."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Autocratic leader gives wide authority to the team.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Autocratic leaders retain authority and decision-making power for themselves, giving little to no authority to the team."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Transformational leadership encourages innovation.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Transformational leaders stimulate intellectual curiosity and encourage team members to think creatively and innovate."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Essential leadership skill:",
+    "options": ["Communication", "Sleep", "Laziness", "Isolation"],
+    "answer": 0,
+    "explanation": "Communication is arguably the most essential leadership skill, as it is required to convey vision, provide feedback, and build relationships."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "\"The Full Picture\" is related to skill:",
+    "options": ["Strategy", "Routine", "Micromanagement", "Clerical work"],
+    "answer": 0,
+    "explanation": "Seeing 'The Full Picture' is a core component of strategic thinking, allowing leaders to understand how all parts fit together."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Conflict in teams can be healthy if productive.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Task-related conflict can be healthy and productive by generating new ideas and fostering critical thinking, as long as it doesn't turn personal."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Positive culture attracts more customers to organization.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "A positive internal culture often results in better customer service and brand reputation, which can attract more customers."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "A leader admitting mistakes weakens prestige.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Admitting mistakes actually enhances a leader's credibility and demonstrates humility, integrity, and a willingness to learn."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Linking work to personal goals increases accountability.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "When team members see how their work aligns with their personal goals and values, they are more invested and accountable."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "A fearful environment generates long-term commitment.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "A fearful environment (e.g., from threat-based leadership) leads to burnout, high turnover, and disengagement, not long-term commitment."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Good leader praises people before criticizing them.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Using the 'sandwich' feedback method (praise, critique, praise) softens the blow of criticism and makes it easier for the employee to receive."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "A Project is a collaborative, carefully planned work.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "A project is a temporary, collaborative endeavor with a defined goal, scope, and timeline, requiring careful planning."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Task of leader is to unlock potential of others.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Great leaders act as coaches and mentors, empowering their team members to discover and develop their full potential."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Mourning stage is at the end of temporary team's life.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "The Mourning (or Adjourning) stage occurs when a temporary project team completes its mission and disbands."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Persuasion must be a negative skill for coercion.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Persuasion is a positive skill based on logic, emotion, and trust. Coercion is forcing someone against their will and is not a form of persuasion."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Planning a project as a team helps manager risks.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Collaborative planning brings diverse perspectives that can help identify potential risks early and develop better mitigation strategies."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "A successful leader always waits for instructions.",
+    "options": ["True", "False"],
+    "answer": 1,
+    "explanation": "Successful leaders are proactive and take initiative. They do not wait passively for instructions from above."
+  },
+  {
+    "chapter": "Unit 5",
+    "q": "Leadership is a great responsibility requiring hard decisions.",
+    "options": ["True", "False"],
+    "answer": 0,
+    "explanation": "Leadership comes with the heavy burden of responsibility and often requires making difficult decisions that affect the entire team."
   }
+]
 ]
