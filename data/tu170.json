@@ -3814,6 +3814,234 @@
         "explanation": "The slides list three different kinds of UI: Command-driven interface, Menu-driven interface, and Graphical user interface (GUI). A command-driven interface relies on typed commands."
     },
     {
+        "chapter": "Chapter 6",
+        "q": "What is a computer network?",
+        "options": [
+            "A single powerful computer that runs multiple operating systems",
+            "Two or more computers connected via software and hardware so they can communicate",
+            "A software program used to block hackers",
+            "A type of wireless cable used to connect to the internet"
+        ],
+        "answer": 1,
+        "explanation": "A computer network is defined as two or more computers that are connected via software and hardware so that they can communicate with each other."
+    },
+    {
+        "chapter": "Chapter 6",
+        "q": "In networking terms, what is a 'node'?",
+        "options": [
+            "The software that allows the network to run",
+            "The physical cable connecting computers",
+            "Any device connected to a network, such as a computer, printer, or router",
+            "The central server that stores all data"
+        ],
+        "answer": 2,
+        "explanation": "Each device connected to a network is referred to as a node. A node can be a computer, a peripheral (like a printer), or a network device (like a router)."
+    },
+    {
+        "chapter": "Chapter 6",
+        "q": "Which of the following is a benefit of having computers networked?",
+        "options": [
+            "Increasing the physical speed of the CPU",
+            "Sharing an Internet connection, printers, and files",
+            "Preventing all computer viruses from infecting the system",
+            "Removing the need for an operating system"
+        ],
+        "answer": 1,
+        "explanation": "Benefits of networking include sharing an Internet connection, sharing printers and other peripherals, sharing files, and allowing common communications between different operating systems."
+    },
+    {
+        "chapter": "Chapter 6",
+        "q": "Which type of network is used for communication among devices close to one person?",
+        "options": [
+            "Local Area Network (LAN)",
+            "Wide Area Network (WAN)",
+            "Personal Area Network (PAN)",
+            "Metropolitan Area Network (MAN)"
+        ],
+        "answer": 2,
+        "explanation": "A personal area network (PAN) is used for communication among devices close to one person."
+    },
+    {
+        "chapter": "Chapter 6",
+        "q": "What type of network covers a large geographic area, such as an entire city?",
+        "options": [
+            "Home Area Network (HAN)",
+            "Metropolitan Area Network (MAN)",
+            "Local Area Network (LAN)",
+            "Personal Area Network (PAN)"
+        ],
+        "answer": 1,
+        "explanation": "A metropolitan area network (MAN) is a large network designed to provide access to a specific geographical area, such as an entire city."
+    },
+    {
+        "chapter": "Chapter 6",
+        "q": "What is a specific type of LAN that is located in a home?",
+        "options": [
+            "WAN",
+            "HAN",
+            "PAN",
+            "MAN"
+        ],
+        "answer": 1,
+        "explanation": "A home area network (HAN) is a specific type of LAN located in a home."
+    },
+    {
+        "chapter": "Chapter 6",
+        "q": "In a client/server network, what is the role of the 'client'?",
+        "options": [
+            "It provides information or resources to other computers.",
+            "It is the computer on which users accomplish tasks and make requests.",
+            "It is the physical cable connecting the nodes.",
+            "It routes internet traffic between different networks."
+        ],
+        "answer": 1,
+        "explanation": "In a client/server network, a client is a computer on which users accomplish tasks and make requests, whereas the server provides information or resources."
+    },
+    {
+        "chapter": "Chapter 6",
+        "q": "In a peer-to-peer (P2P) network, how do nodes communicate?",
+        "options": [
+            "All requests must go through a central server.",
+            "Each node connected on the network can communicate directly with every other node.",
+            "Nodes can only communicate if they are connected by a fiber-optic cable.",
+            "Nodes cannot share files without an active Internet connection."
+        ],
+        "answer": 1,
+        "explanation": "In a peer-to-peer (P2P) network, each node connected on the network can communicate directly with every other node on the network."
+    },
+    {
+        "chapter": "Chapter 6",
+        "q": "Which of the following is a type of unshielded twisted-pair cable?",
+        "options": [
+            "Twisted copper wires surrounded by a plastic layer",
+            "A single copper wire surrounded by layers of plastic",
+            "Plastic or glass fibers that transmit data via light",
+            "A wireless signal transmitted via radio waves"
+        ],
+        "answer": 0,
+        "explanation": "Unshielded twisted-pair cable consists of twisted copper wires surrounded by a plastic layer."
+    },
+    {
+        "chapter": "Chapter 6",
+        "q": "How do wireless (Wi-Fi) networks transmit data to connect computing devices?",
+        "options": [
+            "Through fiber-optic cables",
+            "Through coaxial cables",
+            "Using radio waves",
+            "Using unshielded twisted-pair cables"
+        ],
+        "answer": 2,
+        "explanation": "Wireless networks do not require physical cables. They use radio waves to connect computing devices to other devices and to the Internet."
+    },
+    {
+        "chapter": "Chapter 9: Securing Your System",
+        "q": "What is 'spam' in the context of online annoyances?",
+        "options": [
+            "A small text file stored on your computer by a website",
+            "Software designed to steal your personal information",
+            "Junk, unwanted, or unsolicited email",
+            "A type of firewall used to protect your computer"
+        ],
+        "answer": 2,
+        "explanation": "Spam is defined as junk, unwanted, or unsolicited email."
+    },
+    {
+        "chapter": "Chapter 9: Securing Your System",
+        "q": "Which of the following is a recommended way to avoid receiving spam?",
+        "options": [
+            "Clicking on the spam emails to unsubscribe",
+            "Using two email addresses: one for personal use and one for online forms",
+            "Disabling your computer's firewall",
+            "Sharing your primary email address on all public websites"
+        ],
+        "answer": 1,
+        "explanation": "To avoid spam, consider using two email addresses: one for personal emails and another one for filling out forms or online shopping, and use a spam filter."
+    },
+    {
+        "chapter": "Chapter 9: Securing Your System",
+        "q": "What are 'cookies' in the context of web browsing?",
+        "options": [
+            "Malicious software that destroys files",
+            "Small text files stored on your computer by websites you visit",
+            "Hardware components used for network connections",
+            "Viruses that require human interaction to spread"
+        ],
+        "answer": 1,
+        "explanation": "Cookies are small text files stored on your computer by websites you visit, used to assign a unique ID to your computer to make future visits more efficient and personalized."
+    },
+    {
+        "chapter": "Chapter 9: Securing Your System",
+        "q": "What is malware?",
+        "options": [
+            "Software that has a malicious intent",
+            "A type of hardware used to speed up networks",
+            "A legitimate program used for marketing",
+            "A security feature built into operating systems"
+        ],
+        "answer": 0,
+        "explanation": "Malware is software that has a malicious intent. Forms of malware include spyware, Trojan horses, worms, and viruses."
+    },
+    {
+        "chapter": "Chapter 9: Securing Your System",
+        "q": "What type of program runs quietly in the background and transmits information about you to the owner of the program?",
+        "options": [
+            "Spyware",
+            "A firewall",
+            "A cookie",
+            "Spam filter"
+        ],
+        "answer": 0,
+        "explanation": "Spyware is an unwanted program that runs quietly in the background and transmits information about you to the owner of the program for marketing purposes."
+    },
+    {
+        "chapter": "Chapter 9: Securing Your System",
+        "q": "Which type of spyware monitors keystrokes with the intent of stealing passwords or credit card information?",
+        "options": [
+            "A worm",
+            "A keystroke logger",
+            "A cookie",
+            "A web browser"
+        ],
+        "answer": 1,
+        "explanation": "A keystroke logger is a type of spyware program that monitors keystrokes with the intent of stealing passwords, login IDs, or credit card information."
+    },
+    {
+        "chapter": "Chapter 9: Securing Your System",
+        "q": "What program comes with Windows to scan your system for spyware and other potentially unwanted software?",
+        "options": [
+            "Microsoft Excel",
+            "Microsoft Defender",
+            "Microsoft Edge",
+            "Microsoft Teams"
+        ],
+        "answer": 1,
+        "explanation": "Windows comes with a program called Microsoft Defender, which scans your system for spyware and other potentially unwanted software."
+    },
+    {
+        "chapter": "Chapter 9: Securing Your System",
+        "q": "What is the main characteristic of a computer virus?",
+        "options": [
+            "It spreads automatically across networks without human interaction.",
+            "It attaches itself to another program and requires human interaction to spread.",
+            "It only infects mobile phones and tablets.",
+            "It improves the performance of the infected computer."
+        ],
+        "answer": 1,
+        "explanation": "A computer virus attaches itself to another computer program and requires human interaction (like opening or running an infected file) to spread."
+    },
+    {
+        "chapter": "Chapter 9: Securing Your System",
+        "q": "How are worms different from computer viruses?",
+        "options": [
+            "Worms are harmless, while viruses destroy files.",
+            "Worms require human interaction to spread, while viruses do not.",
+            "Worms are self-replicating and can spread automatically across networks without user interaction.",
+            "Worms only affect the hardware, while viruses only affect software."
+        ],
+        "answer": 2,
+        "explanation": "While viruses rely on user interaction and host files to spread, worms are self-replicating and can spread automatically across networks."
+    }
+    {
         "chapter":  "Mock Mids",
         "q":  "According to the course, what is the recommended strategy for answering questions in an exam?",
         "options":  [
