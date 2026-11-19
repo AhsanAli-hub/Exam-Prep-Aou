@@ -3574,6 +3574,246 @@
         "explanation":  "He should review and rehearse until he is comfortable he knows the information and feels confident."
     },
     {
+        "chapter": "Chapter 4",
+        "q": "Which of the following best describes application software?",
+        "options": [
+            "Software that coordinates instructions between hardware and the operating system",
+            "Software used by end users to do tasks at home, school, and work",
+            "A set of programs that manages the computer's hardware",
+            "The physical components of a computer"
+        ],
+        "answer": 1,
+        "explanation": "Application software (End user software) is the software you use to do tasks at home, school, and work."
+    },
+    {
+        "chapter": "Chapter 4",
+        "q": "What is the main difference between proprietary and open-source software?",
+        "options": [
+            "Proprietary software is free, while open-source software is sold for profit.",
+            "Proprietary software is created by companies for profit and sold, while open-source software is available free of charge with few restrictions.",
+            "Open-source software is only for mobile devices, while proprietary is for desktops.",
+            "There is no difference; they are the same."
+        ],
+        "answer": 1,
+        "explanation": "Proprietary (commercial) software is created by companies for profit and sold to you. Open source software is available free of charge and with few licensing and copyright restrictions."
+    },
+    {
+        "chapter": "Chapter 4",
+        "q": "Which of the following is an example of open-source application software?",
+        "options": [
+            "macOS",
+            "Microsoft 365",
+            "LibreOffice",
+            "Adobe Photoshop CC"
+        ],
+        "answer": 2,
+        "explanation": "According to the slides, LibreOffice and Gimp are examples of open-source application software."
+    },
+    {
+        "chapter": "Chapter 4",
+        "q": "Where do users typically purchase and download software for Apple mobile devices?",
+        "options": [
+            "Google Play",
+            "Microsoft Store",
+            "Apple App Store",
+            "The official Apple website only"
+        ],
+        "answer": 2,
+        "explanation": "Software for mobile devices is sold electronically through online sites for each operating system. For Apple, this is the App Store."
+    },
+    {
+        "chapter": "Chapter 4",
+        "q": "Which of the following is NOT a main type of productivity software?",
+        "options": [
+            "Word processing",
+            "Spreadsheet analysis",
+            "Operating Systems",
+            "Presentation software"
+        ],
+        "answer": 2,
+        "explanation": "The main types of productivity software include programs for word processing, spreadsheet analysis, presentations, database management, note-taking, and personal information management. Operating systems are system software."
+    },
+    {
+        "chapter": "Chapter 4",
+        "q": "Which software program is used to create and edit documents such as research papers and resumes?",
+        "options": [
+            "Spreadsheet software",
+            "Word processing software",
+            "Database software",
+            "Presentation software"
+        ],
+        "answer": 1,
+        "explanation": "Word processing software is used to create and edit documents, such as research papers, class notes, résumés, and CVs."
+    },
+    {
+        "chapter": "Chapter 4",
+        "q": "Which of the following is an example of web-based word processing software?",
+        "options": [
+            "Microsoft Word",
+            "LibreOffice Writer",
+            "Google Docs",
+            "Notepad"
+        ],
+        "answer": 2,
+        "explanation": "Google Docs is listed as an example of web-based word processing software, alongside Microsoft Word and LibreOffice Writer."
+    },
+    {
+        "chapter": "Chapter 4",
+        "q": "What type of software is used to perform calculations and numerical analyses?",
+        "options": [
+            "Presentation software",
+            "Database software",
+            "Spreadsheet software",
+            "Word processing software"
+        ],
+        "answer": 2,
+        "explanation": "Spreadsheet software is used to perform calculations and numerical analyses."
+    },
+    {
+        "chapter": "Chapter 4",
+        "q": "In spreadsheet software, what is an equation that uses addition, subtraction, etc., called?",
+        "options": [
+            "A function",
+            "A formula",
+            "A text value",
+            "A chart"
+        ],
+        "answer": 1,
+        "explanation": "Formulas are equations that use addition, subtraction, and other mathematical operations, whereas functions are built-in operations like SUM and AVERAGE."
+    },
+    {
+        "chapter": "Chapter 4",
+        "q": "How are traditional databases organized?",
+        "options": [
+            "Into slides, animations, and transitions",
+            "Into fields, records, and tables",
+            "Into rows, columns, and formulas",
+            "Into headers, footers, and margins"
+        ],
+        "answer": 1,
+        "explanation": "Traditional databases are organized into fields (data categories), records (groups of related fields), and tables (groups of related records)."
+    },
+    {
+        "chapter": "Chapter 4",
+        "q": "Which of the following is an example of project and collaborative software?",
+        "options": [
+            "Microsoft Teams",
+            "Microsoft Access",
+            "LibreOffice Calc",
+            "Google Docs"
+        ],
+        "answer": 0,
+        "explanation": "Project and collaborative software is used when working remotely with team members. Examples include Microsoft Teams and Zoom."
+    },
+    {
+        "chapter": "Chapter 5",
+        "q": "What is the primary function of system software?",
+        "options": [
+            "To perform word processing and spreadsheet tasks",
+            "To help run the computer and coordinate instructions between application software and hardware",
+            "To act as a database management tool",
+            "To create visually interesting presentations"
+        ],
+        "answer": 1,
+        "explanation": "System software is the set of programs that helps run the computer and coordinates instructions between application software and the computer's hardware devices."
+    },
+    {
+        "chapter": "Chapter 5",
+        "q": "What are the two primary types of programs that make up system software?",
+        "options": [
+            "Word processors and spreadsheets",
+            "Operating systems and utility programs",
+            "Application software and hardware",
+            "Proprietary and open-source software"
+        ],
+        "answer": 1,
+        "explanation": "System software consists of two primary types of programs: the Operating System (OS) and Utility programs."
+    },
+    {
+        "chapter": "Chapter 5",
+        "q": "Which of the following is NOT a primary function of the operating system?",
+        "options": [
+            "Managing the computer's hardware",
+            "Providing a consistent means for application software to work with the CPU",
+            "Creating and editing research papers",
+            "Managing, scheduling, and coordinating tasks"
+        ],
+        "answer": 2,
+        "explanation": "Creating and editing research papers is a function of application software (word processing), not the operating system."
+    },
+    {
+        "chapter": "Chapter 5",
+        "q": "What provides the point of interaction between a user and a device, software, or application?",
+        "options": [
+            "The CPU",
+            "The User Interface (UI)",
+            "The Database",
+            "The Cloud"
+        ],
+        "answer": 1,
+        "explanation": "A user interface (UI) is the point of interaction between a user and a device, software, or application, enabling communication and control."
+    },
+    {
+        "chapter": "Chapter 5",
+        "q": "Which of the following are the top three operating systems for personal computers?",
+        "options": [
+            "Android, iOS, and Chrome OS",
+            "Windows, macOS, and Linux",
+            "Apple, Google, and Microsoft",
+            "Windows, Android, and iOS"
+        ],
+        "answer": 1,
+        "explanation": "The top three operating systems for personal computers are Microsoft Windows, Apple's macOS, and Linux."
+    },
+    {
+        "chapter": "Chapter 5",
+        "q": "What is a key characteristic of Google Chrome OS?",
+        "options": [
+            "It requires all files to be installed locally on the device",
+            "It is a web-based OS where main functionality is provided through a web browser",
+            "It is designed exclusively for medical equipment",
+            "It is a proprietary operating system developed by Apple"
+        ],
+        "answer": 1,
+        "explanation": "Google Chrome OS is a web-based OS. No files are installed on your device, and the main functionality of the OS is provided through a web browser."
+    },
+    {
+        "chapter": "Chapter 5",
+        "q": "What type of operating system is required by machines that perform repetitive series of specific tasks in precise time?",
+        "options": [
+            "A web-based OS",
+            "A real-time operating system (RTOS)",
+            "A graphical user interface (GUI)",
+            "A command-driven interface"
+        ],
+        "answer": 1,
+        "explanation": "A machine that performs repetitive series of specific tasks in precise time requires a real-time operating system (RTOS), also called embedded systems."
+    },
+    {
+        "chapter": "Chapter 5",
+        "q": "Which of the following devices is most likely to use a real-time operating system (RTOS)?",
+        "options": [
+            "A student's personal laptop",
+            "A point-of-sale machine at a grocery store",
+            "A corporate web server",
+            "A desktop computer for graphic design"
+        ],
+        "answer": 1,
+        "explanation": "RTOSs can be found in devices such as medical equipment, cars, surveillance systems, and point-of-sale machines."
+    },
+    {
+        "chapter": "Chapter 5",
+        "q": "Which type of user interface requires the user to type specific commands to interact with the computer?",
+        "options": [
+            "Graphical user interface (GUI)",
+            "Menu-driven interface",
+            "Command-driven interface",
+            "Touch interface"
+        ],
+        "answer": 2,
+        "explanation": "The slides list three different kinds of UI: Command-driven interface, Menu-driven interface, and Graphical user interface (GUI). A command-driven interface relies on typed commands."
+    },
+    {
         "chapter":  "Mock Mids",
         "q":  "According to the course, what is the recommended strategy for answering questions in an exam?",
         "options":  [
