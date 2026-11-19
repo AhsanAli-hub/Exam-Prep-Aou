@@ -250,6 +250,7 @@
     let answered = false;
     let showAnswerEnabled = false;
     let wrongAnswers = [];
+    let isRetryRun = false;
     let timerInterval = null;
     let elapsedSeconds = 0;
     let quizStartTime = 0;
@@ -362,31 +363,54 @@
             let flat = [];
 
             if (Array.isArray(raw)) {
-                flat = raw;
+                // Plain array of questions (each should carry its own "chapter")
+                flat = raw.map(q => ({ chapter: 'General', ...q }));
             } else {
-                if (Array.isArray(raw.passages)) {
-                    raw.passages.forEach(p => {
-                        (p.questions || []).forEach(q => {
-                            flat.push({
-                                chapter: 'Reading',
-                                passageTitle: p.title,
-                                passageText: p.text,
-                                q: q.q,
-                                options: q.options,
-                                answer: q.answer,
-                                explanation: q.explanation
-                            });
+                // Reading passages -> one "Reading" chapter, each question carries its passage
+                (raw.passages || []).forEach(p => {
+                    (p.questions || []).forEach(q => {
+                        flat.push({
+                            chapter: 'Reading',
+                            passageTitle: p.title,
+                            passageText: p.text,
+                            q: q.q,
+                            options: q.options,
+                            answer: q.answer,
+                            explanation: q.explanation
                         });
                     });
-                }
-                if (Array.isArray(raw.questions)) {
-                    flat = flat.concat(raw.questions);
-                }
+                });
+
+                // Grammar -> one "Grammar" chapter
+                (raw.grammar || []).forEach(q => {
+                    flat.push({ ...q, chapter: q.chapter || 'Grammar' });
+                });
+
+                // Vocabulary -> "Vocabulary · Unit N" chapters
+                (raw.vocabulary || []).forEach(q => {
+                    flat.push({
+                        ...q,
+                        chapter: q.chapter ? 'Vocabulary · ' + q.chapter : 'Vocabulary'
+                    });
+                });
+
+                // Generic flat list (kept for backward compatibility)
+                (raw.questions || []).forEach(q => {
+                    flat.push({ ...q, chapter: q.chapter || 'General' });
+                });
             }
 
+            // De-duplicate: same chapter + passage + question text + options.
+            // (Question text alone is NOT enough: e.g. "Which is correct?" appears
+            // several times with different options.)
             const seen = new Set();
             allQuestions = flat.filter(q => {
-                const key = (q.q || '').trim().toLowerCase();
+                const key = [
+                    q.chapter,
+                    q.passageTitle || '',
+                    (q.q || '').trim().toLowerCase(),
+                    (q.options || []).map(o => String(o).trim().toLowerCase()).join('|')
+                ].join('¦');
                 if (seen.has(key)) return false;
                 seen.add(key);
                 return true;
@@ -511,6 +535,7 @@
         currentQuestionIndex = 0;
         score = 0;
         wrongAnswers = [];
+        isRetryRun = false;
 
         setupScreen.style.display = 'none';
         scoreScreen.style.display = 'none';
@@ -611,6 +636,7 @@
             feedbackStatus.textContent = `❌ Incorrect. The correct answer is: ${q._shuffledOptions[correctIdx]}`;
             feedbackStatus.style.color = "var(--error)";
             wrongAnswers.push({
+                ref: q,
                 q: q.q,
                 userAnswer: q._shuffledOptions[selectedIndex],
                 correctAnswer: q._shuffledOptions[correctIdx],
@@ -635,6 +661,15 @@
         buttons.forEach((btn, index) => {
             btn.disabled = true;
             if (index === correctIdx) btn.classList.add('correct');
+        });
+
+        // Revealed questions earn no point, so track them as mistakes to practise again
+        wrongAnswers.push({
+            ref: q,
+            q: q.q,
+            userAnswer: '(answer revealed)',
+            correctAnswer: q._shuffledOptions[correctIdx],
+            explanation: q.explanation
         });
 
         feedbackStatus.textContent = `💡 The correct answer is: ${q._shuffledOptions[correctIdx]}`;
@@ -695,8 +730,11 @@
         else caption = "Needs more practice";
         scoreCaptionEl.textContent = caption;
 
-        const usedChapters = [...new Set(activeQuestions.map(q => q.chapter))];
-        usedChapters.forEach(ch => saveHighScore(ch, percent));
+        // Don't let a short "practice mistakes" run overwrite chapter best scores
+        if (!isRetryRun) {
+            const usedChapters = [...new Set(activeQuestions.map(q => q.chapter))];
+            usedChapters.forEach(ch => saveHighScore(ch, percent));
+        }
 
         if (wrongAnswers.length > 0) {
             retryWrongBtn.style.display = 'inline-block';
@@ -723,12 +761,14 @@
     }
 
     function retryWrongAnswers() {
-        const wrongTextSet = new Set(wrongAnswers.map(w => w.q));
-        activeQuestions = shuffle(allQuestions.filter(q => wrongTextSet.has(q.q)));
+        // Use the exact question objects that were missed (not a text match,
+        // which would also pull in other questions with the same wording)
+        activeQuestions = shuffle(wrongAnswers.map(w => w.ref));
 
         wrongAnswers = [];
         currentQuestionIndex = 0;
         score = 0;
+        isRetryRun = true;
 
         scoreScreen.style.display = 'none';
         quizMain.style.display = 'flex';
