@@ -4040,7 +4040,7 @@
         ],
         "answer": 2,
         "explanation": "While viruses rely on user interaction and host files to spread, worms are self-replicating and can spread automatically across networks."
-    }
+    },
     {
         "chapter":  "Mock Mids",
         "q":  "According to the course, what is the recommended strategy for answering questions in an exam?",
