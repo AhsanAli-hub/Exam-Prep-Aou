@@ -4041,6 +4041,181 @@
         "answer": 2,
         "explanation": "While viruses rely on user interaction and host files to spread, worms are self-replicating and can spread automatically across networks."
     },
+  {
+    "chapter": "Chapter 10: Priority Management",
+    "q": "Why does the course state that 'time management is a myth'?",
+    "options": ["Because everyone has a different number of hours in a week depending on their job", "Because you cannot control, speed up, slow down, or add hours to the 168 hours in a week, so you must manage your priorities instead", "Because calendars and schedules do not help students succeed", "Because only finances and relationships can be planned ahead"],
+    "answer": 1,
+    "explanation": "Everyone has the same 168 hours per week, so the focus should be on managing priorities rather than time itself."
+  },
+  {
+    "chapter": "Chapter 10: Priority Management",
+    "q": "According to the general formula for studying, how much study time outside of class should you dedicate for every hour spent in class?",
+    "options": ["1 hour", "2 to 3 hours", "4 to 5 hours", "30 minutes"],
+    "answer": 1,
+    "explanation": "The recommended formula is 2–3 hours of independent study for every hour spent in class."
+  },
+  {
+    "chapter": "Chapter 10: Priority Management",
+    "q": "Using the general study formula, if you spend 12 hours in class each week, how many hours should you devote to studying outside of class?",
+    "options": ["12 to 18 hours", "18 to 24 hours", "24 to 36 hours", "36 to 48 hours"],
+    "answer": 2,
+    "explanation": "Multiplying 12 class hours by 2–3 gives a recommended 24–36 hours of independent study."
+  },
+  {
+    "chapter": "Chapter 10: Priority Management",
+    "q": "Which model is recommended to identify assumptions and separate facts from fiction when determining whether tasks are genuinely necessary?",
+    "options": ["The Two-Minute Drill", "The R.E.D. Model", "The Spidergram Model", "The Traditional Outline Model"],
+    "answer": 1,
+    "explanation": "The R.E.D. Model helps examine assumptions and distinguish facts from unsupported beliefs."
+  },
+  {
+    "chapter": "Chapter 10: Priority Management",
+    "q": "Which time-tracking tool allows you to see four weeks all at once to easily spot commitments and conflicts?",
+    "options": ["Daily to-do list", "Weekly calendar", "Monthly calendar", "Study guide margin"],
+    "answer": 2,
+    "explanation": "A monthly calendar displays approximately four weeks, making scheduling conflicts easier to identify."
+  },
+  {
+    "chapter": "Chapter 10: Priority Management",
+    "q": "What is a 'non-negotiable' item when establishing priorities?",
+    "options": ["An optional task you can move to next month", "Something you must complete by the end of the day, no matter what", "Any small task that takes less than two minutes", "A task assigned to someone else"],
+    "answer": 1,
+    "explanation": "A non-negotiable priority is an essential commitment that must be completed."
+  },
+  {
+    "chapter": "Chapter 10: Priority Management",
+    "q": "Which type of procrastinator has big plans and big ideas, but never puts them into action?",
+    "options": ["Perfectionist", "Dreamer", "Worrier", "Crisis Maker"],
+    "answer": 1,
+    "explanation": "Dreamers imagine ambitious goals but struggle to turn those ideas into actual steps."
+  },
+  {
+    "chapter": "Chapter 10: Priority Management",
+    "q": "Which type of procrastinator always says 'yes' to avoid disappointing others, leaving themselves overwhelmed and out of time?",
+    "options": ["Overdoer", "Crisis Maker", "Perfectionist", "Worrier"],
+    "answer": 0,
+    "explanation": "Overdoers accept too many responsibilities because they find it difficult to say no."
+  },
+  {
+    "chapter": "Chapter 10: Priority Management",
+    "q": "Which type of procrastinator waits until the last minute to do something because they feel 'the more pressure the better'?",
+    "options": ["Dreamer", "Perfectionist", "Crisis Maker", "Overdoer"],
+    "answer": 2,
+    "explanation": "Crisis Makers deliberately delay tasks and rely on deadline pressure to motivate themselves."
+  },
+  {
+    "chapter": "Chapter 10: Priority Management",
+    "q": "What is 'Activation Energy' in the context of dealing with procrastination?",
+    "options": ["Waiting until a deadline creates panic", "The initial spark or extra effort needed to start a positive habit and get you going", "Saying no to every new task on your calendar", "Working backward from a test date"],
+    "answer": 1,
+    "explanation": "Activation energy is the initial effort required to overcome resistance and begin a task."
+  },
+  {
+    "chapter": "Chapter 10: Priority Management",
+    "q": "A student spends two minutes setting up an appointment with a tutor to overcome feeling overwhelmed by a long-term goal. Which anti-procrastination strategy is this?",
+    "options": ["Backwards Planning", "The Two-Minute Drill", "Just Say No", "Filing Method"],
+    "answer": 1,
+    "explanation": "The Two-Minute Drill encourages starting with a small action that takes very little time."
+  },
+  {
+    "chapter": "Chapter 10: Priority Management",
+    "q": "Starting with the end goal of being prepared for an exam in one week and working backward to list the steps needed is called:",
+    "options": ["Activation Energy", "The Two-Minute Drill", "Backwards Planning", "Multi-tasking"],
+    "answer": 2,
+    "explanation": "Backwards Planning starts with the final goal and identifies the steps needed to reach it."
+  },
+  {
+    "chapter": "Chapter 10: Priority Management",
+    "q": "Which practice is recommended when organizing your Personal Study Area at home?",
+    "options": ["Use the space for multi-tasking such as eating, gaming, and studying", "Use it only for studying and establish a quiet zone of privacy", "Keep all loose papers piled on the desk for quick access", "Study in noisy common areas to build focus"],
+    "answer": 1,
+    "explanation": "A dedicated, quiet study area reduces distractions and helps establish a focused study routine."
+  },
+  {
+    "chapter": "Chapter 10: Priority Management",
+    "q": "Anxiety, memory issues, and excessive worrying are classified under which category of stress symptoms?",
+    "options": ["Physical symptoms", "Behavioral symptoms", "Cognitive symptoms", "Emotional symptoms"],
+    "answer": 2,
+    "explanation": "Cognitive stress symptoms affect thinking processes, including memory, concentration, and worrying."
+  },
+  {
+    "chapter": "Chapter 10: Priority Management",
+    "q": "Which of the following is listed as a Behavioral symptom of stress?",
+    "options": ["Changes in eating habits and smoking", "Headaches and chest pain", "Irritability and moodiness", "Memory issues and excessive worrying"],
+    "answer": 0,
+    "explanation": "Changes in eating habits and smoking are observable behavioral responses to stress."
+  },
+  {
+    "chapter": "Chapter 10: Priority Management",
+    "q": "Which of the following is a recommended stress reduction strategy?",
+    "options": ["Increase caffeine intake to stay alert", "Limit intake of caffeine, get a good night's sleep, and maintain realistic expectations", "Say 'yes' to all requests to build a support network", "Avoid taking breaks until all work is finished"],
+    "answer": 1,
+    "explanation": "Healthy sleep, reduced caffeine, and realistic expectations help reduce stress."
+  },
+  {
+    "chapter": "Chapter 11: Class Time Listening and Note Taking",
+    "q": "What does 'active learning' require from students?",
+    "options": ["Passively listening while the instructor does all the work", "Staying involved and taking responsibility for their own learning", "Only studying the night before an exam", "Avoiding questions during class sessions"],
+    "answer": 1,
+    "explanation": "Active learning requires students to participate and take responsibility for understanding the material."
+  },
+  {
+    "chapter": "Chapter 11: Class Time Listening and Note Taking",
+    "q": "Language differences between the instructor and students fall under which type of classroom distraction?",
+    "options": ["Physical distractions", "Emotional distractions", "Cultural barriers", "Electronic distractions"],
+    "answer": 2,
+    "explanation": "Differences in language and cultural background can create barriers to classroom communication."
+  },
+  {
+    "chapter": "Chapter 11: Class Time Listening and Note Taking",
+    "q": "Noise, heat, headache, and illness are examples of which type of distraction?",
+    "options": ["Physical distractions", "Emotional distractions", "Cultural barriers", "Electronic distractions"],
+    "answer": 0,
+    "explanation": "These distractions involve the physical environment or the student's physical condition."
+  },
+  {
+    "chapter": "Chapter 11: Class Time Listening and Note Taking",
+    "q": "Which of the following is one of the seven steps to classroom success?",
+    "options": ["Sit near the back to check messages discreetly", "Review class notes promptly after class and write down any questions", "Wait until the end of the semester to review notes", "Skip the beginning of class if it is just a review of the last session"],
+    "answer": 1,
+    "explanation": "Reviewing notes soon after class reinforces learning and helps identify questions while the lecture is still fresh."
+  },
+  {
+    "chapter": "Chapter 11: Class Time Listening and Note Taking",
+    "q": "How does taking notes in class help you remember material?",
+    "options": ["It replaces the need to attend class", "It translates oral information into visual information (words and graphics on paper)", "It eliminates the need to review after class", "It allows you to multi-task during lectures"],
+    "answer": 1,
+    "explanation": "Note-taking converts spoken information into written or visual material that can be reviewed later."
+  },
+  {
+    "chapter": "Chapter 11: Class Time Listening and Note Taking",
+    "q": "Which note-taking style is highly structured and orderly, using Roman numerals and letters, but is not very useful if the lecture is unclear?",
+    "options": ["Flowchart", "Spidergram (Mind Map)", "Traditional Outline", "Notes with Study Guide"],
+    "answer": 2,
+    "explanation": "The Traditional Outline organizes information hierarchically using headings, Roman numerals, and letters."
+  },
+  {
+    "chapter": "Chapter 11: Class Time Listening and Note Taking",
+    "q": "Which note-taking style features an expanded margin on the left side for student questions and organizing comments to use as a study guide?",
+    "options": ["Notes with Study Guide", "Flowchart", "Traditional Outline", "Clustering"],
+    "answer": 0,
+    "explanation": "This method uses a wider margin for questions and comments that help students review the notes."
+  },
+  {
+    "chapter": "Chapter 11: Class Time Listening and Note Taking",
+    "q": "Which note-taking style is also known as Mind Mapping or Clustering and is especially useful for reviewing notes before a test or planning an essay?",
+    "options": ["Traditional Outline", "Spidergram", "Notes with Study Guide", "Linear Outline"],
+    "answer": 1,
+    "explanation": "A Spidergram connects related ideas visually around a central topic, making relationships easier to understand."
+  },
+  {
+    "chapter": "Chapter 11: Class Time Listening and Note Taking",
+    "q": "In the note-taking abbreviation guide, what do the symbols 'b/c' and 'w/o' stand for respectively?",
+    "options": ["before / within", "because / without", "between / with", "basic / working"],
+    "answer": 1,
+    "explanation": "'b/c' is shorthand for 'because', while 'w/o' means 'without'."
+  },
     {
         "chapter":  "Mock Mids",
         "q":  "According to the course, what is the recommended strategy for answering questions in an exam?",
