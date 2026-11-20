@@ -362,7 +362,7 @@
             allQuestions = data.map(row => {
                 const qd = row.question_data;
                 return {
-                    chapter: qd.passage ? 'Reading' : (qd.chapter ? 'Vocabulary · ' + qd.chapter : (row.topic || 'General')),
+                    chapter: qd.passage ? 'Reading' : (qd.chapter || row.topic || 'General'),
                     passageTitle: qd.passage?.title || null,
                     passageText: qd.passage?.text || null,
                     q: qd.q,
