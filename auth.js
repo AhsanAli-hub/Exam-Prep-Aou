@@ -133,6 +133,12 @@ function injectAuthUI() {
             .req-summary-price { font-weight: 800; font-size: 1.1rem; color: var(--purple); white-space: nowrap; }
             .req-email-note { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; font-size: 0.83rem; color: var(--text-muted); margin-bottom: 14px; line-height: 1.45; }
             .req-email-note strong { color: var(--text-main); }
+
+            /* Google OAuth Button & Divider */
+            .oauth-divider { display: flex; align-items: center; gap: 10px; margin: 14px 0 10px; color: var(--text-muted); font-size: 0.78rem; font-weight: 700; }
+            .oauth-divider::before, .oauth-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+            .google-btn { width: 100%; padding: 12px; background: var(--bg); color: var(--text-main); border: 1.5px solid var(--border); border-radius: 12px; font-weight: 700; font-size: 0.92rem; cursor: pointer; font-family: inherit; display: flex; align-items: center; justify-content: center; gap: 10px; }
+            .google-btn:hover { border-color: var(--purple); background: var(--purple-light); }
         `;
         document.head.appendChild(style);
     }
@@ -156,9 +162,17 @@ function injectAuthUI() {
                         <input type="password" id="auth-confirm-password" class="modal-input" placeholder="Confirm password">
                         <button type="button" class="password-toggle" onclick="togglePwdField('auth-confirm-password', this)" aria-label="Toggle confirm password">👁️</button>
                     </div>
-                    <button class="modal-submit" id="auth-submit-btn" onclick="submitAuth()">Sign In</button>
-                    <div class="oauth-divider">OR</div>
-                    <button type="button" class="google-btn" onclick="signInWithGoogle()">🔵 Continue with Google</button>
+                 <button class="modal-submit" id="auth-submit-btn" onclick="submitAuth()">Sign In</button>
+            <div class="oauth-divider">OR</div>
+            <button type="button" class="google-btn" onclick="signInWithGoogle()">
+                <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47c-.29 1.55-1.14 2.86-2.4 3.73v3.09h3.88c2.27-2.09 3.54-5.17 3.54-9.06z"/>
+                <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.09c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.26v3.18C3.23 21.31 7.31 24 12 24z"/>
+                <path fill="#FBBC05" d="M5.28 14.29c-.24-.72-.38-1.49-.38-2.29s.14-1.57.38-2.29V6.53H1.26C.46 8.17 0 10.02 0 12s.46 3.83 1.26 5.47l4.02-3.18z"/>
+                <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.23 2.69 1.26 6.53l4.02 3.18c.95-2.85 3.6-4.96 6.72-4.96z"/>
+            </svg>
+                <span>Continue with Google</span>
+            </button>
                     <div class="modal-msg" id="auth-msg"></div>
                     <div class="modal-switch">
                         <span id="modal-switch-text">Don't have an account?</span>
