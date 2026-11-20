@@ -610,6 +610,7 @@ window.initAuth = async function() {
                 'signin',
                 `⛔ Device Limit Reached (Max ${devCheck.max} devices). This account is already active on 2 other devices. Contact admin if you switched devices.`
             );
+            
             return { user: null, unlockedCourses: [], deviceBlocked: true };
         }
 
