@@ -2,24 +2,41 @@ const SUPABASE_URL = 'https://sdqhrxybowzyxveqwkwo.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_UBviShU8w5kEtL0sGkIh6w_Ay8_lnaj';
 const ADMIN_EMAIL = 'ahsan.ali72@outlook.com';
 
-// Separate checkout links for each subject
-const COURSE_CHECKOUT_URLS = {
-    el112: 'https://your-store.lemonsqueezy.com/buy/el112-product-id',
-    gr101el: 'https://your-store.lemonsqueezy.com/buy/gr101el-product-id',
-    gt103: 'https://your-store.lemonsqueezy.com/buy/gt103-product-id',
-    tu170: 'https://your-store.lemonsqueezy.com/buy/tu170-product-id',
-    all: 'https://your-store.lemonsqueezy.com/buy/all-courses-bundle-id'
+/* ====================== COURSE PRICING & LABELS ====================== */
+const COURSE_CONFIG = {
+    prices: {
+        el112: '15 SAR',
+        gr101el: '15 SAR',
+        gt103: '15 SAR',
+        tu170: '15 SAR',
+        all: '50 SAR'
+    },
+    labels: {
+        el112: 'EL112 — English Language',
+        gr101el: 'GR101EL — Life Skills',
+        gt103: 'GT103 — Artificial Intelligence',
+        tu170: 'TU170 — Computing Essentials',
+        all: 'All 4 Courses — Full Semester Bundle'
+    }
 };
 
 window.db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 window.currentUser = null;
+window.currentProfile = null;
 window.unlockedCourses = [];
+window.pendingRequests = [];
 let authMode = 'signin';
+let activeRequestCourse = 'all';
 
 window.hasCourseAccess = function(courseCode) {
     if (!courseCode) return window.unlockedCourses.length > 0;
     const code = courseCode.toLowerCase();
     return window.unlockedCourses.includes('all') || window.unlockedCourses.includes(code);
+};
+
+window.getPendingRequest = function(courseCode) {
+    const code = (courseCode || 'all').toLowerCase();
+    return window.pendingRequests.find(r => r.course_code === code || r.course_code === 'all') || null;
 };
 
 /* ====================== PERSISTENT DEVICE ID ====================== */
@@ -34,7 +51,7 @@ function getDeviceId() {
     return id;
 }
 
-/* ====================== INJECT STYLES & AUTH MODAL ====================== */
+/* ====================== INJECT STYLES & MODALS ====================== */
 function injectAuthUI() {
     if (!document.getElementById('shared-auth-styles')) {
         const style = document.createElement('style');
@@ -66,6 +83,7 @@ function injectAuthUI() {
             .pd-section-label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 6px; }
             .pd-courses { display: flex; flex-wrap: wrap; gap: 6px; }
             .pd-chip { font-size: 0.74rem; font-weight: 800; padding: 3px 9px; border-radius: 8px; background: rgba(16, 185, 129, 0.14); color: #10b981; }
+            .pd-chip.pending { background: rgba(245, 158, 11, 0.16); color: #f59e0b; }
             .pd-chip.none { background: var(--bg); color: var(--text-muted); font-weight: 600; }
             .pd-item {
                 width: 100%; padding: 10px 12px; border-radius: 10px; border: none;
@@ -84,15 +102,16 @@ function injectAuthUI() {
                 padding: 5px 12px; border-radius: 20px; letter-spacing: 0.03em;
             }
             .course-status-pill.unlocked { background: rgba(16, 185, 129, 0.14); color: #10b981; }
+            .course-status-pill.pending { background: rgba(245, 158, 11, 0.16); color: #f59e0b; }
             .course-status-pill.locked { background: var(--purple-light); color: var(--purple); }
 
-            /* Auth Modal */
-            .modal-backdrop { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.58); display: none; align-items: center; justify-content: center; padding: 20px; z-index: 1000; }
+            /* Shared Modal Styles */
+            .modal-backdrop { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.62); display: none; align-items: center; justify-content: center; padding: 20px; z-index: 1000; }
             .modal-backdrop.open { display: flex; }
-            .modal-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 28px; width: 100%; max-width: 410px; box-shadow: 0 10px 25px rgba(0,0,0,0.25); }
-            .modal-card h3 { margin: 0 0 6px 0; color: var(--purple); font-size: 1.35rem; font-weight: 800; }
-            .modal-card p { margin: 0 0 18px 0; color: var(--text-muted); font-size: 0.88rem; line-height: 1.45; }
-            .modal-input { width: 100%; padding: 12px 14px; margin-bottom: 12px; border-radius: 10px; border: 1.5px solid var(--border); background: var(--bg); color: var(--text-main); font-family: inherit; font-size: 0.95rem; }
+            .modal-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 26px; width: 100%; max-width: 420px; box-shadow: 0 12px 30px rgba(0,0,0,0.3); max-height: 92vh; overflow-y: auto; }
+            .modal-card h3 { margin: 0 0 6px 0; color: var(--purple); font-size: 1.32rem; font-weight: 800; }
+            .modal-card p { margin: 0 0 16px 0; color: var(--text-muted); font-size: 0.88rem; line-height: 1.45; }
+            .modal-input { width: 100%; padding: 12px 14px; margin-bottom: 12px; border-radius: 10px; border: 1.5px solid var(--border); background: var(--bg); color: var(--text-main); font-family: inherit; font-size: 0.94rem; }
             .modal-input:focus { outline: none; border-color: var(--purple); }
             .password-wrap { position: relative; margin-bottom: 12px; }
             .password-wrap .modal-input { margin-bottom: 0; padding-right: 44px; }
@@ -100,11 +119,19 @@ function injectAuthUI() {
             .password-toggle { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 1.1rem; color: var(--text-muted); padding: 4px; display: flex; align-items: center; justify-content: center; }
             .password-toggle:hover { color: var(--purple); }
             .modal-submit { width: 100%; padding: 13px; background: var(--purple); color: #fff; border: none; border-radius: 12px; font-weight: 700; font-size: 0.95rem; cursor: pointer; font-family: inherit; margin-top: 4px; }
-            .modal-submit:hover { background: var(--purple-hover); }
+            .modal-submit:hover:not(:disabled) { background: var(--purple-hover); }
+            .modal-submit:disabled { opacity: 0.55; cursor: not-allowed; }
             .modal-cancel { width: 100%; padding: 10px; background: transparent; color: var(--text-muted); border: 1.5px solid var(--border); border-radius: 12px; font-weight: 700; font-size: 0.9rem; cursor: pointer; font-family: inherit; margin-top: 10px; }
             .modal-switch { margin-top: 14px; text-align: center; font-size: 0.85rem; color: var(--text-muted); }
             .modal-switch a { color: var(--purple); font-weight: 700; cursor: pointer; text-decoration: none; }
-            .modal-msg { font-size: 0.85rem; margin-top: 10px; font-weight: 600; text-align: center; line-height: 1.4; }
+            .modal-msg { font-size: 0.85rem; margin-top: 10px; font-weight: 600; text-align: center; line-height: 1.45; }
+
+            /* Request Access Summary Box */
+            .req-summary { background: var(--purple-light); border: 1.5px solid var(--purple); border-radius: 14px; padding: 14px 16px; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+            .req-summary-course { font-weight: 800; font-size: 0.92rem; color: var(--text-main); }
+            .req-summary-price { font-weight: 800; font-size: 1.1rem; color: var(--purple); white-space: nowrap; }
+            .req-email-note { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; font-size: 0.83rem; color: var(--text-muted); margin-bottom: 14px; line-height: 1.45; }
+            .req-email-note strong { color: var(--text-main); }
         `;
         document.head.appendChild(style);
     }
@@ -140,7 +167,113 @@ function injectAuthUI() {
         `;
         document.body.appendChild(wrapper.firstElementChild);
     }
+
+    if (!document.getElementById('request-modal')) {
+        const rWrap = document.createElement('div');
+        rWrap.innerHTML = `
+            <div class="modal-backdrop" id="request-modal">
+                <div class="modal-card">
+                    <h3>📩 Request Course Access</h3>
+                    <p>Submit a request below and we will email the payment details directly to your inbox.</p>
+
+                    <div class="req-summary">
+                        <span class="req-summary-course" id="rm-course-label">EL112</span>
+                        <span class="req-summary-price" id="rm-price">25 SAR</span>
+                    </div>
+
+                    <div class="req-email-note" id="rm-email-note"></div>
+
+                    <div id="rm-form-area">
+                        <input type="text" id="rm-note" class="modal-input" placeholder="Optional note (e.g. preferred payment method)" maxlength="120">
+                        <button type="button" class="modal-submit" id="rm-submit-btn" onclick="submitAccessRequest()">Send Access Request ➔</button>
+                    </div>
+
+                    <div class="modal-msg" id="rm-msg"></div>
+                    <button type="button" class="modal-cancel" onclick="closeRequestModal()">Close</button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(rWrap.firstElementChild);
+    }
 }
+
+window.closeRequestModal = function() {
+    const m = document.getElementById('request-modal');
+    if (m) m.classList.remove('open');
+};
+
+window.handleUpgradeClick = function(courseCode = 'all') {
+    if (!window.currentUser) {
+        openAuthModal('signup', 'Create your student account first so we can email you the payment details.');
+        return;
+    }
+    injectAuthUI();
+    activeRequestCourse = (courseCode || 'all').toLowerCase();
+    const label = COURSE_CONFIG.labels[activeRequestCourse] || activeRequestCourse.toUpperCase();
+    const price = COURSE_CONFIG.prices[activeRequestCourse] || COURSE_CONFIG.prices.all;
+
+    document.getElementById('rm-course-label').textContent = label;
+    document.getElementById('rm-price').textContent = price;
+    document.getElementById('rm-email-note').innerHTML =
+        `Payment instructions will be sent to: <strong>${window.currentUser.email}</strong>`;
+
+    const existingPending = window.getPendingRequest(activeRequestCourse);
+    const formArea = document.getElementById('rm-form-area');
+    const msgEl = document.getElementById('rm-msg');
+
+    if (existingPending) {
+        formArea.style.display = 'none';
+        msgEl.style.color = '#f59e0b';
+        msgEl.textContent = `⏳ Access already requested for ${label}. Please check your email inbox (and Spam/Junk folder) for payment details.`;
+    } else {
+        formArea.style.display = 'block';
+        document.getElementById('rm-note').value = '';
+        document.getElementById('rm-submit-btn').disabled = false;
+        msgEl.textContent = '';
+    }
+
+    document.getElementById('request-modal').classList.add('open');
+};
+
+window.submitAccessRequest = async function() {
+    const note = document.getElementById('rm-note').value.trim();
+    const msgEl = document.getElementById('rm-msg');
+    const submitBtn = document.getElementById('rm-submit-btn');
+
+    submitBtn.disabled = true;
+    msgEl.style.color = 'var(--text-muted)';
+    msgEl.textContent = 'Sending request...';
+
+    const price = COURSE_CONFIG.prices[activeRequestCourse] || COURSE_CONFIG.prices.all;
+
+    const { data, error } = await window.db
+        .from('payment_requests')
+        .insert({
+            user_id: window.currentUser.id,
+            email: window.currentUser.email,
+            student_id: window.currentProfile?.student_id || null,
+            course_code: activeRequestCourse,
+            amount: price,
+            transfer_ref: note || 'Access requested'
+        })
+        .select()
+        .single();
+
+    if (error) {
+        submitBtn.disabled = false;
+        msgEl.style.color = 'var(--error)';
+        msgEl.textContent = 'Error: ' + error.message;
+        return;
+    }
+
+    window.pendingRequests.push(data);
+    renderHeaderProfile(window.currentProfile);
+    updateHomeCourseCards();
+
+    document.getElementById('rm-form-area').style.display = 'none';
+    msgEl.style.color = 'var(--success)';
+    msgEl.textContent = `✅ Request sent! We will email payment instructions to ${window.currentUser.email} shortly.`;
+};
 
 /* ====================== RENDER PROFILE AVATAR IN NAVBAR ====================== */
 function renderHeaderProfile(profile) {
@@ -148,7 +281,6 @@ function renderHeaderProfile(profile) {
     if (!themeBtn || !themeBtn.parentElement) return;
     const container = themeBtn.parentElement;
 
-    // Remove legacy cluttered header elements if present
     ['user-email', 'pro-badge', 'admin-link-btn', 'auth-header-btn', 'profile-slot'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.remove();
@@ -169,9 +301,14 @@ function renderHeaderProfile(profile) {
     const isAdmin = email.toLowerCase() === ADMIN_EMAIL.toLowerCase();
     const hasAnyCourse = window.unlockedCourses.length > 0;
 
-    const courseBadges = hasAnyCourse
-        ? window.unlockedCourses.map(c => `<span class="pd-chip">${c === 'all' ? 'ALL SUBJECTS' : c.toUpperCase()}</span>`).join('')
-        : `<span class="pd-chip none">Free Preview Only</span>`;
+    let chips = [];
+    if (hasAnyCourse) {
+        chips.push(...window.unlockedCourses.map(c => `<span class="pd-chip">${c === 'all' ? 'ALL SUBJECTS' : c.toUpperCase()}</span>`));
+    }
+    if (window.pendingRequests.length > 0) {
+        chips.push(...window.pendingRequests.map(r => `<span class="pd-chip pending">⏳ ${r.course_code.toUpperCase()}</span>`));
+    }
+    const courseBadges = chips.length > 0 ? chips.join('') : `<span class="pd-chip none">Free Preview Only</span>`;
 
     slot.innerHTML = `
         <button type="button" class="profile-avatar-btn ${hasAnyCourse ? 'has-pro' : ''}" id="profile-avatar-btn" title="Account">${initial}</button>
@@ -181,10 +318,10 @@ function renderHeaderProfile(profile) {
                 ${profile?.student_id ? `<div class="pd-sid">Student ID: ${profile.student_id}</div>` : ''}
             </div>
             <div>
-                <div class="pd-section-label">Unlocked Subjects</div>
+                <div class="pd-section-label">My Subjects</div>
                 <div class="pd-courses">${courseBadges}</div>
             </div>
-            ${isAdmin ? `<a href="admin.html" class="pd-item admin">⚡ + Add MCQs (Admin)</a>` : ''}
+            ${isAdmin ? `<a href="admin.html" class="pd-item admin">⚡ Admin Dashboard</a>` : ''}
             <button type="button" class="pd-item danger" onclick="signOutUser()">Sign Out</button>
         </div>
     `;
@@ -216,9 +353,19 @@ function updateHomeCourseCards() {
         if (oldPill) oldPill.remove();
 
         const unlocked = window.hasCourseAccess(code);
+        const pending = !unlocked && Boolean(window.getPendingRequest(code));
+
         const pill = document.createElement('span');
-        pill.className = `course-status-pill ${unlocked ? 'unlocked' : 'locked'}`;
-        pill.textContent = unlocked ? '✓ Unlocked' : '🔒 15 Free Questions';
+        if (unlocked) {
+            pill.className = 'course-status-pill unlocked';
+            pill.textContent = '✓ Unlocked';
+        } else if (pending) {
+            pill.className = 'course-status-pill pending';
+            pill.textContent = '⏳ Access Requested';
+        } else {
+            pill.className = 'course-status-pill locked';
+            pill.textContent = '🔒 15 Free Questions';
+        }
         card.appendChild(pill);
     });
 
@@ -229,10 +376,10 @@ function updateHomeCourseCards() {
         const h2 = proBanner.querySelector('h2');
         const p = proBanner.querySelector('p');
         const btn = document.getElementById('pro-cta-btn');
-        if (h2) h2.textContent = '📚 Unlock Your Subjects';
-        if (p) p.textContent = 'Pick only the courses you are taking this semester—or unlock all 4 at once.';
+        if (h2) h2.textContent = '📚 Request Full Subject Access';
+        if (p) p.textContent = 'Unlock individual courses (' + COURSE_CONFIG.prices.el112 + ' each) or all 4 courses (' + COURSE_CONFIG.prices.all + ').';
         if (btn) {
-            btn.textContent = window.currentUser ? 'Unlock All 4 Courses ➔' : 'Sign Up & Get Started ➔';
+            btn.textContent = window.currentUser ? 'Request Full Access ➔' : 'Sign Up & Request Access ➔';
             btn.onclick = () => handleUpgradeClick('all');
         }
     }
@@ -352,24 +499,14 @@ window.signOutUser = function() {
     window.db.auth.signOut().then(() => location.reload());
 };
 
-window.handleUpgradeClick = function(courseCode = 'all') {
-    if (!window.currentUser) {
-        openAuthModal('signup');
-        return;
-    }
-    const code = (courseCode || 'all').toLowerCase();
-    const baseUrl = COURSE_CHECKOUT_URLS[code] || COURSE_CHECKOUT_URLS.all;
-    const sep = baseUrl.includes('?') ? '&' : '?';
-    const url = `${baseUrl}${sep}checkout[email]=${encodeURIComponent(window.currentUser.email)}&checkout[custom][course_code]=${encodeURIComponent(code)}`;
-    window.open(url, '_blank');
-};
-
 /* ====================== INIT SESSION & DEVICE CHECK ====================== */
 window.initAuth = async function() {
     injectAuthUI();
     const { data: { session } } = await window.db.auth.getSession();
     window.currentUser = session?.user || null;
+    window.currentProfile = null;
     window.unlockedCourses = [];
+    window.pendingRequests = [];
 
     if (window.currentUser) {
         const { data: devCheck, error: devErr } = await window.db.rpc('register_device', {
@@ -388,14 +525,23 @@ window.initAuth = async function() {
             return { user: null, unlockedCourses: [], deviceBlocked: true };
         }
 
-        const { data: profile } = await window.db
-            .from('profiles')
-            .select('unlocked_courses, student_id')
-            .eq('id', window.currentUser.id)
-            .single();
+        const [{ data: profile }, { data: pending }] = await Promise.all([
+            window.db
+                .from('profiles')
+                .select('unlocked_courses, student_id')
+                .eq('id', window.currentUser.id)
+                .single(),
+            window.db
+                .from('payment_requests')
+                .select('*')
+                .eq('user_id', window.currentUser.id)
+                .eq('status', 'pending')
+        ]);
 
+        window.currentProfile = profile || null;
         const rawCourses = Array.isArray(profile?.unlocked_courses) ? profile.unlocked_courses : [];
         window.unlockedCourses = rawCourses.map(c => String(c).toLowerCase());
+        window.pendingRequests = Array.isArray(pending) ? pending : [];
 
         renderHeaderProfile(profile);
         updateHomeCourseCards();
