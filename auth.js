@@ -170,7 +170,7 @@ function injectAuthUI() {
                     <h3 id="modal-title">Student Sign In</h3>
                     <p id="modal-subtitle">Log in to access your unlocked subjects.</p>
                     <div id="signup-extra-top" style="display: none;">
-                        <input type="text" id="auth-student-id" class="modal-input" placeholder="University Student ID (starts with 2, e.g. 26464141)" maxlength="20">
+                      <input type="text" id="auth-student-id" class="modal-input" placeholder="University Student ID (8 digits, e.g. 26464141)" inputmode="numeric" maxlength="8">
                     </div>
                     <input type="email" id="auth-email" class="modal-input" placeholder="Email address">
                     <div class="password-wrap">
@@ -490,7 +490,7 @@ window.submitAuth = async function() {
 
         if (!/^2[0-9]{4,19}$/.test(studentId)) {
             msgEl.style.color = 'var(--error)';
-            msgEl.textContent = 'Student ID must start with 2 and contain digits only (5–20 digits).';
+            msgEl.textContent = 'Student ID must start with 2 and must be 8 digits.';
             return;
         }
         if (password.length < 6) {
@@ -615,7 +615,7 @@ window.promptMissingStudentId = async function() {
                             class="modal-input"
                             type="text"
                             inputmode="numeric"
-                            maxlength="20"
+                            maxlength="8"
                             placeholder="e.g. 26262626"
                             required
                         >
