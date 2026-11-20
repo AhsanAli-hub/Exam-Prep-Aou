@@ -359,7 +359,7 @@ function renderHeaderProfile(profile) {
                 <div class="pd-courses">${courseBadges}</div>
             </div>
             ${isAdmin ? `<a href="admin.html" class="pd-item admin">⚡ Admin Dashboard</a>` : ''}
-            <button type="button" class="pd-item danger" onclick="signOutUser()">Sign Out</button>
+            <button type="button" class="pd-item danger" id="profile-signout-btn">     Sign Out </button>
         </div>
     `;
 
@@ -374,6 +374,16 @@ function renderHeaderProfile(profile) {
     document.addEventListener('click', (e) => {
         if (!slot.contains(e.target)) dropdown.classList.remove('open');
     });
+    // Sign Out button click handler
+const signOutBtn = slot.querySelector('#profile-signout-btn');
+
+if (signOutBtn) {
+    signOutBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        await window.signOutUser();
+    });
+}
 }
 
 /* ====================== UPDATE HOME PAGE COURSE CARDS ====================== */
@@ -620,36 +630,68 @@ window.promptMissingStudentId = async function() {
     }
 };
 
-window.signOutUser = async function() {
-    try {
-        Object.keys(sessionStorage).forEach(k => {
-            if (k.startsWith('qcache_')) sessionStorage.removeItem(k);
-        });
-    } catch (e) {}
 
-    try {
-        if (window.db?.auth?.signOut) {
-            await window.db.auth.signOut({ scope: 'local' });
-        }
-    } catch (e) {
-        try {
-            await window.db.auth.signOut();
-        } catch (err) {}
+window.signOutUser = async function() {
+    if (window._signingOut) return;
+    window._signingOut = true;
+
+    const btn = document.getElementById('profile-signout-btn');
+
+    if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'Signing out...';
     }
 
     try {
-        Object.keys(localStorage).forEach(k => {
-            if (k.startsWith('sb-') && k.endsWith('-auth-token')) {
-                localStorage.removeItem(k);
+        // Sign out from this browser only
+        const { error } = await window.db.auth.signOut({
+            scope: 'local'
+        });
+
+        // A server revocation error does not necessarily mean
+        // the local session remains active.
+        if (error) {
+            console.warn('Server sign-out warning:', error.message);
+        }
+
+        // Verify that the local session is gone
+        const { data, error: checkError } =
+            await window.db.auth.getSession();
+
+        if (checkError) throw checkError;
+
+        if (data?.session) {
+            throw new Error('Your browser session is still active.');
+        }
+
+        // Clear cached questions
+        Object.keys(sessionStorage).forEach(key => {
+            if (key.startsWith('qcache_')) {
+                sessionStorage.removeItem(key);
             }
         });
-    } catch (e) {}
 
-    window.currentUser = null;
-    window.currentProfile = null;
-    window.unlockedCourses = [];
-    window.pendingRequests = [];
-    location.reload();
+        // Reset account information
+        window.currentUser = null;
+        window.currentProfile = null;
+        window.unlockedCourses = [];
+        window.pendingRequests = [];
+
+        // Redirect to homepage
+        window.location.replace(REDIRECT_URL);
+
+    } catch (err) {
+        console.error('Sign-out error:', err);
+
+        window._signingOut = false;
+
+        if (btn) {
+            btn.disabled = false;
+            btn.textContent = 'Sign Out';
+        }
+
+        alert('Sign-out failed: ' + err.message);
+    }
 };
 
 /* ====================== INIT SESSION & DEVICE CHECK ====================== */
