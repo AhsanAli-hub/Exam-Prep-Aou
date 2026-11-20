@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin — Automated MCQ Uploader</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        :root { --purple: #8b5cf6; --purple-hover: #7c3aed; --bg: #0f172a; --card: #1e293b; --text: #f1f5f9; --muted: #94a3b8; --border: #334155; --success: #10b981; --error: #ef4444; }
+        * { box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 30px 20px; display: flex; justify-content: center; }
+        .container { width: 100%; max-width: 760px; background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 32px; }
+        .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+        h1 { margin: 0; color: var(--purple); font-size: 1.5rem; font-weight: 800; }
+        a.back { color: var(--muted); text-decoration: none; font-weight: 700; font-size: 0.9rem; }
+        label { display: block; font-weight: 700; font-size: 0.9rem; margin: 16px 0 8px; }
+        select, input[type="file"], textarea { width: 100%; padding: 12px 14px; border-radius: 12px; border: 1.5px solid var(--border); background: var(--bg); color: var(--text); font-family: inherit; font-size: 0.95rem; }
+        textarea { min-height: 220px; font-family: monospace; font-size: 0.85rem; }
+        .row { display: flex; gap: 16px; flex-wrap: wrap; }
+        .col { flex: 1; min-width: 200px; }
+        .btn { margin-top: 22px; width: 100%; padding: 15px; background: var(--purple); color: #fff; border: none; border-radius: 14px; font-weight: 800; font-size: 1rem; cursor: pointer; }
+        .btn:hover { background: var(--purple-hover); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .status { margin-top: 16px; padding: 14px; border-radius: 12px; font-weight: 600; font-size: 0.92rem; display: none; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="top">
+        <h1>⚡ Automated MCQ Uploader</h1>
+        <a href="index.html" class="back">← Back to Site</a>
+    </div>
+
+    <div id="guard-msg" style="color: var(--muted); font-weight: 600;">Checking admin permissions...</div>
+
+    <div id="uploader-ui" style="display: none;">
+        <div class="row">
+            <div class="col">
+                <label for="course-select">Target Course</label>
+                <select id="course-select">
+                    <option value="el112">EL112 — English Language</option>
+                    <option value="gr101el">GR101EL — Life Skills</option>
+                    <option value="gt103">GT103 — Artificial Intelligence</option>
+                    <option value="tu170">TU170 — Computing Essentials</option>
+                </select>
+            </div>
+            <div class="col">
+                <label for="access-select">Access Tier</label>
+                <select id="access-select">
+                    <option value="false">🔒 Pro Members Only (Paid)</option>
+                    <option value="true">🆓 Free Preview (Public)</option>
+                </select>
+            </div>
+        </div>
+
+        <label for="json-file">Option 1: Upload .json file</label>
+        <input type="file" id="json-file" accept=".json">
+
+        <label for="json-text">Option 2: Or paste JSON directly (supports flat array or passages/grammar/vocabulary format)</label>
+        <textarea id="json-text" placeholder='[{"chapter": "Chapter 1", "q": "Your question?", "options": ["A", "B", "C", "D"], "answer": 0, "explanation": "..."}]'></textarea>
+
+        <button class="btn" id="upload-btn" onclick="uploadMCQs()">Upload MCQs to Database ➔</button>
+        <div class="status" id="status-box"></div>
+    </div>
+</div>
+
+<script>
+    const SUPABASE_URL = 'https://sdqhrxybowzyxveqwkwo.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_UBviShU8w5kEtL0sGkIh6w_Ay8_lnaj';
+    const ADMIN_EMAIL = 'ahsan.ali72@outlook.com';
+
+    const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    async function checkAdmin() {
+        const { data: { session } } = await db.auth.getSession();
+        const guardEl = document.getElementById('guard-msg');
+        if (!session || session.user.email.toLowerCase() !== ADMIN_EMAIL.toLowerCase()) {
+            guardEl.style.color = 'var(--error)';
+            guardEl.innerHTML = '⛔ Access Denied. Please <a href="index.html" style="color:var(--purple);">sign in on the home page</a> with your admin email first.';
+            return;
+        }
+        guardEl.style.display = 'none';
+        document.getElementById('uploader-ui').style.display = 'block';
+    }
+
+    document.getElementById('json-file').addEventListener('change', async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        document.getElementById('json-text').value = await file.text();
+    });
+
+    function parsePayload(courseCode, isFree, raw) {
+        const rows = [];
+        if (Array.isArray(raw)) {
+            raw.forEach(item => {
+                rows.push({
+                    course_code: courseCode,
+                    topic: item.chapter || item.topic || 'General',
+                    question_data: item,
+                    is_free_preview: isFree
+                });
+            });
+        } else if (typeof raw === 'object' && raw !== null) {
+            Object.entries(raw).forEach(([section, content]) => {
+                if (section === 'passages' && Array.isArray(content)) {
+                    content.forEach(p => {
+                        const meta = { id: p.id, title: p.title, text: p.text };
+                        (p.questions || []).forEach(q => {
+                            rows.push({
+                                course_code: courseCode,
+                                topic: `Passage: ${p.title || 'Reading'}`,
+                                question_data: { ...q, passage: meta },
+                                is_free_preview: isFree
+                            });
+                        });
+                    });
+                } else if (Array.isArray(content)) {
+                    content.forEach(item => {
+                        rows.push({
+                            course_code: courseCode,
+                            topic: item.chapter || item.topic || section.charAt(0).toUpperCase() + section.slice(1),
+                            question_data: item,
+                            is_free_preview: isFree
+                        });
+                    });
+                }
+            });
+        }
+        return rows;
+    }
+
+    async function uploadMCQs() {
+        const statusBox = document.getElementById('status-box');
+        const btn = document.getElementById('upload-btn');
+        const courseCode = document.getElementById('course-select').value;
+        const isFree = document.getElementById('access-select').value === 'true';
+        const rawText = document.getElementById('json-text').value.trim();
+
+        statusBox.style.display = 'block';
+        if (!rawText) {
+            statusBox.style.background = 'rgba(239,68,68,0.15)';
+            statusBox.style.color = 'var(--error)';
+            statusBox.textContent = 'Please upload a JSON file or paste JSON text first.';
+            return;
+        }
+
+        try {
+            const parsed = JSON.parse(rawText);
+            const rows = parsePayload(courseCode, isFree, parsed);
+            if (rows.length === 0) throw new Error('No valid questions found in JSON.');
+
+            btn.disabled = true;
+            statusBox.style.background = 'rgba(139,92,246,0.15)';
+            statusBox.style.color = 'var(--text)';
+            statusBox.textContent = `Uploading ${rows.length} questions to ${courseCode.toUpperCase()}...`;
+
+            for (let i = 0; i < rows.length; i += 200) {
+                const { error } = await db.from('questions').insert(rows.slice(i, i + 200));
+                if (error) throw error;
+            }
+
+            statusBox.style.background = 'rgba(16,185,129,0.15)';
+            statusBox.style.color = 'var(--success)';
+            statusBox.textContent = `✅ Successfully added ${rows.length} questions to ${courseCode.toUpperCase()}!`;
+            document.getElementById('json-text').value = '';
+            document.getElementById('json-file').value = '';
+        } catch (err) {
+            statusBox.style.background = 'rgba(239,68,68,0.15)';
+            statusBox.style.color = 'var(--error)';
+            statusBox.textContent = '❌ Error: ' + err.message;
+        } finally {
+            btn.disabled = false;
+        }
+    }
+
+    checkAdmin();
+</script>
+</body>
+</html>
