@@ -3,144 +3,249 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard — Exams Prep</title>
+    <title>Admin Command Center — Exams Prep</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         :root { --purple: #8b5cf6; --purple-hover: #7c3aed; --bg: #0f172a; --card: #1e293b; --text: #f1f5f9; --muted: #94a3b8; --border: #334155; --success: #10b981; --error: #ef4444; --warn: #f59e0b; }
         * { box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 30px 20px; display: flex; justify-content: center; }
-        .container { width: 100%; max-width: 860px; display: flex; flex-direction: column; gap: 24px; }
-        .card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 28px; }
-        .top { display: flex; justify-content: space-between; align-items: center; }
-        h1 { margin: 0; color: var(--purple); font-size: 1.55rem; font-weight: 800; }
-        h2 { margin: 0 0 6px 0; color: var(--purple); font-size: 1.2rem; font-weight: 800; }
-        .sub { margin: 0 0 18px 0; color: var(--muted); font-size: 0.88rem; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 28px 18px; display: flex; justify-content: center; }
+        .container { width: 100%; max-width: 940px; display: flex; flex-direction: column; gap: 20px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 24px; }
+        .top { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+        h1 { margin: 0; color: var(--purple); font-size: 1.5rem; font-weight: 800; }
+        h2 { margin: 0 0 6px 0; color: var(--purple); font-size: 1.18rem; font-weight: 800; }
+        .sub { margin: 0 0 16px 0; color: var(--muted); font-size: 0.87rem; }
         a.back { color: var(--muted); text-decoration: none; font-weight: 700; font-size: 0.9rem; }
         a.back:hover { color: var(--purple); }
-        label { display: block; font-weight: 700; font-size: 0.88rem; margin: 14px 0 8px; }
-        select, input[type="file"], input[type="text"], textarea { width: 100%; padding: 12px 14px; border-radius: 12px; border: 1.5px solid var(--border); background: var(--bg); color: var(--text); font-family: inherit; font-size: 0.94rem; }
-        textarea { min-height: 180px; font-family: monospace; font-size: 0.85rem; }
-        .row { display: flex; gap: 14px; flex-wrap: wrap; align-items: flex-end; }
-        .col { flex: 1; min-width: 200px; }
-        .btn { padding: 13px 22px; background: var(--purple); color: #fff; border: none; border-radius: 12px; font-weight: 800; font-size: 0.95rem; cursor: pointer; font-family: inherit; }
-        .btn:hover { background: var(--purple-hover); }
-        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
-        .btn.full { width: 100%; margin-top: 18px; padding: 15px; }
-        .status { margin-top: 14px; padding: 12px 14px; border-radius: 12px; font-weight: 600; font-size: 0.9rem; display: none; }
 
-        /* Pending Request Cards */
-        .req-list { display: flex; flex-direction: column; gap: 12px; }
-        .req-item { background: var(--bg); border: 1.5px solid var(--border); border-radius: 14px; padding: 16px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
-        .req-info { display: flex; flex-direction: column; gap: 4px; }
-        .req-top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-        .req-course { background: rgba(139, 92, 246, 0.2); color: #c4b5fd; font-size: 0.76rem; font-weight: 800; padding: 3px 9px; border-radius: 8px; }
-        .req-amount { color: var(--warn); font-weight: 800; font-size: 0.85rem; }
-        .req-email { font-weight: 700; font-size: 0.95rem; }
-        .req-meta { font-size: 0.82rem; color: var(--muted); }
-        .req-note { color: var(--text); font-weight: 600; }
-        .req-actions { display: flex; gap: 8px; flex-wrap: wrap; }
-        .mail-btn { padding: 10px 14px; background: rgba(139, 92, 246, 0.16); color: #c4b5fd; border: 1.5px solid var(--purple); border-radius: 10px; font-weight: 800; font-size: 0.85rem; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; }
-        .mail-btn:hover { background: var(--purple); color: #fff; }
-        .approve-btn { padding: 10px 16px; background: var(--success); color: #fff; border: none; border-radius: 10px; font-weight: 800; font-size: 0.85rem; cursor: pointer; }
-        .approve-btn:hover { filter: brightness(1.08); }
-        .reject-btn { padding: 10px 14px; background: transparent; color: var(--error); border: 1.5px solid var(--error); border-radius: 10px; font-weight: 700; font-size: 0.85rem; cursor: pointer; }
-        .reject-btn:hover { background: rgba(239, 68, 68, 0.14); }
-        .empty-note { color: var(--muted); font-size: 0.9rem; padding: 12px 0; font-weight: 600; }
+        /* Stats Grid */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-top: 18px; }
+        .stat-box { background: var(--bg); border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; }
+        .stat-num { font-size: 1.55rem; font-weight: 800; color: var(--text); }
+        .stat-num.warn { color: var(--warn); }
+        .stat-num.ok { color: var(--success); }
+        .stat-label { font-size: 0.78rem; font-weight: 700; color: var(--muted); margin-top: 2px; text-transform: uppercase; letter-spacing: 0.04em; }
+
+        /* Navigation Tabs */
+        .tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+        .tab-btn { padding: 10px 16px; border-radius: 12px; border: 1.5px solid var(--border); background: var(--card); color: var(--muted); font-weight: 800; font-size: 0.86rem; cursor: pointer; font-family: inherit; }
+        .tab-btn:hover { border-color: var(--purple); color: var(--text); }
+        .tab-btn.active { background: var(--purple); border-color: var(--purple); color: #fff; }
+        .tab-panel { display: none; flex-direction: column; gap: 20px; }
+        .tab-panel.active { display: flex; }
+
+        /* Form Inputs & Buttons */
+        label { display: block; font-weight: 700; font-size: 0.86rem; margin: 12px 0 6px; }
+        select, input[type="file"], input[type="text"], textarea { width: 100%; padding: 11px 13px; border-radius: 11px; border: 1.5px solid var(--border); background: var(--bg); color: var(--text); font-family: inherit; font-size: 0.92rem; }
+        textarea { min-height: 160px; font-family: monospace; font-size: 0.84rem; }
+        .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-end; }
+        .col { flex: 1; min-width: 190px; }
+        .btn { padding: 11px 18px; background: var(--purple); color: #fff; border: none; border-radius: 11px; font-weight: 800; font-size: 0.9rem; cursor: pointer; font-family: inherit; }
+        .btn:hover:not(:disabled) { background: var(--purple-hover); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn.secondary { background: var(--bg); border: 1.5px solid var(--border); color: var(--text); }
+        .btn.secondary:hover { border-color: var(--purple); color: var(--purple); }
+        .btn.full { width: 100%; margin-top: 16px; padding: 14px; }
+        .status { margin-top: 12px; padding: 11px 14px; border-radius: 11px; font-weight: 600; font-size: 0.88rem; display: none; }
+
+        /* List Items */
+        .list { display: flex; flex-direction: column; gap: 10px; }
+        .item { background: var(--bg); border: 1.5px solid var(--border); border-radius: 14px; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; }
+        .item-info { display: flex; flex-direction: column; gap: 5px; flex: 1; min-width: 240px; }
+        .item-top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .badge { background: rgba(139, 92, 246, 0.2); color: #c4b5fd; font-size: 0.74rem; font-weight: 800; padding: 3px 9px; border-radius: 8px; }
+        .badge.ok { background: rgba(16, 185, 129, 0.16); color: var(--success); }
+        .badge.warn { background: rgba(245, 158, 11, 0.18); color: var(--warn); }
+        .item-title { font-weight: 700; font-size: 0.93rem; }
+        .item-meta { font-size: 0.81rem; color: var(--muted); }
+        .actions { display: flex; gap: 7px; flex-wrap: wrap; align-items: center; }
+        .act-btn { padding: 8px 13px; border-radius: 9px; font-weight: 800; font-size: 0.82rem; cursor: pointer; font-family: inherit; text-decoration: none; border: none; }
+        .act-btn.mail { background: rgba(139, 92, 246, 0.16); color: #c4b5fd; border: 1.5px solid var(--purple); }
+        .act-btn.mail:hover { background: var(--purple); color: #fff; }
+        .act-btn.ok { background: var(--success); color: #fff; }
+        .act-btn.edit { background: rgba(59, 130, 246, 0.18); color: #93c5fd; border: 1.5px solid #3b82f6; }
+        .act-btn.danger { background: transparent; color: var(--error); border: 1.5px solid var(--error); }
+        .act-btn.danger:hover { background: rgba(239, 68, 68, 0.14); }
+        .chip-revoke { display: inline-flex; align-items: center; gap: 6px; background: rgba(16, 185, 129, 0.15); color: var(--success); padding: 3px 9px; border-radius: 8px; font-size: 0.75rem; font-weight: 800; }
+        .chip-revoke button { background: none; border: none; color: var(--error); font-weight: 900; cursor: pointer; padding: 0 2px; font-size: 0.85rem; }
+        .empty { color: var(--muted); font-size: 0.88rem; padding: 8px 0; font-weight: 600; }
+
+        /* Edit Question Modal */
+        .modal-bg { position: fixed; inset: 0; background: rgba(0,0,0,0.72); display: none; align-items: center; justify-content: center; padding: 18px; z-index: 1000; }
+        .modal-bg.open { display: flex; }
+        .modal-box { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 24px; width: 100%; max-width: 560px; max-height: 92vh; overflow-y: auto; }
     </style>
 </head>
 <body>
 <div class="container">
+    <!-- HEADER & LIVE STATS -->
     <div class="card">
         <div class="top">
-            <h1>⚡ Admin Dashboard</h1>
+            <h1>⚡ Admin Command Center</h1>
             <a href="index.html" class="back">← Back to Site</a>
         </div>
-        <div id="guard-msg" style="color: var(--muted); font-weight: 600; margin-top: 14px;">Checking admin permissions...</div>
+        <div id="guard-msg" style="color: var(--muted); font-weight: 600; margin-top: 12px;">Checking admin permissions...</div>
+        <div class="stats-grid" id="stats-grid" style="display: none;">
+            <div class="stat-box"><div class="stat-num warn" id="stat-pending">0</div><div class="stat-label">Pending Requests</div></div>
+            <div class="stat-box"><div class="stat-num" id="stat-students">0</div><div class="stat-label">Total Students</div></div>
+            <div class="stat-box"><div class="stat-num ok" id="stat-paid">0</div><div class="stat-label">Students w/ Unlocks</div></div>
+            <div class="stat-box"><div class="stat-num" id="stat-mcqs">0</div><div class="stat-label">Total MCQs in DB</div></div>
+        </div>
     </div>
 
-    <div id="admin-sections" style="display: none; flex-direction: column; gap: 24px;">
-        <!-- 1. PENDING ACCESS REQUESTS -->
-        <div class="card">
-            <div class="top" style="margin-bottom: 6px;">
-                <h2>📩 Pending Access Requests</h2>
-                <button type="button" class="btn" style="padding: 8px 14px; font-size: 0.82rem;" onclick="loadPendingPayments()">↻ Refresh</button>
-            </div>
-            <p class="sub">Click <strong>Mail Details</strong> to email your payment instructions privately, then click <strong>Approve &amp; Unlock</strong> once confirmed.</p>
-            <div id="pending-list" class="req-list"><div class="empty-note">Loading requests...</div></div>
-            <div class="status" id="payment-status"></div>
+    <!-- TABS -->
+    <div id="admin-main" style="display: none; flex-direction: column; gap: 18px;">
+        <div class="tabs">
+            <button type="button" class="tab-btn active" onclick="switchTab('requests', this)">📩 Access Requests</button>
+            <button type="button" class="tab-btn" onclick="switchTab('students', this)">🎓 Students &amp; Unlocks</button>
+            <button type="button" class="tab-btn" onclick="switchTab('upload', this)">➕ Upload MCQs</button>
+            <button type="button" class="tab-btn" onclick="switchTab('manage', this)">🗂️ Edit / Delete MCQs</button>
         </div>
 
-        <!-- 2. INSTANT MANUAL UNLOCK -->
-        <div class="card">
-            <h2>🔓 Instant Manual Course Unlock</h2>
-            <p class="sub">Unlock a course directly by Email or University Student ID.</p>
-            <div class="row">
-                <div class="col">
-                    <input type="text" id="unlock-identifier" placeholder="Student Email or Student ID (e.g. 26464141)">
+        <!-- TAB 1: ACCESS REQUESTS -->
+        <div class="tab-panel active" id="tab-requests">
+            <div class="card">
+                <div class="top" style="margin-bottom: 6px;">
+                    <h2>📩 Pending Course Access Requests</h2>
+                    <button type="button" class="btn secondary" style="padding: 8px 13px; font-size: 0.82rem;" onclick="loadPendingPayments()">↻ Refresh</button>
                 </div>
-                <div class="col" style="max-width: 240px;">
-                    <select id="unlock-course">
-                        <option value="el112">EL112 — English</option>
-                        <option value="gr101el">GR101EL — Life Skills</option>
-                        <option value="gt103">GT103 — AI</option>
-                        <option value="tu170">TU170 — Computing</option>
-                        <option value="all">ALL 4 COURSES</option>
-                    </select>
-                </div>
-                <div>
-                    <button type="button" class="btn" onclick="manualUnlockCourse()">Unlock Now</button>
-                </div>
+                <p class="sub">Click <strong>Mail Details</strong> to email payment instructions privately, then click <strong>Approve &amp; Unlock</strong> after receiving transfer.</p>
+                <div id="pending-list" class="list"><div class="empty">Loading...</div></div>
+                <div class="status" id="payment-status"></div>
             </div>
-            <div class="status" id="manual-unlock-status"></div>
         </div>
 
-        <!-- 3. RESET STUDENT DEVICES -->
-        <div class="card">
-            <h2>📱 Reset Student Devices (Max 2 Limit)</h2>
-            <p class="sub">Clear registered devices if a student switched phones or laptops.</p>
-            <div class="row">
-                <div class="col">
-                    <input type="text" id="reset-identifier" placeholder="Student Email or Student ID">
+        <!-- TAB 2: STUDENTS & MANUAL UNLOCKS -->
+        <div class="tab-panel" id="tab-students">
+            <div class="card">
+                <h2>🔓 Instant Manual Course Unlock</h2>
+                <p class="sub">Grant course access directly by Email or University Student ID.</p>
+                <div class="row">
+                    <div class="col"><input type="text" id="unlock-identifier" placeholder="Student Email or Student ID (e.g. 26464141)"></div>
+                    <div class="col" style="max-width: 230px;">
+                        <select id="unlock-course">
+                            <option value="el112">EL112 — English</option>
+                            <option value="gr101el">GR101EL — Life Skills</option>
+                            <option value="gt103">GT103 — AI</option>
+                            <option value="tu170">TU170 — Computing</option>
+                            <option value="all">ALL COURSES</option>
+                        </select>
+                    </div>
+                    <div><button type="button" class="btn" onclick="manualUnlockCourse()">Unlock Now</button></div>
                 </div>
-                <div>
-                    <button type="button" class="btn" onclick="resetStudentDevices()">Reset Devices</button>
-                </div>
+                <div class="status" id="manual-unlock-status"></div>
             </div>
-            <div class="status" id="reset-status"></div>
+
+            <div class="card">
+                <div class="top" style="margin-bottom: 6px;">
+                    <h2>🎓 Registered Students Directory</h2>
+                    <button type="button" class="btn secondary" style="padding: 8px 13px; font-size: 0.82rem;" onclick="loadStudents()">↻ Refresh</button>
+                </div>
+                <p class="sub">Search students, reset their 2-device limit, or click <strong>×</strong> on a subject badge to revoke access.</p>
+                <input type="text" id="student-search" placeholder="Search by email or Student ID..." oninput="renderStudents()" style="margin-bottom: 12px;">
+                <div id="students-list" class="list"><div class="empty">Loading students...</div></div>
+                <div class="status" id="student-status"></div>
+            </div>
         </div>
 
-        <!-- 4. AUTOMATED MCQ UPLOADER -->
-        <div class="card">
-            <h2>📚 Automated MCQ Uploader</h2>
-            <p class="sub">Upload a JSON batch directly into the database.</p>
-            <div class="row">
-                <div class="col">
-                    <label for="course-select">Target Course</label>
-                    <select id="course-select">
-                        <option value="el112">EL112 — English Language</option>
-                        <option value="gr101el">GR101EL — Life Skills</option>
-                        <option value="gt103">GT103 — Artificial Intelligence</option>
-                        <option value="tu170">TU170 — Computing Essentials</option>
-                    </select>
+        <!-- TAB 3: UPLOAD MCQS -->
+        <div class="tab-panel" id="tab-upload">
+            <div class="card">
+                <h2>➕ Automated MCQ Uploader</h2>
+                <p class="sub">Automatically checks existing database rows and skips duplicate questions.</p>
+                <div class="row">
+                    <div class="col">
+                        <label for="course-select">Target Course</label>
+                        <select id="course-select">
+                            <option value="el112">EL112 — English Language</option>
+                            <option value="gr101el">GR101EL — Life Skills</option>
+                            <option value="gt103">GT103 — Artificial Intelligence</option>
+                            <option value="tu170">TU170 — Computing Essentials</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label for="access-select">Access Tier</label>
+                        <select id="access-select">
+                            <option value="false">🔒 Paid Course Only</option>
+                            <option value="true">🆓 Free Preview (Public)</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="col">
-                    <label for="access-select">Access Tier</label>
-                    <select id="access-select">
-                        <option value="false">🔒 Paid Course Only</option>
-                        <option value="true">🆓 Free Preview (Public)</option>
-                    </select>
-                </div>
+                <label for="json-file">Option 1: Upload .json file</label>
+                <input type="file" id="json-file" accept=".json">
+                <label for="json-text">Option 2: Or paste JSON directly</label>
+                <textarea id="json-text" placeholder='[{"chapter": "Chapter 1", "q": "Your question?", "options": ["A", "B", "C", "D"], "answer": 0, "explanation": "..."}]'></textarea>
+                <button class="btn full" id="upload-btn" onclick="uploadMCQs()">Upload MCQs to Database ➔</button>
+                <div class="status" id="status-box"></div>
             </div>
+        </div>
 
-            <label for="json-file">Option 1: Upload .json file</label>
-            <input type="file" id="json-file" accept=".json">
+        <!-- TAB 4: INSPECT, EDIT, EXPORT & DELETE MCQS -->
+        <div class="tab-panel" id="tab-manage">
+            <div class="card">
+                <div class="top" style="margin-bottom: 6px;">
+                    <h2>🗂️ Course Plan, Editor &amp; Backup</h2>
+                    <button type="button" class="btn secondary" style="padding: 8px 13px; font-size: 0.82rem;" onclick="exportCourseJSON()">⬇️ Export Course JSON</button>
+                </div>
+                <p class="sub">Inspect chapters, search questions to edit typos/answer keys inline, or delete entire chapters.</p>
+                <div class="row">
+                    <div class="col" style="max-width: 260px;">
+                        <select id="manage-course" onchange="loadCourseOverview()">
+                            <option value="el112">EL112 — English Language</option>
+                            <option value="gr101el">GR101EL — Life Skills</option>
+                            <option value="gt103">GT103 — Artificial Intelligence</option>
+                            <option value="tu170">TU170 — Computing Essentials</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <input type="text" id="search-q-input" placeholder="Search question text to edit or delete individual MCQs..." oninput="renderFilteredQuestions()">
+                    </div>
+                </div>
+                <div id="course-summary-bar" class="empty" style="margin-top: 10px;"></div>
+                <div id="question-search-list" class="list" style="margin-top: 10px;"></div>
+                <div id="chapter-list" class="list" style="margin-top: 14px;"></div>
+                <div class="status" id="manage-status"></div>
+            </div>
+        </div>
+    </div>
+</div>
 
-            <label for="json-text">Option 2: Or paste JSON directly</label>
-            <textarea id="json-text" placeholder='[{"chapter": "Chapter 1", "q": "Your question?", "options": ["A", "B", "C", "D"], "answer": 0, "explanation": "..."}]'></textarea>
-
-            <button class="btn full" id="upload-btn" onclick="uploadMCQs()">Upload MCQs to Database ➔</button>
-            <div class="status" id="status-box"></div>
+<!-- INLINE EDIT MCQ MODAL -->
+<div class="modal-bg" id="edit-modal">
+    <div class="modal-box">
+        <h2 style="margin-bottom: 12px;">✏️ Edit Question #<span id="edit-q-id"></span></h2>
+        <label>Chapter / Topic</label>
+        <input type="text" id="edit-topic">
+        <label>Question Text</label>
+        <textarea id="edit-q-text" style="min-height: 80px; font-family: inherit;"></textarea>
+        <label>Option 1 (Index 0)</label><input type="text" id="edit-opt-0">
+        <label>Option 2 (Index 1)</label><input type="text" id="edit-opt-1">
+        <label>Option 3 (Index 2)</label><input type="text" id="edit-opt-2">
+        <label>Option 4 (Index 3)</label><input type="text" id="edit-opt-3">
+        <div class="row">
+            <div class="col">
+                <label>Correct Answer</label>
+                <select id="edit-answer">
+                    <option value="0">Option 1 (Index 0)</option>
+                    <option value="1">Option 2 (Index 1)</option>
+                    <option value="2">Option 3 (Index 2)</option>
+                    <option value="3">Option 4 (Index 3)</option>
+                </select>
+            </div>
+            <div class="col">
+                <label>Access Tier</label>
+                <select id="edit-free">
+                    <option value="false">🔒 Paid Course Only</option>
+                    <option value="true">🆓 Free Preview</option>
+                </select>
+            </div>
+        </div>
+        <label>Explanation</label>
+        <textarea id="edit-expl" style="min-height: 75px; font-family: inherit;"></textarea>
+        <div class="row" style="margin-top: 16px;">
+            <button type="button" class="btn" style="flex:1;" onclick="saveEditedQuestion()">Save Changes</button>
+            <button type="button" class="btn secondary" onclick="closeEditModal()">Cancel</button>
         </div>
     </div>
 </div>
@@ -151,9 +256,12 @@
     const ADMIN_EMAIL = 'ahsan.ali72@outlook.com';
 
     const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    let allStudents = [];
+    let loadedCourseRows = [];
+    let editingRow = null;
 
     function escapeHtml(str) {
-        return String(str).replace(/[&<>"']/g, c => (
+        return String(str ?? '').replace(/[&<>"']/g, c => (
             { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
         ));
     }
@@ -166,6 +274,13 @@
         box.textContent = text;
     }
 
+    function switchTab(tabName, btn) {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('tab-' + tabName).classList.add('active');
+    }
+
     async function checkAdmin() {
         const { data: { session } } = await db.auth.getSession();
         const guardEl = document.getElementById('guard-msg');
@@ -175,8 +290,18 @@
             return;
         }
         guardEl.style.display = 'none';
-        document.getElementById('admin-sections').style.display = 'flex';
-        loadPendingPayments();
+        document.getElementById('stats-grid').style.display = 'grid';
+        document.getElementById('admin-main').style.display = 'flex';
+        refreshAllData();
+    }
+
+    async function refreshAllData() {
+        await Promise.all([loadPendingPayments(), loadStudents(), loadCourseOverview(), loadTotalMcqCount()]);
+    }
+
+    async function loadTotalMcqCount() {
+        const { count } = await db.from('questions').select('*', { count: 'exact', head: true });
+        document.getElementById('stat-mcqs').textContent = count ?? 0;
     }
 
     /* ====================== 1. PENDING REQUESTS ====================== */
@@ -189,42 +314,41 @@
             .order('created_at', { ascending: true });
 
         if (error) {
-            listEl.innerHTML = `<div class="empty-note" style="color:var(--error);">Error: ${escapeHtml(error.message)}</div>`;
+            listEl.innerHTML = `<div class="empty" style="color:var(--error);">Error: ${escapeHtml(error.message)}</div>`;
             return;
         }
 
+        document.getElementById('stat-pending').textContent = (data || []).length;
+
         if (!data || data.length === 0) {
-            listEl.innerHTML = `<div class="empty-note">✅ No pending access requests right now.</div>`;
+            listEl.innerHTML = `<div class="empty">✅ No pending access requests right now.</div>`;
             return;
         }
 
         listEl.innerHTML = data.map(r => {
             const when = new Date(r.created_at).toLocaleString();
             const courseUpper = r.course_code.toUpperCase();
-            const hasCustomNote = r.transfer_ref && r.transfer_ref !== 'Access requested';
-
+            const hasNote = r.transfer_ref && r.transfer_ref !== 'Access requested';
             const mailSubject = encodeURIComponent(`Exams Prep — Payment Details for ${courseUpper}`);
             const mailBody = encodeURIComponent(
                 `Hi,\n\nThank you for requesting access to ${courseUpper} (${r.amount || ''}) on Exams Prep.\n\nPlease complete your transfer using the details below and reply with your receipt:\n\n[Paste your payment details here]\n\nOnce confirmed, your account (${r.email}) will be unlocked immediately.\n\nBest regards,\nExams Prep`
             );
 
             return `
-                <div class="req-item" id="req-${r.id}">
-                    <div class="req-info">
-                        <div class="req-top">
-                            <span class="req-course">${escapeHtml(courseUpper)}</span>
-                            <span class="req-amount">${escapeHtml(r.amount || '')}</span>
-                            <span class="req-email">${escapeHtml(r.email)}</span>
-                            ${r.student_id ? `<span class="req-meta">(ID: ${escapeHtml(r.student_id)})</span>` : ''}
+                <div class="item" id="req-${r.id}">
+                    <div class="item-info">
+                        <div class="item-top">
+                            <span class="badge">${escapeHtml(courseUpper)}</span>
+                            <span class="badge warn">${escapeHtml(r.amount || '')}</span>
+                            <span class="item-title">${escapeHtml(r.email)}</span>
+                            ${r.student_id ? `<span class="item-meta">(ID: ${escapeHtml(r.student_id)})</span>` : ''}
                         </div>
-                        <div class="req-meta">
-                            ${hasCustomNote ? `Note: <span class="req-note">${escapeHtml(r.transfer_ref)}</span> · ` : ''}${escapeHtml(when)}
-                        </div>
+                        <div class="item-meta">${hasNote ? `Note: <strong style="color:var(--text);">${escapeHtml(r.transfer_ref)}</strong> · ` : ''}${escapeHtml(when)}</div>
                     </div>
-                    <div class="req-actions">
-                        <a href="mailto:${encodeURIComponent(r.email)}?subject=${mailSubject}&body=${mailBody}" class="mail-btn">✉️ Mail Details</a>
-                        <button type="button" class="approve-btn" onclick="approvePayment('${r.id}', '${escapeHtml(r.email)}', '${escapeHtml(r.course_code)}')">✅ Approve &amp; Unlock</button>
-                        <button type="button" class="reject-btn" onclick="rejectPayment('${r.id}')">✕ Reject</button>
+                    <div class="actions">
+                        <a href="mailto:${encodeURIComponent(r.email)}?subject=${mailSubject}&body=${mailBody}" class="act-btn mail">✉️ Mail Details</a>
+                        <button type="button" class="act-btn ok" onclick="approvePayment('${r.id}', '${escapeHtml(r.email)}', '${escapeHtml(r.course_code)}')">✅ Approve &amp; Unlock</button>
+                        <button type="button" class="act-btn danger" onclick="rejectPayment('${r.id}')">✕ Reject</button>
                     </div>
                 </div>
             `;
@@ -233,109 +357,113 @@
 
     async function approvePayment(reqId, email, courseCode) {
         const { error } = await db.rpc('admin_approve_payment', { p_request_id: reqId });
-        if (error) {
-            showBanner('payment-status', false, '❌ ' + error.message);
-            return;
-        }
-        const row = document.getElementById(`req-${reqId}`);
-        if (row) row.remove();
+        if (error) return showBanner('payment-status', false, '❌ ' + error.message);
         showBanner('payment-status', true, `✅ Approved! Unlocked ${courseCode.toUpperCase()} for ${email}.`);
-        if (!document.querySelector('.req-item')) loadPendingPayments();
+        await Promise.all([loadPendingPayments(), loadStudents()]);
     }
 
     async function rejectPayment(reqId) {
-        const { error } = await db
-            .from('payment_requests')
-            .update({ status: 'rejected' })
-            .eq('id', reqId);
-
-        if (error) {
-            showBanner('payment-status', false, '❌ ' + error.message);
-            return;
-        }
-        const row = document.getElementById(`req-${reqId}`);
-        if (row) row.remove();
+        const { error } = await db.from('payment_requests').update({ status: 'rejected' }).eq('id', reqId);
+        if (error) return showBanner('payment-status', false, '❌ ' + error.message);
         showBanner('payment-status', true, 'Request rejected.');
-        if (!document.querySelector('.req-item')) loadPendingPayments();
+        loadPendingPayments();
     }
 
-    /* ====================== 2. MANUAL UNLOCK ====================== */
+    /* ====================== 2. STUDENTS & UNLOCKS ====================== */
+    async function loadStudents() {
+        const { data, error } = await db.from('profiles').select('*').order('created_at', { ascending: false });
+        if (error) return;
+        allStudents = data || [];
+        document.getElementById('stat-students').textContent = allStudents.length;
+        document.getElementById('stat-paid').textContent = allStudents.filter(s => Array.isArray(s.unlocked_courses) && s.unlocked_courses.length > 0).length;
+        renderStudents();
+    }
+
+    function renderStudents() {
+        const q = (document.getElementById('student-search').value || '').trim().toLowerCase();
+        const listEl = document.getElementById('students-list');
+        const filtered = allStudents.filter(s =>
+            (s.email || '').toLowerCase().includes(q) ||
+            (s.student_id || '').toLowerCase().includes(q)
+        );
+
+        if (filtered.length === 0) {
+            listEl.innerHTML = `<div class="empty">No matching students found.</div>`;
+            return;
+        }
+
+        listEl.innerHTML = filtered.map(s => {
+            const courses = Array.isArray(s.unlocked_courses) ? s.unlocked_courses : [];
+            const devCount = Array.isArray(s.registered_devices) ? s.registered_devices.length : 0;
+            const chipsHtml = courses.length > 0
+                ? courses.map(c => `<span class="chip-revoke">${escapeHtml(c.toUpperCase())} <button type="button" title="Revoke ${escapeHtml(c)}" onclick="revokeCourse('${s.id}', '${escapeHtml(c)}', '${escapeHtml(s.email)}')">×</button></span>`).join('')
+                : `<span class="item-meta">Free Preview Only</span>`;
+
+            return `
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-top">
+                            <span class="item-title">${escapeHtml(s.email)}</span>
+                            ${s.student_id ? `<span class="badge">ID: ${escapeHtml(s.student_id)}</span>` : ''}
+                            <span class="badge ${devCount >= 2 ? 'warn' : ''}">📱 ${devCount}/2 Devices</span>
+                        </div>
+                        <div class="item-top" style="margin-top: 4px;">${chipsHtml}</div>
+                    </div>
+                    <div class="actions">
+                        <button type="button" class="act-btn edit" onclick="resetDevicesByEmail('${escapeHtml(s.email)}')">Reset Devices</button>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
     async function manualUnlockCourse() {
         const identifier = document.getElementById('unlock-identifier').value.trim();
         const courseCode = document.getElementById('unlock-course').value;
         if (!identifier) return;
-
-        const { data, error } = await db.rpc('admin_manual_unlock', {
-            p_identifier: identifier,
-            p_course_code: courseCode
-        });
-
-        if (error) {
-            showBanner('manual-unlock-status', false, '❌ ' + error.message);
-        } else if (data > 0) {
+        const { data, error } = await db.rpc('admin_manual_unlock', { p_identifier: identifier, p_course_code: courseCode });
+        if (error) showBanner('manual-unlock-status', false, '❌ ' + error.message);
+        else if (data > 0) {
             showBanner('manual-unlock-status', true, `✅ Unlocked ${courseCode.toUpperCase()} for ${identifier}.`);
             document.getElementById('unlock-identifier').value = '';
-        } else {
-            showBanner('manual-unlock-status', false, `⚠️ No student found matching "${identifier}". Make sure they created an account first.`);
-        }
+            loadStudents();
+        } else showBanner('manual-unlock-status', false, `⚠️ No student found matching "${identifier}".`);
     }
 
-    /* ====================== 3. DEVICE RESET ====================== */
-    async function resetStudentDevices() {
-        const val = document.getElementById('reset-identifier').value.trim();
-        if (!val) return;
-        const { data, error } = await db.rpc('admin_reset_devices', { p_identifier: val });
-        if (error) {
-            showBanner('reset-status', false, '❌ ' + error.message);
-        } else if (data > 0) {
-            showBanner('reset-status', true, `✅ Cleared registered devices for ${val}.`);
-            document.getElementById('reset-identifier').value = '';
-        } else {
-            showBanner('reset-status', false, `⚠️ No student found matching "${val}".`);
-        }
+    async function revokeCourse(userId, courseCode, email) {
+        if (!confirm(`Revoke ${courseCode.toUpperCase()} access from ${email}?`)) return;
+        const { error } = await db.rpc('admin_revoke_course', { p_user_id: userId, p_course_code: courseCode });
+        if (error) return showBanner('student-status', false, '❌ ' + error.message);
+        showBanner('student-status', true, `Revoked ${courseCode.toUpperCase()} from ${email}.`);
+        loadStudents();
     }
 
-    /* ====================== 4. MCQ UPLOADER ====================== */
+    async function resetDevicesByEmail(email) {
+        const { error } = await db.rpc('admin_reset_devices', { p_identifier: email });
+        if (error) return showBanner('student-status', false, '❌ ' + error.message);
+        showBanner('student-status', true, `✅ Cleared devices for ${email}.`);
+        loadStudents();
+    }
+
+    /* ====================== 3. UPLOAD MCQS ====================== */
     document.getElementById('json-file').addEventListener('change', async (e) => {
         const file = e.target.files[0];
-        if (!file) return;
-        document.getElementById('json-text').value = await file.text();
+        if (file) document.getElementById('json-text').value = await file.text();
     });
 
     function parsePayload(courseCode, isFree, raw) {
         const rows = [];
         if (Array.isArray(raw)) {
-            raw.forEach(item => {
-                rows.push({
-                    course_code: courseCode,
-                    topic: item.chapter || item.topic || 'General',
-                    question_data: item,
-                    is_free_preview: isFree
-                });
-            });
+            raw.forEach(item => rows.push({ course_code: courseCode, topic: item.chapter || item.topic || 'General', question_data: item, is_free_preview: isFree }));
         } else if (typeof raw === 'object' && raw !== null) {
             Object.entries(raw).forEach(([section, content]) => {
                 if (section === 'passages' && Array.isArray(content)) {
                     content.forEach(p => {
                         const meta = { id: p.id, title: p.title, text: p.text };
-                        (p.questions || []).forEach(q => {
-                            rows.push({
-                                course_code: courseCode,
-                                topic: `Passage: ${p.title || 'Reading'}`,
-                                question_data: { ...q, passage: meta },
-                                is_free_preview: isFree
-                            });
-                        });
+                        (p.questions || []).forEach(q => rows.push({ course_code: courseCode, topic: `Passage: ${p.title || 'Reading'}`, question_data: { ...q, passage: meta }, is_free_preview: isFree }));
                     });
                 } else if (Array.isArray(content)) {
-                    content.forEach(item => {
-                        rows.push({
-                            course_code: courseCode,
-                            topic: item.chapter || item.topic || section.charAt(0).toUpperCase() + section.slice(1),
-                            question_data: item,
-                            is_free_preview: isFree
-                        });
-                    });
+                    content.forEach(item => rows.push({ course_code: courseCode, topic: item.chapter || item.topic || section.charAt(0).toUpperCase() + section.slice(1), question_data: item, is_free_preview: isFree }));
                 }
             });
         }
@@ -347,33 +475,184 @@
         const courseCode = document.getElementById('course-select').value;
         const isFree = document.getElementById('access-select').value === 'true';
         const rawText = document.getElementById('json-text').value.trim();
-
-        if (!rawText) {
-            showBanner('status-box', false, 'Please upload a JSON file or paste JSON text first.');
-            return;
-        }
+        if (!rawText) return showBanner('status-box', false, 'Please upload a JSON file or paste JSON text first.');
 
         try {
-            const parsed = JSON.parse(rawText);
-            const rows = parsePayload(courseCode, isFree, parsed);
-            if (rows.length === 0) throw new Error('No valid questions found in JSON.');
-
+            const candidateRows = parsePayload(courseCode, isFree, JSON.parse(rawText));
+            if (candidateRows.length === 0) throw new Error('No valid questions found in JSON.');
             btn.disabled = true;
-            showBanner('status-box', true, `Uploading ${rows.length} questions to ${courseCode.toUpperCase()}...`);
+            showBanner('status-box', true, `Checking existing questions in ${courseCode.toUpperCase()}...`);
 
-            for (let i = 0; i < rows.length; i += 200) {
-                const { error } = await db.from('questions').insert(rows.slice(i, i + 200));
+            const { data: existing, error: fetchErr } = await db.from('questions').select('question_data').eq('course_code', courseCode);
+            if (fetchErr) throw fetchErr;
+
+            const existingSet = new Set((existing || []).map(r => (r.question_data?.q || '').trim().toLowerCase()).filter(Boolean));
+            const uniqueRows = [];
+            let skipped = 0;
+            for (const row of candidateRows) {
+                const norm = (row.question_data?.q || '').trim().toLowerCase();
+                if (norm && existingSet.has(norm)) skipped++;
+                else { if (norm) existingSet.add(norm); uniqueRows.push(row); }
+            }
+
+            if (uniqueRows.length === 0) return showBanner('status-box', false, `⚠️ All ${skipped} questions already exist in ${courseCode.toUpperCase()}.`);
+
+            for (let i = 0; i < uniqueRows.length; i += 200) {
+                const { error } = await db.from('questions').insert(uniqueRows.slice(i, i + 200));
                 if (error) throw error;
             }
 
-            showBanner('status-box', true, `✅ Successfully added ${rows.length} questions to ${courseCode.toUpperCase()}!`);
+            showBanner('status-box', true, `✅ Added ${uniqueRows.length} new questions to ${courseCode.toUpperCase()}${skipped ? ` (skipped ${skipped} duplicates)` : ''}!`);
             document.getElementById('json-text').value = '';
             document.getElementById('json-file').value = '';
+            loadTotalMcqCount();
+            if (document.getElementById('manage-course').value === courseCode) loadCourseOverview();
         } catch (err) {
             showBanner('status-box', false, '❌ Error: ' + err.message);
         } finally {
             btn.disabled = false;
         }
+    }
+
+    /* ====================== 4. INSPECT, EDIT, EXPORT & DELETE ====================== */
+    async function loadCourseOverview() {
+        const courseCode = document.getElementById('manage-course').value;
+        const summaryEl = document.getElementById('course-summary-bar');
+        const chapterListEl = document.getElementById('chapter-list');
+        summaryEl.textContent = `Loading ${courseCode.toUpperCase()}...`;
+
+        const { data, error } = await db.from('questions').select('id, topic, is_free_preview, question_data').eq('course_code', courseCode).order('id', { ascending: true });
+        if (error) { summaryEl.textContent = 'Error: ' + error.message; return; }
+
+        loadedCourseRows = data || [];
+        const freeCount = loadedCourseRows.filter(r => r.is_free_preview).length;
+        summaryEl.textContent = `Total in ${courseCode.toUpperCase()}: ${loadedCourseRows.length} questions (${freeCount} Free Preview, ${loadedCourseRows.length - freeCount} Paid)`;
+
+        const map = new Map();
+        for (const row of loadedCourseRows) {
+            const key = row.topic || 'General';
+            if (!map.has(key)) map.set(key, { count: 0, free: 0 });
+            const e = map.get(key);
+            e.count++;
+            if (row.is_free_preview) e.free++;
+        }
+
+        chapterListEl.innerHTML = map.size === 0
+            ? `<div class="empty">No questions found for ${courseCode.toUpperCase()}.</div>`
+            : Array.from(map.entries()).map(([topic, info]) => `
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-top">
+                            <span class="item-title">${escapeHtml(topic)}</span>
+                            <span class="badge">${info.count} questions</span>
+                            ${info.free > 0 ? `<span class="badge ok">${info.free} Free</span>` : ''}
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <button type="button" class="act-btn danger" onclick='deleteChapter(${JSON.stringify(topic)})'>🗑️ Delete Chapter</button>
+                    </div>
+                </div>
+            `).join('');
+
+        renderFilteredQuestions();
+    }
+
+    function renderFilteredQuestions() {
+        const q = document.getElementById('search-q-input').value.trim().toLowerCase();
+        const container = document.getElementById('question-search-list');
+        if (!q) { container.innerHTML = ''; return; }
+
+        const matches = loadedCourseRows.filter(r => (r.question_data?.q || '').toLowerCase().includes(q)).slice(0, 30);
+        container.innerHTML = matches.length === 0
+            ? `<div class="empty">No matching questions found.</div>`
+            : matches.map(r => `
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-top">
+                            <span class="badge">${escapeHtml(r.topic || 'General')}</span>
+                            <span class="badge ${r.is_free_preview ? 'ok' : ''}">${r.is_free_preview ? 'Free' : 'Paid'}</span>
+                            <span class="item-meta">#${r.id}</span>
+                        </div>
+                        <div class="item-title" style="font-size: 0.87rem; font-weight: 600;">${escapeHtml(r.question_data?.q || '')}</div>
+                    </div>
+                    <div class="actions">
+                        <button type="button" class="act-btn edit" onclick="openEditModal(${r.id})">✏️ Edit</button>
+                        <button type="button" class="act-btn danger" onclick="deleteSingleQuestion(${r.id})">🗑️ Delete</button>
+                    </div>
+                </div>
+            `).join('');
+    }
+
+    function openEditModal(id) {
+        editingRow = loadedCourseRows.find(r => r.id === id);
+        if (!editingRow) return;
+        const qd = editingRow.question_data || {};
+        const opts = qd.options || ['', '', '', ''];
+        document.getElementById('edit-q-id').textContent = id;
+        document.getElementById('edit-topic').value = editingRow.topic || '';
+        document.getElementById('edit-q-text').value = qd.q || '';
+        for (let i = 0; i < 4; i++) document.getElementById('edit-opt-' + i).value = opts[i] || '';
+        document.getElementById('edit-answer').value = String(qd.answer ?? 0);
+        document.getElementById('edit-free').value = String(Boolean(editingRow.is_free_preview));
+        document.getElementById('edit-expl').value = qd.explanation || '';
+        document.getElementById('edit-modal').classList.add('open');
+    }
+
+    function closeEditModal() {
+        document.getElementById('edit-modal').classList.remove('open');
+        editingRow = null;
+    }
+
+    async function saveEditedQuestion() {
+        if (!editingRow) return;
+        const newTopic = document.getElementById('edit-topic').value.trim() || 'General';
+        const isFree = document.getElementById('edit-free').value === 'true';
+        const updatedQd = {
+            ...editingRow.question_data,
+            chapter: newTopic,
+            q: document.getElementById('edit-q-text').value.trim(),
+            options: [0, 1, 2, 3].map(i => document.getElementById('edit-opt-' + i).value.trim()),
+            answer: Number(document.getElementById('edit-answer').value),
+            explanation: document.getElementById('edit-expl').value.trim()
+        };
+
+        const { error } = await db.from('questions').update({ topic: newTopic, is_free_preview: isFree, question_data: updatedQd }).eq('id', editingRow.id);
+        if (error) return alert('Error saving: ' + error.message);
+
+        const savedId = editingRow.id;
+        closeEditModal();
+        showBanner('manage-status', true, `✅ Updated question #${savedId}.`);
+        loadCourseOverview();
+    }
+
+    async function deleteChapter(topicName) {
+        const courseCode = document.getElementById('manage-course').value;
+        if (!confirm(`Delete ALL questions in "${topicName}" from ${courseCode.toUpperCase()}?`)) return;
+        const { error } = await db.from('questions').delete().eq('course_code', courseCode).eq('topic', topicName);
+        if (error) return showBanner('manage-status', false, '❌ ' + error.message);
+        showBanner('manage-status', true, `🗑️ Deleted "${topicName}".`);
+        loadCourseOverview();
+        loadTotalMcqCount();
+    }
+
+    async function deleteSingleQuestion(id) {
+        if (!confirm(`Delete question #${id}?`)) return;
+        const { error } = await db.from('questions').delete().eq('id', id);
+        if (error) return showBanner('manage-status', false, '❌ ' + error.message);
+        showBanner('manage-status', true, `🗑️ Deleted question #${id}.`);
+        loadCourseOverview();
+        loadTotalMcqCount();
+    }
+
+    function exportCourseJSON() {
+        const courseCode = document.getElementById('manage-course').value;
+        if (!loadedCourseRows.length) return alert('No questions loaded to export.');
+        const exported = loadedCourseRows.map(r => r.question_data);
+        const blob = new Blob([JSON.stringify(exported, null, 2)], { type: 'application/json' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = `${courseCode}_backup.json`;
+        a.click();
     }
 
     checkAdmin();
