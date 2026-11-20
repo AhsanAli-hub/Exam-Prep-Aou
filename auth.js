@@ -632,9 +632,11 @@ window.initAuth = async function() {
         window.unlockedCourses = rawCourses.map(c => String(c).toLowerCase());
         window.pendingRequests = Array.isArray(pending) ? pending : [];
 
-        if (!profile?.student_id || !/^2[0-9]{4,19}$/.test(profile.student_id)) {
-            promptMissingStudentId();
-        }
+     const savedStudentId = String(profile?.student_id || '').trim();
+
+        if (!/^2[0-9]{4,19}$/.test(savedStudentId)) {
+                await promptMissingStudentId();
+            }
 
         renderHeaderProfile(profile);
         updateHomeCourseCards();
