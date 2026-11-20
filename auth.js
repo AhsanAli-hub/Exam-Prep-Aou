@@ -1,6 +1,7 @@
 const SUPABASE_URL = 'https://sdqhrxybowzyxveqwkwo.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_UBviShU8w5kEtL0sGkIh6w_Ay8_lnaj';
 const ADMIN_EMAIL = 'ahsan.ali72@outlook.com';
+const REDIRECT_URL = 'https://ahsanali-hub.github.io/Exam-Prep-Aou/';
 
 /* ====================== COURSE PRICING & LABELS ====================== */
 const COURSE_CONFIG = {
@@ -156,6 +157,8 @@ function injectAuthUI() {
                         <button type="button" class="password-toggle" onclick="togglePwdField('auth-confirm-password', this)" aria-label="Toggle confirm password">👁️</button>
                     </div>
                     <button class="modal-submit" id="auth-submit-btn" onclick="submitAuth()">Sign In</button>
+                    <div class="oauth-divider">OR</div>
+                    <button type="button" class="google-btn" onclick="signInWithGoogle()">🔵 Continue with Google</button>
                     <div class="modal-msg" id="auth-msg"></div>
                     <div class="modal-switch">
                         <span id="modal-switch-text">Don't have an account?</span>
@@ -166,6 +169,17 @@ function injectAuthUI() {
             </div>
         `;
         document.body.appendChild(wrapper.firstElementChild);
+
+        const dividerEl = document.querySelector('#auth-modal .oauth-divider');
+        const googleBtnEl = document.querySelector('#auth-modal .google-btn');
+        if (dividerEl) {
+            dividerEl.style.cssText = 'display:flex;align-items:center;gap:10px;margin:14px 0 10px;color:var(--text-muted);font-size:0.78rem;font-weight:700;';
+        }
+        if (googleBtnEl) {
+            googleBtnEl.style.cssText = 'width:100%;padding:12px;background:var(--bg);color:var(--text-main);border:1.5px solid var(--border);border-radius:12px;font-weight:700;font-size:0.92rem;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;';
+            googleBtnEl.onmouseenter = () => { googleBtnEl.style.borderColor = 'var(--purple)'; googleBtnEl.style.background = 'var(--purple-light)'; };
+            googleBtnEl.onmouseleave = () => { googleBtnEl.style.borderColor = 'var(--border)'; googleBtnEl.style.background = 'var(--bg)'; };
+        }
     }
 
     if (!document.getElementById('request-modal')) {
@@ -441,7 +455,7 @@ window.submitAuth = async function() {
         const studentId = document.getElementById('auth-student-id').value.trim();
         const confirmPwd = document.getElementById('auth-confirm-password').value;
 
-      if (!/^2[0-9]{4,19}$/.test(studentId)) {
+        if (!/^2[0-9]{4,19}$/.test(studentId)) {
             msgEl.style.color = 'var(--error)';
             msgEl.textContent = 'Student ID must start with 2 and contain digits only (5–20 digits).';
             return;
@@ -457,7 +471,7 @@ window.submitAuth = async function() {
             return;
         }
 
-       msgEl.style.color = 'var(--text-muted)';
+        msgEl.style.color = 'var(--text-muted)';
         msgEl.textContent = 'Creating account...';
 
         const { data, error } = await window.db.auth.signUp({
@@ -465,7 +479,7 @@ window.submitAuth = async function() {
             password,
             options: {
                 data: { student_id: studentId },
-                emailRedirectTo: 'https://ahsanali-hub.github.io/Exam-Prep-Aou/'
+                emailRedirectTo: REDIRECT_URL
             }
         });
 
@@ -480,7 +494,6 @@ window.submitAuth = async function() {
             msgEl.textContent = `✅ Account created! Check ${email} (including Spam/Junk) and click the verification link before signing in.`;
             return;
         }
-    }
     } else {
         msgEl.style.color = 'var(--text-muted)';
         msgEl.textContent = 'Signing in...';
@@ -500,6 +513,47 @@ window.submitAuth = async function() {
     msgEl.style.color = 'var(--success)';
     msgEl.textContent = 'Success! Loading...';
     setTimeout(() => location.reload(), 500);
+};
+
+window.signInWithGoogle = async function() {
+    const msgEl = document.getElementById('auth-msg');
+    msgEl.style.color = 'var(--text-muted)';
+    msgEl.textContent = 'Redirecting to Google...';
+
+    const { error } = await window.db.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+            redirectTo: REDIRECT_URL
+        }
+    });
+
+    if (error) {
+        msgEl.style.color = 'var(--error)';
+        msgEl.textContent = error.message;
+    }
+};
+
+window.promptMissingStudentId = async function() {
+    let sid = '';
+    while (!/^2[0-9]{4,19}$/.test(sid)) {
+        sid = window.prompt('Enter your University Student ID (must start with 2, 5–20 digits) to complete your profile:');
+        if (sid === null) {
+            await signOutUser();
+            return;
+        }
+        sid = sid.trim();
+    }
+    const { error } = await window.db
+        .from('profiles')
+        .update({ student_id: sid })
+        .eq('id', window.currentUser.id);
+
+    if (error) {
+        alert('Could not save Student ID: ' + error.message);
+        await signOutUser();
+        return;
+    }
+    location.reload();
 };
 
 window.signOutUser = function() {
@@ -552,6 +606,10 @@ window.initAuth = async function() {
         const rawCourses = Array.isArray(profile?.unlocked_courses) ? profile.unlocked_courses : [];
         window.unlockedCourses = rawCourses.map(c => String(c).toLowerCase());
         window.pendingRequests = Array.isArray(pending) ? pending : [];
+
+        if (!profile?.student_id || !/^2[0-9]{4,19}$/.test(profile.student_id)) {
+            promptMissingStudentId();
+        }
 
         renderHeaderProfile(profile);
         updateHomeCourseCards();
