@@ -144,7 +144,7 @@ function injectAuthUI() {
                     <h3 id="modal-title">Student Sign In</h3>
                     <p id="modal-subtitle">Log in to access your unlocked subjects.</p>
                     <div id="signup-extra-top" style="display: none;">
-                        <input type="text" id="auth-student-id" class="modal-input" placeholder="University Student ID (e.g. 26464141)" maxlength="20">
+                        <input type="text" id="auth-student-id" class="modal-input" placeholder="University Student ID (starts with 2, e.g. 26464141)" maxlength="20">
                     </div>
                     <input type="email" id="auth-email" class="modal-input" placeholder="Email address">
                     <div class="password-wrap">
