@@ -403,18 +403,18 @@
                 </span>
             </label>`;
         }).join('');
-
-        const paywallHTML = !isProUser ? `
+const courseUnlocked = window.hasCourseAccess(SUBJECT.courseCode);
+        const courseLabel = SUBJECT.courseCode.toUpperCase();
+        const paywallHTML = !courseUnlocked ? `
             <div class="paywall-banner">
                 <div class="paywall-info">
-                    <h3>🔒 Free Preview Mode (${allQuestions.length} Sample Questions)</h3>
-                    <p>Unlock all 350+ Reading, Grammar & Vocabulary questions across every course.</p>
+                    <h3>🔒 ${courseLabel} Free Preview Mode (${allQuestions.length} Sample Questions)</h3>
+                    <p>Unlock all chapters, passages, and explanations for ${courseLabel}.</p>
                 </div>
-                <button type="button" class="paywall-cta" onclick="handleUpgradeClick()">
-                    ${currentUser ? 'Unlock Full Access ➔' : 'Sign Up & Unlock ➔'}
+                <button type="button" class="paywall-cta" onclick="handleUpgradeClick('${SUBJECT.courseCode}')">
+                    ${currentUser ? `Unlock ${courseLabel} ➔` : `Sign Up & Unlock ${courseLabel} ➔`}
                 </button>
             </div>` : '';
-
         setupScreen.innerHTML = `
             ${paywallHTML}
             <div class="setup-card">
