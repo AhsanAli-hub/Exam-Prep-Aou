@@ -622,6 +622,44 @@ window.promptMissingStudentId = async function() {
         window._studentIdPromptOpen = false;
     }
 };
+
+/* ====================== SIGN OUT USER ====================== */
+window.signOutUser = async function() {
+    try {
+        const { error } = await window.db.auth.signOut({
+            scope: 'local'
+        });
+
+        if (error) {
+            throw error;
+        }
+
+        // Clear cached quiz data
+        Object.keys(sessionStorage).forEach(key => {
+            if (key.startsWith('qcache_')) {
+                sessionStorage.removeItem(key);
+            }
+        });
+
+        // Reset local account information
+        window.currentUser = null;
+        window.currentProfile = null;
+        window.unlockedCourses = [];
+        window.pendingRequests = [];
+
+        // Return to homepage
+        window.location.replace(REDIRECT_URL);
+
+    } catch (err) {
+        console.error('Sign-out error:', err);
+
+        alert(
+            'Could not sign out: ' +
+            (err.message || 'Please try again.')
+        );
+    }
+};
+
 /* ====================== INIT SESSION & DEVICE CHECK ====================== */
 window.initAuth = async function() {
     injectAuthUI();
