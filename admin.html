@@ -371,9 +371,15 @@
 
     /* ====================== 2. STUDENTS & UNLOCKS ====================== */
     async function loadStudents() {
-        const { data, error } = await db.from('profiles').select('*').order('created_at', { ascending: false });
-        if (error) return;
-        allStudents = data || [];
+        const listEl = document.getElementById('students-list');
+        const { data, error } = await db.from('profiles').select('*');
+        if (error) {
+            listEl.innerHTML = `<div class="empty" style="color:var(--error);">Error: ${escapeHtml(error.message)}</div>`;
+            return;
+        }
+        allStudents = (data || []).sort((a, b) =>
+            new Date(b.created_at || 0) - new Date(a.created_at || 0)
+        );
         document.getElementById('stat-students').textContent = allStudents.length;
         document.getElementById('stat-paid').textContent = allStudents.filter(s => Array.isArray(s.unlocked_courses) && s.unlocked_courses.length > 0).length;
         renderStudents();
