@@ -359,7 +359,7 @@ function renderHeaderProfile(profile) {
                 <div class="pd-courses">${courseBadges}</div>
             </div>
             ${isAdmin ? `<a href="admin.html" class="pd-item admin">⚡ Admin Dashboard</a>` : ''}
-            <button type="button" class="pd-item danger" id="profile-signout-btn">     Sign Out </button>
+            <button type="button" class="pd-item danger" id="profile-signout-btn">Sign Out</button>
         </div>
     `;
 
@@ -374,16 +374,15 @@ function renderHeaderProfile(profile) {
     document.addEventListener('click', (e) => {
         if (!slot.contains(e.target)) dropdown.classList.remove('open');
     });
-    // Sign Out button click handler
-const signOutBtn = slot.querySelector('#profile-signout-btn');
 
-if (signOutBtn) {
-    signOutBtn.addEventListener('click', async (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        await window.signOutUser();
-    });
-}
+    const signOutBtn = slot.querySelector('#profile-signout-btn');
+    if (signOutBtn) {
+        signOutBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            await window.signOutUser();
+        });
+    }
 }
 
 /* ====================== UPDATE HOME PAGE COURSE CARDS ====================== */
@@ -567,7 +566,6 @@ window.signInWithGoogle = async function() {
     }
 };
 
-
 window.promptMissingStudentId = async function() {
     if (window._studentIdPromptOpen || !window.currentUser?.id) return false;
 
@@ -583,7 +581,6 @@ window.promptMissingStudentId = async function() {
 
             modal.innerHTML = `
                 <div class="modal-card" style="max-width:440px;">
-
                     <div style="
                         width:52px;height:52px;
                         display:flex;align-items:center;justify-content:center;
@@ -659,7 +656,6 @@ window.promptMissingStudentId = async function() {
         const cancelBtn = modal.querySelector('#student-id-cancel');
 
         if (modal.dataset.bound !== 'true') {
-
             form.addEventListener('submit', async (e) => {
                 e.preventDefault();
 
@@ -740,38 +736,6 @@ window.promptMissingStudentId = async function() {
     }
 };
 
-
-        // Open modal
-        const input = modal.querySelector('#required-student-id');
-        const message = modal.querySelector('#student-id-message');
-
-        input.value = '';
-        message.textContent = '';
-
-        modal.classList.add('open');
-        input.focus();
-
-        // Wait until the student saves or signs out
-        const completed = await new Promise(resolve => {
-            window._studentIdModalResolve = resolve;
-        });
-
-        if (!completed && window.currentUser?.id) {
-            await window.signOutUser();
-        }
-
-        return completed;
-
-    } catch (err) {
-        console.error('Student ID modal error:', err);
-        alert('Could not open the Student ID form: ' + err.message);
-        return false;
-
-    } finally {
-        window._studentIdPromptOpen = false;
-    }
-};
-
 window.signOutUser = async function() {
     if (window._signingOut) return;
     window._signingOut = true;
@@ -784,7 +748,6 @@ window.signOutUser = async function() {
     }
 
     try {
-        // Sign out only this browser
         try {
             const { error } = await window.db.auth.signOut({
                 scope: 'local'
@@ -797,17 +760,14 @@ window.signOutUser = async function() {
             console.warn('Sign-out request failed:', err);
         }
 
-        // Remove only this project's local authentication token
         try {
             const projectRef = new URL(SUPABASE_URL).hostname.split('.')[0];
             const authStorageKey = `sb-${projectRef}-auth-token`;
-
             localStorage.removeItem(authStorageKey);
         } catch (err) {
             console.warn('Local storage cleanup warning:', err);
         }
 
-        // Clear cached questions
         try {
             Object.keys(sessionStorage).forEach(key => {
                 if (key.startsWith('qcache_')) {
@@ -818,13 +778,11 @@ window.signOutUser = async function() {
             console.warn('Cache cleanup warning:', err);
         }
 
-        // Reset local account information
         window.currentUser = null;
         window.currentProfile = null;
         window.unlockedCourses = [];
         window.pendingRequests = [];
 
-        // Redirect to homepage
         window.location.replace(REDIRECT_URL);
 
     } catch (err) {
