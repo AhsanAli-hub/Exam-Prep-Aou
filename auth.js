@@ -567,6 +567,7 @@ window.signInWithGoogle = async function() {
     }
 };
 
+
 window.promptMissingStudentId = async function() {
     if (window._studentIdPromptOpen || !window.currentUser?.id) return false;
 
@@ -575,92 +576,89 @@ window.promptMissingStudentId = async function() {
     try {
         let modal = document.getElementById('student-id-modal');
 
-        // Create the custom modal once
         if (!modal) {
-            const wrapper = document.createElement('div');
+            modal = document.createElement('div');
+            modal.id = 'student-id-modal';
+            modal.className = 'modal-backdrop';
 
-            wrapper.innerHTML = `
-                <div class="modal-backdrop" id="student-id-modal"
-                     role="dialog" aria-modal="true"
-                     aria-labelledby="student-id-title">
+            modal.innerHTML = `
+                <div class="modal-card" style="max-width:440px;">
 
-                    <div class="modal-card">
+                    <div style="
+                        width:52px;height:52px;
+                        display:flex;align-items:center;justify-content:center;
+                        border-radius:16px;
+                        background:var(--purple-light);
+                        font-size:26px;margin-bottom:18px;">
+                        🎓
+                    </div>
+
+                    <div style="
+                        font-size:11px;font-weight:800;
+                        letter-spacing:1.5px;color:var(--purple);
+                        margin-bottom:8px;">
+                        ACCOUNT SETUP
+                    </div>
+
+                    <h3>Complete Your Profile</h3>
+
+                    <p>
+                        Just one more step! Enter your university
+                        Student ID to finish setting up your account.
+                    </p>
+
+                    <form id="student-id-form">
+                        <label for="required-student-id"
+                            style="display:block;margin-bottom:8px;font-weight:700;">
+                            University Student ID
+                        </label>
+
+                        <input
+                            id="required-student-id"
+                            class="modal-input"
+                            type="text"
+                            inputmode="numeric"
+                            maxlength="20"
+                            placeholder="e.g. 26262626"
+                            required
+                        >
 
                         <div style="
-                            width: 48px;
-                            height: 48px;
-                            border-radius: 14px;
-                            background: var(--purple-light);
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            font-size: 25px;
-                            margin-bottom: 16px;">
-                            🎓
+                            font-size:12px;color:var(--text-muted);
+                            margin:0 0 14px;">
+                            Your ID must start with 2 and contain 5–20 digits.
                         </div>
 
-                        <h3 id="student-id-title">Complete Your Profile</h3>
+                        <div id="student-id-message"
+                            class="modal-msg"
+                            aria-live="polite">
+                        </div>
 
-                        <p>
-                            Welcome! Please enter your university Student ID
-                            to complete your account setup.
-                        </p>
-
-                        <form id="student-id-form">
-
-                            <label for="required-student-id">
-                                University Student ID
-                            </label>
-
-                            <input
-                                type="text"
-                                id="required-student-id"
-                                class="modal-input"
-                                placeholder="e.g. 26262626"
-                                maxlength="20"
-                                inputmode="numeric"
-                                autocomplete="off"
-                                required
-                            >
-
-                            <div
-                                class="modal-msg"
-                                id="student-id-message"
-                                aria-live="polite">
-                            </div>
-
-                            <button
-                                type="submit"
-                                class="modal-submit"
-                                id="student-id-save">
-                                Save Student ID →
-                            </button>
-
-                        </form>
-
-                        <button
-                            type="button"
-                            class="modal-cancel"
-                            id="student-id-cancel">
-                            Sign Out
+                        <button class="modal-submit"
+                            id="student-id-save"
+                            type="submit">
+                            Save Student ID →
                         </button>
+                    </form>
 
-                    </div>
+                    <button type="button"
+                        class="modal-cancel"
+                        id="student-id-cancel">
+                        Sign Out
+                    </button>
                 </div>
             `;
 
-            modal = wrapper.firstElementChild;
             document.body.appendChild(modal);
         }
 
-        // Attach event listeners only once
-        if (modal.dataset.handlersBound !== 'true') {
+        const form = modal.querySelector('#student-id-form');
+        const input = modal.querySelector('#required-student-id');
+        const message = modal.querySelector('#student-id-message');
+        const saveBtn = modal.querySelector('#student-id-save');
+        const cancelBtn = modal.querySelector('#student-id-cancel');
 
-            const form = modal.querySelector('#student-id-form');
-            const input = modal.querySelector('#required-student-id');
-            const message = modal.querySelector('#student-id-message');
-            const saveBtn = modal.querySelector('#student-id-save');
-            const cancelBtn = modal.querySelector('#student-id-cancel');
+        if (modal.dataset.bound !== 'true') {
 
             form.addEventListener('submit', async (e) => {
                 e.preventDefault();
@@ -671,14 +669,7 @@ window.promptMissingStudentId = async function() {
 
                 if (!/^2[0-9]{4,19}$/.test(sid)) {
                     message.style.color = 'var(--error)';
-                    message.textContent =
-                        'Your ID must start with 2 and contain 5–20 digits.';
-                    input.focus();
-                    return;
-                }
-
-                if (!window.currentUser?.id) {
-                    message.textContent = 'Your session has expired. Please sign in again.';
+                    message.textContent = 'Please enter a valid Student ID.';
                     return;
                 }
 
@@ -697,9 +688,7 @@ window.promptMissingStudentId = async function() {
                     if (error) throw error;
 
                     if (!data) {
-                        throw new Error(
-                            'Your profile could not be found. Please contact support.'
-                        );
+                        throw new Error('Profile not found. Please contact support.');
                     }
 
                     window.currentProfile = {
@@ -719,11 +708,9 @@ window.promptMissingStudentId = async function() {
                     if (resolve) resolve(true);
 
                 } catch (err) {
-                    console.error('Student ID save error:', err);
-
+                    console.error(err);
                     message.style.color = 'var(--error)';
-                    message.textContent =
-                        err.message || 'Could not save your Student ID. Please try again.';
+                    message.textContent = err.message || 'Unable to save. Please retry.';
 
                 } finally {
                     modal.dataset.saving = 'false';
@@ -732,17 +719,27 @@ window.promptMissingStudentId = async function() {
                 }
             });
 
-            cancelBtn.addEventListener('click', () => {
-                modal.classList.remove('open');
-
-                const resolve = window._studentIdModalResolve;
-                window._studentIdModalResolve = null;
-
-                if (resolve) resolve(false);
+            cancelBtn.addEventListener('click', async () => {
+                await window.signOutUser();
             });
 
-            modal.dataset.handlersBound = 'true';
+            modal.dataset.bound = 'true';
         }
+
+        input.value = '';
+        message.textContent = '';
+        modal.classList.add('open');
+        input.focus();
+
+        return await new Promise(resolve => {
+            window._studentIdModalResolve = resolve;
+        });
+
+    } finally {
+        window._studentIdPromptOpen = false;
+    }
+};
+
 
         // Open modal
         const input = modal.querySelector('#required-student-id');
