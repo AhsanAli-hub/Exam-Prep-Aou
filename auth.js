@@ -29,6 +29,25 @@ window.pendingRequests = [];
 let authMode = 'signin';
 let activeRequestCourse = 'all';
 
+/* ====================== PASSWORD EYE SVG HELPERS ====================== */
+const EYE_OPEN_SVG = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`;
+
+const EYE_CLOSED_SVG = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a21.77 21.77 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a21.85 21.85 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`;
+
+function setPwdToggleIcon(btn, isVisible) {
+    if (!btn) return;
+    btn.innerHTML = isVisible ? EYE_OPEN_SVG : EYE_CLOSED_SVG;
+}
+
+function resetPwdToggles() {
+    document.querySelectorAll('#auth-modal .password-toggle').forEach(btn => {
+        setPwdToggleIcon(btn, false);
+    });
+    document.querySelectorAll('#auth-modal input[type="text"][id*="password"]').forEach(input => {
+        input.type = 'password';
+    });
+}
+
 window.hasCourseAccess = function(courseCode) {
     if (!courseCode) return window.unlockedCourses.length > 0;
     const code = courseCode.toLowerCase();
@@ -156,23 +175,23 @@ function injectAuthUI() {
                     <input type="email" id="auth-email" class="modal-input" placeholder="Email address">
                     <div class="password-wrap">
                         <input type="password" id="auth-password" class="modal-input" placeholder="Password (min 6 characters)">
-                        <button type="button" class="password-toggle" onclick="togglePwdField('auth-password', this)" aria-label="Toggle password">👁️</button>
+                        <button type="button" class="password-toggle" onclick="togglePwdField('auth-password', this)" aria-label="Toggle password"></button>
                     </div>
                     <div class="password-wrap" id="confirm-pwd-wrap" style="display: none;">
                         <input type="password" id="auth-confirm-password" class="modal-input" placeholder="Confirm password">
-                        <button type="button" class="password-toggle" onclick="togglePwdField('auth-confirm-password', this)" aria-label="Toggle confirm password">👁️</button>
+                        <button type="button" class="password-toggle" onclick="togglePwdField('auth-confirm-password', this)" aria-label="Toggle confirm password"></button>
                     </div>
-                 <button class="modal-submit" id="auth-submit-btn" onclick="submitAuth()">Sign In</button>
-            <div class="oauth-divider">OR</div>
-            <button type="button" class="google-btn" onclick="signInWithGoogle()">
-                <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-                <path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47c-.29 1.55-1.14 2.86-2.4 3.73v3.09h3.88c2.27-2.09 3.54-5.17 3.54-9.06z"/>
-                <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.09c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.26v3.18C3.23 21.31 7.31 24 12 24z"/>
-                <path fill="#FBBC05" d="M5.28 14.29c-.24-.72-.38-1.49-.38-2.29s.14-1.57.38-2.29V6.53H1.26C.46 8.17 0 10.02 0 12s.46 3.83 1.26 5.47l4.02-3.18z"/>
-                <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.23 2.69 1.26 6.53l4.02 3.18c.95-2.85 3.6-4.96 6.72-4.96z"/>
-            </svg>
-                <span>Continue with Google</span>
-            </button>
+                    <button class="modal-submit" id="auth-submit-btn" onclick="submitAuth()">Sign In</button>
+                    <div class="oauth-divider">OR</div>
+                    <button type="button" class="google-btn" onclick="signInWithGoogle()">
+                        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47c-.29 1.55-1.14 2.86-2.4 3.73v3.09h3.88c2.27-2.09 3.54-5.17 3.54-9.06z"/>
+                            <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.09c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.26v3.18C3.23 21.31 7.31 24 12 24z"/>
+                            <path fill="#FBBC05" d="M5.28 14.29c-.24-.72-.38-1.49-.38-2.29s.14-1.57.38-2.29V6.53H1.26C.46 8.17 0 10.02 0 12s.46 3.83 1.26 5.47l4.02-3.18z"/>
+                            <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.23 2.69 1.26 6.53l4.02 3.18c.95-2.85 3.6-4.96 6.72-4.96z"/>
+                        </svg>
+                        <span>Continue with Google</span>
+                    </button>
                     <div class="modal-msg" id="auth-msg"></div>
                     <div class="modal-switch">
                         <span id="modal-switch-text">Don't have an account?</span>
@@ -183,17 +202,7 @@ function injectAuthUI() {
             </div>
         `;
         document.body.appendChild(wrapper.firstElementChild);
-
-        const dividerEl = document.querySelector('#auth-modal .oauth-divider');
-        const googleBtnEl = document.querySelector('#auth-modal .google-btn');
-        if (dividerEl) {
-            dividerEl.style.cssText = 'display:flex;align-items:center;gap:10px;margin:14px 0 10px;color:var(--text-muted);font-size:0.78rem;font-weight:700;';
-        }
-        if (googleBtnEl) {
-            googleBtnEl.style.cssText = 'width:100%;padding:12px;background:var(--bg);color:var(--text-main);border:1.5px solid var(--border);border-radius:12px;font-weight:700;font-size:0.92rem;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;';
-            googleBtnEl.onmouseenter = () => { googleBtnEl.style.borderColor = 'var(--purple)'; googleBtnEl.style.background = 'var(--purple-light)'; };
-            googleBtnEl.onmouseleave = () => { googleBtnEl.style.borderColor = 'var(--border)'; googleBtnEl.style.background = 'var(--bg)'; };
-        }
+        resetPwdToggles();
     }
 
     if (!document.getElementById('request-modal')) {
@@ -415,13 +424,14 @@ function updateHomeCourseCards() {
 
 window.togglePwdField = function(inputId, btn) {
     const input = document.getElementById(inputId);
-    const hidden = input.type === 'password';
-    input.type = hidden ? 'text' : 'password';
-    btn.textContent = hidden ? '🙈' : '👁️';
+    const showText = input.type === 'password';
+    input.type = showText ? 'text' : 'password';
+    setPwdToggleIcon(btn, showText);
 };
 
 window.openAuthModal = function(mode = 'signin', customMessage = '') {
     injectAuthUI();
+    resetPwdToggles();
     authMode = mode;
     updateAuthModalUI();
     const msgEl = document.getElementById('auth-msg');
