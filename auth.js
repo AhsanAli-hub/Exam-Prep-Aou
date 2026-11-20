@@ -170,7 +170,7 @@ function injectAuthUI() {
                     <h3 id="modal-title">Student Sign In</h3>
                     <p id="modal-subtitle">Log in to access your unlocked subjects.</p>
                     <div id="signup-extra-top" style="display: none;">
-                      <input type="text" id="auth-student-id" class="modal-input" placeholder="University Student ID (8 digits, e.g. 26464141)" inputmode="numeric" maxlength="8">
+                        <input type="text" id="auth-student-id" class="modal-input" placeholder="University Student ID (8 digits, e.g. 26464141)" inputmode="numeric" maxlength="8">
                     </div>
                     <input type="email" id="auth-email" class="modal-input" placeholder="Email address">
                     <div class="password-wrap">
@@ -488,9 +488,9 @@ window.submitAuth = async function() {
         const studentId = document.getElementById('auth-student-id').value.trim();
         const confirmPwd = document.getElementById('auth-confirm-password').value;
 
-        if (!/^2[0-9]{4,19}$/.test(studentId)) {
+        if (!/^2[0-9]{7}$/.test(studentId)) {
             msgEl.style.color = 'var(--error)';
-            msgEl.textContent = 'Student ID must start with 2 and must be 8 digits.';
+            msgEl.textContent = 'Student ID must start with 2 and be exactly 8 digits.';
             return;
         }
         if (password.length < 6) {
@@ -623,7 +623,7 @@ window.promptMissingStudentId = async function() {
                         <div style="
                             font-size:12px;color:var(--text-muted);
                             margin:0 0 14px;">
-                            Your ID must start with 2 and contain 5–20 digits.
+                            Your ID must start with 2 and be exactly 8 digits.
                         </div>
 
                         <div id="student-id-message"
@@ -663,9 +663,9 @@ window.promptMissingStudentId = async function() {
 
                 const sid = input.value.trim();
 
-                if (!/^2[0-9]{4,19}$/.test(sid)) {
+                if (!/^2[0-9]{7}$/.test(sid)) {
                     message.style.color = 'var(--error)';
-                    message.textContent = 'Please enter a valid Student ID.';
+                    message.textContent = 'Student ID must start with 2 and be exactly 8 digits.';
                     return;
                 }
 
@@ -674,22 +674,15 @@ window.promptMissingStudentId = async function() {
                 saveBtn.textContent = 'Saving...';
 
                 try {
-                    const { data, error } = await window.db
-                        .from('profiles')
-                        .update({ student_id: sid })
-                        .eq('id', window.currentUser.id)
-                        .select('id, student_id')
-                        .maybeSingle();
+                    const { data: savedSid, error } = await window.db.rpc('set_student_id', {
+                        p_student_id: sid
+                    });
 
                     if (error) throw error;
 
-                    if (!data) {
-                        throw new Error('Profile not found. Please contact support.');
-                    }
-
                     window.currentProfile = {
                         ...(window.currentProfile || {}),
-                        student_id: data.student_id
+                        student_id: savedSid || sid
                     };
 
                     message.style.color = 'var(--success)';
@@ -831,7 +824,7 @@ window.initAuth = async function() {
                 .from('profiles')
                 .select('unlocked_courses, student_id')
                 .eq('id', window.currentUser.id)
-                .single(),
+                .maybeSingle(),
             window.db
                 .from('payment_requests')
                 .select('*')
@@ -846,7 +839,7 @@ window.initAuth = async function() {
 
         const savedStudentId = String(profile?.student_id || '').trim();
 
-        if (!/^2[0-9]{4,19}$/.test(savedStudentId)) {
+        if (!/^2[0-9]{7}$/.test(savedStudentId)) {
             await promptMissingStudentId();
         }
 
