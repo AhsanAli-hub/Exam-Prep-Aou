@@ -631,6 +631,7 @@ window.promptMissingStudentId = async function() {
 };
 
 
+
 window.signOutUser = async function() {
     if (window._signingOut) return;
     window._signingOut = true;
@@ -643,35 +644,41 @@ window.signOutUser = async function() {
     }
 
     try {
-        // Sign out from this browser only
-        const { error } = await window.db.auth.signOut({
-            scope: 'local'
-        });
+        // Sign out only this browser
+        try {
+            const { error } = await window.db.auth.signOut({
+                scope: 'local'
+            });
 
-        // A server revocation error does not necessarily mean
-        // the local session remains active.
-        if (error) {
-            console.warn('Server sign-out warning:', error.message);
+            if (error) {
+                console.warn('Supabase sign-out warning:', error.message);
+            }
+        } catch (err) {
+            console.warn('Sign-out request failed:', err);
         }
 
-        // Verify that the local session is gone
-        const { data, error: checkError } =
-            await window.db.auth.getSession();
+        // Remove only this project's local authentication token
+        try {
+            const projectRef = new URL(SUPABASE_URL).hostname.split('.')[0];
+            const authStorageKey = `sb-${projectRef}-auth-token`;
 
-        if (checkError) throw checkError;
-
-        if (data?.session) {
-            throw new Error('Your browser session is still active.');
+            localStorage.removeItem(authStorageKey);
+        } catch (err) {
+            console.warn('Local storage cleanup warning:', err);
         }
 
         // Clear cached questions
-        Object.keys(sessionStorage).forEach(key => {
-            if (key.startsWith('qcache_')) {
-                sessionStorage.removeItem(key);
-            }
-        });
+        try {
+            Object.keys(sessionStorage).forEach(key => {
+                if (key.startsWith('qcache_')) {
+                    sessionStorage.removeItem(key);
+                }
+            });
+        } catch (err) {
+            console.warn('Cache cleanup warning:', err);
+        }
 
-        // Reset account information
+        // Reset local account information
         window.currentUser = null;
         window.currentProfile = null;
         window.unlockedCourses = [];
@@ -690,7 +697,7 @@ window.signOutUser = async function() {
             btn.textContent = 'Sign Out';
         }
 
-        alert('Sign-out failed: ' + err.message);
+        alert('Sign-out failed: ' + (err.message || err));
     }
 };
 
