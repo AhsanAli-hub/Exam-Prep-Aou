@@ -1,7 +1,7 @@
 const SUPABASE_URL = 'https://sdqhrxybowzyxveqwkwo.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_UBviShU8w5kEtL0sGkIh6w_Ay8_lnaj';
 const ADMIN_EMAIL = 'ahsan.ali72@outlook.com';
-const REDIRECT_URL = 'https://ahsanali-hub.github.io/Exam-Prep-Aou/';
+const REDIRECT_URL = 'https://exam-prep-aou.pages.dev/';
 
 /* ====================== COURSE PRICING & LABELS ====================== */
 const COURSE_CONFIG = {
