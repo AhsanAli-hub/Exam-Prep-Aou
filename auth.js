@@ -441,9 +441,9 @@ window.submitAuth = async function() {
         const studentId = document.getElementById('auth-student-id').value.trim();
         const confirmPwd = document.getElementById('auth-confirm-password').value;
 
-        if (!/^[a-zA-Z0-9-]{5,20}$/.test(studentId)) {
+      if (!/^2[0-9]{4,19}$/.test(studentId)) {
             msgEl.style.color = 'var(--error)';
-            msgEl.textContent = 'Please enter a valid University Student ID (5–20 letters/numbers).';
+            msgEl.textContent = 'Student ID must start with 2 and contain digits only (5–20 digits).';
             return;
         }
         if (password.length < 6) {
@@ -457,13 +457,16 @@ window.submitAuth = async function() {
             return;
         }
 
-        msgEl.style.color = 'var(--text-muted)';
+       msgEl.style.color = 'var(--text-muted)';
         msgEl.textContent = 'Creating account...';
 
-        const { error } = await window.db.auth.signUp({
+        const { data, error } = await window.db.auth.signUp({
             email,
             password,
-            options: { data: { student_id: studentId } }
+            options: {
+                data: { student_id: studentId },
+                emailRedirectTo: 'https://ahsanali-hub.github.io/Exam-Prep-Aou/'
+            }
         });
 
         if (error) {
@@ -471,6 +474,13 @@ window.submitAuth = async function() {
             msgEl.textContent = error.message;
             return;
         }
+
+        if (!data?.session) {
+            msgEl.style.color = 'var(--success)';
+            msgEl.textContent = `✅ Account created! Check ${email} (including Spam/Junk) and click the verification link before signing in.`;
+            return;
+        }
+    }
     } else {
         msgEl.style.color = 'var(--text-muted)';
         msgEl.textContent = 'Signing in...';
