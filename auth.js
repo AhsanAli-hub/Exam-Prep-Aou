@@ -558,35 +558,70 @@ window.signInWithGoogle = async function() {
 };
 
 window.promptMissingStudentId = async function() {
-    let sid = '';
-    while (!/^2[0-9]{4,19}$/.test(sid)) {
-        sid = window.prompt('Enter your University Student ID (must start with 2, 5–20 digits) to complete your profile:');
-        if (sid === null) {
-            await signOutUser();
+    // Prevent duplicate popups
+    if (window._studentIdPromptOpen || !window.currentUser?.id) return;
+
+    window._studentIdPromptOpen = true;
+
+    try {
+        let sid = '';
+        const studentIdPattern = /^2[0-9]{4,19}$/;
+
+        while (!studentIdPattern.test(sid)) {
+            const entered = window.prompt(
+                'Enter your University Student ID (must start with 2, 5–20 digits):'
+            );
+
+            if (entered === null) {
+                await signOutUser();
+                return;
+            }
+
+            sid = entered.trim();
+
+            if (!studentIdPattern.test(sid)) {
+                alert('Invalid Student ID. It must start with 2 and contain 5–20 digits.');
+            }
+        }
+
+        // Save and verify the Student ID in Supabase
+        const { data, error } = await window.db
+            .from('profiles')
+            .update({ student_id: sid })
+            .eq('id', window.currentUser.id)
+            .select('id, student_id')
+            .maybeSingle();
+
+        if (error) {
+            console.error('Student ID update failed:', error);
+            alert('Could not save Student ID: ' + error.message);
             return;
         }
-        sid = sid.trim();
+
+        if (!data) {
+            alert(
+                'Student ID was not saved. No matching profile was found. ' +
+                'Check your profiles table and RLS UPDATE policy.'
+            );
+            return;
+        }
+
+        // Update local profile without reloading
+        window.currentProfile = {
+            ...(window.currentProfile || {}),
+            student_id: data.student_id
+        };
+
+        renderHeaderProfile(window.currentProfile);
+
+    } catch (err) {
+        console.error('Student ID error:', err);
+        alert('Unexpected error: ' + (err?.message || err));
+
+    } finally {
+        window._studentIdPromptOpen = false;
     }
-    const { error } = await window.db
-        .from('profiles')
-        .update({ student_id: sid })
-        .eq('id', window.currentUser.id);
-
-    if (error) {
-        alert('Could not save Student ID: ' + error.message);
-        await signOutUser();
-        return;
-    }
-    location.reload();
 };
-
-window.signOutUser = function() {
-    Object.keys(sessionStorage).forEach(k => {
-        if (k.startsWith('qcache_')) sessionStorage.removeItem(k);
-    });
-    window.db.auth.signOut().then(() => location.reload());
-};
-
 /* ====================== INIT SESSION & DEVICE CHECK ====================== */
 window.initAuth = async function() {
     injectAuthUI();
