@@ -558,7 +558,6 @@ window.signInWithGoogle = async function() {
 };
 
 window.promptMissingStudentId = async function() {
-    // Prevent duplicate popups
     if (window._studentIdPromptOpen || !window.currentUser?.id) return;
 
     window._studentIdPromptOpen = true;
@@ -584,7 +583,6 @@ window.promptMissingStudentId = async function() {
             }
         }
 
-        // Save and verify the Student ID in Supabase
         const { data, error } = await window.db
             .from('profiles')
             .update({ student_id: sid })
@@ -606,7 +604,6 @@ window.promptMissingStudentId = async function() {
             return;
         }
 
-        // Update local profile without reloading
         window.currentProfile = {
             ...(window.currentProfile || {}),
             student_id: data.student_id
@@ -623,41 +620,36 @@ window.promptMissingStudentId = async function() {
     }
 };
 
-/* ====================== SIGN OUT USER ====================== */
 window.signOutUser = async function() {
     try {
-        const { error } = await window.db.auth.signOut({
-            scope: 'local'
+        Object.keys(sessionStorage).forEach(k => {
+            if (k.startsWith('qcache_')) sessionStorage.removeItem(k);
         });
+    } catch (e) {}
 
-        if (error) {
-            throw error;
+    try {
+        if (window.db?.auth?.signOut) {
+            await window.db.auth.signOut({ scope: 'local' });
         }
+    } catch (e) {
+        try {
+            await window.db.auth.signOut();
+        } catch (err) {}
+    }
 
-        // Clear cached quiz data
-        Object.keys(sessionStorage).forEach(key => {
-            if (key.startsWith('qcache_')) {
-                sessionStorage.removeItem(key);
+    try {
+        Object.keys(localStorage).forEach(k => {
+            if (k.startsWith('sb-') && k.endsWith('-auth-token')) {
+                localStorage.removeItem(k);
             }
         });
+    } catch (e) {}
 
-        // Reset local account information
-        window.currentUser = null;
-        window.currentProfile = null;
-        window.unlockedCourses = [];
-        window.pendingRequests = [];
-
-        // Return to homepage
-        window.location.replace(REDIRECT_URL);
-
-    } catch (err) {
-        console.error('Sign-out error:', err);
-
-        alert(
-            'Could not sign out: ' +
-            (err.message || 'Please try again.')
-        );
-    }
+    window.currentUser = null;
+    window.currentProfile = null;
+    window.unlockedCourses = [];
+    window.pendingRequests = [];
+    location.reload();
 };
 
 /* ====================== INIT SESSION & DEVICE CHECK ====================== */
@@ -683,7 +675,7 @@ window.initAuth = async function() {
                 'signin',
                 `⛔ Device Limit Reached (Max ${devCheck.max} devices). This account is already active on 2 other devices. Contact admin if you switched devices.`
             );
-            
+
             return { user: null, unlockedCourses: [], deviceBlocked: true };
         }
 
@@ -705,13 +697,14 @@ window.initAuth = async function() {
         window.unlockedCourses = rawCourses.map(c => String(c).toLowerCase());
         window.pendingRequests = Array.isArray(pending) ? pending : [];
 
-     const savedStudentId = String(profile?.student_id || '').trim();
+        const savedStudentId = String(profile?.student_id || '').trim();
 
         if (!/^2[0-9]{4,19}$/.test(savedStudentId)) {
-                await promptMissingStudentId();
-            }
+            await promptMissingStudentId();
+        }
 
-        renderHeaderProfile(profile);
+        const activeProfile = window.currentProfile || profile;
+        renderHeaderProfile(activeProfile);
         updateHomeCourseCards();
         return { user: window.currentUser, unlockedCourses: window.unlockedCourses, deviceBlocked: false };
     }
