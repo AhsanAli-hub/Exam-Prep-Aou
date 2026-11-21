@@ -941,7 +941,8 @@
             if (problems.length) throw new Error(`The upload was stopped because ${problems.length} question(s) are invalid. ${problems.slice(0, 6).join(' ')}`);
 
             showBanner('status-box', true, `Checking existing questions in ${courseCode.toUpperCase()}...`);
-            const existing = await fetchAllRows(() => db.from('questions').select('question_data').eq('course_code', courseCode));
+          const existing = await fetchAllRows(() =>
+            db.from('questions').select('id, question_data').eq('course_code', courseCode).order('id', { ascending: true }));
             const existingSet = new Set(existing.map(r => String(r.question_data?.q || '').trim().toLowerCase()).filter(Boolean));
             const uniqueRows = [];
             let skipped = 0;
