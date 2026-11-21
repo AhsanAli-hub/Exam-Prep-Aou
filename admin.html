@@ -73,11 +73,64 @@
         .chip-revoke { display: inline-flex; align-items: center; gap: 6px; background: rgba(16, 185, 129, 0.15); color: var(--success); padding: 3px 9px; border-radius: 8px; font-size: 0.75rem; font-weight: 800; }
         .chip-revoke button { background: none; border: none; color: var(--error); font-weight: 900; cursor: pointer; padding: 0 2px; font-size: 0.85rem; }
         .empty { color: var(--muted); font-size: 0.88rem; padding: 8px 0; font-weight: 600; }
+        .student-expiry { width: 100%; margin-top: 12px; padding: 12px; background: rgba(15,23,42,0.55); border: 1px solid var(--border); border-radius: 12px; }
+        .student-expiry-grid { display: grid; grid-template-columns: minmax(220px, 1fr) auto; gap: 12px; align-items: end; }
+        .student-expiry label { margin: 0 0 6px; }
+        .student-expiry input[type="datetime-local"] { width: 100%; }
+        .student-expiry .checkline { display: flex; align-items: center; gap: 8px; margin: 10px 0 0; font-size: 0.82rem; }
+        .student-expiry .checkline input { width: 16px; height: 16px; accent-color: var(--purple); }
+        .student-expiry .hint { margin-top: 8px; color: var(--muted); font-size: 0.78rem; line-height: 1.4; }
+        @media (max-width: 620px) { .student-expiry-grid { grid-template-columns: 1fr; } }
 
         /* Edit Question Modal */
         .modal-bg { position: fixed; inset: 0; background: rgba(0,0,0,0.72); display: none; align-items: center; justify-content: center; padding: 18px; z-index: 1000; }
         .modal-bg.open { display: flex; }
         .modal-box { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 24px; width: 100%; max-width: 560px; max-height: 92vh; overflow-y: auto; }
+
+        /* Branded confirmation / notice dialog (replaces browser popups) */
+        .app-dialog-backdrop {
+            position: fixed; inset: 0; z-index: 2000; display: none;
+            align-items: center; justify-content: center; padding: 18px;
+            background: rgba(2, 6, 23, 0.78); backdrop-filter: blur(7px);
+        }
+        .app-dialog-backdrop.open { display: flex; animation: dialogFadeIn .16s ease-out; }
+        .app-dialog {
+            width: 100%; max-width: 455px; padding: 26px;
+            background: #1e293b; color: var(--text);
+            border: 1px solid #475569; border-radius: 21px;
+            box-shadow: 0 24px 80px rgba(0,0,0,.5);
+            animation: dialogRise .18s ease-out;
+        }
+        .app-dialog-icon {
+            width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;
+            border-radius: 15px; background: rgba(139,92,246,.17);
+            font-size: 23px; margin-bottom: 16px;
+        }
+        .app-dialog-icon.danger { background: rgba(239,68,68,.14); }
+        .app-dialog-eyebrow { color: #a78bfa; font-size: .68rem; font-weight: 800; letter-spacing: .12em; margin-bottom: 7px; }
+        .app-dialog-title { color: #f8fafc; font-size: 1.2rem; line-height: 1.35; font-weight: 800; margin: 0 0 9px; }
+        .app-dialog-message { color: #cbd5e1; font-size: .9rem; line-height: 1.6; margin: 0; white-space: pre-line; }
+        .app-dialog-input-wrap { margin-top: 17px; }
+        .app-dialog-input-wrap[hidden] { display: none; }
+        .app-dialog-input-wrap label { display: block; color: #e2e8f0; margin: 0 0 7px; font-size: .82rem; font-weight: 700; }
+        .app-dialog-input { width: 100%; padding: 12px 13px; color: #f8fafc; background: #0f172a; border: 1.5px solid #475569; border-radius: 11px; font: inherit; outline: none; }
+        .app-dialog-input:focus { border-color: var(--purple); box-shadow: 0 0 0 3px rgba(139,92,246,.16); }
+        .app-dialog-error { min-height: 18px; color: #f87171; font-size: .76rem; font-weight: 600; margin-top: 6px; }
+        .app-dialog-actions { display: flex; justify-content: flex-end; gap: 9px; margin-top: 22px; }
+        .app-dialog-btn { min-width: 102px; padding: 11px 16px; border-radius: 11px; border: 1px solid transparent; font: inherit; font-size: .86rem; font-weight: 800; cursor: pointer; }
+        .app-dialog-btn.cancel { color: #e2e8f0; background: #0f172a; border-color: #475569; }
+        .app-dialog-btn.cancel:hover { border-color: #94a3b8; }
+        .app-dialog-btn.confirm { color: #fff; background: var(--purple); }
+        .app-dialog-btn.confirm:hover { background: var(--purple-hover); }
+        .app-dialog-btn.confirm.danger { background: #dc2626; }
+        .app-dialog-btn.confirm.danger:hover { background: #b91c1c; }
+        @keyframes dialogFadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes dialogRise { from { opacity: 0; transform: translateY(9px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        @media (max-width: 480px) {
+            .app-dialog { padding: 21px; }
+            .app-dialog-actions { flex-direction: column-reverse; }
+            .app-dialog-btn { width: 100%; }
+        }
     </style>
 </head>
 <body>
@@ -143,10 +196,10 @@
 
             <div class="card">
                 <div class="top" style="margin-bottom: 6px;">
-                    <h2>🎓 Registered Students Directory</h2>
+                    <h2>🎓 Students, Unlocks & Individual Expiry</h2>
                     <button type="button" class="btn secondary" style="padding: 8px 13px; font-size: 0.82rem;" onclick="loadStudents()">↻ Refresh</button>
                 </div>
-                <p class="sub">Search students, reset their 2-device limit, or click <strong>×</strong> on a subject badge to revoke access.</p>
+                <p class="sub">Search students, set an individual expiry date, reset devices, or click <strong>×</strong> on a subject badge to revoke access.</p>
                 <input type="text" id="student-search" placeholder="Search by email or Student ID..." oninput="renderStudents()" style="margin-bottom: 12px;">
                 <div id="students-list" class="list"><div class="empty">Loading students...</div></div>
                 <div class="status" id="student-status"></div>
@@ -179,22 +232,9 @@
             </div>
 
             <div class="card">
-                <h2>⏰ Automatic Expiry Settings</h2>
-                <p class="sub">Choose when temporary access expires and what should happen at that time.</p>
-                <div class="row">
-                    <div class="col">
-                        <label for="access-expires-at">Expiry date and time (your browser's local time)</label>
-                        <input type="datetime-local" id="access-expires-at">
-                    </div>
-                </div>
-                <label class="checkline"><input type="checkbox" id="expiry-reset-devices" checked> Reset registered devices when access expires</label>
-                <label class="checkline"><input type="checkbox" id="expiry-restore-paid" checked> Restore paid mode (first 15 questions per course remain free)</label>
-                <div class="row" style="margin-top: 14px;">
-                    <button type="button" class="btn" onclick="saveExpirySettings()">Save Expiry Settings</button>
-                    <button type="button" class="btn secondary" onclick="clearExpirySettings()">Clear Expiry</button>
-                </div>
-                <div class="hint" id="expiry-current">Loading expiry information...</div>
-                <div class="hint">This admin page checks for expiry when opened and every 60 seconds while it remains open. For expiry to run reliably when nobody has the site open, configure a Supabase scheduled job to call the expiry function.</div>
+                <h2>⏰ Individual Student Expiry</h2>
+                <p class="sub">Set a separate expiry date for each student in the Students &amp; Unlocks tab. Expiry removes only that student's unlocked courses and, optionally, that student's registered devices. It does not change question access settings for other students.</p>
+                <div class="hint">Use the expiry controls inside each student's card. For expiry to be processed at the scheduled time even when the student is offline, enable the optional database scheduled job described in the SQL setup instructions.</div>
             </div>
             <div class="status" id="site-status"></div>
         </div>
@@ -300,6 +340,25 @@
     </div>
 </div>
 
+<!-- Branded confirmation / notice dialog: replaces native browser alerts, confirms and prompts. -->
+<div class="app-dialog-backdrop" id="app-dialog-backdrop" aria-hidden="true">
+    <section class="app-dialog" role="dialog" aria-modal="true" aria-labelledby="app-dialog-title" aria-describedby="app-dialog-message">
+        <div class="app-dialog-icon" id="app-dialog-icon" aria-hidden="true">🔐</div>
+        <div class="app-dialog-eyebrow">EXAMS PREP · ADMIN</div>
+        <h2 class="app-dialog-title" id="app-dialog-title">Confirm action</h2>
+        <p class="app-dialog-message" id="app-dialog-message"></p>
+        <div class="app-dialog-input-wrap" id="app-dialog-input-wrap" hidden>
+            <label id="app-dialog-input-label" for="app-dialog-input">Confirmation phrase</label>
+            <input class="app-dialog-input" id="app-dialog-input" type="text" autocomplete="off" spellcheck="false">
+            <div class="app-dialog-error" id="app-dialog-error" aria-live="polite"></div>
+        </div>
+        <div class="app-dialog-actions">
+            <button type="button" class="app-dialog-btn cancel" id="app-dialog-cancel">Cancel</button>
+            <button type="button" class="app-dialog-btn confirm" id="app-dialog-confirm">Continue</button>
+        </div>
+    </section>
+</div>
+
 <script>
     const SUPABASE_URL = 'https://sdqhrxybowzyxveqwkwo.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_UBviShU8w5kEtL0sGkIh6w_Ay8_lnaj';
@@ -310,7 +369,6 @@
     let allStudents = [];
     let loadedCourseRows = [];
     let editingRow = null;
-    let expiryTimer = null;
 
     // Safe for HTML text and quoted HTML attributes. Dynamic values are never
     // inserted into inline JavaScript event-handler strings.
@@ -333,6 +391,115 @@
         box.style.color = isOk ? 'var(--success)' : 'var(--error)';
         box.textContent = String(message ?? '');
     }
+
+    // Branded in-page confirmation and notification dialog.
+    let activeAdminDialogResolve = null;
+    let activeAdminDialogOptions = null;
+
+    function closeAdminDialog(result) {
+        const backdrop = document.getElementById('app-dialog-backdrop');
+        if (!backdrop || !activeAdminDialogResolve) return;
+        backdrop.classList.remove('open');
+        backdrop.setAttribute('aria-hidden', 'true');
+        const resolve = activeAdminDialogResolve;
+        activeAdminDialogResolve = null;
+        activeAdminDialogOptions = null;
+        resolve(result);
+    }
+
+    function showAdminDialog(options = {}) {
+        const backdrop = document.getElementById('app-dialog-backdrop');
+        const title = document.getElementById('app-dialog-title');
+        const message = document.getElementById('app-dialog-message');
+        const icon = document.getElementById('app-dialog-icon');
+        const cancelButton = document.getElementById('app-dialog-cancel');
+        const confirmButton = document.getElementById('app-dialog-confirm');
+        const inputWrap = document.getElementById('app-dialog-input-wrap');
+        const input = document.getElementById('app-dialog-input');
+        const inputLabel = document.getElementById('app-dialog-input-label');
+        const inputError = document.getElementById('app-dialog-error');
+
+        // Resolve any previous dialog safely before showing a new one.
+        if (activeAdminDialogResolve) closeAdminDialog(false);
+
+        const config = {
+            mode: 'confirm',
+            title: 'Confirm action',
+            message: '',
+            icon: '🔐',
+            confirmText: 'Continue',
+            cancelText: 'Cancel',
+            danger: false,
+            requireText: null,
+            inputLabel: 'Type the confirmation phrase',
+            inputPlaceholder: 'Enter confirmation phrase',
+            ...options
+        };
+
+        title.textContent = config.title;
+        message.textContent = config.message;
+        icon.textContent = config.icon;
+        icon.classList.toggle('danger', Boolean(config.danger));
+        confirmButton.textContent = config.confirmText;
+        confirmButton.classList.toggle('danger', Boolean(config.danger));
+        cancelButton.textContent = config.cancelText;
+        cancelButton.hidden = config.mode === 'alert';
+        inputWrap.hidden = !config.requireText;
+        inputLabel.textContent = config.inputLabel;
+        input.placeholder = config.inputPlaceholder;
+        input.value = '';
+        inputError.textContent = '';
+
+        activeAdminDialogOptions = config;
+        backdrop.classList.add('open');
+        backdrop.setAttribute('aria-hidden', 'false');
+
+        return new Promise(resolve => {
+            activeAdminDialogResolve = resolve;
+            requestAnimationFrame(() => {
+                if (config.requireText) input.focus();
+                else confirmButton.focus();
+            });
+        });
+    }
+
+    function confirmAdminAction(options) {
+        return showAdminDialog({ ...options, mode: 'confirm' });
+    }
+
+    function notifyAdmin(options) {
+        return showAdminDialog({ ...options, mode: 'alert', confirmText: options.confirmText || 'Got it' });
+    }
+
+    document.getElementById('app-dialog-confirm').addEventListener('click', () => {
+        if (!activeAdminDialogResolve) return;
+        const required = activeAdminDialogOptions?.requireText;
+        if (required) {
+            const entered = document.getElementById('app-dialog-input').value.trim();
+            if (entered !== required) {
+                document.getElementById('app-dialog-error').textContent = 'The phrase does not match. Nothing has been changed.';
+                document.getElementById('app-dialog-input').focus();
+                return;
+            }
+        }
+        closeAdminDialog(true);
+    });
+
+    document.getElementById('app-dialog-cancel').addEventListener('click', () => closeAdminDialog(false));
+    document.getElementById('app-dialog-backdrop').addEventListener('click', event => {
+        if (event.target.id === 'app-dialog-backdrop' && activeAdminDialogOptions?.mode !== 'alert') {
+            closeAdminDialog(false);
+        }
+    });
+    document.addEventListener('keydown', event => {
+        if (!activeAdminDialogResolve) return;
+        if (event.key === 'Escape' && activeAdminDialogOptions?.mode !== 'alert') {
+            closeAdminDialog(false);
+        } else if (event.key === 'Enter' && event.target.id === 'app-dialog-input') {
+            event.preventDefault();
+            document.getElementById('app-dialog-confirm').click();
+        }
+    });
 
     function showLoadingError(el, message) {
         if (!el) return;
@@ -383,13 +550,7 @@
             document.getElementById('stats-grid').style.display = 'grid';
             document.getElementById('admin-main').style.display = 'flex';
 
-            await runExpiryCheck();
             await refreshAllData();
-            if (expiryTimer) clearInterval(expiryTimer);
-            expiryTimer = setInterval(async () => {
-                const didRun = await runExpiryCheck();
-                if (didRun) await refreshAllData();
-            }, 60000);
         } catch (error) {
             showLoadingError(guardEl, error.message);
         }
@@ -464,7 +625,12 @@
     }
 
     async function approvePayment(reqId, email, courseCode) {
-        if (!confirm(`Approve the payment request and unlock ${String(courseCode).toUpperCase()} for ${email}?`)) return;
+        const approved = await confirmAdminAction({
+            title: 'Approve payment request?',
+            message: `This will unlock ${String(courseCode).toUpperCase()} for ${email}.`,
+            icon: '✅', confirmText: 'Approve & unlock'
+        });
+        if (!approved) return;
         const { error } = await db.rpc('admin_approve_payment', { p_request_id: reqId });
         if (error) return showBanner('payment-status', false, '❌ ' + error.message);
         showBanner('payment-status', true, `✅ Approved! Unlocked ${String(courseCode).toUpperCase()} for ${email}.`);
@@ -472,7 +638,12 @@
     }
 
     async function rejectPayment(reqId) {
-        if (!confirm('Reject this access request?')) return;
+        const confirmed = await confirmAdminAction({
+            title: 'Reject access request?',
+            message: 'The request will be marked as rejected. No course access will be granted.',
+            icon: '✉️', danger: true, confirmText: 'Reject request'
+        });
+        if (!confirmed) return;
         const { error } = await db.from('payment_requests').update({ status: 'rejected' }).eq('id', reqId);
         if (error) return showBanner('payment-status', false, '❌ ' + error.message);
         showBanner('payment-status', true, 'Request rejected.');
@@ -485,7 +656,7 @@
         try {
             allStudents = await fetchAllRows(() => db
                 .from('profiles')
-                .select('id,email,student_id,unlocked_courses,registered_devices,created_at')
+                .select('id,email,student_id,unlocked_courses,registered_devices,created_at,access_expires_at,expiry_reset_devices,expiry_last_run_at')
                 .order('created_at', { ascending: false }));
             document.getElementById('stat-students').textContent = allStudents.length;
             document.getElementById('stat-paid').textContent = allStudents.filter(s => Array.isArray(s.unlocked_courses) && s.unlocked_courses.length > 0).length;
@@ -514,9 +685,15 @@
             const chipsHtml = courses.length > 0
                 ? courses.map(c => `<span class="chip-revoke">${escapeHtml(String(c).toUpperCase())} <button type="button" title="Revoke ${escapeHtml(c)}" data-action="revoke-course" data-user-id="${escapeHtml(s.id)}" data-course="${escapeHtml(c)}" data-email="${escapeHtml(s.email || '')}">×</button></span>`).join('')
                 : '<span class="item-meta">Free Preview Only</span>';
+            const expiryText = s.access_expires_at
+                ? `Scheduled: ${new Date(s.access_expires_at).toLocaleString()}`
+                : 'No individual expiry scheduled.';
+            const lastRunText = s.expiry_last_run_at
+                ? ` Last expiry processed: ${new Date(s.expiry_last_run_at).toLocaleString()}.`
+                : '';
 
             return `
-                <div class="item">
+                <div class="item" style="align-items:stretch;">
                     <div class="item-info">
                         <div class="item-top">
                             <span class="item-title">${escapeHtml(s.email || '')}</span>
@@ -524,9 +701,21 @@
                             <span class="badge ${devCount >= 2 ? 'warn' : ''}">📱 ${devCount}/2 Devices</span>
                         </div>
                         <div class="item-top" style="margin-top: 4px;">${chipsHtml}</div>
-                    </div>
-                    <div class="actions">
-                        <button type="button" class="act-btn edit" data-action="reset-devices" data-email="${escapeHtml(s.email || '')}">Reset Devices</button>
+                        <div class="student-expiry" data-student-card="${escapeHtml(s.id)}">
+                            <div class="student-expiry-grid">
+                                <div>
+                                    <label>Individual expiry (your browser's local time)</label>
+                                    <input type="datetime-local" data-role="expiry-date" value="${escapeHtml(toLocalDateTimeInput(s.access_expires_at))}">
+                                    <label class="checkline"><input type="checkbox" data-role="expiry-reset-devices" ${s.expiry_reset_devices !== false ? 'checked' : ''}> Also reset this student's devices</label>
+                                </div>
+                                <div class="actions">
+                                    <button type="button" class="act-btn ok" data-action="save-student-expiry" data-user-id="${escapeHtml(s.id)}">Save expiry</button>
+                                    <button type="button" class="act-btn danger" data-action="clear-student-expiry" data-user-id="${escapeHtml(s.id)}">Clear expiry</button>
+                                    <button type="button" class="act-btn edit" data-action="reset-devices" data-email="${escapeHtml(s.email || '')}">Reset Devices</button>
+                                </div>
+                            </div>
+                            <div class="hint">${escapeHtml(expiryText + lastRunText)} When the date passes, only this student's course unlocks are cleared${s.expiry_reset_devices !== false ? ' and their devices are reset' : ''}.</div>
+                        </div>
                     </div>
                 </div>`;
         }).join('');
@@ -546,7 +735,12 @@
     }
 
     async function revokeCourse(userId, courseCode, email) {
-        if (!confirm(`Revoke ${String(courseCode).toUpperCase()} access from ${email}?`)) return;
+        const confirmed = await confirmAdminAction({
+            title: 'Revoke course access?',
+            message: `This will remove ${String(courseCode).toUpperCase()} access from ${email}.`,
+            icon: '🔒', danger: true, confirmText: 'Revoke access'
+        });
+        if (!confirmed) return;
         const { error } = await db.rpc('admin_revoke_course', { p_user_id: userId, p_course_code: courseCode });
         if (error) return showBanner('student-status', false, '❌ ' + error.message);
         showBanner('student-status', true, `Revoked ${String(courseCode).toUpperCase()} from ${email}.`);
@@ -554,7 +748,12 @@
     }
 
     async function resetDevicesByEmail(email) {
-        if (!confirm(`Reset the registered devices for ${email}?`)) return;
+        const confirmed = await confirmAdminAction({
+            title: 'Reset registered devices?',
+            message: `This will clear the registered devices for ${email}. They will be asked to register again on their next visit.`,
+            icon: '📱', confirmText: 'Reset devices'
+        });
+        if (!confirmed) return;
         const { error } = await db.rpc('admin_reset_devices', { p_identifier: email });
         if (error) return showBanner('student-status', false, '❌ ' + error.message);
         showBanner('student-status', true, `✅ Cleared devices for ${email}.`);
@@ -572,35 +771,29 @@
 
     async function loadSiteSettings() {
         try {
-            const { data, error } = await db.from('site_settings').select('*').eq('id', 1).maybeSingle();
+            const { data, error } = await db.from('site_settings').select('id,is_global_free').eq('id', 1).maybeSingle();
             if (error) throw error;
             if (!data) throw new Error('The site_settings row (id = 1) was not found.');
 
             document.getElementById('global-free-state').textContent = data.is_global_free
                 ? '🟢 Global free mode is ON — all questions are marked as free preview.'
                 : '🔒 Global free mode is OFF — normal paid/free-preview rules apply.';
-            document.getElementById('access-expires-at').value = toLocalDateTimeInput(data.access_expires_at);
-            document.getElementById('expiry-reset-devices').checked = Boolean(data.auto_reset_devices);
-            document.getElementById('expiry-restore-paid').checked = Boolean(data.auto_restore_paid);
-            const expiryText = data.access_expires_at
-                ? `Scheduled expiry: ${new Date(data.access_expires_at).toLocaleString()}`
-                : 'No expiry is currently scheduled.';
-            const resetText = data.last_auto_reset_at
-                ? ` Last automatic reset: ${new Date(data.last_auto_reset_at).toLocaleString()}.`
-                : '';
-            document.getElementById('expiry-current').textContent = expiryText + resetText;
         } catch (error) {
             showBanner('site-status', false, 'Could not load site settings: ' + error.message);
             document.getElementById('global-free-state').textContent = 'Could not load current setting.';
-            document.getElementById('expiry-current').textContent = 'Could not load expiry information.';
         }
     }
 
     async function setGlobalFreeMode(makeFree) {
-        const actionText = makeFree
-            ? 'make every question free for all students'
-            : 'restore paid mode and keep only the first 15 questions per course free';
-        if (!confirm(`Are you sure you want to ${actionText}?`)) return;
+        const confirmed = await confirmAdminAction({
+            title: makeFree ? 'Enable global free mode?' : 'Restore paid mode?',
+            message: makeFree
+                ? 'Every question will become free for every student. This changes access for the entire website.'
+                : 'Paid mode will be restored. Only the first 15 questions in each course will remain free preview.',
+            icon: makeFree ? '🌍' : '🔒', danger: makeFree,
+            confirmText: makeFree ? 'Make all questions free' : 'Restore paid mode'
+        });
+        if (!confirmed) return;
         const { error } = await db.rpc('admin_set_global_free_mode', { p_make_free: makeFree });
         if (error) return showBanner('site-status', false, '❌ ' + error.message);
         showBanner('site-status', true, makeFree
@@ -611,62 +804,62 @@
 
     async function resetAllStudentAccess() {
         const resetDevices = document.getElementById('reset-all-devices').checked;
-        const phrase = prompt(`This will remove course access for EVERY student${resetDevices ? ' and clear EVERY registered device' : ''}.\n\nType RESET ALL ACCESS to continue:`);
-        if (phrase !== 'RESET ALL ACCESS') {
-            if (phrase !== null) showBanner('site-status', false, 'Confirmation did not match. Nothing was changed.');
-            return;
-        }
+        const confirmed = await confirmAdminAction({
+            title: 'Reset access for every student?',
+            message: `This will remove course access for EVERY student${resetDevices ? ' and clear EVERY registered device' : ''}. This action affects the whole site and cannot be automatically undone.`,
+            icon: '⚠️', danger: true, confirmText: 'Reset all access',
+            requireText: 'RESET ALL ACCESS',
+            inputLabel: 'Type RESET ALL ACCESS to confirm',
+            inputPlaceholder: 'RESET ALL ACCESS'
+        });
+        if (!confirmed) return;
         const { data, error } = await db.rpc('admin_reset_all_access', { p_reset_devices: resetDevices });
         if (error) return showBanner('site-status', false, '❌ ' + error.message);
         showBanner('site-status', true, `✅ Access reset completed for ${Number(data) || 0} profiles${resetDevices ? ', including registered devices' : ''}.`);
         await Promise.all([loadStudents(), loadSiteSettings()]);
     }
 
-    async function saveExpirySettings() {
-        const localValue = document.getElementById('access-expires-at').value;
-        if (!localValue) return showBanner('site-status', false, 'Choose an expiry date and time first, or use Clear Expiry.');
+    async function saveStudentExpiry(userId, button) {
+        const card = button.closest('[data-student-card]');
+        if (!card) throw new Error('Could not find this student expiry form.');
+        const localValue = card.querySelector('[data-role="expiry-date"]').value;
+        const resetDevices = card.querySelector('[data-role="expiry-reset-devices"]').checked;
+
+        if (!localValue) {
+            showBanner('student-status', false, 'Choose an expiry date and time, or use Clear Expiry.');
+            return;
+        }
+
         const parsed = new Date(localValue);
         if (Number.isNaN(parsed.getTime()) || parsed.getTime() <= Date.now()) {
-            return showBanner('site-status', false, 'Choose a valid future date and time.');
+            showBanner('student-status', false, 'Choose a valid future date and time.');
+            return;
         }
-        const { error } = await db.rpc('admin_save_expiry_settings', {
+
+        const { error } = await db.rpc('admin_set_student_expiry', {
+            p_user_id: userId,
             p_expires_at: parsed.toISOString(),
-            p_reset_devices: document.getElementById('expiry-reset-devices').checked,
-            p_restore_paid: document.getElementById('expiry-restore-paid').checked
+            p_reset_devices: resetDevices
         });
-        if (error) return showBanner('site-status', false, '❌ ' + error.message);
-        showBanner('site-status', true, '✅ Expiry settings saved.');
-        await loadSiteSettings();
+        if (error) throw error;
+
+        showBanner('student-status', true, '✅ Individual expiry saved. This setting affects only the selected student.');
+        await loadStudents();
     }
 
-    async function clearExpirySettings() {
-        if (!confirm('Clear the scheduled expiry without running the reset?')) return;
-        const { error } = await db.rpc('admin_save_expiry_settings', {
-            p_expires_at: null,
-            p_reset_devices: document.getElementById('expiry-reset-devices').checked,
-            p_restore_paid: document.getElementById('expiry-restore-paid').checked
+    async function clearStudentExpiry(userId) {
+        const confirmed = await confirmAdminAction({
+            title: 'Clear this student’s expiry?',
+            message: 'Their current course access and registered devices will not be changed. Only the scheduled expiry date will be removed.',
+            icon: '⏰', confirmText: 'Clear expiry'
         });
-        if (error) return showBanner('site-status', false, '❌ ' + error.message);
-        showBanner('site-status', true, '✅ Scheduled expiry cleared. No reset was performed.');
-        await loadSiteSettings();
-    }
-
-    async function runExpiryCheck() {
-        try {
-            const { data, error } = await db.rpc('check_and_run_expiry');
-            if (error) {
-                console.warn('Expiry check failed:', error.message);
-                return false;
-            }
-            if (data === true) {
-                showBanner('site-status', true, '✅ Expiry reached. The configured access/device reset has run.');
-                return true;
-            }
-            return false;
-        } catch (error) {
-            console.warn('Expiry check failed:', error.message);
-            return false;
-        }
+        if (!confirmed) return;
+        const { error } = await db.rpc('admin_clear_student_expiry', {
+            p_user_id: userId
+        });
+        if (error) throw error;
+        showBanner('student-status', true, '✅ This student’s expiry has been cleared. No access or devices were reset.');
+        await loadStudents();
     }
 
     /* ====================== 3. UPLOAD MCQS ====================== */
@@ -890,7 +1083,11 @@
         const options = [0, 1, 2, 3].map(i => document.getElementById('edit-opt-' + i).value.trim());
         const answer = Number(document.getElementById('edit-answer').value);
         if (!questionText || options.some(option => !option) || !Number.isInteger(answer) || answer < 0 || answer > 3) {
-            return alert('Enter the question, all four options, and a valid correct-answer index.');
+            return notifyAdmin({
+                title: 'Question details are incomplete',
+                message: 'Enter the question, all four options, and a valid correct-answer index.',
+                icon: '📝'
+            });
         }
         const updatedQd = {
             ...editingRow.question_data,
@@ -904,7 +1101,10 @@
         const { error } = await db.from('questions')
             .update({ topic: newTopic, is_free_preview: isFree, question_data: updatedQd })
             .eq('id', editingRow.id);
-        if (error) return alert('Error saving: ' + error.message);
+        if (error) {
+            await notifyAdmin({ title: 'Could not save question', message: error.message, icon: '⚠️', danger: true });
+            return;
+        }
 
         const savedId = editingRow.id;
         closeEditModal();
@@ -914,7 +1114,12 @@
 
     async function deleteChapter(topicName) {
         const courseCode = document.getElementById('manage-course').value;
-        if (!confirm(`Delete ALL questions in "${topicName}" from ${courseCode.toUpperCase()}?`)) return;
+        const confirmed = await confirmAdminAction({
+            title: 'Delete this entire chapter?',
+            message: `All questions in “${topicName}” from ${courseCode.toUpperCase()} will be permanently deleted.`,
+            icon: '🗑️', danger: true, confirmText: 'Delete chapter'
+        });
+        if (!confirmed) return;
         const { error } = await db.from('questions').delete().eq('course_code', courseCode).eq('topic', topicName);
         if (error) return showBanner('manage-status', false, '❌ ' + error.message);
         showBanner('manage-status', true, `🗑️ Deleted "${topicName}".`);
@@ -922,7 +1127,12 @@
     }
 
     async function deleteSingleQuestion(id) {
-        if (!confirm(`Delete question #${id}?`)) return;
+        const confirmed = await confirmAdminAction({
+            title: 'Delete this question?',
+            message: `Question #${id} will be permanently deleted.`,
+            icon: '🗑️', danger: true, confirmText: 'Delete question'
+        });
+        if (!confirmed) return;
         const { error } = await db.from('questions').delete().eq('id', id);
         if (error) return showBanner('manage-status', false, '❌ ' + error.message);
         showBanner('manage-status', true, `🗑️ Deleted question #${id}.`);
@@ -931,7 +1141,9 @@
 
     function exportCourseJSON() {
         const courseCode = document.getElementById('manage-course').value;
-        if (!loadedCourseRows.length) return alert('No questions loaded to export.');
+        if (!loadedCourseRows.length) {
+            return notifyAdmin({ title: 'Nothing to export', message: 'Load a course containing questions before exporting its JSON backup.', icon: '📦' });
+        }
         const exported = loadedCourseRows.map(r => r.question_data);
         const blob = new Blob([JSON.stringify(exported, null, 2)], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
@@ -955,12 +1167,14 @@
             else if (action === 'reject-payment') await rejectPayment(button.dataset.id);
             else if (action === 'revoke-course') await revokeCourse(button.dataset.userId, button.dataset.course, button.dataset.email);
             else if (action === 'reset-devices') await resetDevicesByEmail(button.dataset.email);
+            else if (action === 'save-student-expiry') await saveStudentExpiry(button.dataset.userId, button);
+            else if (action === 'clear-student-expiry') await clearStudentExpiry(button.dataset.userId);
             else if (action === 'delete-chapter') await deleteChapter(button.dataset.topic);
             else if (action === 'edit-question') openEditModal(button.dataset.id);
             else if (action === 'delete-question') await deleteSingleQuestion(button.dataset.id);
         } catch (error) {
             console.error(error);
-            alert('Action failed: ' + error.message);
+            await notifyAdmin({ title: 'Action could not be completed', message: error.message || 'An unexpected error occurred.', icon: '⚠️', danger: true });
         } finally {
             if (button.isConnected) button.disabled = false;
         }
