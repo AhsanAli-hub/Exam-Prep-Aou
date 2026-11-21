@@ -793,38 +793,77 @@ window.signOutUser = async function() {
 };
 
 /* ====================== INIT SESSION & DEVICE CHECK ====================== */
+
+/* ====================== INIT SESSION, AUTO-EXPIRY & DEVICE CHECK ====================== */
 window.initAuth = async function() {
     injectAuthUI();
+
     const { data: { session } } = await window.db.auth.getSession();
+
     window.currentUser = session?.user || null;
     window.currentProfile = null;
     window.unlockedCourses = [];
     window.pendingRequests = [];
 
     if (window.currentUser) {
-        const { data: devCheck, error: devErr } = await window.db.rpc('register_device', {
-            p_device_id: getDeviceId()
-        });
 
-        if (!devErr && devCheck && devCheck.allowed === false && devCheck.reason === 'limit_reached') {
+        // 1. Check automatic access expiry before registering the device.
+        try {
+            const { data: expiryRan, error: expiryError } =
+                await window.db.rpc('check_and_run_expiry');
+
+            if (expiryError) {
+                console.error('Auto-expiry check failed:', expiryError);
+            } else if (expiryRan === true) {
+                console.info('Automatic expiry reset completed.');
+
+                // Clear cached question data after an access reset.
+                Object.keys(sessionStorage).forEach(key => {
+                    if (key.startsWith('qcache_')) {
+                        sessionStorage.removeItem(key);
+                    }
+                });
+            }
+        } catch (err) {
+            console.error('Auto-expiry request failed:', err);
+        }
+
+        // 2. Register this device.
+        const { data: devCheck, error: devErr } =
+            await window.db.rpc('register_device', {
+                p_device_id: getDeviceId()
+            });
+
+        if (!devErr && devCheck &&
+            devCheck.allowed === false &&
+            devCheck.reason === 'limit_reached') {
+
             await window.db.auth.signOut();
+
             window.currentUser = null;
             renderHeaderProfile(null);
             updateHomeCourseCards();
+
             openAuthModal(
                 'signin',
                 `⛔ Device Limit Reached (Max ${devCheck.max} devices). This account is already active on 2 other devices. Contact admin if you switched devices.`
             );
 
-            return { user: null, unlockedCourses: [], deviceBlocked: true };
+            return {
+                user: null,
+                unlockedCourses: [],
+                deviceBlocked: true
+            };
         }
 
+        // 3. Load the updated profile and pending requests.
         const [{ data: profile }, { data: pending }] = await Promise.all([
             window.db
                 .from('profiles')
                 .select('unlocked_courses, student_id')
                 .eq('id', window.currentUser.id)
                 .maybeSingle(),
+
             window.db
                 .from('payment_requests')
                 .select('*')
@@ -833,25 +872,47 @@ window.initAuth = async function() {
         ]);
 
         window.currentProfile = profile || null;
-        const rawCourses = Array.isArray(profile?.unlocked_courses) ? profile.unlocked_courses : [];
-        window.unlockedCourses = rawCourses.map(c => String(c).toLowerCase());
-        window.pendingRequests = Array.isArray(pending) ? pending : [];
 
+        const rawCourses = Array.isArray(profile?.unlocked_courses)
+            ? profile.unlocked_courses
+            : [];
+
+        window.unlockedCourses = rawCourses.map(c =>
+            String(c).toLowerCase()
+        );
+
+        window.pendingRequests = Array.isArray(pending)
+            ? pending
+            : [];
+
+        // 4. Check the student's ID.
         const savedStudentId = String(profile?.student_id || '').trim();
 
         if (!/^2[0-9]{7}$/.test(savedStudentId)) {
             await promptMissingStudentId();
         }
 
+        // 5. Update the website interface.
         const activeProfile = window.currentProfile || profile;
+
         renderHeaderProfile(activeProfile);
         updateHomeCourseCards();
-        return { user: window.currentUser, unlockedCourses: window.unlockedCourses, deviceBlocked: false };
+
+        return {
+            user: window.currentUser,
+            unlockedCourses: window.unlockedCourses,
+            deviceBlocked: false
+        };
     }
 
     renderHeaderProfile(null);
     updateHomeCourseCards();
-    return { user: null, unlockedCourses: [], deviceBlocked: false };
+
+    return {
+        user: null,
+        unlockedCourses: [],
+        deviceBlocked: false
+    };
 };
 
 /* ====================== CACHED QUESTION LOADER ====================== */
