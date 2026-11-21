@@ -37,9 +37,12 @@
 
         /* Form Inputs & Buttons */
         label { display: block; font-weight: 700; font-size: 0.86rem; margin: 12px 0 6px; }
-        select, input[type="file"], input[type="text"], textarea { width: 100%; padding: 11px 13px; border-radius: 11px; border: 1.5px solid var(--border); background: var(--bg); color: var(--text); font-family: inherit; font-size: 0.92rem; }
+        select, input[type="file"], input[type="text"], input[type="datetime-local"], textarea { width: 100%; padding: 11px 13px; border-radius: 11px; border: 1.5px solid var(--border); background: var(--bg); color: var(--text); font-family: inherit; font-size: 0.92rem; }
         textarea { min-height: 160px; font-family: monospace; font-size: 0.84rem; }
         .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-end; }
+        .checkline { display: flex; align-items: center; gap: 9px; margin: 12px 0; color: var(--text); font-size: 0.88rem; font-weight: 600; }
+        .checkline input { width: 17px; height: 17px; accent-color: var(--purple); }
+        .hint { color: var(--muted); font-size: 0.82rem; line-height: 1.5; margin-top: 9px; }
         .col { flex: 1; min-width: 190px; }
         .btn { padding: 11px 18px; background: var(--purple); color: #fff; border: none; border-radius: 11px; font-weight: 800; font-size: 0.9rem; cursor: pointer; font-family: inherit; }
         .btn:hover:not(:disabled) { background: var(--purple-hover); }
@@ -99,6 +102,7 @@
         <div class="tabs">
             <button type="button" class="tab-btn active" onclick="switchTab('requests', this)">📩 Access Requests</button>
             <button type="button" class="tab-btn" onclick="switchTab('students', this)">🎓 Students &amp; Unlocks</button>
+            <button type="button" class="tab-btn" onclick="switchTab('site', this)">🌐 Site Controls</button>
             <button type="button" class="tab-btn" onclick="switchTab('upload', this)">➕ Upload MCQs</button>
             <button type="button" class="tab-btn" onclick="switchTab('manage', this)">🗂️ Edit / Delete MCQs</button>
         </div>
@@ -147,6 +151,52 @@
                 <div id="students-list" class="list"><div class="empty">Loading students...</div></div>
                 <div class="status" id="student-status"></div>
             </div>
+        </div>
+
+        <!-- TAB: GLOBAL SITE CONTROLS -->
+        <div class="tab-panel" id="tab-site">
+            <div class="card">
+                <h2>🌐 Global Free / Paid Mode</h2>
+                <p class="sub">Make every question free, or restore the first 15 questions per course as free preview.</p>
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-title">Current setting</div>
+                        <div class="item-meta" id="global-free-state">Loading site settings...</div>
+                    </div>
+                    <div class="actions">
+                        <button type="button" class="btn" onclick="setGlobalFreeMode(true)">Make Everything Free</button>
+                        <button type="button" class="btn secondary" onclick="setGlobalFreeMode(false)">Restore Paid Mode</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>⚠️ Reset All Student Access</h2>
+                <p class="sub">Remove course unlocks for every profile. You can also clear all registered devices.</p>
+                <label class="checkline"><input type="checkbox" id="reset-all-devices" checked> Also reset registered devices for everyone</label>
+                <button type="button" class="btn" onclick="resetAllStudentAccess()">Reset All Access</button>
+                <div class="hint">This action affects every student account and cannot be undone automatically. You will be asked to type a confirmation phrase.</div>
+            </div>
+
+            <div class="card">
+                <h2>⏰ Automatic Expiry Settings</h2>
+                <p class="sub">Choose when temporary access expires and what should happen at that time.</p>
+                <div class="row">
+                    <div class="col">
+                        <label for="access-expires-at">Expiry date and time (your browser's local time)</label>
+                        <input type="datetime-local" id="access-expires-at">
+                    </div>
+                </div>
+                <label class="checkline"><input type="checkbox" id="expiry-reset-devices" checked> Reset registered devices when access expires</label>
+                <label class="checkline"><input type="checkbox" id="expiry-restore-paid" checked> Restore paid mode (first 15 questions per course remain free)</label>
+                <div class="row" style="margin-top: 14px;">
+                    <button type="button" class="btn" onclick="saveExpirySettings()">Save Expiry Settings</button>
+                    <button type="button" class="btn secondary" onclick="clearExpirySettings()">Clear Expiry</button>
+                </div>
+                <div class="hint" id="expiry-current">Loading expiry information...</div>
+                <div class="hint">This admin page checks for expiry when opened and every 60 seconds while it remains open. For expiry to run reliably when nobody has the site open, configure a Supabase scheduled job to call the expiry function.</div>
+            </div>
+            <div class="status" id="site-status"></div>
         </div>
 
         <!-- TAB 3: UPLOAD MCQS -->
@@ -254,24 +304,53 @@
     const SUPABASE_URL = 'https://sdqhrxybowzyxveqwkwo.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_UBviShU8w5kEtL0sGkIh6w_Ay8_lnaj';
     const ADMIN_EMAIL = 'ahsan.ali72@outlook.com';
+    const PAGE_SIZE = 1000;
 
     const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     let allStudents = [];
     let loadedCourseRows = [];
     let editingRow = null;
+    let expiryTimer = null;
 
-    function escapeHtml(str) {
-        return String(str ?? '').replace(/[&<>"']/g, c => (
-            { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
-        ));
+    // Safe for HTML text and quoted HTML attributes. Dynamic values are never
+    // inserted into inline JavaScript event-handler strings.
+    function escapeHtml(value) {
+        const chars = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;'
+        };
+        return String(value ?? '').replace(/[&<>"']/g, char => chars[char]);
     }
 
-    function showBanner(elId, isOk, text) {
+    function showBanner(elId, isOk, message) {
         const box = document.getElementById(elId);
+        if (!box) return;
         box.style.display = 'block';
         box.style.background = isOk ? 'rgba(16,185,129,0.15)' : 'rgba(239,68,68,0.15)';
         box.style.color = isOk ? 'var(--success)' : 'var(--error)';
-        box.textContent = text;
+        box.textContent = String(message ?? '');
+    }
+
+    function showLoadingError(el, message) {
+        if (!el) return;
+        el.textContent = 'Error: ' + String(message ?? 'Unknown error');
+        el.style.color = 'var(--error)';
+    }
+
+    // Fetch every page instead of silently stopping at Supabase's row limit.
+    async function fetchAllRows(queryFactory) {
+        const rows = [];
+        for (let from = 0; ; from += PAGE_SIZE) {
+            const { data, error } = await queryFactory().range(from, from + PAGE_SIZE - 1);
+            if (error) throw error;
+            const page = data || [];
+            rows.push(...page);
+            if (page.length < PAGE_SIZE) break;
+        }
+        return rows;
     }
 
     function switchTab(tabName, btn) {
@@ -282,107 +361,138 @@
     }
 
     async function checkAdmin() {
-        const { data: { session } } = await db.auth.getSession();
         const guardEl = document.getElementById('guard-msg');
-        if (!session || session.user.email.toLowerCase() !== ADMIN_EMAIL.toLowerCase()) {
-            guardEl.style.color = 'var(--error)';
-            guardEl.innerHTML = '⛔ Access Denied. Please <a href="index.html" style="color:var(--purple);">sign in on the home page</a> with your admin email first.';
-            return;
+        try {
+            const { data, error } = await db.auth.getSession();
+            if (error) throw error;
+            const email = data?.session?.user?.email || '';
+            if (email.toLowerCase() !== ADMIN_EMAIL.toLowerCase()) {
+                guardEl.style.color = 'var(--error)';
+                guardEl.textContent = '';
+                const message = document.createElement('span');
+                message.textContent = '⛔ Access denied. Sign in on the home page with the admin account first. ';
+                const link = document.createElement('a');
+                link.href = 'index.html';
+                link.textContent = 'Go to sign in';
+                link.style.color = 'var(--purple)';
+                guardEl.append(message, link);
+                return;
+            }
+
+            guardEl.style.display = 'none';
+            document.getElementById('stats-grid').style.display = 'grid';
+            document.getElementById('admin-main').style.display = 'flex';
+
+            await runExpiryCheck();
+            await refreshAllData();
+            if (expiryTimer) clearInterval(expiryTimer);
+            expiryTimer = setInterval(async () => {
+                const didRun = await runExpiryCheck();
+                if (didRun) await refreshAllData();
+            }, 60000);
+        } catch (error) {
+            showLoadingError(guardEl, error.message);
         }
-        guardEl.style.display = 'none';
-        document.getElementById('stats-grid').style.display = 'grid';
-        document.getElementById('admin-main').style.display = 'flex';
-        refreshAllData();
     }
 
     async function refreshAllData() {
-        await Promise.all([loadPendingPayments(), loadStudents(), loadCourseOverview(), loadTotalMcqCount()]);
+        const jobs = [
+            loadPendingPayments(),
+            loadStudents(),
+            loadCourseOverview(),
+            loadTotalMcqCount(),
+            loadSiteSettings()
+        ];
+        await Promise.allSettled(jobs);
     }
 
     async function loadTotalMcqCount() {
-        const { count } = await db.from('questions').select('*', { count: 'exact', head: true });
+        const { count, error } = await db.from('questions').select('*', { count: 'exact', head: true });
+        if (error) {
+            document.getElementById('stat-mcqs').textContent = '—';
+            return;
+        }
         document.getElementById('stat-mcqs').textContent = count ?? 0;
     }
 
     /* ====================== 1. PENDING REQUESTS ====================== */
     async function loadPendingPayments() {
         const listEl = document.getElementById('pending-list');
-        const { data, error } = await db
-            .from('payment_requests')
-            .select('*')
-            .eq('status', 'pending')
-            .order('created_at', { ascending: true });
+        try {
+            const data = await fetchAllRows(() => db
+                .from('payment_requests')
+                .select('id,email,student_id,course_code,amount,transfer_ref,created_at,status')
+                .eq('status', 'pending')
+                .order('created_at', { ascending: true }));
 
-        if (error) {
-            listEl.innerHTML = `<div class="empty" style="color:var(--error);">Error: ${escapeHtml(error.message)}</div>`;
-            return;
-        }
+            document.getElementById('stat-pending').textContent = data.length;
+            if (data.length === 0) {
+                listEl.innerHTML = '<div class="empty">✅ No pending access requests right now.</div>';
+                return;
+            }
 
-        document.getElementById('stat-pending').textContent = (data || []).length;
-
-        if (!data || data.length === 0) {
-            listEl.innerHTML = `<div class="empty">✅ No pending access requests right now.</div>`;
-            return;
-        }
-
-        listEl.innerHTML = data.map(r => {
-            const when = new Date(r.created_at).toLocaleString();
-            const courseUpper = r.course_code.toUpperCase();
-            const hasNote = r.transfer_ref && r.transfer_ref !== 'Access requested';
-            const mailSubject = encodeURIComponent(`Exams Prep — Payment Details for ${courseUpper}`);
-            const mailBody = encodeURIComponent(
-                `Hi,\n\nThank you for requesting access to ${courseUpper} (${r.amount || ''}) on Exams Prep.\n\nPlease complete your transfer using the details below and reply with your receipt:\n\n[Paste your payment details here]\n\nOnce confirmed, your account (${r.email}) will be unlocked immediately.\n\nBest regards,\nExams Prep`
-            );
-
-            return `
-                <div class="item" id="req-${r.id}">
-                    <div class="item-info">
-                        <div class="item-top">
-                            <span class="badge">${escapeHtml(courseUpper)}</span>
-                            <span class="badge warn">${escapeHtml(r.amount || '')}</span>
-                            <span class="item-title">${escapeHtml(r.email)}</span>
-                            ${r.student_id ? `<span class="item-meta">(ID: ${escapeHtml(r.student_id)})</span>` : ''}
+            listEl.innerHTML = data.map(r => {
+                const when = r.created_at ? new Date(r.created_at).toLocaleString() : 'Date unavailable';
+                const courseUpper = String(r.course_code || '').toUpperCase();
+                const email = String(r.email || '');
+                const hasNote = r.transfer_ref && r.transfer_ref !== 'Access requested';
+                const mailSubject = encodeURIComponent(`Exams Prep — Payment Details for ${courseUpper}`);
+                const mailBody = encodeURIComponent(
+                    `Hi,\n\nThank you for requesting access to ${courseUpper} (${r.amount || ''}) on Exams Prep.\n\nPlease complete your transfer using the details below and reply with your receipt:\n\n[Paste your payment details here]\n\nOnce confirmed, your account (${email}) will be unlocked.\n\nBest regards,\nExams Prep`
+                );
+                return `
+                    <div class="item" id="req-${escapeHtml(r.id)}">
+                        <div class="item-info">
+                            <div class="item-top">
+                                <span class="badge">${escapeHtml(courseUpper)}</span>
+                                <span class="badge warn">${escapeHtml(r.amount || '')}</span>
+                                <span class="item-title">${escapeHtml(email)}</span>
+                                ${r.student_id ? `<span class="item-meta">(ID: ${escapeHtml(r.student_id)})</span>` : ''}
+                            </div>
+                            <div class="item-meta">${hasNote ? `Note: <strong style="color:var(--text);">${escapeHtml(r.transfer_ref)}</strong> · ` : ''}${escapeHtml(when)}</div>
                         </div>
-                        <div class="item-meta">${hasNote ? `Note: <strong style="color:var(--text);">${escapeHtml(r.transfer_ref)}</strong> · ` : ''}${escapeHtml(when)}</div>
-                    </div>
-                    <div class="actions">
-                        <a href="mailto:${encodeURIComponent(r.email)}?subject=${mailSubject}&body=${mailBody}" class="act-btn mail">✉️ Mail Details</a>
-                        <button type="button" class="act-btn ok" onclick="approvePayment('${r.id}', '${escapeHtml(r.email)}', '${escapeHtml(r.course_code)}')">✅ Approve &amp; Unlock</button>
-                        <button type="button" class="act-btn danger" onclick="rejectPayment('${r.id}')">✕ Reject</button>
-                    </div>
-                </div>
-            `;
-        }).join('');
+                        <div class="actions">
+                            <a href="mailto:${encodeURI(email)}?subject=${mailSubject}&body=${mailBody}" class="act-btn mail">✉️ Mail Details</a>
+                            <button type="button" class="act-btn ok" data-action="approve-payment" data-id="${escapeHtml(r.id)}" data-email="${escapeHtml(email)}" data-course="${escapeHtml(r.course_code || '')}">✅ Approve &amp; Unlock</button>
+                            <button type="button" class="act-btn danger" data-action="reject-payment" data-id="${escapeHtml(r.id)}">✕ Reject</button>
+                        </div>
+                    </div>`;
+            }).join('');
+        } catch (error) {
+            showLoadingError(listEl, error.message);
+        }
     }
 
     async function approvePayment(reqId, email, courseCode) {
+        if (!confirm(`Approve the payment request and unlock ${String(courseCode).toUpperCase()} for ${email}?`)) return;
         const { error } = await db.rpc('admin_approve_payment', { p_request_id: reqId });
         if (error) return showBanner('payment-status', false, '❌ ' + error.message);
-        showBanner('payment-status', true, `✅ Approved! Unlocked ${courseCode.toUpperCase()} for ${email}.`);
+        showBanner('payment-status', true, `✅ Approved! Unlocked ${String(courseCode).toUpperCase()} for ${email}.`);
         await Promise.all([loadPendingPayments(), loadStudents()]);
     }
 
     async function rejectPayment(reqId) {
+        if (!confirm('Reject this access request?')) return;
         const { error } = await db.from('payment_requests').update({ status: 'rejected' }).eq('id', reqId);
         if (error) return showBanner('payment-status', false, '❌ ' + error.message);
         showBanner('payment-status', true, 'Request rejected.');
-        loadPendingPayments();
+        await loadPendingPayments();
     }
 
     /* ====================== 2. STUDENTS & UNLOCKS ====================== */
     async function loadStudents() {
         const listEl = document.getElementById('students-list');
-        const { data, error } = await db.from('profiles').select('*');
-        if (error) {
-            listEl.innerHTML = `<div class="empty" style="color:var(--error);">Error: ${escapeHtml(error.message)}</div>`;
-            return;
+        try {
+            allStudents = await fetchAllRows(() => db
+                .from('profiles')
+                .select('id,email,student_id,unlocked_courses,registered_devices,created_at')
+                .order('created_at', { ascending: false }));
+            document.getElementById('stat-students').textContent = allStudents.length;
+            document.getElementById('stat-paid').textContent = allStudents.filter(s => Array.isArray(s.unlocked_courses) && s.unlocked_courses.length > 0).length;
+            renderStudents();
+        } catch (error) {
+            showLoadingError(listEl, error.message);
         }
-        allStudents = (data || []).sort((a, b) =>
-            new Date(b.created_at || 0) - new Date(a.created_at || 0)
-        );
-        document.getElementById('stat-students').textContent = allStudents.length;
-        document.getElementById('stat-paid').textContent = allStudents.filter(s => Array.isArray(s.unlocked_courses) && s.unlocked_courses.length > 0).length;
-        renderStudents();
     }
 
     function renderStudents() {
@@ -390,11 +500,11 @@
         const listEl = document.getElementById('students-list');
         const filtered = allStudents.filter(s =>
             (s.email || '').toLowerCase().includes(q) ||
-            (s.student_id || '').toLowerCase().includes(q)
+            String(s.student_id || '').toLowerCase().includes(q)
         );
 
         if (filtered.length === 0) {
-            listEl.innerHTML = `<div class="empty">No matching students found.</div>`;
+            listEl.innerHTML = '<div class="empty">No matching students found.</div>';
             return;
         }
 
@@ -402,78 +512,225 @@
             const courses = Array.isArray(s.unlocked_courses) ? s.unlocked_courses : [];
             const devCount = Array.isArray(s.registered_devices) ? s.registered_devices.length : 0;
             const chipsHtml = courses.length > 0
-                ? courses.map(c => `<span class="chip-revoke">${escapeHtml(c.toUpperCase())} <button type="button" title="Revoke ${escapeHtml(c)}" onclick="revokeCourse('${s.id}', '${escapeHtml(c)}', '${escapeHtml(s.email)}')">×</button></span>`).join('')
-                : `<span class="item-meta">Free Preview Only</span>`;
+                ? courses.map(c => `<span class="chip-revoke">${escapeHtml(String(c).toUpperCase())} <button type="button" title="Revoke ${escapeHtml(c)}" data-action="revoke-course" data-user-id="${escapeHtml(s.id)}" data-course="${escapeHtml(c)}" data-email="${escapeHtml(s.email || '')}">×</button></span>`).join('')
+                : '<span class="item-meta">Free Preview Only</span>';
 
             return `
                 <div class="item">
                     <div class="item-info">
                         <div class="item-top">
-                            <span class="item-title">${escapeHtml(s.email)}</span>
+                            <span class="item-title">${escapeHtml(s.email || '')}</span>
                             ${s.student_id ? `<span class="badge">ID: ${escapeHtml(s.student_id)}</span>` : ''}
                             <span class="badge ${devCount >= 2 ? 'warn' : ''}">📱 ${devCount}/2 Devices</span>
                         </div>
                         <div class="item-top" style="margin-top: 4px;">${chipsHtml}</div>
                     </div>
                     <div class="actions">
-                        <button type="button" class="act-btn edit" onclick="resetDevicesByEmail('${escapeHtml(s.email)}')">Reset Devices</button>
+                        <button type="button" class="act-btn edit" data-action="reset-devices" data-email="${escapeHtml(s.email || '')}">Reset Devices</button>
                     </div>
-                </div>
-            `;
+                </div>`;
         }).join('');
     }
 
     async function manualUnlockCourse() {
         const identifier = document.getElementById('unlock-identifier').value.trim();
         const courseCode = document.getElementById('unlock-course').value;
-        if (!identifier) return;
+        if (!identifier) return showBanner('manual-unlock-status', false, 'Enter a student email or student ID first.');
         const { data, error } = await db.rpc('admin_manual_unlock', { p_identifier: identifier, p_course_code: courseCode });
         if (error) showBanner('manual-unlock-status', false, '❌ ' + error.message);
-        else if (data > 0) {
+        else if (Number(data) > 0) {
             showBanner('manual-unlock-status', true, `✅ Unlocked ${courseCode.toUpperCase()} for ${identifier}.`);
             document.getElementById('unlock-identifier').value = '';
-            loadStudents();
+            await loadStudents();
         } else showBanner('manual-unlock-status', false, `⚠️ No student found matching "${identifier}".`);
     }
 
     async function revokeCourse(userId, courseCode, email) {
-        if (!confirm(`Revoke ${courseCode.toUpperCase()} access from ${email}?`)) return;
+        if (!confirm(`Revoke ${String(courseCode).toUpperCase()} access from ${email}?`)) return;
         const { error } = await db.rpc('admin_revoke_course', { p_user_id: userId, p_course_code: courseCode });
         if (error) return showBanner('student-status', false, '❌ ' + error.message);
-        showBanner('student-status', true, `Revoked ${courseCode.toUpperCase()} from ${email}.`);
-        loadStudents();
+        showBanner('student-status', true, `Revoked ${String(courseCode).toUpperCase()} from ${email}.`);
+        await loadStudents();
     }
 
     async function resetDevicesByEmail(email) {
+        if (!confirm(`Reset the registered devices for ${email}?`)) return;
         const { error } = await db.rpc('admin_reset_devices', { p_identifier: email });
         if (error) return showBanner('student-status', false, '❌ ' + error.message);
         showBanner('student-status', true, `✅ Cleared devices for ${email}.`);
-        loadStudents();
+        await loadStudents();
+    }
+
+    /* ====================== SITE CONTROLS ====================== */
+    function toLocalDateTimeInput(value) {
+        if (!value) return '';
+        const d = new Date(value);
+        if (Number.isNaN(d.getTime())) return '';
+        const pad = n => String(n).padStart(2, '0');
+        return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+    }
+
+    async function loadSiteSettings() {
+        try {
+            const { data, error } = await db.from('site_settings').select('*').eq('id', 1).maybeSingle();
+            if (error) throw error;
+            if (!data) throw new Error('The site_settings row (id = 1) was not found.');
+
+            document.getElementById('global-free-state').textContent = data.is_global_free
+                ? '🟢 Global free mode is ON — all questions are marked as free preview.'
+                : '🔒 Global free mode is OFF — normal paid/free-preview rules apply.';
+            document.getElementById('access-expires-at').value = toLocalDateTimeInput(data.access_expires_at);
+            document.getElementById('expiry-reset-devices').checked = Boolean(data.auto_reset_devices);
+            document.getElementById('expiry-restore-paid').checked = Boolean(data.auto_restore_paid);
+            const expiryText = data.access_expires_at
+                ? `Scheduled expiry: ${new Date(data.access_expires_at).toLocaleString()}`
+                : 'No expiry is currently scheduled.';
+            const resetText = data.last_auto_reset_at
+                ? ` Last automatic reset: ${new Date(data.last_auto_reset_at).toLocaleString()}.`
+                : '';
+            document.getElementById('expiry-current').textContent = expiryText + resetText;
+        } catch (error) {
+            showBanner('site-status', false, 'Could not load site settings: ' + error.message);
+            document.getElementById('global-free-state').textContent = 'Could not load current setting.';
+            document.getElementById('expiry-current').textContent = 'Could not load expiry information.';
+        }
+    }
+
+    async function setGlobalFreeMode(makeFree) {
+        const actionText = makeFree
+            ? 'make every question free for all students'
+            : 'restore paid mode and keep only the first 15 questions per course free';
+        if (!confirm(`Are you sure you want to ${actionText}?`)) return;
+        const { error } = await db.rpc('admin_set_global_free_mode', { p_make_free: makeFree });
+        if (error) return showBanner('site-status', false, '❌ ' + error.message);
+        showBanner('site-status', true, makeFree
+            ? '✅ Global free mode enabled.'
+            : '✅ Paid mode restored. The first 15 questions per course remain free.');
+        await Promise.all([loadSiteSettings(), loadTotalMcqCount()]);
+    }
+
+    async function resetAllStudentAccess() {
+        const resetDevices = document.getElementById('reset-all-devices').checked;
+        const phrase = prompt(`This will remove course access for EVERY student${resetDevices ? ' and clear EVERY registered device' : ''}.\n\nType RESET ALL ACCESS to continue:`);
+        if (phrase !== 'RESET ALL ACCESS') {
+            if (phrase !== null) showBanner('site-status', false, 'Confirmation did not match. Nothing was changed.');
+            return;
+        }
+        const { data, error } = await db.rpc('admin_reset_all_access', { p_reset_devices: resetDevices });
+        if (error) return showBanner('site-status', false, '❌ ' + error.message);
+        showBanner('site-status', true, `✅ Access reset completed for ${Number(data) || 0} profiles${resetDevices ? ', including registered devices' : ''}.`);
+        await Promise.all([loadStudents(), loadSiteSettings()]);
+    }
+
+    async function saveExpirySettings() {
+        const localValue = document.getElementById('access-expires-at').value;
+        if (!localValue) return showBanner('site-status', false, 'Choose an expiry date and time first, or use Clear Expiry.');
+        const parsed = new Date(localValue);
+        if (Number.isNaN(parsed.getTime()) || parsed.getTime() <= Date.now()) {
+            return showBanner('site-status', false, 'Choose a valid future date and time.');
+        }
+        const { error } = await db.rpc('admin_save_expiry_settings', {
+            p_expires_at: parsed.toISOString(),
+            p_reset_devices: document.getElementById('expiry-reset-devices').checked,
+            p_restore_paid: document.getElementById('expiry-restore-paid').checked
+        });
+        if (error) return showBanner('site-status', false, '❌ ' + error.message);
+        showBanner('site-status', true, '✅ Expiry settings saved.');
+        await loadSiteSettings();
+    }
+
+    async function clearExpirySettings() {
+        if (!confirm('Clear the scheduled expiry without running the reset?')) return;
+        const { error } = await db.rpc('admin_save_expiry_settings', {
+            p_expires_at: null,
+            p_reset_devices: document.getElementById('expiry-reset-devices').checked,
+            p_restore_paid: document.getElementById('expiry-restore-paid').checked
+        });
+        if (error) return showBanner('site-status', false, '❌ ' + error.message);
+        showBanner('site-status', true, '✅ Scheduled expiry cleared. No reset was performed.');
+        await loadSiteSettings();
+    }
+
+    async function runExpiryCheck() {
+        try {
+            const { data, error } = await db.rpc('check_and_run_expiry');
+            if (error) {
+                console.warn('Expiry check failed:', error.message);
+                return false;
+            }
+            if (data === true) {
+                showBanner('site-status', true, '✅ Expiry reached. The configured access/device reset has run.');
+                return true;
+            }
+            return false;
+        } catch (error) {
+            console.warn('Expiry check failed:', error.message);
+            return false;
+        }
     }
 
     /* ====================== 3. UPLOAD MCQS ====================== */
-    document.getElementById('json-file').addEventListener('change', async (e) => {
-        const file = e.target.files[0];
-        if (file) document.getElementById('json-text').value = await file.text();
+    document.getElementById('json-file').addEventListener('change', async event => {
+        const file = event.target.files?.[0];
+        if (!file) return;
+        try {
+            document.getElementById('json-text').value = await file.text();
+        } catch (error) {
+            showBanner('status-box', false, 'Could not read file: ' + error.message);
+        }
     });
 
     function parsePayload(courseCode, isFree, raw) {
         const rows = [];
         if (Array.isArray(raw)) {
-            raw.forEach(item => rows.push({ course_code: courseCode, topic: item.chapter || item.topic || 'General', question_data: item, is_free_preview: isFree }));
+            raw.forEach(item => rows.push({
+                course_code: courseCode,
+                topic: item?.chapter || item?.topic || 'General',
+                question_data: item,
+                is_free_preview: isFree
+            }));
         } else if (typeof raw === 'object' && raw !== null) {
             Object.entries(raw).forEach(([section, content]) => {
                 if (section === 'passages' && Array.isArray(content)) {
                     content.forEach(p => {
-                        const meta = { id: p.id, title: p.title, text: p.text };
-                        (p.questions || []).forEach(q => rows.push({ course_code: courseCode, topic: `Passage: ${p.title || 'Reading'}`, question_data: { ...q, passage: meta }, is_free_preview: isFree }));
+                        const meta = { id: p?.id, title: p?.title, text: p?.text };
+                        (Array.isArray(p?.questions) ? p.questions : []).forEach(q => rows.push({
+                            course_code: courseCode,
+                            topic: `Passage: ${p?.title || 'Reading'}`,
+                            question_data: { ...q, passage: meta },
+                            is_free_preview: isFree
+                        }));
                     });
                 } else if (Array.isArray(content)) {
-                    content.forEach(item => rows.push({ course_code: courseCode, topic: item.chapter || item.topic || section.charAt(0).toUpperCase() + section.slice(1), question_data: item, is_free_preview: isFree }));
+                    content.forEach(item => rows.push({
+                        course_code: courseCode,
+                        topic: item?.chapter || item?.topic || (section ? section.charAt(0).toUpperCase() + section.slice(1) : 'General'),
+                        question_data: item,
+                        is_free_preview: isFree
+                    }));
                 }
             });
         }
         return rows;
+    }
+
+    function validateCandidateRows(rows) {
+        const problems = [];
+        rows.forEach((row, index) => {
+            const qd = row?.question_data;
+            if (!qd || typeof qd !== 'object' || Array.isArray(qd)) {
+                problems.push(`Question ${index + 1}: expected an object.`);
+                return;
+            }
+            if (typeof qd.q !== 'string' || !qd.q.trim()) problems.push(`Question ${index + 1}: missing question text (q).`);
+            if (!Array.isArray(qd.options) || qd.options.length !== 4 || qd.options.some(option => typeof option !== 'string' || !option.trim())) {
+                problems.push(`Question ${index + 1}: provide exactly four non-empty options.`);
+            }
+            if (!Number.isInteger(qd.answer) || qd.answer < 0 || qd.answer > 3) {
+                problems.push(`Question ${index + 1}: answer must be an integer from 0 to 3.`);
+            }
+        });
+        return problems;
     }
 
     async function uploadMCQs() {
@@ -483,38 +740,47 @@
         const rawText = document.getElementById('json-text').value.trim();
         if (!rawText) return showBanner('status-box', false, 'Please upload a JSON file or paste JSON text first.');
 
+        btn.disabled = true;
         try {
             const candidateRows = parsePayload(courseCode, isFree, JSON.parse(rawText));
-            if (candidateRows.length === 0) throw new Error('No valid questions found in JSON.');
-            btn.disabled = true;
+            if (candidateRows.length === 0) throw new Error('No questions found in the supplied JSON.');
+            const problems = validateCandidateRows(candidateRows);
+            if (problems.length) throw new Error(`The upload was stopped because ${problems.length} question(s) are invalid. ${problems.slice(0, 6).join(' ')}`);
+
             showBanner('status-box', true, `Checking existing questions in ${courseCode.toUpperCase()}...`);
-
-            const { data: existing, error: fetchErr } = await db.from('questions').select('question_data').eq('course_code', courseCode);
-            if (fetchErr) throw fetchErr;
-
-            const existingSet = new Set((existing || []).map(r => (r.question_data?.q || '').trim().toLowerCase()).filter(Boolean));
+            const existing = await fetchAllRows(() => db.from('questions').select('question_data').eq('course_code', courseCode));
+            const existingSet = new Set(existing.map(r => String(r.question_data?.q || '').trim().toLowerCase()).filter(Boolean));
             const uniqueRows = [];
             let skipped = 0;
             for (const row of candidateRows) {
-                const norm = (row.question_data?.q || '').trim().toLowerCase();
-                if (norm && existingSet.has(norm)) skipped++;
-                else { if (norm) existingSet.add(norm); uniqueRows.push(row); }
+                const norm = row.question_data.q.trim().toLowerCase();
+                if (existingSet.has(norm)) skipped++;
+                else {
+                    existingSet.add(norm);
+                    uniqueRows.push(row);
+                }
             }
 
-            if (uniqueRows.length === 0) return showBanner('status-box', false, `⚠️ All ${skipped} questions already exist in ${courseCode.toUpperCase()}.`);
+            if (uniqueRows.length === 0) {
+                showBanner('status-box', true, `All ${skipped} supplied questions already exist in ${courseCode.toUpperCase()}. Nothing was inserted.`);
+                return;
+            }
 
+            let inserted = 0;
             for (let i = 0; i < uniqueRows.length; i += 200) {
-                const { error } = await db.from('questions').insert(uniqueRows.slice(i, i + 200));
-                if (error) throw error;
+                const batch = uniqueRows.slice(i, i + 200);
+                const { error } = await db.from('questions').insert(batch);
+                if (error) throw new Error(`Upload stopped after ${inserted} inserted question(s): ${error.message}`);
+                inserted += batch.length;
             }
 
-            showBanner('status-box', true, `✅ Added ${uniqueRows.length} new questions to ${courseCode.toUpperCase()}${skipped ? ` (skipped ${skipped} duplicates)` : ''}!`);
+            showBanner('status-box', true, `✅ Added ${inserted} questions to ${courseCode.toUpperCase()}${skipped ? ` (skipped ${skipped} duplicates)` : ''}.`);
             document.getElementById('json-text').value = '';
             document.getElementById('json-file').value = '';
-            loadTotalMcqCount();
-            if (document.getElementById('manage-course').value === courseCode) loadCourseOverview();
-        } catch (err) {
-            showBanner('status-box', false, '❌ Error: ' + err.message);
+            await loadTotalMcqCount();
+            if (document.getElementById('manage-course').value === courseCode) await loadCourseOverview();
+        } catch (error) {
+            showBanner('status-box', false, '❌ Error: ' + error.message);
         } finally {
             btn.disabled = false;
         }
@@ -527,73 +793,80 @@
         const chapterListEl = document.getElementById('chapter-list');
         summaryEl.textContent = `Loading ${courseCode.toUpperCase()}...`;
 
-        const { data, error } = await db.from('questions').select('id, topic, is_free_preview, question_data').eq('course_code', courseCode).order('id', { ascending: true });
-        if (error) { summaryEl.textContent = 'Error: ' + error.message; return; }
+        try {
+            loadedCourseRows = await fetchAllRows(() => db.from('questions')
+                .select('id, topic, is_free_preview, question_data')
+                .eq('course_code', courseCode)
+                .order('id', { ascending: true }));
 
-        loadedCourseRows = data || [];
-        const freeCount = loadedCourseRows.filter(r => r.is_free_preview).length;
-        summaryEl.textContent = `Total in ${courseCode.toUpperCase()}: ${loadedCourseRows.length} questions (${freeCount} Free Preview, ${loadedCourseRows.length - freeCount} Paid)`;
+            const freeCount = loadedCourseRows.filter(r => r.is_free_preview).length;
+            summaryEl.textContent = `Total in ${courseCode.toUpperCase()}: ${loadedCourseRows.length} questions (${freeCount} Free Preview, ${loadedCourseRows.length - freeCount} Paid)`;
 
-        const map = new Map();
-        for (const row of loadedCourseRows) {
-            const key = row.topic || 'General';
-            if (!map.has(key)) map.set(key, { count: 0, free: 0 });
-            const e = map.get(key);
-            e.count++;
-            if (row.is_free_preview) e.free++;
-        }
+            const map = new Map();
+            for (const row of loadedCourseRows) {
+                const key = row.topic || 'General';
+                if (!map.has(key)) map.set(key, { count: 0, free: 0 });
+                const entry = map.get(key);
+                entry.count++;
+                if (row.is_free_preview) entry.free++;
+            }
 
-        chapterListEl.innerHTML = map.size === 0
-            ? `<div class="empty">No questions found for ${courseCode.toUpperCase()}.</div>`
-            : Array.from(map.entries()).map(([topic, info]) => `
-                <div class="item">
-                    <div class="item-info">
-                        <div class="item-top">
-                            <span class="item-title">${escapeHtml(topic)}</span>
-                            <span class="badge">${info.count} questions</span>
-                            ${info.free > 0 ? `<span class="badge ok">${info.free} Free</span>` : ''}
+            chapterListEl.innerHTML = map.size === 0
+                ? `<div class="empty">No questions found for ${escapeHtml(courseCode.toUpperCase())}.</div>`
+                : Array.from(map.entries()).map(([topic, info]) => `
+                    <div class="item">
+                        <div class="item-info">
+                            <div class="item-top">
+                                <span class="item-title">${escapeHtml(topic)}</span>
+                                <span class="badge">${info.count} questions</span>
+                                ${info.free > 0 ? `<span class="badge ok">${info.free} Free</span>` : ''}
+                            </div>
                         </div>
-                    </div>
-                    <div class="actions">
-                        <button type="button" class="act-btn danger" onclick='deleteChapter(${JSON.stringify(topic)})'>🗑️ Delete Chapter</button>
-                    </div>
-                </div>
-            `).join('');
+                        <div class="actions">
+                            <button type="button" class="act-btn danger" data-action="delete-chapter" data-topic="${escapeHtml(topic)}">🗑️ Delete Chapter</button>
+                        </div>
+                    </div>`).join('');
 
-        renderFilteredQuestions();
+            renderFilteredQuestions();
+        } catch (error) {
+            showLoadingError(summaryEl, error.message);
+            chapterListEl.innerHTML = '';
+        }
     }
 
     function renderFilteredQuestions() {
         const q = document.getElementById('search-q-input').value.trim().toLowerCase();
         const container = document.getElementById('question-search-list');
-        if (!q) { container.innerHTML = ''; return; }
+        if (!q) {
+            container.innerHTML = '';
+            return;
+        }
 
-        const matches = loadedCourseRows.filter(r => (r.question_data?.q || '').toLowerCase().includes(q)).slice(0, 30);
+        const matches = loadedCourseRows.filter(r => String(r.question_data?.q || '').toLowerCase().includes(q)).slice(0, 30);
         container.innerHTML = matches.length === 0
-            ? `<div class="empty">No matching questions found.</div>`
+            ? '<div class="empty">No matching questions found.</div>'
             : matches.map(r => `
                 <div class="item">
                     <div class="item-info">
                         <div class="item-top">
                             <span class="badge">${escapeHtml(r.topic || 'General')}</span>
                             <span class="badge ${r.is_free_preview ? 'ok' : ''}">${r.is_free_preview ? 'Free' : 'Paid'}</span>
-                            <span class="item-meta">#${r.id}</span>
+                            <span class="item-meta">#${escapeHtml(r.id)}</span>
                         </div>
                         <div class="item-title" style="font-size: 0.87rem; font-weight: 600;">${escapeHtml(r.question_data?.q || '')}</div>
                     </div>
                     <div class="actions">
-                        <button type="button" class="act-btn edit" onclick="openEditModal(${r.id})">✏️ Edit</button>
-                        <button type="button" class="act-btn danger" onclick="deleteSingleQuestion(${r.id})">🗑️ Delete</button>
+                        <button type="button" class="act-btn edit" data-action="edit-question" data-id="${escapeHtml(r.id)}">✏️ Edit</button>
+                        <button type="button" class="act-btn danger" data-action="delete-question" data-id="${escapeHtml(r.id)}">🗑️ Delete</button>
                     </div>
-                </div>
-            `).join('');
+                </div>`).join('');
     }
 
     function openEditModal(id) {
-        editingRow = loadedCourseRows.find(r => r.id === id);
+        editingRow = loadedCourseRows.find(r => String(r.id) === String(id));
         if (!editingRow) return;
         const qd = editingRow.question_data || {};
-        const opts = qd.options || ['', '', '', ''];
+        const opts = Array.isArray(qd.options) ? qd.options : ['', '', '', ''];
         document.getElementById('edit-q-id').textContent = id;
         document.getElementById('edit-topic').value = editingRow.topic || '';
         document.getElementById('edit-q-text').value = qd.q || '';
@@ -613,22 +886,30 @@
         if (!editingRow) return;
         const newTopic = document.getElementById('edit-topic').value.trim() || 'General';
         const isFree = document.getElementById('edit-free').value === 'true';
+        const questionText = document.getElementById('edit-q-text').value.trim();
+        const options = [0, 1, 2, 3].map(i => document.getElementById('edit-opt-' + i).value.trim());
+        const answer = Number(document.getElementById('edit-answer').value);
+        if (!questionText || options.some(option => !option) || !Number.isInteger(answer) || answer < 0 || answer > 3) {
+            return alert('Enter the question, all four options, and a valid correct-answer index.');
+        }
         const updatedQd = {
             ...editingRow.question_data,
             chapter: newTopic,
-            q: document.getElementById('edit-q-text').value.trim(),
-            options: [0, 1, 2, 3].map(i => document.getElementById('edit-opt-' + i).value.trim()),
-            answer: Number(document.getElementById('edit-answer').value),
+            q: questionText,
+            options,
+            answer,
             explanation: document.getElementById('edit-expl').value.trim()
         };
 
-        const { error } = await db.from('questions').update({ topic: newTopic, is_free_preview: isFree, question_data: updatedQd }).eq('id', editingRow.id);
+        const { error } = await db.from('questions')
+            .update({ topic: newTopic, is_free_preview: isFree, question_data: updatedQd })
+            .eq('id', editingRow.id);
         if (error) return alert('Error saving: ' + error.message);
 
         const savedId = editingRow.id;
         closeEditModal();
         showBanner('manage-status', true, `✅ Updated question #${savedId}.`);
-        loadCourseOverview();
+        await loadCourseOverview();
     }
 
     async function deleteChapter(topicName) {
@@ -637,8 +918,7 @@
         const { error } = await db.from('questions').delete().eq('course_code', courseCode).eq('topic', topicName);
         if (error) return showBanner('manage-status', false, '❌ ' + error.message);
         showBanner('manage-status', true, `🗑️ Deleted "${topicName}".`);
-        loadCourseOverview();
-        loadTotalMcqCount();
+        await Promise.all([loadCourseOverview(), loadTotalMcqCount()]);
     }
 
     async function deleteSingleQuestion(id) {
@@ -646,8 +926,7 @@
         const { error } = await db.from('questions').delete().eq('id', id);
         if (error) return showBanner('manage-status', false, '❌ ' + error.message);
         showBanner('manage-status', true, `🗑️ Deleted question #${id}.`);
-        loadCourseOverview();
-        loadTotalMcqCount();
+        await Promise.all([loadCourseOverview(), loadTotalMcqCount()]);
     }
 
     function exportCourseJSON() {
@@ -655,11 +934,37 @@
         if (!loadedCourseRows.length) return alert('No questions loaded to export.');
         const exported = loadedCourseRows.map(r => r.question_data);
         const blob = new Blob([JSON.stringify(exported, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
+        a.href = url;
         a.download = `${courseCode}_backup.json`;
+        document.body.appendChild(a);
         a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
     }
+
+    // Event delegation keeps database values out of inline JavaScript handlers.
+    document.addEventListener('click', async event => {
+        const button = event.target.closest('[data-action]');
+        if (!button) return;
+        const action = button.dataset.action;
+        button.disabled = true;
+        try {
+            if (action === 'approve-payment') await approvePayment(button.dataset.id, button.dataset.email, button.dataset.course);
+            else if (action === 'reject-payment') await rejectPayment(button.dataset.id);
+            else if (action === 'revoke-course') await revokeCourse(button.dataset.userId, button.dataset.course, button.dataset.email);
+            else if (action === 'reset-devices') await resetDevicesByEmail(button.dataset.email);
+            else if (action === 'delete-chapter') await deleteChapter(button.dataset.topic);
+            else if (action === 'edit-question') openEditModal(button.dataset.id);
+            else if (action === 'delete-question') await deleteSingleQuestion(button.dataset.id);
+        } catch (error) {
+            console.error(error);
+            alert('Action failed: ' + error.message);
+        } finally {
+            if (button.isConnected) button.disabled = false;
+        }
+    });
 
     checkAdmin();
 </script>
