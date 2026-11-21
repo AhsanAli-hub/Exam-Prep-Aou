@@ -37,10 +37,10 @@
 
         /* Form Inputs & Buttons */
         label { display: block; font-weight: 700; font-size: 0.86rem; margin: 12px 0 6px; }
-        select, input[type="file"], input[type="text"], input[type="datetime-local"], textarea { width: 100%; padding: 11px 13px; border-radius: 11px; border: 1.5px solid var(--border); background: var(--bg); color: var(--text); font-family: inherit; font-size: 0.92rem; }
+        select, input[type="file"], input[type="text"], input[type="datetime-local"], textarea { width: 100%; padding: 11px 13px; border-radius: 11px; border: 1.5px solid var(--border); background: var(--bg); color: var(--text); font-family: inherit; font-size: 0.92rem; color-scheme: dark; }
         textarea { min-height: 160px; font-family: monospace; font-size: 0.84rem; }
         .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-end; }
-        .checkline { display: flex; align-items: center; gap: 9px; margin: 12px 0; color: var(--text); font-size: 0.88rem; font-weight: 600; }
+        .checkline { display: flex; align-items: center; gap: 9px; margin: 10px 0; color: var(--text); font-size: 0.88rem; font-weight: 600; cursor: pointer; }
         .checkline input { width: 17px; height: 17px; accent-color: var(--purple); }
         .hint { color: var(--muted); font-size: 0.82rem; line-height: 1.5; margin-top: 9px; }
         .col { flex: 1; min-width: 190px; }
@@ -49,8 +49,15 @@
         .btn:disabled { opacity: 0.5; cursor: not-allowed; }
         .btn.secondary { background: var(--bg); border: 1.5px solid var(--border); color: var(--text); }
         .btn.secondary:hover { border-color: var(--purple); color: var(--purple); }
+        .btn.danger { background: transparent; border: 1.5px solid var(--error); color: var(--error); }
+        .btn.danger:hover:not(:disabled) { background: rgba(239, 68, 68, 0.14); }
         .btn.full { width: 100%; margin-top: 16px; padding: 14px; }
         .status { margin-top: 12px; padding: 11px 14px; border-radius: 11px; font-weight: 600; font-size: 0.88rem; display: none; }
+
+        /* Preset Pills */
+        .preset-row { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 8px; }
+        .preset-pill { padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); background: var(--bg); color: var(--muted); font-size: 0.78rem; font-weight: 700; cursor: pointer; font-family: inherit; }
+        .preset-pill:hover { border-color: var(--purple); color: var(--text); }
 
         /* List Items */
         .list { display: flex; flex-direction: column; gap: 10px; }
@@ -73,14 +80,6 @@
         .chip-revoke { display: inline-flex; align-items: center; gap: 6px; background: rgba(16, 185, 129, 0.15); color: var(--success); padding: 3px 9px; border-radius: 8px; font-size: 0.75rem; font-weight: 800; }
         .chip-revoke button { background: none; border: none; color: var(--error); font-weight: 900; cursor: pointer; padding: 0 2px; font-size: 0.85rem; }
         .empty { color: var(--muted); font-size: 0.88rem; padding: 8px 0; font-weight: 600; }
-        .student-expiry { width: 100%; margin-top: 12px; padding: 12px; background: rgba(15,23,42,0.55); border: 1px solid var(--border); border-radius: 12px; }
-        .student-expiry-grid { display: grid; grid-template-columns: minmax(220px, 1fr) auto; gap: 12px; align-items: end; }
-        .student-expiry label { margin: 0 0 6px; }
-        .student-expiry input[type="datetime-local"] { width: 100%; }
-        .student-expiry .checkline { display: flex; align-items: center; gap: 8px; margin: 10px 0 0; font-size: 0.82rem; }
-        .student-expiry .checkline input { width: 16px; height: 16px; accent-color: var(--purple); }
-        .student-expiry .hint { margin-top: 8px; color: var(--muted); font-size: 0.78rem; line-height: 1.4; }
-        @media (max-width: 620px) { .student-expiry-grid { grid-template-columns: 1fr; } }
 
         /* Edit Question Modal */
         .modal-bg { position: fixed; inset: 0; background: rgba(0,0,0,0.72); display: none; align-items: center; justify-content: center; padding: 18px; z-index: 1000; }
@@ -196,10 +195,10 @@
 
             <div class="card">
                 <div class="top" style="margin-bottom: 6px;">
-                    <h2>🎓 Students, Unlocks & Individual Expiry</h2>
+                    <h2>🎓 Registered Students Directory</h2>
                     <button type="button" class="btn secondary" style="padding: 8px 13px; font-size: 0.82rem;" onclick="loadStudents()">↻ Refresh</button>
                 </div>
-                <p class="sub">Search students, set an individual expiry date, reset devices, or click <strong>×</strong> on a subject badge to revoke access.</p>
+                <p class="sub">Search students, reset their 2-device limit, or click <strong>×</strong> on a subject badge to revoke access.</p>
                 <input type="text" id="student-search" placeholder="Search by email or Student ID..." oninput="renderStudents()" style="margin-bottom: 12px;">
                 <div id="students-list" class="list"><div class="empty">Loading students...</div></div>
                 <div class="status" id="student-status"></div>
@@ -210,7 +209,7 @@
         <div class="tab-panel" id="tab-site">
             <div class="card">
                 <h2>🌐 Global Free / Paid Mode</h2>
-                <p class="sub">Make every question free, or restore the first 15 questions per course as free preview.</p>
+                <p class="sub">Make every question free for everyone, or restore the first 15 questions per course as free preview.</p>
                 <div class="item">
                     <div class="item-info">
                         <div class="item-title">Current setting</div>
@@ -225,17 +224,40 @@
 
             <div class="card">
                 <h2>⚠️ Reset All Student Access</h2>
-                <p class="sub">Remove course unlocks for every profile. You can also clear all registered devices.</p>
+                <p class="sub">Remove course unlocks for every profile immediately. You can also clear all registered devices.</p>
                 <label class="checkline"><input type="checkbox" id="reset-all-devices" checked> Also reset registered devices for everyone</label>
-                <button type="button" class="btn" onclick="resetAllStudentAccess()">Reset All Access</button>
-                <div class="hint">This action affects every student account and cannot be undone automatically. You will be asked to type a confirmation phrase.</div>
+                <button type="button" class="btn danger" onclick="resetAllStudentAccess()">Reset All Access</button>
+                <div class="hint">This affects every student account on the site and asks you to type a confirmation phrase first.</div>
             </div>
 
             <div class="card">
-                <h2>⏰ Individual Student Expiry</h2>
-                <p class="sub">Set a separate expiry date for each student in the Students &amp; Unlocks tab. Expiry removes only that student's unlocked courses and, optionally, that student's registered devices. It does not change question access settings for other students.</p>
-                <div class="hint">Use the expiry controls inside each student's card. For expiry to be processed at the scheduled time even when the student is offline, enable the optional database scheduled job described in the SQL setup instructions.</div>
+                <h2>⏰ Global Access Expiry</h2>
+                <p class="sub">Set one site-wide expiry date &amp; time. When it passes, everyone's unlocked courses are automatically reset at once.</p>
+                <div class="item" style="margin-bottom: 12px;">
+                    <div class="item-info">
+                        <div class="item-title">Scheduled global expiry</div>
+                        <div class="item-meta" id="global-expiry-state">Loading schedule...</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="global-expiry-input">Expiry date &amp; time (your browser's local time)</label>
+                        <input type="datetime-local" id="global-expiry-input">
+                        <div class="preset-row">
+                            <button type="button" class="preset-pill" data-action="preset-expiry" data-value="2026-12-20T23:59">Dec 20, 2026</button>
+                            <button type="button" class="preset-pill" data-action="preset-days" data-days="30">+30 Days</button>
+                            <button type="button" class="preset-pill" data-action="preset-days" data-days="90">+90 Days</button>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <button type="button" class="btn" data-action="save-global-expiry">Save Global Expiry</button>
+                        <button type="button" class="btn secondary" data-action="clear-global-expiry">Clear Expiry</button>
+                    </div>
+                </div>
+                <label class="checkline" style="margin-top: 12px;"><input type="checkbox" id="global-expiry-devices" checked> Also reset everyone's registered devices when expiry hits</label>
+                <label class="checkline"><input type="checkbox" id="global-expiry-paid" checked> Also restore Paid Mode (first 15 free) when expiry hits</label>
             </div>
+
             <div class="status" id="site-status"></div>
         </div>
 
@@ -370,8 +392,6 @@
     let loadedCourseRows = [];
     let editingRow = null;
 
-    // Safe for HTML text and quoted HTML attributes. Dynamic values are never
-    // inserted into inline JavaScript event-handler strings.
     function escapeHtml(value) {
         const chars = {
             '&': '&amp;',
@@ -419,7 +439,6 @@
         const inputLabel = document.getElementById('app-dialog-input-label');
         const inputError = document.getElementById('app-dialog-error');
 
-        // Resolve any previous dialog safely before showing a new one.
         if (activeAdminDialogResolve) closeAdminDialog(false);
 
         const config = {
@@ -507,7 +526,6 @@
         el.style.color = 'var(--error)';
     }
 
-    // Fetch every page instead of silently stopping at Supabase's row limit.
     async function fetchAllRows(queryFactory) {
         const rows = [];
         for (let from = 0; ; from += PAGE_SIZE) {
@@ -557,14 +575,20 @@
     }
 
     async function refreshAllData() {
-        const jobs = [
+        try {
+            const { data: didReset } = await db.rpc('check_and_run_expiry');
+            if (didReset) {
+                showBanner('site-status', true, '⏰ Scheduled global expiry reached — all student access has been automatically reset.');
+            }
+        } catch (_) {}
+
+        await Promise.allSettled([
             loadPendingPayments(),
             loadStudents(),
             loadCourseOverview(),
             loadTotalMcqCount(),
             loadSiteSettings()
-        ];
-        await Promise.allSettled(jobs);
+        ]);
     }
 
     async function loadTotalMcqCount() {
@@ -656,7 +680,7 @@
         try {
             allStudents = await fetchAllRows(() => db
                 .from('profiles')
-                .select('id,email,student_id,unlocked_courses,registered_devices,created_at,access_expires_at,expiry_reset_devices,expiry_last_run_at')
+                .select('id,email,student_id,unlocked_courses,registered_devices,created_at')
                 .order('created_at', { ascending: false }));
             document.getElementById('stat-students').textContent = allStudents.length;
             document.getElementById('stat-paid').textContent = allStudents.filter(s => Array.isArray(s.unlocked_courses) && s.unlocked_courses.length > 0).length;
@@ -685,15 +709,9 @@
             const chipsHtml = courses.length > 0
                 ? courses.map(c => `<span class="chip-revoke">${escapeHtml(String(c).toUpperCase())} <button type="button" title="Revoke ${escapeHtml(c)}" data-action="revoke-course" data-user-id="${escapeHtml(s.id)}" data-course="${escapeHtml(c)}" data-email="${escapeHtml(s.email || '')}">×</button></span>`).join('')
                 : '<span class="item-meta">Free Preview Only</span>';
-            const expiryText = s.access_expires_at
-                ? `Scheduled: ${new Date(s.access_expires_at).toLocaleString()}`
-                : 'No individual expiry scheduled.';
-            const lastRunText = s.expiry_last_run_at
-                ? ` Last expiry processed: ${new Date(s.expiry_last_run_at).toLocaleString()}.`
-                : '';
 
             return `
-                <div class="item" style="align-items:stretch;">
+                <div class="item">
                     <div class="item-info">
                         <div class="item-top">
                             <span class="item-title">${escapeHtml(s.email || '')}</span>
@@ -701,21 +719,9 @@
                             <span class="badge ${devCount >= 2 ? 'warn' : ''}">📱 ${devCount}/2 Devices</span>
                         </div>
                         <div class="item-top" style="margin-top: 4px;">${chipsHtml}</div>
-                        <div class="student-expiry" data-student-card="${escapeHtml(s.id)}">
-                            <div class="student-expiry-grid">
-                                <div>
-                                    <label>Individual expiry (your browser's local time)</label>
-                                    <input type="datetime-local" data-role="expiry-date" value="${escapeHtml(toLocalDateTimeInput(s.access_expires_at))}">
-                                    <label class="checkline"><input type="checkbox" data-role="expiry-reset-devices" ${s.expiry_reset_devices !== false ? 'checked' : ''}> Also reset this student's devices</label>
-                                </div>
-                                <div class="actions">
-                                    <button type="button" class="act-btn ok" data-action="save-student-expiry" data-user-id="${escapeHtml(s.id)}">Save expiry</button>
-                                    <button type="button" class="act-btn danger" data-action="clear-student-expiry" data-user-id="${escapeHtml(s.id)}">Clear expiry</button>
-                                    <button type="button" class="act-btn edit" data-action="reset-devices" data-email="${escapeHtml(s.email || '')}">Reset Devices</button>
-                                </div>
-                            </div>
-                            <div class="hint">${escapeHtml(expiryText + lastRunText)} When the date passes, only this student's course unlocks are cleared${s.expiry_reset_devices !== false ? ' and their devices are reset' : ''}.</div>
-                        </div>
+                    </div>
+                    <div class="actions">
+                        <button type="button" class="act-btn edit" data-action="reset-devices" data-email="${escapeHtml(s.email || '')}">Reset Devices</button>
                     </div>
                 </div>`;
         }).join('');
@@ -760,7 +766,7 @@
         await loadStudents();
     }
 
-    /* ====================== SITE CONTROLS ====================== */
+    /* ====================== SITE CONTROLS (GLOBAL) ====================== */
     function toLocalDateTimeInput(value) {
         if (!value) return '';
         const d = new Date(value);
@@ -771,16 +777,45 @@
 
     async function loadSiteSettings() {
         try {
-            const { data, error } = await db.from('site_settings').select('id,is_global_free').eq('id', 1).maybeSingle();
+            const { data, error } = await db
+                .from('site_settings')
+                .select('id,is_global_free,access_expires_at,auto_reset_devices,auto_restore_paid,last_auto_reset_at')
+                .eq('id', 1)
+                .maybeSingle();
             if (error) throw error;
             if (!data) throw new Error('The site_settings row (id = 1) was not found.');
 
             document.getElementById('global-free-state').textContent = data.is_global_free
                 ? '🟢 Global free mode is ON — all questions are marked as free preview.'
                 : '🔒 Global free mode is OFF — normal paid/free-preview rules apply.';
+
+            document.getElementById('global-expiry-input').value = toLocalDateTimeInput(data.access_expires_at);
+            document.getElementById('global-expiry-devices').checked = data.auto_reset_devices !== false;
+            document.getElementById('global-expiry-paid').checked = data.auto_restore_paid !== false;
+
+            const expiryEl = document.getElementById('global-expiry-state');
+            if (data.access_expires_at) {
+                const expDate = new Date(data.access_expires_at);
+                const diffMs = expDate - new Date();
+                if (diffMs > 0) {
+                    const days = Math.floor(diffMs / 86400000);
+                    const hrs = Math.floor((diffMs % 86400000) / 3600000);
+                    expiryEl.style.color = 'var(--warn)';
+                    expiryEl.textContent = `⏰ Scheduled for ${expDate.toLocaleString()} (in ${days}d ${hrs}h).`;
+                } else {
+                    expiryEl.style.color = 'var(--warn)';
+                    expiryEl.textContent = `⏰ Expiry time (${expDate.toLocaleString()}) has passed and will run automatically.`;
+                }
+            } else {
+                expiryEl.style.color = 'var(--muted)';
+                expiryEl.textContent = data.last_auto_reset_at
+                    ? `No active expiry set. Last global auto-reset ran on ${new Date(data.last_auto_reset_at).toLocaleString()}.`
+                    : 'No global expiry scheduled.';
+            }
         } catch (error) {
             showBanner('site-status', false, 'Could not load site settings: ' + error.message);
             document.getElementById('global-free-state').textContent = 'Could not load current setting.';
+            document.getElementById('global-expiry-state').textContent = 'Run the SQL setup script first.';
         }
     }
 
@@ -799,7 +834,7 @@
         showBanner('site-status', true, makeFree
             ? '✅ Global free mode enabled.'
             : '✅ Paid mode restored. The first 15 questions per course remain free.');
-        await Promise.all([loadSiteSettings(), loadTotalMcqCount()]);
+        await Promise.all([loadSiteSettings(), loadTotalMcqCount(), loadCourseOverview()]);
     }
 
     async function resetAllStudentAccess() {
@@ -819,47 +854,55 @@
         await Promise.all([loadStudents(), loadSiteSettings()]);
     }
 
-    async function saveStudentExpiry(userId, button) {
-        const card = button.closest('[data-student-card]');
-        if (!card) throw new Error('Could not find this student expiry form.');
-        const localValue = card.querySelector('[data-role="expiry-date"]').value;
-        const resetDevices = card.querySelector('[data-role="expiry-reset-devices"]').checked;
+    async function saveGlobalExpiry() {
+        const localValue = document.getElementById('global-expiry-input').value;
+        const resetDevices = document.getElementById('global-expiry-devices').checked;
+        const restorePaid = document.getElementById('global-expiry-paid').checked;
 
         if (!localValue) {
-            showBanner('student-status', false, 'Choose an expiry date and time, or use Clear Expiry.');
-            return;
+            return showBanner('site-status', false, 'Choose an expiry date and time first, or click Clear Expiry.');
         }
 
         const parsed = new Date(localValue);
         if (Number.isNaN(parsed.getTime()) || parsed.getTime() <= Date.now()) {
-            showBanner('student-status', false, 'Choose a valid future date and time.');
-            return;
+            return showBanner('site-status', false, 'Choose a valid future date and time.');
         }
 
-        const { error } = await db.rpc('admin_set_student_expiry', {
-            p_user_id: userId,
-            p_expires_at: parsed.toISOString(),
-            p_reset_devices: resetDevices
+        const confirmed = await confirmAdminAction({
+            title: 'Schedule global access expiry?',
+            message: `On ${parsed.toLocaleString()}, all student unlocks will be cleared${resetDevices ? ', registered devices reset' : ''}${restorePaid ? ', and Paid Mode restored' : ''}.`,
+            icon: '⏰', confirmText: 'Save global expiry'
         });
-        if (error) throw error;
+        if (!confirmed) return;
 
-        showBanner('student-status', true, '✅ Individual expiry saved. This setting affects only the selected student.');
-        await loadStudents();
+        const { error } = await db.rpc('admin_save_expiry_settings', {
+            p_expires_at: parsed.toISOString(),
+            p_reset_devices: resetDevices,
+            p_restore_paid: restorePaid
+        });
+        if (error) return showBanner('site-status', false, '❌ ' + error.message);
+
+        showBanner('site-status', true, `✅ Global expiry saved for ${parsed.toLocaleString()}.`);
+        await loadSiteSettings();
     }
 
-    async function clearStudentExpiry(userId) {
+    async function clearGlobalExpiry() {
         const confirmed = await confirmAdminAction({
-            title: 'Clear this student’s expiry?',
-            message: 'Their current course access and registered devices will not be changed. Only the scheduled expiry date will be removed.',
+            title: 'Clear global expiry?',
+            message: 'No current student access will be changed. The scheduled site-wide auto-reset will simply be removed.',
             icon: '⏰', confirmText: 'Clear expiry'
         });
         if (!confirmed) return;
-        const { error } = await db.rpc('admin_clear_student_expiry', {
-            p_user_id: userId
+
+        const { error } = await db.rpc('admin_save_expiry_settings', {
+            p_expires_at: null,
+            p_reset_devices: document.getElementById('global-expiry-devices').checked,
+            p_restore_paid: document.getElementById('global-expiry-paid').checked
         });
-        if (error) throw error;
-        showBanner('student-status', true, '✅ This student’s expiry has been cleared. No access or devices were reset.');
-        await loadStudents();
+        if (error) return showBanner('site-status', false, '❌ ' + error.message);
+
+        showBanner('site-status', true, '✅ Global expiry cleared.');
+        await loadSiteSettings();
     }
 
     /* ====================== 3. UPLOAD MCQS ====================== */
@@ -941,8 +984,8 @@
             if (problems.length) throw new Error(`The upload was stopped because ${problems.length} question(s) are invalid. ${problems.slice(0, 6).join(' ')}`);
 
             showBanner('status-box', true, `Checking existing questions in ${courseCode.toUpperCase()}...`);
-          const existing = await fetchAllRows(() =>
-            db.from('questions').select('id, question_data').eq('course_code', courseCode).order('id', { ascending: true }));
+            const existing = await fetchAllRows(() =>
+                db.from('questions').select('id, question_data').eq('course_code', courseCode).order('id', { ascending: true }));
             const existingSet = new Set(existing.map(r => String(r.question_data?.q || '').trim().toLowerCase()).filter(Boolean));
             const uniqueRows = [];
             let skipped = 0;
@@ -1157,19 +1200,31 @@
         setTimeout(() => URL.revokeObjectURL(url), 1000);
     }
 
-    // Event delegation keeps database values out of inline JavaScript handlers.
     document.addEventListener('click', async event => {
         const button = event.target.closest('[data-action]');
         if (!button) return;
         const action = button.dataset.action;
+
+        if (action === 'preset-expiry') {
+            document.getElementById('global-expiry-input').value = button.dataset.value || '';
+            return;
+        }
+        if (action === 'preset-days') {
+            const days = Number(button.dataset.days || 30);
+            const future = new Date(Date.now() + days * 86400000);
+            future.setHours(23, 59, 0, 0);
+            document.getElementById('global-expiry-input').value = toLocalDateTimeInput(future.toISOString());
+            return;
+        }
+
         button.disabled = true;
         try {
             if (action === 'approve-payment') await approvePayment(button.dataset.id, button.dataset.email, button.dataset.course);
             else if (action === 'reject-payment') await rejectPayment(button.dataset.id);
             else if (action === 'revoke-course') await revokeCourse(button.dataset.userId, button.dataset.course, button.dataset.email);
             else if (action === 'reset-devices') await resetDevicesByEmail(button.dataset.email);
-            else if (action === 'save-student-expiry') await saveStudentExpiry(button.dataset.userId, button);
-            else if (action === 'clear-student-expiry') await clearStudentExpiry(button.dataset.userId);
+            else if (action === 'save-global-expiry') await saveGlobalExpiry();
+            else if (action === 'clear-global-expiry') await clearGlobalExpiry();
             else if (action === 'delete-chapter') await deleteChapter(button.dataset.topic);
             else if (action === 'edit-question') openEditModal(button.dataset.id);
             else if (action === 'delete-question') await deleteSingleQuestion(button.dataset.id);
