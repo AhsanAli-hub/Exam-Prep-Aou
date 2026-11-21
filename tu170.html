@@ -4,16 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TU170 Quiz</title>
-    <script>
-        (function() {
-            try {
-                var saved = localStorage.getItem('theme');
-                if (saved === 'dark') {
-                    document.documentElement.setAttribute('data-theme', 'dark');
-                }
-            } catch (e) {}
-        })();
-    </script>
+    <script src="theme.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -286,21 +277,7 @@
 
     passageHeader.addEventListener('click', () => passageBox.classList.toggle('open'));
 
-    /* ====================== THEME ====================== */
-    function toggleTheme() {
-        const html = document.documentElement;
-        const btn = document.getElementById('theme-toggle');
-        if (html.getAttribute('data-theme') === 'dark') {
-            html.setAttribute('data-theme', 'light'); btn.textContent = '🌙';
-            try { localStorage.setItem('theme', 'light'); } catch (e) {}
-        } else {
-            html.setAttribute('data-theme', 'dark'); btn.textContent = '☀️';
-            try { localStorage.setItem('theme', 'dark'); } catch (e) {}
-        }
-    }
-    if (document.documentElement.getAttribute('data-theme') === 'dark') {
-        document.getElementById('theme-toggle').textContent = '☀️';
-    }
+    /* THEME: handled by theme.js (shared cookie across all pages) */
 
     /* ====================== HELPERS ====================== */
     function escapeHtml(str) {
