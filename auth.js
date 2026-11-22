@@ -26,8 +26,12 @@ window.currentUser = null;
 window.currentProfile = null;
 window.unlockedCourses = [];
 window.pendingRequests = [];
-let authMode = 'signin';
+
+let authMode = 'signin'; // 'signin' | 'signup' | 'otp-email' | 'verify-otp' | 'forgot' | 'reset'
 let activeRequestCourse = 'all';
+let pendingOtpEmail = '';
+let pendingOtpType = 'signup'; // 'signup' | 'email'
+let resendTimerId = null;
 
 /* ====================== PASSWORD EYE SVG HELPERS ====================== */
 const EYE_OPEN_SVG = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`;
@@ -133,6 +137,19 @@ function injectAuthUI() {
             .modal-card p { margin: 0 0 16px 0; color: var(--text-muted); font-size: 0.88rem; line-height: 1.45; }
             .modal-input { width: 100%; padding: 12px 14px; margin-bottom: 12px; border-radius: 10px; border: 1.5px solid var(--border); background: var(--bg); color: var(--text-main); font-family: inherit; font-size: 0.94rem; }
             .modal-input:focus { outline: none; border-color: var(--purple); }
+            .otp-code-input {
+                width: 100%; padding: 14px; margin-bottom: 10px;
+                border-radius: 12px; border: 2px solid var(--purple);
+                background: var(--bg); color: var(--text-main);
+                font-family: inherit; font-size: 1.65rem; font-weight: 800;
+                letter-spacing: 0.42em; text-align: center;
+            }
+            .otp-code-input:focus { outline: none; box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.25); }
+            .otp-resend-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 0.82rem; color: var(--text-muted); }
+            .forgot-row { display: flex; justify-content: flex-end; margin: -6px 0 12px; }
+            .inline-link-btn { background: none; border: none; padding: 0; color: var(--purple); font-family: inherit; font-size: 0.82rem; font-weight: 700; cursor: pointer; text-decoration: none; }
+            .inline-link-btn:hover:not(:disabled) { text-decoration: underline; }
+            .inline-link-btn:disabled { color: var(--text-muted); cursor: not-allowed; opacity: 0.7; }
             .password-wrap { position: relative; margin-bottom: 12px; }
             .password-wrap .modal-input { margin-bottom: 0; padding-right: 44px; }
             .password-wrap input::-ms-reveal, .password-wrap input::-ms-clear { display: none; }
@@ -153,10 +170,10 @@ function injectAuthUI() {
             .req-email-note { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; font-size: 0.83rem; color: var(--text-muted); margin-bottom: 14px; line-height: 1.45; }
             .req-email-note strong { color: var(--text-main); }
 
-            /* Google OAuth Button & Divider */
+            /* Google OAuth & OTP Option Buttons */
             .oauth-divider { display: flex; align-items: center; gap: 10px; margin: 14px 0 10px; color: var(--text-muted); font-size: 0.78rem; font-weight: 700; }
             .oauth-divider::before, .oauth-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-            .google-btn { width: 100%; padding: 12px; background: var(--bg); color: var(--text-main); border: 1.5px solid var(--border); border-radius: 12px; font-weight: 700; font-size: 0.92rem; cursor: pointer; font-family: inherit; display: flex; align-items: center; justify-content: center; gap: 10px; }
+            .google-btn { width: 100%; padding: 12px; background: var(--bg); color: var(--text-main); border: 1.5px solid var(--border); border-radius: 12px; font-weight: 700; font-size: 0.92rem; cursor: pointer; font-family: inherit; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 8px; }
             .google-btn:hover { border-color: var(--purple); background: var(--purple-light); }
         `;
         document.head.appendChild(style);
@@ -169,40 +186,78 @@ function injectAuthUI() {
                 <div class="modal-card">
                     <h3 id="modal-title">Student Sign In</h3>
                     <p id="modal-subtitle">Log in to access your unlocked subjects.</p>
+
                     <div id="signup-extra-top" style="display: none;">
                         <input type="text" id="auth-student-id" class="modal-input" placeholder="University Student ID (8 digits, e.g. 26464141)" inputmode="numeric" maxlength="8">
                     </div>
+
                     <input type="email" id="auth-email" class="modal-input" placeholder="Email address">
-                    <div class="password-wrap">
+
+                    <div class="password-wrap" id="auth-pwd-wrap">
                         <input type="password" id="auth-password" class="modal-input" placeholder="Password (min 6 characters)">
                         <button type="button" class="password-toggle" onclick="togglePwdField('auth-password', this)" aria-label="Toggle password"></button>
                     </div>
+
+                    <div class="forgot-row" id="forgot-row">
+                        <button type="button" class="inline-link-btn" onclick="openForgotPassword()">Forgot password?</button>
+                    </div>
+
                     <div class="password-wrap" id="confirm-pwd-wrap" style="display: none;">
                         <input type="password" id="auth-confirm-password" class="modal-input" placeholder="Confirm password">
                         <button type="button" class="password-toggle" onclick="togglePwdField('auth-confirm-password', this)" aria-label="Toggle confirm password"></button>
                     </div>
+
+                    <div id="otp-verify-wrap" style="display: none;">
+                        <input type="text" id="auth-otp-code" class="otp-code-input" placeholder="000000" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="one-time-code">
+                        <div class="otp-resend-row">
+                            <span>Didn't get the code?</span>
+                            <button type="button" class="inline-link-btn" id="resend-otp-btn" onclick="resendOtpCode()">Resend code</button>
+                        </div>
+                    </div>
+
                     <button class="modal-submit" id="auth-submit-btn" onclick="submitAuth()">Sign In</button>
-                    <div class="oauth-divider">OR</div>
-                    <button type="button" class="google-btn" onclick="signInWithGoogle()">
-                        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-                            <path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47c-.29 1.55-1.14 2.86-2.4 3.73v3.09h3.88c2.27-2.09 3.54-5.17 3.54-9.06z"/>
-                            <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.09c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.26v3.18C3.23 21.31 7.31 24 12 24z"/>
-                            <path fill="#FBBC05" d="M5.28 14.29c-.24-.72-.38-1.49-.38-2.29s.14-1.57.38-2.29V6.53H1.26C.46 8.17 0 10.02 0 12s.46 3.83 1.26 5.47l4.02-3.18z"/>
-                            <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.23 2.69 1.26 6.53l4.02 3.18c.95-2.85 3.6-4.96 6.72-4.96z"/>
-                        </svg>
-                        <span>Continue with Google</span>
-                    </button>
+
+                    <div id="oauth-section">
+                        <div class="oauth-divider">OR</div>
+                        <button type="button" class="google-btn" id="otp-mode-btn" onclick="openOtpEmailMode()">
+                            <span>✉️ Sign in with 6-digit email code</span>
+                        </button>
+                        <button type="button" class="google-btn" onclick="signInWithGoogle()">
+                            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47c-.29 1.55-1.14 2.86-2.4 3.73v3.09h3.88c2.27-2.09 3.54-5.17 3.54-9.06z"/>
+                                <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.09c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.26v3.18C3.23 21.31 7.31 24 12 24z"/>
+                                <path fill="#FBBC05" d="M5.28 14.29c-.24-.72-.38-1.49-.38-2.29s.14-1.57.38-2.29V6.53H1.26C.46 8.17 0 10.02 0 12s.46 3.83 1.26 5.47l4.02-3.18z"/>
+                                <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.23 2.69 1.26 6.53l4.02 3.18c.95-2.85 3.6-4.96 6.72-4.96z"/>
+                            </svg>
+                            <span>Continue with Google</span>
+                        </button>
+                    </div>
+
                     <div class="modal-msg" id="auth-msg"></div>
-                    <div class="modal-switch">
+
+                    <div class="modal-switch" id="modal-switch-wrap">
                         <span id="modal-switch-text">Don't have an account?</span>
                         <a id="modal-switch-link" onclick="toggleAuthMode()">Create one</a>
                     </div>
+
                     <button class="modal-cancel" onclick="closeAuthModal()">Cancel</button>
                 </div>
             </div>
         `;
         document.body.appendChild(wrapper.firstElementChild);
         resetPwdToggles();
+
+        const otpInput = document.getElementById('auth-otp-code');
+        otpInput.addEventListener('input', () => {
+            otpInput.value = otpInput.value.replace(/\D/g, '').slice(0, 6);
+        });
+
+        document.getElementById('auth-modal').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                submitAuth();
+            }
+        });
     }
 
     if (!document.getElementById('request-modal')) {
@@ -452,31 +507,309 @@ window.openAuthModal = function(mode = 'signin', customMessage = '') {
 window.closeAuthModal = function() {
     const modal = document.getElementById('auth-modal');
     if (modal) modal.classList.remove('open');
+    if (resendTimerId) {
+        clearInterval(resendTimerId);
+        resendTimerId = null;
+    }
+};
+
+window.openOtpEmailMode = function() {
+    authMode = 'otp-email';
+    document.getElementById('auth-msg').textContent = '';
+    updateAuthModalUI();
+    document.getElementById('auth-email').focus();
+};
+
+window.openForgotPassword = function() {
+    authMode = 'forgot';
+    document.getElementById('auth-msg').textContent = '';
+    updateAuthModalUI();
+    document.getElementById('auth-email').focus();
 };
 
 window.toggleAuthMode = function() {
-    authMode = authMode === 'signin' ? 'signup' : 'signin';
+    if (authMode === 'signin') {
+        authMode = 'signup';
+    } else {
+        authMode = 'signin';
+    }
     document.getElementById('auth-msg').textContent = '';
     updateAuthModalUI();
 };
 
+function startResendCooldown(seconds = 60) {
+    const btn = document.getElementById('resend-otp-btn');
+    if (!btn) return;
+    if (resendTimerId) clearInterval(resendTimerId);
+
+    let remaining = seconds;
+    btn.disabled = true;
+    btn.textContent = `Resend in ${remaining}s`;
+
+    resendTimerId = setInterval(() => {
+        remaining -= 1;
+        if (remaining <= 0) {
+            clearInterval(resendTimerId);
+            resendTimerId = null;
+            btn.disabled = false;
+            btn.textContent = 'Resend code';
+        } else {
+            btn.textContent = `Resend in ${remaining}s`;
+        }
+    }, 1000);
+}
+
+window.resendOtpCode = async function() {
+    if (!pendingOtpEmail) return;
+    const msgEl = document.getElementById('auth-msg');
+    msgEl.style.color = 'var(--text-muted)';
+    msgEl.textContent = 'Sending new 6-digit code...';
+
+    let error = null;
+    if (pendingOtpType === 'signup') {
+        const res = await window.db.auth.resend({
+            type: 'signup',
+            email: pendingOtpEmail
+        });
+        error = res.error;
+    } else {
+        const res = await window.db.auth.signInWithOtp({
+            email: pendingOtpEmail,
+            options: { shouldCreateUser: true }
+        });
+        error = res.error;
+    }
+
+    if (error) {
+        msgEl.style.color = 'var(--error)';
+        msgEl.textContent = error.message;
+        return;
+    }
+
+    msgEl.style.color = 'var(--success)';
+    msgEl.textContent = `✅ A new 6-digit code was sent to ${pendingOtpEmail}.`;
+    startResendCooldown(60);
+};
+
 function updateAuthModalUI() {
-    const isSignIn = authMode === 'signin';
-    document.getElementById('modal-title').textContent = isSignIn ? 'Student Sign In' : 'Create Student Account';
-    document.getElementById('modal-subtitle').textContent = isSignIn
-        ? 'Log in to access your unlocked subjects (Max 2 devices).'
-        : 'Enter your University Student ID and email. Accounts are limited to 2 devices.';
-    document.getElementById('signup-extra-top').style.display = isSignIn ? 'none' : 'block';
-    document.getElementById('confirm-pwd-wrap').style.display = isSignIn ? 'none' : 'block';
-    document.getElementById('auth-submit-btn').textContent = isSignIn ? 'Sign In' : 'Create Account';
-    document.getElementById('modal-switch-text').textContent = isSignIn ? "Don't have an account?" : "Already have an account?";
-    document.getElementById('modal-switch-link').textContent = isSignIn ? 'Create one' : 'Sign in';
+    const titleEl = document.getElementById('modal-title');
+    const subEl = document.getElementById('modal-subtitle');
+    const signupTop = document.getElementById('signup-extra-top');
+    const emailInput = document.getElementById('auth-email');
+    const pwdWrap = document.getElementById('auth-pwd-wrap');
+    const pwdInput = document.getElementById('auth-password');
+    const forgotRow = document.getElementById('forgot-row');
+    const confirmWrap = document.getElementById('confirm-pwd-wrap');
+    const otpWrap = document.getElementById('otp-verify-wrap');
+    const submitBtn = document.getElementById('auth-submit-btn');
+    const oauthSec = document.getElementById('oauth-section');
+    const otpModeBtn = document.getElementById('otp-mode-btn');
+    const switchWrap = document.getElementById('modal-switch-wrap');
+    const switchText = document.getElementById('modal-switch-text');
+    const switchLink = document.getElementById('modal-switch-link');
+
+    // Reset visibility defaults
+    signupTop.style.display = 'none';
+    emailInput.style.display = 'block';
+    pwdWrap.style.display = 'none';
+    forgotRow.style.display = 'none';
+    confirmWrap.style.display = 'none';
+    otpWrap.style.display = 'none';
+    oauthSec.style.display = 'none';
+    switchWrap.style.display = 'block';
+    pwdInput.placeholder = 'Password (min 6 characters)';
+
+    if (authMode === 'signin') {
+        titleEl.textContent = 'Student Sign In';
+        subEl.textContent = 'Log in to access your unlocked subjects (Max 2 devices).';
+        pwdWrap.style.display = 'block';
+        forgotRow.style.display = 'flex';
+        submitBtn.textContent = 'Sign In';
+        oauthSec.style.display = 'block';
+        otpModeBtn.style.display = 'flex';
+        switchText.textContent = "Don't have an account?";
+        switchLink.textContent = 'Create one';
+    } else if (authMode === 'signup') {
+        titleEl.textContent = 'Create Student Account';
+        subEl.textContent = 'Enter your University Student ID and email. Accounts are limited to 2 devices.';
+        signupTop.style.display = 'block';
+        pwdWrap.style.display = 'block';
+        confirmWrap.style.display = 'block';
+        submitBtn.textContent = 'Create Account';
+        oauthSec.style.display = 'block';
+        otpModeBtn.style.display = 'none';
+        switchText.textContent = 'Already have an account?';
+        switchLink.textContent = 'Sign in';
+    } else if (authMode === 'otp-email') {
+        titleEl.textContent = 'Sign In with Email Code';
+        subEl.textContent = 'Enter your email address and we will send you a 6-digit login code.';
+        submitBtn.textContent = 'Send 6-Digit Code';
+        switchText.textContent = 'Prefer password?';
+        switchLink.textContent = 'Back to Sign In';
+    } else if (authMode === 'verify-otp') {
+        titleEl.textContent = 'Enter 6-Digit Code';
+        subEl.textContent = `We sent a 6-digit verification code to ${pendingOtpEmail}. Check Spam/Junk if needed.`;
+        emailInput.style.display = 'none';
+        otpWrap.style.display = 'block';
+        document.getElementById('auth-otp-code').value = '';
+        submitBtn.textContent = 'Verify & Continue';
+        switchText.textContent = 'Wrong email?';
+        switchLink.textContent = 'Go back';
+    } else if (authMode === 'forgot') {
+        titleEl.textContent = 'Reset Password';
+        subEl.textContent = 'Enter your account email and we will send you a password reset link.';
+        submitBtn.textContent = 'Send Reset Link';
+        switchText.textContent = 'Remembered your password?';
+        switchLink.textContent = 'Back to Sign In';
+    } else if (authMode === 'reset') {
+        titleEl.textContent = 'Set New Password';
+        subEl.textContent = 'Enter your new password below (minimum 6 characters).';
+        emailInput.style.display = 'none';
+        pwdWrap.style.display = 'block';
+        pwdInput.placeholder = 'New password (min 6 characters)';
+        confirmWrap.style.display = 'block';
+        submitBtn.textContent = 'Update Password';
+        switchWrap.style.display = 'none';
+    }
 }
 
 window.submitAuth = async function() {
-    const email = document.getElementById('auth-email').value.trim();
+    const email = document.getElementById('auth-email').value.trim().toLowerCase();
     const password = document.getElementById('auth-password').value;
     const msgEl = document.getElementById('auth-msg');
+    const submitBtn = document.getElementById('auth-submit-btn');
+
+    if (authMode === 'verify-otp') {
+        const token = document.getElementById('auth-otp-code').value.replace(/\D/g, '').trim();
+        if (token.length !== 6) {
+            msgEl.style.color = 'var(--error)';
+            msgEl.textContent = 'Please enter the 6-digit code from your email.';
+            return;
+        }
+
+        submitBtn.disabled = true;
+        msgEl.style.color = 'var(--text-muted)';
+        msgEl.textContent = 'Verifying code...';
+
+        const { error } = await window.db.auth.verifyOtp({
+            email: pendingOtpEmail,
+            token,
+            type: pendingOtpType
+        });
+
+        submitBtn.disabled = false;
+
+        if (error) {
+            msgEl.style.color = 'var(--error)';
+            msgEl.textContent = 'Invalid or expired code: ' + error.message;
+            return;
+        }
+
+        Object.keys(sessionStorage).forEach(k => {
+            if (k.startsWith('qcache_')) sessionStorage.removeItem(k);
+        });
+
+        msgEl.style.color = 'var(--success)';
+        msgEl.textContent = '✅ Verified! Loading...';
+        setTimeout(() => location.reload(), 500);
+        return;
+    }
+
+    if (authMode === 'otp-email') {
+        if (!email) {
+            msgEl.style.color = 'var(--error)';
+            msgEl.textContent = 'Please enter your email address.';
+            return;
+        }
+
+        submitBtn.disabled = true;
+        msgEl.style.color = 'var(--text-muted)';
+        msgEl.textContent = 'Sending 6-digit code...';
+
+        const { error } = await window.db.auth.signInWithOtp({
+            email,
+            options: { shouldCreateUser: true }
+        });
+
+        submitBtn.disabled = false;
+
+        if (error) {
+            msgEl.style.color = 'var(--error)';
+            msgEl.textContent = error.message;
+            return;
+        }
+
+        pendingOtpEmail = email;
+        pendingOtpType = 'email';
+        authMode = 'verify-otp';
+        updateAuthModalUI();
+        msgEl.style.color = 'var(--success)';
+        msgEl.textContent = `✅ Code sent to ${email}!`;
+        startResendCooldown(60);
+        document.getElementById('auth-otp-code').focus();
+        return;
+    }
+
+    if (authMode === 'forgot') {
+        if (!email) {
+            msgEl.style.color = 'var(--error)';
+            msgEl.textContent = 'Please enter your email address.';
+            return;
+        }
+
+        submitBtn.disabled = true;
+        msgEl.style.color = 'var(--text-muted)';
+        msgEl.textContent = 'Sending password reset link...';
+
+        const { error } = await window.db.auth.resetPasswordForEmail(email, {
+            redirectTo: REDIRECT_URL
+        });
+
+        submitBtn.disabled = false;
+
+        if (error) {
+            msgEl.style.color = 'var(--error)';
+            msgEl.textContent = error.message;
+            return;
+        }
+
+        msgEl.style.color = 'var(--success)';
+        msgEl.textContent = `✅ Password reset link sent to ${email}. Open the link in your inbox (check Spam/Junk) to set a new password.`;
+        return;
+    }
+
+    if (authMode === 'reset') {
+        const confirmPwd = document.getElementById('auth-confirm-password').value;
+        if (password.length < 6) {
+            msgEl.style.color = 'var(--error)';
+            msgEl.textContent = 'New password must be at least 6 characters.';
+            return;
+        }
+        if (password !== confirmPwd) {
+            msgEl.style.color = 'var(--error)';
+            msgEl.textContent = 'Passwords do not match.';
+            return;
+        }
+
+        submitBtn.disabled = true;
+        msgEl.style.color = 'var(--text-muted)';
+        msgEl.textContent = 'Updating password...';
+
+        const { error } = await window.db.auth.updateUser({ password });
+        submitBtn.disabled = false;
+
+        if (error) {
+            msgEl.style.color = 'var(--error)';
+            msgEl.textContent = error.message;
+            return;
+        }
+
+        window._isPasswordRecovery = false;
+        msgEl.style.color = 'var(--success)';
+        msgEl.textContent = '✅ Password updated! Signing you in...';
+        setTimeout(() => location.replace(REDIRECT_URL), 700);
+        return;
+    }
 
     if (!email || !password) {
         msgEl.style.color = 'var(--error)';
@@ -504,6 +837,7 @@ window.submitAuth = async function() {
             return;
         }
 
+        submitBtn.disabled = true;
         msgEl.style.color = 'var(--text-muted)';
         msgEl.textContent = 'Creating account...';
 
@@ -516,23 +850,49 @@ window.submitAuth = async function() {
             }
         });
 
+        submitBtn.disabled = false;
+
         if (error) {
             msgEl.style.color = 'var(--error)';
             msgEl.textContent = error.message;
             return;
         }
 
+        if (data?.user && Array.isArray(data.user.identities) && data.user.identities.length === 0) {
+            msgEl.style.color = 'var(--error)';
+            msgEl.textContent = 'An account with this email already exists. Please sign in or click Forgot password.';
+            return;
+        }
+
         if (!data?.session) {
+            pendingOtpEmail = email;
+            pendingOtpType = 'signup';
+            authMode = 'verify-otp';
+            updateAuthModalUI();
             msgEl.style.color = 'var(--success)';
-            msgEl.textContent = `✅ Account created! Check ${email} (including Spam/Junk) and click the verification link before signing in.`;
+            msgEl.textContent = `✅ Account created! Enter the 6-digit code sent to ${email}.`;
+            startResendCooldown(60);
+            document.getElementById('auth-otp-code').focus();
             return;
         }
     } else {
+        submitBtn.disabled = true;
         msgEl.style.color = 'var(--text-muted)';
         msgEl.textContent = 'Signing in...';
 
         const { error } = await window.db.auth.signInWithPassword({ email, password });
+        submitBtn.disabled = false;
+
         if (error) {
+            if (error.message.toLowerCase().includes('email not confirmed')) {
+                pendingOtpEmail = email;
+                pendingOtpType = 'signup';
+                authMode = 'verify-otp';
+                updateAuthModalUI();
+                await window.resendOtpCode();
+                document.getElementById('auth-otp-code').focus();
+                return;
+            }
             msgEl.style.color = 'var(--error)';
             msgEl.textContent = error.message;
             return;
@@ -792,11 +1152,21 @@ window.signOutUser = async function() {
     }
 };
 
-/* ====================== INIT SESSION & DEVICE CHECK ====================== */
-
 /* ====================== INIT SESSION, AUTO-EXPIRY & DEVICE CHECK ====================== */
 window.initAuth = async function() {
     injectAuthUI();
+
+    if (window.location.hash.includes('type=recovery')) {
+        window._isPasswordRecovery = true;
+    }
+
+    window.db.auth.onAuthStateChange((event, session) => {
+        if (event === 'PASSWORD_RECOVERY') {
+            window._isPasswordRecovery = true;
+            window.currentUser = session?.user || window.currentUser;
+            openAuthModal('reset');
+        }
+    });
 
     const { data: { session } } = await window.db.auth.getSession();
 
@@ -804,6 +1174,10 @@ window.initAuth = async function() {
     window.currentProfile = null;
     window.unlockedCourses = [];
     window.pendingRequests = [];
+
+    if (window._isPasswordRecovery) {
+        openAuthModal('reset');
+    }
 
     if (window.currentUser) {
 
@@ -817,7 +1191,6 @@ window.initAuth = async function() {
             } else if (expiryRan === true) {
                 console.info('Automatic expiry reset completed.');
 
-                // Clear cached question data after an access reset.
                 Object.keys(sessionStorage).forEach(key => {
                     if (key.startsWith('qcache_')) {
                         sessionStorage.removeItem(key);
@@ -885,10 +1258,10 @@ window.initAuth = async function() {
             ? pending
             : [];
 
-        // 4. Check the student's ID.
+        // 4. Check the student's ID (skip if currently resetting password).
         const savedStudentId = String(profile?.student_id || '').trim();
 
-        if (!/^2[0-9]{7}$/.test(savedStudentId)) {
+        if (!window._isPasswordRecovery && !/^2[0-9]{7}$/.test(savedStudentId)) {
             await promptMissingStudentId();
         }
 
