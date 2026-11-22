@@ -50,8 +50,11 @@
 
         .setup-screen { width: 100%; }
         .setup-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 30px; box-shadow: var(--shadow-md); }
+        .card-header-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 20px; }
         .setup-card h2 { margin: 0 0 6px 0; color: var(--purple); font-size: 1.5rem; font-weight: 800; }
-        .setup-subtitle { margin: 0 0 20px 0; color: var(--text-muted); font-size: 0.95rem; font-weight: 500; }
+        .setup-subtitle { margin: 0; color: var(--text-muted); font-size: 0.95rem; font-weight: 500; }
+        .card-home-btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 16px; border-radius: 20px; border: 2px solid var(--purple); background: var(--purple-light); color: var(--purple); font-size: 0.85rem; font-weight: 700; text-decoration: none; white-space: nowrap; flex-shrink: 0; }
+        .card-home-btn:hover { background: var(--purple); color: #fff; }
         .setup-controls { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; }
         .chip-btn { padding: 9px 16px; border-radius: 20px; border: 2px solid var(--purple); background: transparent; color: var(--purple); font-weight: 700; font-size: 0.85rem; cursor: pointer; font-family: inherit; }
         .chip-btn:hover { background: var(--purple-light); }
@@ -380,7 +383,8 @@
                 </span>
             </label>`;
         }).join('');
-const courseUnlocked = window.hasCourseAccess(SUBJECT.courseCode);
+
+        const courseUnlocked = window.hasCourseAccess(SUBJECT.courseCode);
         const courseLabel = SUBJECT.courseCode.toUpperCase();
         const paywallHTML = !courseUnlocked ? `
             <div class="paywall-banner">
@@ -392,11 +396,17 @@ const courseUnlocked = window.hasCourseAccess(SUBJECT.courseCode);
                     ${currentUser ? `Unlock ${courseLabel} ➔` : `Sign Up & Unlock ${courseLabel} ➔`}
                 </button>
             </div>` : '';
+
         setupScreen.innerHTML = `
             ${paywallHTML}
             <div class="setup-card">
-                <h2>Choose Your Chapters</h2>
-                <p class="setup-subtitle">Tick the chapters you want to practise, then press Start.</p>
+                <div class="card-header-row">
+                    <div>
+                        <h2>Choose Your Chapters</h2>
+                        <p class="setup-subtitle">Tick the chapters you want to practise, then press Start.</p>
+                    </div>
+                    <a href="/" class="card-home-btn">← Home</a>
+                </div>
                 <div class="setup-controls">
                     <button type="button" class="chip-btn" id="select-all-btn">✓ Select All</button>
                     <button type="button" class="chip-btn" id="clear-all-btn">✕ Clear All</button>
@@ -712,7 +722,5 @@ const courseUnlocked = window.hasCourseAccess(SUBJECT.courseCode);
     /* ====================== INIT ====================== */
     loadData();
 </script>
-</body>
-</html>
 </body>
 </html>
