@@ -2,6 +2,8 @@ const SUPABASE_URL = 'https://sdqhrxybowzyxveqwkwo.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_UBviShU8w5kEtL0sGkIh6w_Ay8_lnaj';
 const ADMIN_EMAIL = 'ahsan.ali72@outlook.com';
 const REDIRECT_URL = 'https://exam-prep-aou.online/';
+const EMAIL_COOLDOWN_SECONDS = 90;
+const COOLDOWN_STORAGE_KEY = 'exam_prep_email_cooldown_until';
 
 /* ====================== COURSE PRICING & LABELS ====================== */
 const COURSE_CONFIG = {
@@ -30,7 +32,7 @@ window.pendingRequests = [];
 let authMode = 'signin'; // 'signin' | 'signup' | 'verify-signup' | 'forgot' | 'reset'
 let activeRequestCourse = 'all';
 let pendingSignupEmail = '';
-let resendTimerId = null;
+let cooldownTimerId = null;
 
 /* ====================== PASSWORD EYE SVG HELPERS ====================== */
 const EYE_OPEN_SVG = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`;
@@ -72,6 +74,46 @@ function getDeviceId() {
         localStorage.setItem('exam_prep_device_id', id);
     }
     return id;
+}
+
+/* ====================== EMAIL COOLDOWN HELPERS ====================== */
+function clearCooldownTimer() {
+    if (cooldownTimerId) {
+        clearInterval(cooldownTimerId);
+        cooldownTimerId = null;
+    }
+}
+
+function setEmailCooldown(seconds = EMAIL_COOLDOWN_SECONDS) {
+    localStorage.setItem(COOLDOWN_STORAGE_KEY, String(Date.now() + seconds * 1000));
+}
+
+function getRemainingCooldown() {
+    const until = Number(localStorage.getItem(COOLDOWN_STORAGE_KEY) || 0);
+    return Math.max(0, Math.ceil((until - Date.now()) / 1000));
+}
+
+function syncCooldownButton(btnId, defaultLabel) {
+    const btn = document.getElementById(btnId);
+    if (!btn) return;
+    clearCooldownTimer();
+
+    const tick = () => {
+        const remaining = getRemainingCooldown();
+        if (remaining <= 0) {
+            clearCooldownTimer();
+            btn.disabled = false;
+            btn.textContent = defaultLabel;
+        } else {
+            btn.disabled = true;
+            btn.textContent = `${defaultLabel} (${remaining}s)`;
+        }
+    };
+
+    tick();
+    if (getRemainingCooldown() > 0) {
+        cooldownTimerId = setInterval(tick, 1000);
+    }
 }
 
 /* ====================== INJECT STYLES & MODALS ====================== */
@@ -503,10 +545,7 @@ window.openAuthModal = function(mode = 'signin', customMessage = '') {
 window.closeAuthModal = function() {
     const modal = document.getElementById('auth-modal');
     if (modal) modal.classList.remove('open');
-    if (resendTimerId) {
-        clearInterval(resendTimerId);
-        resendTimerId = null;
-    }
+    clearCooldownTimer();
 };
 
 window.openForgotPassword = function() {
@@ -528,31 +567,13 @@ window.toggleAuthMode = function() {
     updateAuthModalUI();
 };
 
-function startResendCooldown(seconds = 60) {
-    const btn = document.getElementById('resend-otp-btn');
-    if (!btn) return;
-    if (resendTimerId) clearInterval(resendTimerId);
-
-    let remaining = seconds;
-    btn.disabled = true;
-    btn.textContent = `Resend in ${remaining}s`;
-
-    resendTimerId = setInterval(() => {
-        remaining -= 1;
-        if (remaining <= 0) {
-            clearInterval(resendTimerId);
-            resendTimerId = null;
-            btn.disabled = false;
-            btn.textContent = 'Resend code';
-        } else {
-            btn.textContent = `Resend in ${remaining}s`;
-        }
-    }, 1000);
-}
-
 window.resendSignupCode = async function() {
-    if (!pendingSignupEmail) return;
+    if (!pendingSignupEmail || getRemainingCooldown() > 0) return;
+
     const msgEl = document.getElementById('auth-msg');
+    const resendBtn = document.getElementById('resend-otp-btn');
+    if (resendBtn) resendBtn.disabled = true;
+
     msgEl.style.color = 'var(--text-muted)';
     msgEl.textContent = 'Sending new 6-digit code...';
 
@@ -564,12 +585,14 @@ window.resendSignupCode = async function() {
     if (error) {
         msgEl.style.color = 'var(--error)';
         msgEl.textContent = error.message;
+        syncCooldownButton('resend-otp-btn', 'Resend code');
         return;
     }
 
+    setEmailCooldown(EMAIL_COOLDOWN_SECONDS);
+    syncCooldownButton('resend-otp-btn', 'Resend code');
     msgEl.style.color = 'var(--success)';
     msgEl.textContent = `✅ A new 6-digit code was sent to ${pendingSignupEmail}.`;
-    startResendCooldown(60);
 };
 
 function updateAuthModalUI() {
@@ -587,6 +610,9 @@ function updateAuthModalUI() {
     const switchWrap = document.getElementById('modal-switch-wrap');
     const switchText = document.getElementById('modal-switch-text');
     const switchLink = document.getElementById('modal-switch-link');
+
+    clearCooldownTimer();
+    submitBtn.disabled = false;
 
     signupTop.style.display = 'none';
     emailInput.style.display = 'block';
@@ -626,12 +652,14 @@ function updateAuthModalUI() {
         submitBtn.textContent = 'Verify & Create Account';
         switchText.textContent = 'Wrong email?';
         switchLink.textContent = 'Go back';
+        syncCooldownButton('resend-otp-btn', 'Resend code');
     } else if (authMode === 'forgot') {
         titleEl.textContent = 'Reset Password';
         subEl.textContent = 'Enter your account email and we will send you a password reset link.';
         submitBtn.textContent = 'Send Reset Link';
         switchText.textContent = 'Remembered your password?';
         switchLink.textContent = 'Back to Sign In';
+        syncCooldownButton('auth-submit-btn', 'Send Reset Link');
     } else if (authMode === 'reset') {
         titleEl.textContent = 'Set New Password';
         subEl.textContent = 'Enter your new password below (minimum 6 characters).';
@@ -645,10 +673,12 @@ function updateAuthModalUI() {
 }
 
 window.submitAuth = async function() {
+    const submitBtn = document.getElementById('auth-submit-btn');
+    if (submitBtn.disabled) return;
+
     const email = document.getElementById('auth-email').value.trim().toLowerCase();
     const password = document.getElementById('auth-password').value;
     const msgEl = document.getElementById('auth-msg');
-    const submitBtn = document.getElementById('auth-submit-btn');
 
     if (authMode === 'verify-signup') {
         const token = document.getElementById('auth-otp-code').value.replace(/\D/g, '').trim();
@@ -687,6 +717,8 @@ window.submitAuth = async function() {
     }
 
     if (authMode === 'forgot') {
+        if (getRemainingCooldown() > 0) return;
+
         if (!email) {
             msgEl.style.color = 'var(--error)';
             msgEl.textContent = 'Please enter your email address.';
@@ -701,14 +733,15 @@ window.submitAuth = async function() {
             redirectTo: REDIRECT_URL
         });
 
-        submitBtn.disabled = false;
-
         if (error) {
+            submitBtn.disabled = false;
             msgEl.style.color = 'var(--error)';
             msgEl.textContent = error.message;
             return;
         }
 
+        setEmailCooldown(EMAIL_COOLDOWN_SECONDS);
+        syncCooldownButton('auth-submit-btn', 'Send Reset Link');
         msgEl.style.color = 'var(--success)';
         msgEl.textContent = `✅ Reset link sent to ${email}. Open the link in your inbox (check Spam/Junk) to set a new password.`;
         return;
@@ -802,11 +835,11 @@ window.submitAuth = async function() {
 
         if (!data?.session) {
             pendingSignupEmail = email;
+            setEmailCooldown(EMAIL_COOLDOWN_SECONDS);
             authMode = 'verify-signup';
             updateAuthModalUI();
             msgEl.style.color = 'var(--success)';
             msgEl.textContent = `✅ Code sent to ${email}!`;
-            startResendCooldown(60);
             document.getElementById('auth-otp-code').focus();
             return;
         }
@@ -823,7 +856,12 @@ window.submitAuth = async function() {
                 pendingSignupEmail = email;
                 authMode = 'verify-signup';
                 updateAuthModalUI();
-                await window.resendSignupCode();
+                if (getRemainingCooldown() === 0) {
+                    await window.resendSignupCode();
+                } else {
+                    msgEl.style.color = 'var(--text-muted)';
+                    msgEl.textContent = `Please enter the 6-digit code recently sent to ${email}.`;
+                }
                 document.getElementById('auth-otp-code').focus();
                 return;
             }
