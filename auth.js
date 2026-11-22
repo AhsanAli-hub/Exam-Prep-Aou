@@ -27,10 +27,9 @@ window.currentProfile = null;
 window.unlockedCourses = [];
 window.pendingRequests = [];
 
-let authMode = 'signin'; // 'signin' | 'signup' | 'otp-email' | 'verify-otp' | 'forgot' | 'reset'
+let authMode = 'signin'; // 'signin' | 'signup' | 'verify-signup' | 'forgot' | 'reset'
 let activeRequestCourse = 'all';
-let pendingOtpEmail = '';
-let pendingOtpType = 'signup'; // 'signup' | 'email'
+let pendingSignupEmail = '';
 let resendTimerId = null;
 
 /* ====================== PASSWORD EYE SVG HELPERS ====================== */
@@ -170,10 +169,10 @@ function injectAuthUI() {
             .req-email-note { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; font-size: 0.83rem; color: var(--text-muted); margin-bottom: 14px; line-height: 1.45; }
             .req-email-note strong { color: var(--text-main); }
 
-            /* Google OAuth & OTP Option Buttons */
+            /* Google OAuth Button & Divider */
             .oauth-divider { display: flex; align-items: center; gap: 10px; margin: 14px 0 10px; color: var(--text-muted); font-size: 0.78rem; font-weight: 700; }
             .oauth-divider::before, .oauth-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-            .google-btn { width: 100%; padding: 12px; background: var(--bg); color: var(--text-main); border: 1.5px solid var(--border); border-radius: 12px; font-weight: 700; font-size: 0.92rem; cursor: pointer; font-family: inherit; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 8px; }
+            .google-btn { width: 100%; padding: 12px; background: var(--bg); color: var(--text-main); border: 1.5px solid var(--border); border-radius: 12px; font-weight: 700; font-size: 0.92rem; cursor: pointer; font-family: inherit; display: flex; align-items: center; justify-content: center; gap: 10px; }
             .google-btn:hover { border-color: var(--purple); background: var(--purple-light); }
         `;
         document.head.appendChild(style);
@@ -211,7 +210,7 @@ function injectAuthUI() {
                         <input type="text" id="auth-otp-code" class="otp-code-input" placeholder="000000" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="one-time-code">
                         <div class="otp-resend-row">
                             <span>Didn't get the code?</span>
-                            <button type="button" class="inline-link-btn" id="resend-otp-btn" onclick="resendOtpCode()">Resend code</button>
+                            <button type="button" class="inline-link-btn" id="resend-otp-btn" onclick="resendSignupCode()">Resend code</button>
                         </div>
                     </div>
 
@@ -219,9 +218,6 @@ function injectAuthUI() {
 
                     <div id="oauth-section">
                         <div class="oauth-divider">OR</div>
-                        <button type="button" class="google-btn" id="otp-mode-btn" onclick="openOtpEmailMode()">
-                            <span>✉️ Sign in with 6-digit email code</span>
-                        </button>
                         <button type="button" class="google-btn" onclick="signInWithGoogle()">
                             <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
                                 <path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47c-.29 1.55-1.14 2.86-2.4 3.73v3.09h3.88c2.27-2.09 3.54-5.17 3.54-9.06z"/>
@@ -513,13 +509,6 @@ window.closeAuthModal = function() {
     }
 };
 
-window.openOtpEmailMode = function() {
-    authMode = 'otp-email';
-    document.getElementById('auth-msg').textContent = '';
-    updateAuthModalUI();
-    document.getElementById('auth-email').focus();
-};
-
 window.openForgotPassword = function() {
     authMode = 'forgot';
     document.getElementById('auth-msg').textContent = '';
@@ -529,6 +518,8 @@ window.openForgotPassword = function() {
 
 window.toggleAuthMode = function() {
     if (authMode === 'signin') {
+        authMode = 'signup';
+    } else if (authMode === 'verify-signup') {
         authMode = 'signup';
     } else {
         authMode = 'signin';
@@ -559,26 +550,16 @@ function startResendCooldown(seconds = 60) {
     }, 1000);
 }
 
-window.resendOtpCode = async function() {
-    if (!pendingOtpEmail) return;
+window.resendSignupCode = async function() {
+    if (!pendingSignupEmail) return;
     const msgEl = document.getElementById('auth-msg');
     msgEl.style.color = 'var(--text-muted)';
     msgEl.textContent = 'Sending new 6-digit code...';
 
-    let error = null;
-    if (pendingOtpType === 'signup') {
-        const res = await window.db.auth.resend({
-            type: 'signup',
-            email: pendingOtpEmail
-        });
-        error = res.error;
-    } else {
-        const res = await window.db.auth.signInWithOtp({
-            email: pendingOtpEmail,
-            options: { shouldCreateUser: true }
-        });
-        error = res.error;
-    }
+    const { error } = await window.db.auth.resend({
+        type: 'signup',
+        email: pendingSignupEmail
+    });
 
     if (error) {
         msgEl.style.color = 'var(--error)';
@@ -587,7 +568,7 @@ window.resendOtpCode = async function() {
     }
 
     msgEl.style.color = 'var(--success)';
-    msgEl.textContent = `✅ A new 6-digit code was sent to ${pendingOtpEmail}.`;
+    msgEl.textContent = `✅ A new 6-digit code was sent to ${pendingSignupEmail}.`;
     startResendCooldown(60);
 };
 
@@ -603,12 +584,10 @@ function updateAuthModalUI() {
     const otpWrap = document.getElementById('otp-verify-wrap');
     const submitBtn = document.getElementById('auth-submit-btn');
     const oauthSec = document.getElementById('oauth-section');
-    const otpModeBtn = document.getElementById('otp-mode-btn');
     const switchWrap = document.getElementById('modal-switch-wrap');
     const switchText = document.getElementById('modal-switch-text');
     const switchLink = document.getElementById('modal-switch-link');
 
-    // Reset visibility defaults
     signupTop.style.display = 'none';
     emailInput.style.display = 'block';
     pwdWrap.style.display = 'none';
@@ -626,7 +605,6 @@ function updateAuthModalUI() {
         forgotRow.style.display = 'flex';
         submitBtn.textContent = 'Sign In';
         oauthSec.style.display = 'block';
-        otpModeBtn.style.display = 'flex';
         switchText.textContent = "Don't have an account?";
         switchLink.textContent = 'Create one';
     } else if (authMode === 'signup') {
@@ -637,22 +615,15 @@ function updateAuthModalUI() {
         confirmWrap.style.display = 'block';
         submitBtn.textContent = 'Create Account';
         oauthSec.style.display = 'block';
-        otpModeBtn.style.display = 'none';
         switchText.textContent = 'Already have an account?';
         switchLink.textContent = 'Sign in';
-    } else if (authMode === 'otp-email') {
-        titleEl.textContent = 'Sign In with Email Code';
-        subEl.textContent = 'Enter your email address and we will send you a 6-digit login code.';
-        submitBtn.textContent = 'Send 6-Digit Code';
-        switchText.textContent = 'Prefer password?';
-        switchLink.textContent = 'Back to Sign In';
-    } else if (authMode === 'verify-otp') {
-        titleEl.textContent = 'Enter 6-Digit Code';
-        subEl.textContent = `We sent a 6-digit verification code to ${pendingOtpEmail}. Check Spam/Junk if needed.`;
+    } else if (authMode === 'verify-signup') {
+        titleEl.textContent = 'Verify Your Email';
+        subEl.textContent = `Enter the 6-digit code sent to ${pendingSignupEmail} (check Spam/Junk if needed).`;
         emailInput.style.display = 'none';
         otpWrap.style.display = 'block';
         document.getElementById('auth-otp-code').value = '';
-        submitBtn.textContent = 'Verify & Continue';
+        submitBtn.textContent = 'Verify & Create Account';
         switchText.textContent = 'Wrong email?';
         switchLink.textContent = 'Go back';
     } else if (authMode === 'forgot') {
@@ -679,11 +650,11 @@ window.submitAuth = async function() {
     const msgEl = document.getElementById('auth-msg');
     const submitBtn = document.getElementById('auth-submit-btn');
 
-    if (authMode === 'verify-otp') {
+    if (authMode === 'verify-signup') {
         const token = document.getElementById('auth-otp-code').value.replace(/\D/g, '').trim();
         if (token.length !== 6) {
             msgEl.style.color = 'var(--error)';
-            msgEl.textContent = 'Please enter the 6-digit code from your email.';
+            msgEl.textContent = 'Please enter the 6-digit verification code.';
             return;
         }
 
@@ -692,9 +663,9 @@ window.submitAuth = async function() {
         msgEl.textContent = 'Verifying code...';
 
         const { error } = await window.db.auth.verifyOtp({
-            email: pendingOtpEmail,
+            email: pendingSignupEmail,
             token,
-            type: pendingOtpType
+            type: 'signup'
         });
 
         submitBtn.disabled = false;
@@ -710,43 +681,8 @@ window.submitAuth = async function() {
         });
 
         msgEl.style.color = 'var(--success)';
-        msgEl.textContent = '✅ Verified! Loading...';
+        msgEl.textContent = '✅ Email verified! Loading...';
         setTimeout(() => location.reload(), 500);
-        return;
-    }
-
-    if (authMode === 'otp-email') {
-        if (!email) {
-            msgEl.style.color = 'var(--error)';
-            msgEl.textContent = 'Please enter your email address.';
-            return;
-        }
-
-        submitBtn.disabled = true;
-        msgEl.style.color = 'var(--text-muted)';
-        msgEl.textContent = 'Sending 6-digit code...';
-
-        const { error } = await window.db.auth.signInWithOtp({
-            email,
-            options: { shouldCreateUser: true }
-        });
-
-        submitBtn.disabled = false;
-
-        if (error) {
-            msgEl.style.color = 'var(--error)';
-            msgEl.textContent = error.message;
-            return;
-        }
-
-        pendingOtpEmail = email;
-        pendingOtpType = 'email';
-        authMode = 'verify-otp';
-        updateAuthModalUI();
-        msgEl.style.color = 'var(--success)';
-        msgEl.textContent = `✅ Code sent to ${email}!`;
-        startResendCooldown(60);
-        document.getElementById('auth-otp-code').focus();
         return;
     }
 
@@ -774,7 +710,7 @@ window.submitAuth = async function() {
         }
 
         msgEl.style.color = 'var(--success)';
-        msgEl.textContent = `✅ Password reset link sent to ${email}. Open the link in your inbox (check Spam/Junk) to set a new password.`;
+        msgEl.textContent = `✅ Reset link sent to ${email}. Open the link in your inbox (check Spam/Junk) to set a new password.`;
         return;
     }
 
@@ -865,12 +801,11 @@ window.submitAuth = async function() {
         }
 
         if (!data?.session) {
-            pendingOtpEmail = email;
-            pendingOtpType = 'signup';
-            authMode = 'verify-otp';
+            pendingSignupEmail = email;
+            authMode = 'verify-signup';
             updateAuthModalUI();
             msgEl.style.color = 'var(--success)';
-            msgEl.textContent = `✅ Account created! Enter the 6-digit code sent to ${email}.`;
+            msgEl.textContent = `✅ Code sent to ${email}!`;
             startResendCooldown(60);
             document.getElementById('auth-otp-code').focus();
             return;
@@ -885,11 +820,10 @@ window.submitAuth = async function() {
 
         if (error) {
             if (error.message.toLowerCase().includes('email not confirmed')) {
-                pendingOtpEmail = email;
-                pendingOtpType = 'signup';
-                authMode = 'verify-otp';
+                pendingSignupEmail = email;
+                authMode = 'verify-signup';
                 updateAuthModalUI();
-                await window.resendOtpCode();
+                await window.resendSignupCode();
                 document.getElementById('auth-otp-code').focus();
                 return;
             }
