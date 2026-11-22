@@ -145,6 +145,7 @@ function injectAuthUI() {
             .pd-header { border-bottom: 1px solid var(--border); padding-bottom: 10px; }
             .pd-email { font-size: 0.86rem; font-weight: 700; color: var(--text-main); word-break: break-all; }
             .pd-sid { font-size: 0.78rem; color: var(--text-muted); font-weight: 600; margin-top: 3px; }
+            .pd-expiry { font-size: 0.75rem; color: #f59e0b; font-weight: 700; margin-top: 6px; }
             .pd-section-label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 6px; }
             .pd-courses { display: flex; flex-wrap: wrap; gap: 6px; }
             .pd-chip { font-size: 0.74rem; font-weight: 800; padding: 3px 9px; border-radius: 8px; background: rgba(16, 185, 129, 0.14); color: #10b981; }
@@ -440,6 +441,14 @@ function renderHeaderProfile(profile) {
     }
     const courseBadges = chips.length > 0 ? chips.join('') : `<span class="pd-chip none">Free Preview Only</span>`;
 
+    let expiryLine = '';
+    if (hasAnyCourse && profile?.access_expires_at) {
+        const expDate = new Date(profile.access_expires_at);
+        if (!Number.isNaN(expDate.getTime()) && expDate > new Date()) {
+            expiryLine = `<div class="pd-expiry">⏰ Access expires: ${expDate.toLocaleDateString()}</div>`;
+        }
+    }
+
     slot.innerHTML = `
         <button type="button" class="profile-avatar-btn ${hasAnyCourse ? 'has-pro' : ''}" id="profile-avatar-btn" title="Account">${initial}</button>
         <div class="profile-dropdown" id="profile-dropdown">
@@ -450,6 +459,7 @@ function renderHeaderProfile(profile) {
             <div>
                 <div class="pd-section-label">My Subjects</div>
                 <div class="pd-courses">${courseBadges}</div>
+                ${expiryLine}
             </div>
             ${isAdmin ? `<a href="admin.html" class="pd-item admin">⚡ Admin Dashboard</a>` : ''}
             <button type="button" class="pd-item danger" id="profile-signout-btn">Sign Out</button>
@@ -1153,14 +1163,22 @@ window.initAuth = async function() {
 
     if (window.currentUser) {
 
-        // 1. Check automatic access expiry before registering the device.
+        // 1. Check automatic global and per-student access expiry before registering the device.
         try {
-            const { data: expiryRan, error: expiryError } =
-                await window.db.rpc('check_and_run_expiry');
+            const [{ data: expiryRan, error: expiryError }, { data: studentExpiryRan, error: studentExpiryError }] =
+                await Promise.all([
+                    window.db.rpc('check_and_run_expiry'),
+                    window.db.rpc('check_and_run_student_expiry')
+                ]);
 
             if (expiryError) {
-                console.error('Auto-expiry check failed:', expiryError);
-            } else if (expiryRan === true) {
+                console.error('Global auto-expiry check failed:', expiryError);
+            }
+            if (studentExpiryError) {
+                console.error('Student auto-expiry check failed:', studentExpiryError);
+            }
+
+            if (expiryRan === true || studentExpiryRan === true) {
                 console.info('Automatic expiry reset completed.');
 
                 Object.keys(sessionStorage).forEach(key => {
@@ -1205,7 +1223,7 @@ window.initAuth = async function() {
         const [{ data: profile }, { data: pending }] = await Promise.all([
             window.db
                 .from('profiles')
-                .select('unlocked_courses, student_id')
+                .select('unlocked_courses, student_id, access_expires_at')
                 .eq('id', window.currentUser.id)
                 .maybeSingle(),
 
