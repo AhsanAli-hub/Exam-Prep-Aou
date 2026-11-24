@@ -311,7 +311,7 @@ function injectAuthUI() {
 
                     <div class="req-summary">
                         <span class="req-summary-course" id="rm-course-label">EL112</span>
-                        <span class="req-summary-price" id="rm-price">25 SAR</span>
+                        <span class="req-summary-price" id="rm-price">15 SAR</span>
                     </div>
 
                     <div class="req-email-note" id="rm-email-note"></div>
@@ -541,6 +541,10 @@ window.togglePwdField = function(inputId, btn) {
     const showText = input.type === 'password';
     input.type = showText ? 'text' : 'password';
     setPwdToggleIcon(btn, showText);
+};
+
+window.handleAuthHeaderClick = function() {
+    window.openAuthModal('signin');
 };
 
 window.openAuthModal = function(mode = 'signin', customMessage = '') {
@@ -1171,6 +1175,16 @@ window.initAuth = async function() {
     window.unlockedCourses = [];
     window.pendingRequests = [];
 
+    if (!window.currentUser) {
+        try {
+            Object.keys(sessionStorage).forEach(key => {
+                if (key.startsWith('qcache_')) {
+                    sessionStorage.removeItem(key);
+                }
+            });
+        } catch (e) {}
+    }
+
     if (window._isPasswordRecovery) {
         openAuthModal('reset');
     }
@@ -1294,6 +1308,10 @@ window.initAuth = async function() {
 
 /* ====================== CACHED QUESTION LOADER ====================== */
 window.fetchCourseQuestions = async function(courseCode) {
+    if (!window.currentUser) {
+        throw new Error('Authentication required. Please sign in to access questions.');
+    }
+
     const unlocked = window.hasCourseAccess(courseCode);
     const cacheKey = `qcache_${courseCode}_${unlocked ? 'unlocked' : 'free'}`;
     const cached = sessionStorage.getItem(cacheKey);
