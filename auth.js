@@ -348,7 +348,7 @@ window.handleUpgradeClick = function(courseCode = 'all') {
     document.getElementById('rm-course-label').textContent = label;
     document.getElementById('rm-price').textContent = price;
     document.getElementById('rm-email-note').innerHTML =
-        `Payment instructions will be sent to: <strong>\${window.currentUser.email}</strong>`;
+        `Payment instructions will be sent to: <strong>${window.currentUser.email}</strong>`;
 
     const existingPending = window.getPendingRequest(activeRequestCourse);
     const formArea = document.getElementById('rm-form-area');
@@ -357,7 +357,7 @@ window.handleUpgradeClick = function(courseCode = 'all') {
     if (existingPending) {
         formArea.style.display = 'none';
         msgEl.style.color = '#f59e0b';
-        msgEl.textContent = `⏳ Access already requested for \${label}. Please check your email inbox (and Spam/Junk folder) for payment details.`;
+        msgEl.textContent = `⏳ Access already requested for ${label}. Please check your email inbox (and Spam/Junk folder) for payment details.`;
     } else {
         formArea.style.display = 'block';
         document.getElementById('rm-note').value = '';
@@ -405,7 +405,7 @@ window.submitAccessRequest = async function() {
 
     document.getElementById('rm-form-area').style.display = 'none';
     msgEl.style.color = 'var(--success)';
-    msgEl.textContent = `✅ Request sent! We will email payment instructions to \${window.currentUser.email} shortly.`;
+    msgEl.textContent = `✅ Request sent! We will email payment instructions to ${window.currentUser.email} shortly.`;
 };
 
 /* ====================== RENDER PROFILE AVATAR IN NAVBAR ====================== */
@@ -436,10 +436,10 @@ function renderHeaderProfile(profile) {
 
     let chips = [];
     if (hasAnyCourse) {
-        chips.push(...window.unlockedCourses.map(c => `<span class="pd-chip">\${c === 'all' ? 'ALL SUBJECTS' : c.toUpperCase()}</span>`));
+        chips.push(...window.unlockedCourses.map(c => `<span class="pd-chip">${c === 'all' ? 'ALL SUBJECTS' : c.toUpperCase()}</span>`));
     }
     if (window.pendingRequests.length > 0) {
-        chips.push(...window.pendingRequests.map(r => `<span class="pd-chip pending">⏳ \${r.course_code.toUpperCase()}</span>`));
+        chips.push(...window.pendingRequests.map(r => `<span class="pd-chip pending">⏳ ${r.course_code.toUpperCase()}</span>`));
     }
     const courseBadges = chips.length > 0 ? chips.join('') : `<span class="pd-chip none">Free Preview Only</span>`;
 
@@ -447,7 +447,7 @@ function renderHeaderProfile(profile) {
     if (hasAnyCourse && profile?.access_expires_at) {
         const expDate = new Date(profile.access_expires_at);
         if (!Number.isNaN(expDate.getTime()) && expDate > new Date()) {
-            expiryLine = `<div class="pd-expiry">⏰ Access expires: \${expDate.toLocaleDateString()}</div>`;
+            expiryLine = `<div class="pd-expiry">⏰ Access expires: ${expDate.toLocaleDateString()}</div>`;
         }
     }
 
@@ -455,13 +455,15 @@ function renderHeaderProfile(profile) {
         <button type="button" class="profile-avatar-btn ${hasAnyCourse ? 'has-pro' : ''}" id="profile-avatar-btn" title="Account">${initial}</button>
         <div class="profile-dropdown" id="profile-dropdown">
             <div class="pd-header">
-                <div class="pd-email">${email}</div>${profile?.student_id ? `<div class="pd-sid">Student ID: ${profile.student_id}</div>` : ''}
+                <div class="pd-email">${email}</div>
+                ${profile?.student_id ? `<div class="pd-sid">Student ID: ${profile.student_id}</div>` : ''}
             </div>
             <div>
                 <div class="pd-section-label">My Subjects</div>
-                <div class="pd-courses">${courseBadges}</div>${expiryLine}
+                <div class="pd-courses">${courseBadges}</div>
+                ${expiryLine}
             </div>
-            \${isAdmin ? `<a href="admin.html" class="pd-item admin">⚡ Admin Dashboard</a>` : ''}
+            ${isAdmin ? `<a href="admin.html" class="pd-item admin">⚡ Admin Dashboard</a>` : ''}
             <button type="button" class="pd-item danger" id="profile-signout-btn">Sign Out</button>
         </div>
     `;
@@ -602,7 +604,7 @@ window.resendSignupCode = async function() {
     setEmailCooldown(EMAIL_COOLDOWN_SECONDS);
     syncCooldownButton('resend-otp-btn', 'Resend code');
     msgEl.style.color = 'var(--success)';
-    msgEl.textContent = `✅ A new 6-digit code was sent to \${pendingSignupEmail}.`;
+    msgEl.textContent = `✅ A new 6-digit code was sent to ${pendingSignupEmail}.`;
 };
 
 function updateAuthModalUI() {
@@ -655,7 +657,7 @@ function updateAuthModalUI() {
         switchLink.textContent = 'Sign in';
     } else if (authMode === 'verify-signup') {
         titleEl.textContent = 'Verify Your Email';
-        subEl.textContent = `Enter the 6-digit code sent to \${pendingSignupEmail} (check Spam/Junk if needed).`;
+        subEl.textContent = `Enter the 6-digit code sent to ${pendingSignupEmail} (check Spam/Junk if needed).`;
         emailInput.style.display = 'none';
         otpWrap.style.display = 'block';
         document.getElementById('auth-otp-code').value = '';
@@ -753,7 +755,7 @@ window.submitAuth = async function() {
         setEmailCooldown(EMAIL_COOLDOWN_SECONDS);
         syncCooldownButton('auth-submit-btn', 'Send Reset Link');
         msgEl.style.color = 'var(--success)';
-        msgEl.textContent = `✅ Reset link sent to \${email}. Open the link in your inbox (check Spam/Junk) to set a new password.`;
+        msgEl.textContent = `✅ Reset link sent to ${email}. Open the link in your inbox (check Spam/Junk) to set a new password.`;
         return;
     }
 
@@ -849,7 +851,7 @@ window.submitAuth = async function() {
             authMode = 'verify-signup';
             updateAuthModalUI();
             msgEl.style.color = 'var(--success)';
-            msgEl.textContent = `✅ Code sent to \${email}!`;
+            msgEl.textContent = `✅ Code sent to ${email}!`;
             document.getElementById('auth-otp-code').focus();
             return;
         }
@@ -870,7 +872,7 @@ window.submitAuth = async function() {
                     await window.resendSignupCode();
                 } else {
                     msgEl.style.color = 'var(--text-muted)';
-                    msgEl.textContent = `Please enter the 6-digit code recently sent to \${email}.`;
+                    msgEl.textContent = `Please enter the 6-digit code recently sent to ${email}.`;
                 }
                 document.getElementById('auth-otp-code').focus();
                 return;
@@ -1097,7 +1099,7 @@ window.signOutUser = async function() {
 
         try {
             const projectRef = new URL(SUPABASE_URL).hostname.split('.')[0];
-            const authStorageKey = `sb-\${projectRef}-auth-token`;
+            const authStorageKey = `sb-${projectRef}-auth-token`;
             localStorage.removeItem(authStorageKey);
         } catch (err) {
             console.warn('Local storage cleanup warning:', err);
@@ -1221,7 +1223,7 @@ window.initAuth = async function() {
 
             openAuthModal(
                 'signin',
-                `⛔ Device Limit Reached (Max \${devCheck.max} devices). This account is already active on 2 other devices. Contact admin if you switched devices.`
+                `⛔ Device Limit Reached (Max ${devCheck.max} devices). This account is already active on 2 other devices. Contact admin if you switched devices.`
             );
 
             return {
