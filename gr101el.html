@@ -169,7 +169,7 @@
         </div>
     </header>
 
-    <div id="setup-screen" class="setup-screen"><div class="loading">Loading chapters from database...</div></div>
+    <div id="setup-screen" class="setup-screen"><div class="loading">Checking sign-in status...</div></div>
 
     <div class="quiz-main" id="quiz-main">
         <div class="top-bar">
@@ -330,10 +330,42 @@
         timerInterval = null;
     }
 
+    /* ====================== SIGN-IN WALL ====================== */
+    function renderSignInWall() {
+        const courseLabel = SUBJECT.courseCode.toUpperCase();
+        setupScreen.innerHTML = `
+            <div class="setup-card" style="text-align: center; padding: 48px 28px;">
+                <div style="font-size: 3rem; margin-bottom: 12px;">🔒</div>
+                <h2 style="margin-bottom: 8px;">Sign In to Unlock ${courseLabel}</h2>
+                <p class="setup-subtitle" style="max-width: 440px; margin: 0 auto 24px;">
+                    Create a free account or sign in to access all ${courseLabel} chapters, MCQs, and explanations.
+                </p>
+                <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                    <button type="button" class="start-btn" onclick="handleAuthHeaderClick()">
+                        Sign In / Create Account ➔
+                    </button>
+                    <a href="/" class="card-home-btn" style="padding: 15px 24px; border-radius: 14px;">
+                        ← Back to Home
+                    </a>
+                </div>
+            </div>`;
+    }
+
     /* ====================== DATA LOADING VIA SHARED AUTH.JS ====================== */
     async function loadData() {
         try {
             await window.initAuth();
+
+            const user = window.currentUser || (typeof currentUser !== 'undefined' && currentUser);
+            if (!user) {
+                renderSignInWall();
+                if (typeof handleAuthHeaderClick === 'function') {
+                    handleAuthHeaderClick();
+                }
+                return;
+            }
+
+            setupScreen.innerHTML = '<div class="loading">Loading chapters from database...</div>';
             const data = await window.fetchCourseQuestions(SUBJECT.courseCode);
 
             if (!data || data.length === 0) throw new Error('No questions returned from database.');
