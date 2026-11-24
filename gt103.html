@@ -24,7 +24,15 @@
         .header-actions { display: flex; align-items: center; gap: 10px; }
         .auth-btn { padding: 8px 16px; border-radius: 10px; border: 1.5px solid var(--purple); background: var(--purple-light); color: var(--purple); font-weight: 700; font-size: 0.85rem; cursor: pointer; font-family: inherit; }
         .auth-btn:hover { background: var(--purple); color: #fff; }
+        .pro-badge { background: linear-gradient(135deg, #f59e0b, #d97706); color: #fff; font-size: 0.72rem; font-weight: 800; padding: 4px 10px; border-radius: 20px; letter-spacing: 0.05em; }
         .theme-toggle { background: var(--purple-light); border: none; border-radius: 50%; width: 38px; height: 38px; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; }
+
+        /* PAYWALL BANNER */
+        .paywall-banner { background: linear-gradient(135deg, var(--purple), #6d28d9); color: #fff; padding: 20px 24px; border-radius: 16px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; box-shadow: var(--shadow-md); }
+        .paywall-info h3 { margin: 0 0 4px 0; font-size: 1.1rem; font-weight: 800; }
+        .paywall-info p { margin: 0; font-size: 0.88rem; opacity: 0.92; }
+        .paywall-cta { padding: 12px 22px; background: #fff; color: var(--purple); border: none; border-radius: 12px; font-weight: 800; font-size: 0.9rem; cursor: pointer; font-family: inherit; white-space: nowrap; }
+        .paywall-cta:hover { transform: translateY(-1px); box-shadow: var(--shadow-sm); }
 
         /* AUTH MODAL */
         .modal-backdrop { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.55); display: none; align-items: center; justify-content: center; padding: 20px; z-index: 1000; }
@@ -155,6 +163,7 @@
     <header class="main-header">
         <h1>GT103 Quiz</h1>
         <div class="header-actions">
+            <span id="pro-badge" class="pro-badge" style="display: none;">PRO MEMBER</span>
             <button class="auth-btn" id="auth-header-btn" onclick="handleAuthHeaderClick()">Sign In</button>
             <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()">🌙</button>
         </div>
@@ -410,7 +419,21 @@
             </label>`;
         }).join('');
 
+        const courseUnlocked = window.hasCourseAccess(SUBJECT.courseCode);
+        const courseLabel = SUBJECT.courseCode.toUpperCase();
+        const paywallHTML = !(courseUnlocked || window.isGlobalFree) ? `
+            <div class="paywall-banner">
+                <div class="paywall-info">
+                    <h3>🔒 ${courseLabel} Free Preview Mode (${allQuestions.length} Sample Questions)</h3>
+                    <p>Unlock all chapter MCQs and explanations for ${courseLabel}.</p>
+                </div>
+                <button type="button" class="paywall-cta" onclick="handleUpgradeClick('${SUBJECT.courseCode}')">
+                    ${window.currentUser ? `Unlock ${courseLabel} ➔` : `Sign Up & Unlock ${courseLabel} ➔`}
+                </button>
+            </div>` : '';
+
         setupScreen.innerHTML = `
+            ${paywallHTML}
             <div class="setup-card">
                 <div class="card-header-row">
                     <div>
