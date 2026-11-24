@@ -21,7 +21,6 @@
         .nav-btn:hover { background: var(--purple); color: #fff; }
         .nav-btn.admin { border-color: #10b981; background: rgba(16, 185, 129, 0.12); color: #10b981; }
         .nav-btn.admin:hover { background: #10b981; color: #fff; }
-        .pro-badge { background: linear-gradient(135deg, #f59e0b, #d97706); color: #fff; font-size: 0.75rem; font-weight: 800; padding: 5px 12px; border-radius: 20px; letter-spacing: 0.05em; }
         .user-email { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; margin-right: 4px; }
         .theme-toggle { background: var(--card-bg); border: 1px solid var(--border); border-radius: 50%; width: 40px; height: 40px; cursor: pointer; font-size: 1.1rem; box-shadow: var(--shadow-md); display: flex; align-items: center; justify-content: center; }
 
@@ -29,14 +28,15 @@
         .header-container h1 { font-size: 2.5rem; color: var(--purple); margin: 0 0 10px 0; font-weight: 800; }
         .header-container p { font-size: 1.1rem; color: var(--text-muted); margin: 0; }
 
-        /* PRO BANNER */
-        .pro-banner { width: 100%; max-width: 1000px; background: linear-gradient(135deg, var(--purple), #6d28d9); color: #fff; padding: 22px 28px; border-radius: 20px; display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap; margin-bottom: 32px; box-shadow: var(--shadow-lg); }
-        .pro-banner h2 { margin: 0 0 4px 0; font-size: 1.2rem; font-weight: 800; }
-        .pro-banner p { margin: 0; font-size: 0.92rem; opacity: 0.92; }
-        .pro-cta { padding: 12px 24px; background: #fff; color: var(--purple); border: none; border-radius: 12px; font-weight: 800; font-size: 0.92rem; cursor: pointer; font-family: inherit; white-space: nowrap; }
-        .pro-cta:hover { transform: translateY(-2px); }
+        /* SIGN-IN WALL */
+        .signin-wall { width: 100%; max-width: 520px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 44px 32px; text-align: center; box-shadow: var(--shadow-lg); display: none; }
+        .signin-wall .lock-icon { font-size: 3rem; margin-bottom: 12px; }
+        .signin-wall h2 { margin: 0 0 8px 0; color: var(--purple); font-size: 1.5rem; font-weight: 800; }
+        .signin-wall p { margin: 0 0 24px 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; }
+        .signin-cta { padding: 14px 28px; background: var(--purple); color: #fff; border: none; border-radius: 14px; font-weight: 700; font-size: 1rem; cursor: pointer; font-family: inherit; }
+        .signin-cta:hover { background: var(--purple-hover); }
 
-        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; width: 100%; max-width: 1000px; }
+        .grid-container { display: none; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; width: 100%; max-width: 1000px; }
         .card { background: var(--card-bg); padding: 40px 30px; border-radius: 20px; box-shadow: var(--shadow-md); text-decoration: none; color: var(--text-main); border: 2px solid transparent; transition: all 0.3s ease; display: flex; flex-direction: column; align-items: center; text-align: center; }
         .card:hover { transform: translateY(-8px); border-color: var(--purple); box-shadow: var(--shadow-lg); }
         .card h2 { color: var(--purple); font-size: 1.8rem; margin: 0 0 10px 0; font-weight: 800; }
@@ -62,7 +62,6 @@
 <body>
     <nav class="top-nav">
         <span class="user-email" id="user-email"></span>
-        <span class="pro-badge" id="pro-badge" style="display: none;">PRO MEMBER</span>
         <a href="admin.html" class="nav-btn admin" id="admin-link-btn" style="display: none;">+ Add MCQs</a>
         <button class="nav-btn" id="auth-header-btn" onclick="handleAuthHeaderClick()">Sign In</button>
         <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()">🌙</button>
@@ -73,15 +72,14 @@
         <p>Master your exams with these comprehensive quizzes</p>
     </div>
 
-    <div class="pro-banner" id="pro-banner" style="display: none;">
-        <div>
-            <h2>🚀 Unlock Full Semester Access</h2>
-            <p>Get unlimited access to 1,000+ verified MCQs, reading passages, and detailed explanations across all 4 courses.</p>
-        </div>
-        <button class="pro-cta" id="pro-cta-btn" onclick="handleUpgradeClick()">Get Full Access ➔</button>
+    <div class="signin-wall" id="signin-wall">
+        <div class="lock-icon">🔒</div>
+        <h2>Sign In to Access Quizzes</h2>
+        <p>Create a free account or sign in to unlock all course chapters, practice quizzes, and explanations.</p>
+        <button class="signin-cta" onclick="handleAuthHeaderClick()">Sign In / Create Account ➔</button>
     </div>
 
-    <div class="grid-container">
+    <div class="grid-container" id="grid-container">
         <a href="gt103.html" class="card"><div class="card-icon">🤖</div><h2>GT103</h2><p>Artificial Intelligence Quiz</p></a>
         <a href="tu170.html" class="card"><div class="card-icon">💻</div><h2>TU170</h2><p>Computing Essentials Quiz</p></a>
         <a href="el112.html" class="card"><div class="card-icon">📖</div><h2>EL112</h2><p>English Language Quiz</p></a>
@@ -90,7 +88,20 @@
 
     <script src="auth.js"></script>
     <script>
-        initAuth();
+        (async () => {
+            await initAuth();
+            const user = window.currentUser || (typeof currentUser !== 'undefined' && currentUser);
+            if (user) {
+                document.getElementById('signin-wall').style.display = 'none';
+                document.getElementById('grid-container').style.display = 'grid';
+            } else {
+                document.getElementById('signin-wall').style.display = 'block';
+                document.getElementById('grid-container').style.display = 'none';
+                if (typeof handleAuthHeaderClick === 'function') {
+                    handleAuthHeaderClick();
+                }
+            }
+        })();
     </script>
 </body>
 </html>
