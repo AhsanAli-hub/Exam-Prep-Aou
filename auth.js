@@ -1111,7 +1111,7 @@ window.signOutUser = async function() {
 
         try {
             Object.keys(sessionStorage).forEach(key => {
-                if (key.startsWith('qcache_')) {
+                if (key.startsWith('qcache_') || key.startsWith('exam_prep_')) {
                     sessionStorage.removeItem(key);
                 }
             });
@@ -1144,18 +1144,6 @@ window.signOutUser = async function() {
 window.initAuth = async function() {
     injectAuthUI();
 
-    window.isGlobalFree = false;
-    try {
-        const { data: settings } = await window.db
-            .from('site_settings')
-            .select('is_global_free')
-            .eq('id', 1)
-            .maybeSingle();
-        window.isGlobalFree = Boolean(settings?.is_global_free);
-    } catch (e) {
-        console.warn('Could not load global free setting:', e);
-    }
-
     if (window.location.hash.includes('type=recovery')) {
         window._isPasswordRecovery = true;
     }
@@ -1168,8 +1156,37 @@ window.initAuth = async function() {
         }
     });
 
-    const { data: { session } } = await window.db.auth.getSession();
+    // 1. Check cached site_settings (5 min TTL) + fetch auth session in parallel
+    const SETTINGS_CACHE_KEY = 'exam_prep_site_settings';
+    let cachedSettings = null;
+    try {
+        const raw = sessionStorage.getItem(SETTINGS_CACHE_KEY);
+        if (raw) {
+            const parsed = JSON.parse(raw);
+            if (Date.now() - parsed.ts < 5 * 60 * 1000) {
+                cachedSettings = parsed.is_global_free;
+            }
+        }
+    } catch (e) {}
 
+    const [settingsRes, sessionRes] = await Promise.all([
+        cachedSettings !== null
+            ? Promise.resolve({ data: { is_global_free: cachedSettings } })
+            : window.db.from('site_settings').select('is_global_free').eq('id', 1).maybeSingle(),
+        window.db.auth.getSession()
+    ]);
+
+    window.isGlobalFree = Boolean(settingsRes?.data?.is_global_free);
+    if (cachedSettings === null && settingsRes?.data) {
+        try {
+            sessionStorage.setItem(SETTINGS_CACHE_KEY, JSON.stringify({
+                is_global_free: window.isGlobalFree,
+                ts: Date.now()
+            }));
+        } catch (e) {}
+    }
+
+    const session = sessionRes?.data?.session;
     window.currentUser = session?.user || null;
     window.currentProfile = null;
     window.unlockedCourses = [];
@@ -1178,130 +1195,88 @@ window.initAuth = async function() {
     if (!window.currentUser) {
         try {
             Object.keys(sessionStorage).forEach(key => {
-                if (key.startsWith('qcache_')) {
-                    sessionStorage.removeItem(key);
-                }
+                if (key.startsWith('qcache_')) sessionStorage.removeItem(key);
             });
         } catch (e) {}
+
+        renderHeaderProfile(null);
+        updateHomeCourseCards();
+        return { user: null, unlockedCourses: [], deviceBlocked: false };
     }
 
     if (window._isPasswordRecovery) {
         openAuthModal('reset');
     }
 
-    if (window.currentUser) {
-
-        // 1. Check automatic global and per-student access expiry before registering the device.
+    // 2. Throttle expiry RPCs to once every 30 minutes per browser session
+    const EXPIRY_THROTTLE_KEY = 'exam_prep_last_expiry_check';
+    const lastExpiryCheck = Number(sessionStorage.getItem(EXPIRY_THROTTLE_KEY) || 0);
+    if ((Date.now() - lastExpiryCheck) > 30 * 60 * 1000) {
+        sessionStorage.setItem(EXPIRY_THROTTLE_KEY, String(Date.now()));
         try {
-            const [{ data: expiryRan, error: expiryError }, { data: studentExpiryRan, error: studentExpiryError }] =
-                await Promise.all([
-                    window.db.rpc('check_and_run_expiry'),
-                    window.db.rpc('check_and_run_student_expiry')
-                ]);
-
-            if (expiryError) {
-                console.error('Global auto-expiry check failed:', expiryError);
-            }
-            if (studentExpiryError) {
-                console.error('Student auto-expiry check failed:', studentExpiryError);
-            }
-
+            const [{ data: expiryRan }, { data: studentExpiryRan }] = await Promise.all([
+                window.db.rpc('check_and_run_expiry'),
+                window.db.rpc('check_and_run_student_expiry')
+            ]);
             if (expiryRan === true || studentExpiryRan === true) {
-                console.info('Automatic expiry reset completed.');
-
                 Object.keys(sessionStorage).forEach(key => {
-                    if (key.startsWith('qcache_')) {
-                        sessionStorage.removeItem(key);
-                    }
+                    if (key.startsWith('qcache_')) sessionStorage.removeItem(key);
                 });
             }
         } catch (err) {
             console.error('Auto-expiry request failed:', err);
         }
-
-        // 2. Register this device.
-        const { data: devCheck, error: devErr } =
-            await window.db.rpc('register_device', {
-                p_device_id: getDeviceId()
-            });
-
-        if (!devErr && devCheck &&
-            devCheck.allowed === false &&
-            devCheck.reason === 'limit_reached') {
-
-            await window.db.auth.signOut();
-
-            window.currentUser = null;
-            renderHeaderProfile(null);
-            updateHomeCourseCards();
-
-            openAuthModal(
-                'signin',
-                `⛔ Device Limit Reached (Max ${devCheck.max} devices). This account is already active on 2 other devices. Contact admin if you switched devices.`
-            );
-
-            return {
-                user: null,
-                unlockedCourses: [],
-                deviceBlocked: true
-            };
-        }
-
-        // 3. Load the updated profile and pending requests.
-        const [{ data: profile }, { data: pending }] = await Promise.all([
-            window.db
-                .from('profiles')
-                .select('unlocked_courses, student_id, access_expires_at')
-                .eq('id', window.currentUser.id)
-                .maybeSingle(),
-
-            window.db
-                .from('payment_requests')
-                .select('*')
-                .eq('user_id', window.currentUser.id)
-                .eq('status', 'pending')
-        ]);
-
-        window.currentProfile = profile || null;
-
-        const rawCourses = Array.isArray(profile?.unlocked_courses)
-            ? profile.unlocked_courses
-            : [];
-
-        window.unlockedCourses = rawCourses.map(c =>
-            String(c).toLowerCase()
-        );
-
-        window.pendingRequests = Array.isArray(pending)
-            ? pending
-            : [];
-
-        // 4. Check the student's ID (skip if currently resetting password).
-        const savedStudentId = String(profile?.student_id || '').trim();
-
-        if (!window._isPasswordRecovery && !/^2[0-9]{7}$/.test(savedStudentId)) {
-            await promptMissingStudentId();
-        }
-
-        // 5. Update the website interface.
-        const activeProfile = window.currentProfile || profile;
-
-        renderHeaderProfile(activeProfile);
-        updateHomeCourseCards();
-
-        return {
-            user: window.currentUser,
-            unlockedCourses: window.unlockedCourses,
-            deviceBlocked: false
-        };
     }
 
-    renderHeaderProfile(null);
+    // 3. Run device check, profile fetch, and pending requests in parallel
+    const [devRes, profileRes, pendingRes] = await Promise.all([
+        window.db.rpc('register_device', { p_device_id: getDeviceId() }),
+        window.db
+            .from('profiles')
+            .select('unlocked_courses, student_id, access_expires_at')
+            .eq('id', window.currentUser.id)
+            .maybeSingle(),
+        window.db
+            .from('payment_requests')
+            .select('*')
+            .eq('user_id', window.currentUser.id)
+            .eq('status', 'pending')
+    ]);
+
+    const devCheck = devRes?.data;
+    if (!devRes?.error && devCheck && devCheck.allowed === false && devCheck.reason === 'limit_reached') {
+        await window.db.auth.signOut();
+        window.currentUser = null;
+        renderHeaderProfile(null);
+        updateHomeCourseCards();
+
+        openAuthModal(
+            'signin',
+            `⛔ Device Limit Reached (Max ${devCheck.max} devices). This account is already active on 2 other devices. Contact admin if you switched devices.`
+        );
+        return { user: null, unlockedCourses: [], deviceBlocked: true };
+    }
+
+    const profile = profileRes?.data || null;
+    window.currentProfile = profile;
+
+    const rawCourses = Array.isArray(profile?.unlocked_courses) ? profile.unlocked_courses : [];
+    window.unlockedCourses = rawCourses.map(c => String(c).toLowerCase());
+    window.pendingRequests = Array.isArray(pendingRes?.data) ? pendingRes.data : [];
+
+    // 4. Check Student ID
+    const savedStudentId = String(profile?.student_id || '').trim();
+    if (!window._isPasswordRecovery && !/^2[0-9]{7}$/.test(savedStudentId)) {
+        await promptMissingStudentId();
+    }
+
+    const activeProfile = window.currentProfile || profile;
+    renderHeaderProfile(activeProfile);
     updateHomeCourseCards();
 
     return {
-        user: null,
-        unlockedCourses: [],
+        user: window.currentUser,
+        unlockedCourses: window.unlockedCourses,
         deviceBlocked: false
     };
 };
